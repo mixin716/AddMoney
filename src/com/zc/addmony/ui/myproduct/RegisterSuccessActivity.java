@@ -25,7 +25,7 @@ public class RegisterSuccessActivity extends BaseActivity {
 	@Override
 	protected void setTitleViews() {
 		// TODO Auto-generated method stub
-
+		titleText.setText("注册成功");
 	}
 
 	@Override
