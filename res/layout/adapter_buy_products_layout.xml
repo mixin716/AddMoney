@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_product_detail_top_view_background"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/adapter_buy_products_tv_name"
+            style="@style/wrap"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="基金名称"
+            android:textColor="@color/text_deep"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/adapter_buy_products_tv_wf"
+            style="@style/wrap"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="万分收益：1.12元"
+            android:textColor="@color/text_light"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/line_color" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp" >
+
+        <TextView
+            style="@style/wrap"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="持有金额："
+            android:textColor="@color/text_deep"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/adapter_buy_products_tv_have"
+            style="@style/wrap"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="￥1000元"
+            android:textColor="@color/text_light"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp" >
+
+        <TextView
+            style="@style/wrap"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="昨日收益："
+            android:textColor="@color/text_deep"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/adapter_buy_products_tv_yeatorday"
+            style="@style/wrap"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="￥0.29元"
+            android:textColor="@color/normal_red"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp" >
+
+        <TextView
+            style="@style/wrap"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="未结算收益："
+            android:textColor="@color/text_deep"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/adapter_buy_products_tv_not"
+            style="@style/wrap"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="￥5.29元"
+            android:textColor="@color/text_light"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp" >
+
+        <TextView
+            style="@style/wrap"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="赎回中："
+            android:textColor="@color/text_deep"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/adapter_buy_products_tv_inredeem"
+            style="@style/wrap"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="￥100.1元"
+            android:textColor="@color/normal_red"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/line_color" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp" >
+
+        <LinearLayout
+            android:id="@+id/adapter_buy_products_ll_buttons"
+            style="@style/wrap"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/adapter_buy_products_tv_redeem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/bg_normal_green_selector"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="5dp"
+                android:text="赎回"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/adapter_buy_products_tv_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/bg_normal_red_selector"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="5dp"
+                android:text="购买"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/adapter_buy_products_tv_bank"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/adapter_buy_products_ll_buttons"
+            android:singleLine="true"
+            android:text="工商（123456）"
+            android:textColor="@color/text_light"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+</LinearLayout>

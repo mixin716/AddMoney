@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- base color -->
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="yellow">#ffffff00</color>
+    <color name="red">#FF0000</color>
+    <color name="grey">#FCFCFC</color>
+    <color name="goal">#ff0000ff</color>
+
+    <!-- default text color -->
+    <color name="default_text_color">#ff000000</color>
+    <!-- nickname -->
+    <color name="nickname">#64a733</color>
+    <!-- 我的订单钱数的颜色 -->
+    <color name="text_color_d97000">#d97000</color>
+    <!-- 注册 页 -->
+    <color name="yellow_register">#cb9034</color>
+    <color name="order_number">#666666</color>
+    <color name="black_gray">#a6b383</color>
+    <color name="button_green">#378300</color>
+    <!-- login  自动登录的颜色 -->
+    <color name="login_selected">#49a611</color>
+    <!-- listview item 选中后的颜色 -->
+    <color name="listitem_selected">#d5f6bd</color>
+    <color name="bleck_register">#333333</color>
+    <!-- listview item 选中后的颜色 -->
+    <color name="listitem_unselected">#f8fdf6</color>
+    <!-- 我的话题背景色 -->
+    <color name="clear">#00000000</color>
+    <color name="medical_reference_documentation">#70afcc</color>
+    <color name="medical_medical_datepicker_background">#f5f5f5</color>
+    <color name="medical_medical_datepicker_title">#33b5e5</color>
+    <color name="medicate_divider">#dddddd</color>
+
+    <!--  -->
+    <color name="text_color_bbbbbb">#bbbbbb</color>
+    <color name="text_color_79d3a0">#79d3a0</color>
+    <color name="text_color_888888">#888888</color>
+    <color name="text_color_333333">#333333</color>
+    <color name="text_color_2893ca">#2893ca</color>
+    <color name="text_color_eef7f2">#eef7f2</color>
+    <color name="text_color_ffffff">#ffffff</color>
+    <color name="text_color_d2d2d2">#d2d2d2</color>
+    <color name="text_color_bdf1ca">#bdf1ca</color>
+    <color name="text_color_59a6c7">#59a6c7</color>
+    <color name="text_color_d47e45">#d47e45</color>
+    <color name="text_color_e3f7e7">#e3f7e7</color>
+    <color name="text_color_4fb015">#4fb015</color>
+    <color name="text_color_73c185">#73c185</color>
+    <color name="text_color_4ba216">#4ba216</color>
+    <color name="text_color_259f41">#259f41</color>
+    <color name="text_color_875300">#875300</color>
+    <color name="text_color_3aa0cf">#3aa0cf</color>
+    <color name="text_color_54912e">#54912e</color>
+    <color name="text_color_1874cd">#1874cd</color>
+    <color name="text_color_b5b8be">#b5b8be</color>
+    <color name="text_color_bfbfbf">#bfbfbf</color>
+    <color name="text_color_666666">#666666</color>
+    <color name="text_color_ea5414">#ea5414</color>
+    <color name="text_color_00a7e4">#00a7e4</color>
+    <color name="text_color_e6e6e6">#e6e6e6</color>
+    <color name="text_color_ededed">#ededed</color>
+    <color name="text_color_787878">#787878</color>
+    <color name="text_color_131313">#131313</color>
+    <color name="text_color_343933">#343933</color>
+    <color name="text_color_ececec">#ececec</color>
+    <color name="text_color_a3a3a3">#a3a3a3</color>
+    <!-- 使用帮助 -->
+    <color name="text_color_006496">#006496</color>
+    <color name="text_color_bae3f9">#bae3f9</color>
+
+    <!-- 原 bg_bottom_bar -->
+    <color name="text_color_484848">#484848</color>
+    <color name="text_color_f4f4f4">#f4f4f4</color>
+    <!-- 门诊 -->
+    <color name="text_color_A_3a6f5e">#3a6f5e</color>
+    <!-- 动画用 -->
+    <color name="text_color_A_358d23">#358d23</color>
+    <!-- 动画用 -->
+    <color name="text_color_A_c9774a">#c9774a</color>
+    <!-- 动画用 -->
+    <color name="text_color_A_97983c">#97983c</color>
+    <!-- 动画用 -->
+    <color name="text_color_A_626e9d">#626e9d</color>
+    <!-- 动画用 -->
+    <color name="text_color_A_c34a4a">#c34a4a</color>
+    <!-- 动画用 -->
+    <color name="text_color_A_178f90">#178f90</color>
+    <!-- 动画用 -->
+    <color name="text_color_A_9656d2">#9656d2</color>
+    <!-- 动画用 -->
+    <color name="text_color_A_5f9753">#5f9753</color>
+    <!-- 动画用 -->
+
+    <color name="health_control_blood_sugar_select">#666666</color>
+    <color name="health_control_blood_sugar_line">#d5cce0</color>
+    <color name="health_control_blood_sugar_point_deep">#8961b7</color>
+    <color name="health_control_blood_sugar_point_lignt">#c7b4dd</color>
+    <color name="person_background_color">#e1faec</color>
+    <color name="main_left_bg">#f2f2f2</color>
+    <color name="text_light">#999999</color>
+    <color name="text_deep">#282828</color>
+    <color name="line_color">#cccccc</color>
+    <color name="machine_text_color">#3ea943</color>
+    <color name="machine_text_black">#333333</color>
+    <color name="machine_history_rb_check">#139ce3</color>
+    <color name="machine_history_rb_no_check">#bae3f9</color>
+    <color name="machine_history_tv_black">#282828</color>
+    <color name="machne_history_tv_bg">#F2F2F2</color>
+    <color name="health_control_blood_pressure_point_deep">#36a2f4</color>
+    <color name="bg_title">#3ea943</color>
+    <color name="text_color_nomal">#3ea943</color>
+    <color name="line_color_weight">#ffc000</color>
+    <color name="manager_suger_kongfu">#00A0E9</color>
+    <color name="manager_suger_canhou">#C30D23</color>
+    <color name="manager_press_gao">#C40E24</color>
+    <color name="manager_press_di">#00A1E9</color>
+    <color name="manager_press_canhou">#16AD66</color>
+    <color name="manager_press_kongfu">#F39801</color>
+    <color name="manager_eat">#14AE67</color>
+    <color name="manager_sugar_breBefore">#EB6100</color>
+    <color name="manager_sugar_breAfter">#00A29A</color>
+    <color name="manager_sugar_lunBefore">#2FA8E1</color>
+    <color name="manager_sugar_lunAfter">#E4007F</color>
+    <color name="manager_sugar_dinBefore">#F39700</color>
+    <color name="manager_sugar_dinAfter">#8EC31F</color>
+    <color name="manager_sugar_sleBefore">#601986</color>
+    <color name="manager_sugar_moning">#1B2A58</color>
+    <color name="manager_sugar_new_round">#F85745</color>
+    <color name="manager_sugar_good">#3DA942</color>
+    <color name="manager_sugar_normal">#2BC8DB</color>
+    <color name="manager_sugar_bad">#EFC910</color>
+    <color name="manager_sugar_low">#FB5B4B</color>
+    <color name="doc_gray">#F6F6F6</color>
+    <color name="common_top_bar_blue">#4ebcd3</color>
+    <color name="btn_login_normal">#007086</color>
+    <color name="btn_login_pressed">#303744</color>
+    <color name="btn_logout_normal">#d33f3f</color>
+    <color name="btn_logout_pressed">#DA5A4D</color>
+    <color name="btn_register_normal">#2dafa3</color>
+    <color name="btn_register_pressed">#4ebcd3</color>
+    <color name="common_bottom_bar_normal_bg">#2d2f31</color>
+    <color name="common_bottom_bar_selected_bg">#161718</color>
+    <color name="common_botton_bar_blue">#2ea7e0</color>
+    <color name="common_bg">#fcfcfc</color>
+    <color name="btn_pressed_green_solid">#B6DA53</color>
+    <color name="divider_list">#cccccc</color>
+    <color name="top_bar_normal_bg">#4ebcd3</color>
+    <color name="error_item_color">#F6EBE6</color>
+    <color name="bottom_bar_normal_bg">#2D2F31</color>
+    <color name="bottom_text_color_normal">#ffffff</color>
+    <color name="btn_white_normal">#f7f8f8</color>
+    <color name="btn_white_pressed">#b5b5b6</color>
+    <color name="btn_green_noraml">#68C270</color>
+    <color name="btn_green_pressed">#6FCD78</color>
+    <color name="btn_gray_normal">#c0c0c0</color>
+    <color name="btn_gray_pressed_status">#b5b5b6</color>
+    <color name="btn_gray_pressed">#666667</color>
+    <color name="btn_blue_normal">#1e90ff</color>
+    <color name="btn_blue_pressed">#0066FF</color>
+    <color name="orange">#FFA500</color>
+    <color name="gray_pressed">#b5b5b6</color>
+    <color name="gray_normal">#666667</color>
+    <color name="grid_state_pressed">#1Affffff</color>
+    <color name="grid_state_focused">#80000000</color>
+    <color name="normal_red">#ff3300</color>
+    <color name="normal_bg">#e5e5e5</color>
+    <color name="normal_purple">#820f94</color>
+	
+</resources>

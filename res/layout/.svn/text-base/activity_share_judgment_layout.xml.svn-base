@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_product_detail_top_view_background"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/activity_share_judgment_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="XX基金"
+            android:textColor="@color/text_deep"
+            android:textSize="19sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已持有份额："
+                android:textColor="@color/text_deep"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/activity_share_judgment_tv_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1111"
+                android:textColor="@color/normal_red"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/activity_share_judgment_bt_full"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_normal_red_selector"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="份额充足，立即参加活动"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/activity_share_judgment_bt_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_normal_red_selector"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="份额不足，立即申购基金"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

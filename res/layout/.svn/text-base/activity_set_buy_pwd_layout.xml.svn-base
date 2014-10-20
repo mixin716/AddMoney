@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_finish_message_top_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_finish_message_checked" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="o(∩_∩)o银行卡信息已校验通过"
+            android:textColor="@color/text_deep"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="您的银行卡信息已经校验通过，为了保证交易安全，请设置交易密码用于交易时确认"
+        android:textColor="@color/text_deep"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/activity_set_buy_pwd_et_pwd"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_item_normal_bg"
+        android:digits=".0123456789"
+        android:hint="设置交易密码"
+        android:inputType="number"
+        android:maxLength="4"
+        android:paddingBottom="13dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="13dp"
+        android:password="true"
+        android:textColor="@color/text_deep"
+        android:textColorHint="@color/text_light"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="密码由6-12位数字、字母组成，字母区分大小写"
+        android:textColor="@color/text_light"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="同意 《银行自动转账授权书》"
+        android:textColor="@color/text_light"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/activity_set_buy_pwd_bt_next"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_normal_red_selector"
+        android:padding="10dp"
+        android:paddingBottom="13dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="13dp"
+        android:text="确认购买"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>

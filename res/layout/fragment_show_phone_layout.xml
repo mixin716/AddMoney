@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- ListFragment对应的android:id值固定为"@id/android:list" -->
+
+    <ListView
+        android:id="@id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:divider="#00000000"
+        android:drawSelectorOnTop="false" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/activity_fragment_tv_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="上一页"
+            android:textColor="@color/text_deep"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/activity_fragment_tv_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_horizontal"
+            android:text="下一页"
+            android:textColor="@color/text_deep"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/activity_fragment_show_phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_horizontal"
+            android:text="第1页"
+            android:textColor="@color/text_deep"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/activity_fragment_tv_pages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/text_deep"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

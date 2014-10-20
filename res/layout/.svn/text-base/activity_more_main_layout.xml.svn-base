@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            style="@style/match_wrap"
+            android:background="@drawable/ic_item_normal_bg"
+            android:orientation="vertical"
+            android:paddingLeft="10dp" >
+
+            <!-- 分享好友 -->
+
+            <LinearLayout
+                android:id="@+id/activity_more_ll_share"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    style="@style/wrap"
+                    android:text="分享好友"
+                    android:textColor="@color/text_deep"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_background" />
+            <!-- 帮助中心 -->
+
+            <LinearLayout
+                android:id="@+id/activity_more_ll_help"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    style="@style/wrap"
+                    android:text="帮助中心"
+                    android:textColor="@color/text_deep"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_background" />
+            <!-- 鼓励我们做的更好 -->
+
+            <LinearLayout
+                android:id="@+id/activity_more_ll_opinion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    style="@style/wrap"
+                    android:text="鼓励我们做的更好"
+                    android:textColor="@color/text_deep"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_background" />
+            <!-- 版本更新 -->
+
+            <LinearLayout
+                android:id="@+id/activity_more_ll_update"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    style="@style/wrap"
+                    android:text="版本更新"
+                    android:textColor="@color/text_deep"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_background" />
+
+            <!-- 关于我们 -->
+
+            <LinearLayout
+                android:id="@+id/activity_more_ll_about"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    style="@style/wrap"
+                    android:text="关于我们"
+                    android:textColor="@color/text_deep"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_background" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/activity_more_main_bt_logout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_normal_red_selector"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="退出"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</ScrollView>

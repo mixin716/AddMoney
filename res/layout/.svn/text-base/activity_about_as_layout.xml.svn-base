@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_login_logo" />
+
+        <RelativeLayout
+            android:id="@+id/activity_about_rl_welcom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_item_normal_bg"
+            android:gravity="center_vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="欢迎页面"
+                android:textColor="@color/text_deep"
+                android:textSize="18sp" />
+
+            <ImageView
+                style="@style/wrap"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_home_grey_arrow_right" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_about_ll_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_item_normal_bg"
+            android:gravity="center_vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="客服电话:"
+                android:textColor="@color/text_deep"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="400-001-8811"
+                android:textColor="@color/text_deep"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_about_ll_email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_item_normal_bg"
+            android:gravity="center_vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="客服邮箱:"
+                android:textColor="@color/text_deep"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="service@zcvc.com.cn"
+                android:textColor="@color/text_deep"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_about_ll_web"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_item_normal_bg"
+            android:gravity="center_vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="网站:"
+                android:textColor="@color/text_deep"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="http://www.zcvc.com.cn"
+                android:textColor="@color/text_deep"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:text="天天增财 V1.0"
+            android:textColor="@color/text_deep"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="北京增财基金销售有限公司版权所有"
+            android:textColor="@color/text_deep"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="Copyright © Core 2012. zcvc.com.cn All Rights Reserved"
+            android:textColor="@color/text_deep"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</ScrollView>

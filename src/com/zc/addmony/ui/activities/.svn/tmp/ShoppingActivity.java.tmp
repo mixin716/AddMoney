@@ -1,0 +1,156 @@
+package com.zc.addmony.ui.activities;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+
+import com.jky.struct2.http.core.AjaxParams;
+import com.zc.addmony.BaseActivity;
+import com.zc.addmony.R;
+import com.zc.addmony.bean.activities.PhoneBean;
+import com.zc.addmony.common.Urls;
+import com.zc.addmony.logic.LogicActivities;
+import com.zc.addmony.utils.AnimUtil;
+
+public class ShoppingActivity extends BaseActivity implements
+		OnCheckedChangeListener {
+	private Button btnNext;
+<<<<<<< .mine
+	private RadioGroup rgPhone, rgColor;
+	private RadioButton rbIphone5s, rbIphone6, rbBlack, rbwhite, rbGold;
+	private List<PhoneBean> phones;
+=======
+	private RadioGroup rgPhone,rgColor;
+	private RadioButton rbIphone5,rbIphone5s, rbIphone6,rbBlack,rbwhite,rbGold;
+>>>>>>> .r72
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentViewRes(R.layout.activity_shopping_layout);
+		setViews();
+		requestPhone();
+	}
+
+	@Override
+	protected void initVariable() {
+		// TODO Auto-generated method stub
+		phones = new ArrayList<PhoneBean>();
+	}
+
+	@Override
+	protected void setTitleViews() {
+		titleText.setText("天天增财");
+
+	}
+
+	@Override
+	protected void setViews() {
+		rgPhone = (RadioGroup) findViewById(R.id.activity_shopping_rg_phone);
+		rgColor = (RadioGroup) findViewById(R.id.activity_shopping_rg_color);
+
+		rbIphone5 = (RadioButton) findViewById(R.id.activity_shopping_rb_iphone5);
+		rbIphone5s = (RadioButton) findViewById(R.id.activity_shopping_rb_iphone5s);
+		rbIphone6 = (RadioButton) findViewById(R.id.activity_shopping_rb_iphone6);
+		rbBlack = (RadioButton) findViewById(R.id.activity_shopping_rb_black);
+		rbGold = (RadioButton) findViewById(R.id.activity_shopping_rb_gold);
+		rbwhite = (RadioButton) findViewById(R.id.activity_shopping_rb_white);
+
+		btnNext = (Button) findViewById(R.id.activity_shopping_btn_next);
+		btnNext.setOnClickListener(this);
+		rgPhone.setOnCheckedChangeListener(this);
+		rgColor.setOnCheckedChangeListener(this);
+
+	}
+
+	@Override
+	protected void doClickAction(int viewId) {
+		switch (viewId) {
+		case R.id.title_iv_left:
+			finish();
+			AnimUtil.pushRightInAndOut(this);
+			break;
+		case R.id.activity_shopping_btn_next:
+			Intent intent = new Intent(this, OrderSuccessActivity.class);
+			startActivity(intent);
+			AnimUtil.pushLeftInAndOut(this);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	/** 获取手机信息 */
+	public void requestPhone() {
+		AjaxParams params = new AjaxParams();
+		httpRequest.get(Urls.GET_PHONES, params, callBack, 0);
+	}
+
+	@Override
+	protected void handleJson(int reqeustCode, String jsonString, String message) {
+		// TODO Auto-generated method stub
+		super.handleJson(reqeustCode, jsonString, message);
+		phones = LogicActivities.parsePhoneList(jsonString);
+	}
+
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+		if (group.getId() == R.id.activity_shopping_rg_phone) {
+			switch (checkedId) {
+			case R.id.activity_shopping_rb_iphone5:
+				rbIphone5.setChecked(true);
+				rbIphone5s.setChecked(false);
+				rbIphone6.setChecked(false);
+				break;
+			case R.id.activity_shopping_rb_iphone5s:
+				rbIphone5s.setChecked(true);
+				rbIphone5.setChecked(false);
+				rbIphone6.setChecked(false);
+				break;
+			case R.id.activity_shopping_rb_iphone6:
+				rbIphone5.setChecked(false);
+				rbIphone5s.setChecked(false);
+				rbIphone6.setChecked(true);
+
+				break;
+
+			default:
+				break;
+			}
+		} else if (group.getId() == R.id.activity_shopping_rg_color) {
+			switch (checkedId) {
+			case R.id.activity_shopping_rb_black:
+				rbBlack.setChecked(true);
+				rbwhite.setChecked(false);
+				rbGold.setChecked(false);
+				break;
+			case R.id.activity_shopping_rb_white:
+				rbwhite.setChecked(true);
+				rbBlack.setChecked(false);
+				rbGold.setChecked(false);
+				break;
+			case R.id.activity_shopping_rb_gold:
+				rbGold.setChecked(true);
+				rbBlack.setChecked(false);
+				rbwhite.setChecked(false);
+<<<<<<< .mine
+
+=======
+>>>>>>> .r72
+				break;
+
+			default:
+				break;
+			}
+		}
+
+	}
+
+}
