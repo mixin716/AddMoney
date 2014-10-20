@@ -23,7 +23,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class HomeTabActivity extends TabActivity implements
 		OnCheckedChangeListener, OnClickListener {
-
+  
 	private RadioGroup rg;
 	private RadioButton rbHome, rbProductList, rbMyProduct, rbMore;
 	private Intent mHomeIntent, mProductListIntent, mMyProductIntent,
