@@ -6,6 +6,8 @@ import android.view.Menu;
 
 public class MainActivity extends Activity {
 
+	private String str;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
