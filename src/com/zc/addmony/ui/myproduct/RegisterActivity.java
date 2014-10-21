@@ -1,5 +1,6 @@
 package com.zc.addmony.ui.myproduct;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -85,6 +86,8 @@ public class RegisterActivity extends BaseActivity {
 			}
 			break;
 		case R.id.activity_register_bt_register:// 注册
+			Intent intent = new Intent(this,RegisterSecondActivity.class);
+			startActivity(intent);
 			if (checkInput()) {
 				mCheck = etCheck.getText().toString().trim();
 				if (TextUtils.isEmpty(mCheck)) {
