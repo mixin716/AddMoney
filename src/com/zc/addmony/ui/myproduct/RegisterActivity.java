@@ -88,6 +88,7 @@ public class RegisterActivity extends BaseActivity {
 		case R.id.activity_register_bt_register:// 注册
 			Intent intent = new Intent(this,RegisterSecondActivity.class);
 			startActivity(intent);
+			this.finish();
 			if (checkInput()) {
 				mCheck = etCheck.getText().toString().trim();
 				if (TextUtils.isEmpty(mCheck)) {

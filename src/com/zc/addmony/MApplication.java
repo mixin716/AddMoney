@@ -7,7 +7,9 @@ import java.util.TimerTask;
 
 import com.zc.addmony.bean.FundBean;
 import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
+import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.ui.lock.GestureActivity;
+import com.zc.addmony.view.lockview.LockPatternUtils;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -33,6 +35,7 @@ import android.util.Log;
  */
 public class MApplication extends Application {
 
+	private String TAG = "MApplication";
 	public FundBean fundBean = new FundBean();
 	/** 活动保存的数据 */
 	public ActivitiesPhoneBean apBean;
@@ -82,6 +85,13 @@ public class MApplication extends Application {
 	long lastTimeMillis = 0;
 
 	public void setLastTouchTime() {
+		Log.e(TAG,LockPatternUtils.getInstance(
+				getApplicationContext()).getLockPaternString("user_key")+ "");
+		if (TextUtils.isEmpty(LockPatternUtils.getInstance(
+				getApplicationContext()).getLockPaternString("user_key"))) {
+			return;
+		}
+
 		// 最新的触碰时间
 		long currentTimeMillis = System.currentTimeMillis();
 		if (lastTimeMillis == 0) {
@@ -156,7 +166,7 @@ public class MApplication extends Application {
 			};
 		}
 		if (!isRunning) {
-			timer.schedule(timerTask, 600 * 1000, 600 * 1000);
+			timer.schedule(timerTask, 6 * 1000, 6 * 1000);
 			isRunning = true;
 		}
 	}
