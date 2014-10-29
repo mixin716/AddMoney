@@ -75,7 +75,7 @@ public class LoginActivity extends BaseActivity {
 			AnimUtil.pushRightInAndOut(LoginActivity.this);
 			break;
 		case R.id.activity_login_bt_register:
-			intent = new Intent(this, RegisterActivity.class);
+			intent = new Intent(this, RegisterSecondActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(LoginActivity.this);
 			break;

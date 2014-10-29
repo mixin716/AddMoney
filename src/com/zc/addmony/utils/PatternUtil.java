@@ -62,4 +62,25 @@ public class PatternUtil {
 		return false;
 	}
 
+	/**
+	 * 判断身份证号是否可用
+	 * @param idCard
+	 * @return
+	 */
+	public static boolean patternIdCard(String idCard){
+		if (idCard.contains(" ") || idCard.contains("__")
+				|| idCard.contains("_.") || idCard.contains("._")
+				|| idCard.contains("..")) {
+			return false;
+		}
+		String check = "(\\d{14}[0-9a-zA-Z])|(\\d{17}[0-9a-zA-Z])";
+		Pattern regex = Pattern.compile(check);
+		Matcher matcher = regex.matcher(idCard);
+		boolean isMatched = matcher.matches();
+		if (isMatched) {
+			
+			return true;
+		}
+		return false;
+	}
 }

@@ -2,6 +2,7 @@ package com.zc.addmony.ui.buyproduct;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,17 +25,21 @@ import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicBuyProduct;
 import com.zc.addmony.ui.myproduct.RegisterSuccessActivity;
 import com.zc.addmony.utils.AnimUtil;
+import com.zc.addmony.utils.KeyBoard;
+import com.zc.addmony.utils.PatternUtil;
 
+/** 添加银行卡信息 */
 public class PerfectInformationActivity extends BaseActivity {
-	private EditText edtName, edtIdCard, edtBankNum;
+	private EditText edtName, edtIdCard, edtBankNum, edtPhone, edtCode;
 	private TextView tvBanks, tvProvince, tvCity, tvBranch;
 	private LinearLayout llBanks, llProvince, llCity, llBranch;
-	private Button btnNext;
+	private Button btnNext, btnCode;
 	private ArrayList<String> banksList, branchList, provinceList, cityList;
-	private String banks, province, city, branch, bankCode, branchCode;
+	public String banks, province, city, branch, bankCode, branchCode;
 	private List<BanksBean> bean;
 	private Intent intent;
-	private String name, idCard, userName, bankNum;
+	private String name, idCard, userName, bankNum, phone, checkCode;
+	private String accoreqserial="";// 获取验证码时返回的字段
 	private int position;
 	private List<BranchBean> branchBean;
 
@@ -67,6 +72,8 @@ public class PerfectInformationActivity extends BaseActivity {
 		edtName = (EditText) findViewById(R.id.activity_perfect_information_edt_name);
 		edtBankNum = (EditText) findViewById(R.id.activity_perfect_information_edt_bank_num);
 		edtIdCard = (EditText) findViewById(R.id.activity_perfect_information_edt_idcard);
+		edtPhone = (EditText) findViewById(R.id.activity_perfect_information_edt_phone);
+		edtCode = (EditText) findViewById(R.id.activity_perfect_information_edt_checkcode);
 
 		tvBanks = (TextView) findViewById(R.id.activity_perfect_information_tv_bank);
 		tvBranch = (TextView) findViewById(R.id.activity_perfect_information_tv_branch);
@@ -78,22 +85,26 @@ public class PerfectInformationActivity extends BaseActivity {
 		llCity = (LinearLayout) findViewById(R.id.activity_perfect_information_ll_city);
 		llProvince = (LinearLayout) findViewById(R.id.activity_perfect_information_ll_province);
 		btnNext = (Button) findViewById(R.id.activity_perfect_information_btn_next);
+		btnCode = (Button) findViewById(R.id.activity_perfect_information_btn_code);
 
 		btnNext.setOnClickListener(this);
+		btnCode.setOnClickListener(this);
 		llBanks.setOnClickListener(this);
 		llBranch.setOnClickListener(this);
 		llCity.setOnClickListener(this);
 		llProvince.setOnClickListener(this);
 	}
 
+	/** 获取银行列表 */
 	private void getBanksRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("key", "banks");
-		httpRequest.get(Urls.PERFECT_INFORMATION, params, callBack, 0);
+		// params.put("key", "banks");
+		httpRequest.get(Urls.GET_SUPPORT_BANKS, params, callBack, 0);
 
 	}
 
+	/** 获取省份 */
 	private void getProvinceRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
@@ -102,6 +113,7 @@ public class PerfectInformationActivity extends BaseActivity {
 
 	}
 
+	/** 获取城市 */
 	private void getCityRequest(String province) {
 		showLoading();
 		AjaxParams params = new AjaxParams();
@@ -111,7 +123,9 @@ public class PerfectInformationActivity extends BaseActivity {
 
 	}
 
+	/** 获取支行列表 */
 	private void getBranchRequest(String city) {
+		branchList.clear();
 		showLoading();
 		AjaxParams params = new AjaxParams();
 		params.put("key", "branch");
@@ -120,11 +134,36 @@ public class PerfectInformationActivity extends BaseActivity {
 		httpRequest.post(Urls.PERFECT_INFORMATION, params, callBack, 3);
 	}
 
+	/** 获取手机短信 */
+	private void getMessage() {
+		showLoading();
+		AjaxParams params = new AjaxParams();
+		params.put("phone", phone);// 手机号
+		params.put("banknum", bankNum);// 银行卡号
+		params.put("name", "高岳");// 姓名
+		params.put("idcard", "130223199107160617");// 身份证号
+		httpRequest.get(Urls.OPEN_BANK_CODE, params, callBack, 5);
+	}
+	
+	/** 验证信息*/
+	private void sendCheckMessage(){
+//		 checkMessage($accoreqserial,$mobileauthcode,$banknum,$idcard,$name,$phone)
+		showLoading();
+		AjaxParams params = new AjaxParams();
+		params.put("accoreqserial", accoreqserial);
+		params.put("mobileauthcode", checkCode);
+		params.put("phone", phone);// 手机号
+		params.put("banknum", bankNum);// 银行卡号
+		params.put("name", "高岳");// 姓名
+		params.put("idcard", "130223199107160617");// 身份证号
+		httpRequest.get(Urls.OPEN_BANK_CHECK, params, callBack, 6);
+	}
+
 	private void sendPerfectRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-//		params.put("idcard", idCard);
-//		params.put("name", userName);
+		// params.put("idcard", idCard);
+		// params.put("name", userName);
 		params.put("bankcode", bankCode);
 		params.put("bnum", bankNum);
 		params.put("province", province);
@@ -182,16 +221,40 @@ public class PerfectInformationActivity extends BaseActivity {
 			}
 			break;
 		case R.id.activity_perfect_information_btn_next:// 下一步
-//			idCard = edtIdCard.getText().toString();
-//			userName = edtName.getText().toString();
+			KeyBoard.demissKeyBoard(getApplicationContext(), edtIdCard);
 			bankNum = edtBankNum.getText().toString();
-			if (checkEmpty()) {
-				sendPerfectRequest();
+			phone = edtPhone.getText().toString().trim();
+			checkCode = edtCode.getText().toString().trim();
+			if (TextUtils.isEmpty(bankNum)) {
+				showToast("请输入银行卡号");
+			} else if (TextUtils.isEmpty(phone)) {
+				showToast("请输入手机号");
+			} else if (phone.length() != 11) {
+				showToast("请输入正确的手机号");
+			} else if (TextUtils.isEmpty(checkCode)) {
+				showToast("请输入收到的验证码");
+			} else if (checkCode.length() != 6) {
+				showToast("请输入6位验证码");
+			} else if (checkEmpty()) {
+				// sendPerfectRequest();
+				sendCheckMessage();
+			}
+			break;
+		case R.id.activity_perfect_information_btn_code:// 银行开户手机号验证
+			KeyBoard.demissKeyBoard(getApplicationContext(), edtIdCard);
+			bankNum = edtBankNum.getText().toString();
+			phone = edtPhone.getText().toString().trim();
+			checkCode = edtCode.getText().toString().trim();
+			if (TextUtils.isEmpty(bankNum)) {
+				showToast("请输入银行卡号");
+			} else if (TextUtils.isEmpty(phone)) {
+				showToast("请输入手机号");
+			} else if (phone.length() != 11) {
+				showToast("请输入正确的手机号");
+			} else {
+				getMessage();
 			}
 
-			break;
-
-		default:
 			break;
 		}
 	}
@@ -279,14 +342,23 @@ public class PerfectInformationActivity extends BaseActivity {
 			}
 			break;
 		case 4:
-//			showToast("提交成功！");
+			// showToast("提交成功！");
 			finish();
-			Intent intent = new Intent(this,RegisterSuccessActivity.class);
+			Intent intent = new Intent(this, RegisterSuccessActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(this);
 			break;
-
-		default:
+		case 5:// 短信验证码
+			showToast("信息发送成功，请注意查收");
+			try {
+				JSONObject obj = new JSONObject(jsonString);
+				accoreqserial = obj.getString("accoreqserial");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case 6:
 			break;
 		}
 	}
@@ -322,14 +394,18 @@ public class PerfectInformationActivity extends BaseActivity {
 				position = data.getIntExtra("postion", 0);
 				tvBanks.setText(name);
 				bankCode = bean.get(position).getBank_num();
+				tvBranch.setText("");
 				break;
 			case 1:
 				name = data.getStringExtra("name");
 				tvProvince.setText(name);
+				tvCity.setText("");
+				tvBranch.setText("");
 				break;
 			case 2:
 				name = data.getStringExtra("name");
 				tvCity.setText(name);
+				tvBranch.setText("");
 				break;
 			case 3:
 				name = data.getStringExtra("name");

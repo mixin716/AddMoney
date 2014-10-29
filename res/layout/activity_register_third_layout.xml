@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        style="@style/wrap"
+        android:layout_marginTop="10dp"
+        android:text="请设置您的密码，不要忘记哦！"
+        android:textColor="@color/text_deep"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        style="@style/match_wrap"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_item_normal_bg"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/activity_register_third_et_pwd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入6~8位密码"
+            android:padding="13dp"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/ic_line_background" />
+
+        <EditText
+            android:id="@+id/activity_register_third_et_pwdsecond"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="确认密码"
+            android:padding="13dp"
+            android:password="true"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/activity_register_third_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_normal_red_selector"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="确认"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</LinearLayout>

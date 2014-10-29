@@ -37,6 +37,12 @@ public class Urls {
 	public static String TBUYFUND = common + "tbuyFund";
 	/** 购买基金 */
 	public static String BUY_PRODUCT = common + "buyFund";
+	/** 注册获取银行列表*/
+	public static String GET_SUPPORT_BANKS = common +"getBnakList";
+	/** 银行开户手机号获取验证码*/
+	public static String OPEN_BANK_CODE = common +"sendMessage";
+	/** 建议验证码是否正确*/
+	public static String OPEN_BANK_CHECK = common +"checkMessage";
 	/** 完善信息 */
 	public static String PERFECT_INFORMATION = common + "apiDict";
 	/** 验证开户银行卡并且进行小额打款 */

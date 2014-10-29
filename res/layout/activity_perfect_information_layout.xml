@@ -31,7 +31,7 @@
                 android:layout_marginTop="10dp"
                 android:text="姓名身份证号与银行卡信息必须一致"
                 android:textColor="@color/text_color_666666"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <EditText
@@ -46,8 +46,8 @@
             android:paddingTop="10dp"
             android:singleLine="true"
             android:textColor="@color/text_color_666666"
-            android:textSize="14sp" 
-            android:visibility="gone"/>
+            android:textSize="15sp"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/activity_perfect_information_edt_idcard"
@@ -60,7 +60,7 @@
             android:paddingTop="10dp"
             android:singleLine="true"
             android:textColor="@color/text_color_666666"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:visibility="gone" />
 
         <LinearLayout
@@ -79,7 +79,7 @@
                 android:layout_weight="1"
                 android:hint="请选择银行"
                 android:textColor="@color/text_color_666666"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -95,12 +95,10 @@
             android:background="@drawable/ic_normal_white_normal"
             android:hint="请输入您的银行卡号"
             android:inputType="number"
-            android:paddingBottom="10dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="10dp"
+            android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/text_color_666666"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -129,7 +127,7 @@
                         android:layout_weight="1"
                         android:hint="请选择省份"
                         android:textColor="@color/text_color_666666"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -154,7 +152,7 @@
                         android:layout_weight="1"
                         android:hint="请选择城市"
                         android:textColor="@color/text_color_666666"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -179,7 +177,7 @@
                     android:layout_weight="1"
                     android:hint="请选择支行"
                     android:textColor="@color/text_color_666666"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -196,6 +194,51 @@
             android:text="只支持储蓄卡，不支持信用卡"
             android:textColor="@color/text_color_333333"
             android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/activity_perfect_information_edt_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_normal_white_normal"
+            android:hint="请输入银行预留手机号"
+            android:inputType="number"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/text_color_666666"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/activity_perfect_information_edt_checkcode"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ic_normal_white_normal"
+                android:hint="输入收到的验证码"
+                android:inputType="number"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/text_color_666666"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/activity_perfect_information_btn_code"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_normal_white_selector"
+                android:padding="10dp"
+                android:text="发送验证码"
+                android:textColor="@color/normal_purple"
+                android:textSize="15sp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/activity_perfect_information_btn_next"

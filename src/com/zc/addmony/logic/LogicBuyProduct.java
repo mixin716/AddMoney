@@ -16,15 +16,17 @@ public class LogicBuyProduct {
 	public static List<BanksBean> parseBanksList(String json) {
 		List<BanksBean> list = new ArrayList<BanksBean>();
 		try {
-			JSONArray array = new JSONArray(json);
+			JSONObject jsonObj = new JSONObject(json);
+			JSONObject listOjb = new JSONObject(jsonObj.optString("results"));
+			JSONArray array = new JSONArray(listOjb.optString("cardlist"));
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj = array.getJSONObject(i);
 				BanksBean bean = new BanksBean();
-				bean.setBank_ext(obj.optString("bank_ext"));
-				bean.setBank_name(obj.optString("bank_name"));
-				bean.setBank_num(obj.optString("bank_num"));
-				bean.setBlag(obj.optString("blag"));
-				bean.setId(obj.optString("id"));
+				// bean.setBank_ext(obj.optString("bank_ext"));
+				bean.setBank_name(obj.optString("bankname"));
+				bean.setBank_num(obj.optString("bankserial"));
+				// bean.setBlag(obj.optString("blag"));
+				// bean.setId(obj.optString("id"));
 				list.add(bean);
 			}
 		} catch (JSONException e) {

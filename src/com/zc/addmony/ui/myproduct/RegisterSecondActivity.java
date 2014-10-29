@@ -14,9 +14,11 @@ import android.widget.RelativeLayout.LayoutParams;
 
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.R;
+import com.zc.addmony.ui.buyproduct.PerfectInformationActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
 
+/** 注册第一步 输入姓名身份证号*/
 public class RegisterSecondActivity extends BaseActivity {
 
 	private Button btNext, btPopLogin;
@@ -85,7 +87,10 @@ public class RegisterSecondActivity extends BaseActivity {
 			AnimUtil.pushRightInAndOut(RegisterSecondActivity.this);
 			break;
 		case R.id.activity_register_second_bt_next:
-			PopWindMsg();
+//			PopWindMsg();
+			intent = new Intent(this, PerfectInformationActivity.class);
+			startActivity(intent);
+			AnimUtil.pushLeftInAndOut(this);
 			KeyBoard.demissKeyBoard(getApplicationContext(), etName);
 			strName = etName.getText().toString().trim();
 			strIdCard = etIdCard.getText().toString().trim();
@@ -96,9 +101,7 @@ public class RegisterSecondActivity extends BaseActivity {
 			} else if (strIdCard.length() != 18) {
 				showToast("请输入合理地身份证号");
 			} else {
-				intent = new Intent(this, RegisterSuccessActivity.class);
-				startActivity(intent);
-				AnimUtil.pushLeftInAndOut(this);
+				
 			}
 			break;
 		case R.id.pop_register_second_bt_login:
