@@ -55,7 +55,7 @@ public class ActivitiesRuleActivity extends BaseActivity {
 			llMoreContent.setVisibility(View.VISIBLE);
 			break;
 		case R.id.activity_activities_rule_btn_ok:
-			Intent intent = new Intent(this,ShoppingActivity.class);
+			Intent intent = new Intent(this,PhoneListActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(this);
 			break;

@@ -20,6 +20,7 @@ import com.zc.addmony.bean.myproduct.ManageBankBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicBase;
+import com.zc.addmony.logic.LogicBuyProduct;
 import com.zc.addmony.ui.buyproduct.CheckBankActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
@@ -68,7 +69,7 @@ public class ManageBankActivity extends BaseActivity implements
 		lv.setAdapter(adapter);
 	}
 
-	/** 设置listview高度*/
+	/** 设置listview高度 */
 	public void SetListViewHeight() {
 		if (banks.size() > 0) {
 			View listitem = adapter.getView(0, null, lv);
@@ -78,38 +79,44 @@ public class ManageBankActivity extends BaseActivity implements
 			lv.setLayoutParams(params);
 		}
 	}
-	
-	/** 获取银行卡列表*/
-	public void getBankList(){
+
+	/** 获取银行卡列表 */
+	public void getBankList() {
 		AjaxParams params = new AjaxParams();
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_BANK_LIST, params, callBack, 0);
 	}
-	
+
 	@Override
 	protected void handleResult(int requestCode, HttpResult result) {
 		// TODO Auto-generated method stub
 		super.handleResult(requestCode, result);
+		ManageBankBean bean;
 		String baseJson = result.baseJson;
 		System.out.println("-----json:------" + baseJson);
 		BaseBean baseBean = LogicBase.getInstance().parseData(baseJson);
 		switch (baseBean.getStatus()) {
 		case 1:
-			handleJson(requestCode, baseBean.getContent(),
-					baseBean.getMessage());
 			System.out.println("-----baseBean.getData():------"
 					+ baseBean.getContent());
+			banks = LogicBuyProduct.parseMyBanks(baseBean.getContent());
+			bean = new ManageBankBean();
+			bean.setFlag(0);
+			banks.add(bean);
+			adapter = new ManageBankAdapter(getApplicationContext(), banks);
+			lv.setAdapter(adapter);
 			break;
 		default:// 请求失败
 			showToast(baseBean.getMessage());
 			banks.clear();
-			ManageBankBean bean = new ManageBankBean();
+			bean = new ManageBankBean();
 			bean.setFlag(0);
 			banks.add(bean);
 			adapter.notifyDataSetChanged();
 			break;
 		}
 	}
-	
+
 	@Override
 	protected void handleJson(int reqeustCode, String jsonString, String message) {
 		// TODO Auto-generated method stub
@@ -125,11 +132,11 @@ public class ManageBankActivity extends BaseActivity implements
 			break;
 
 		case 2:// 解除绑定
-			
+
 			break;
 		}
 	}
-	
+
 	@Override
 	protected void doClickAction(int viewId) {
 		// TODO Auto-generated method stub
@@ -140,7 +147,7 @@ public class ManageBankActivity extends BaseActivity implements
 			AnimUtil.pushRightInAndOut(ManageBankActivity.this);
 			break;
 		case R.id.activity_manage_bank_bt_add:
-			Intent intent = new Intent(this,CheckBankActivity.class);
+			Intent intent = new Intent(this, CheckBankActivity.class);
 			startActivity(intent);
 			break;
 		default:

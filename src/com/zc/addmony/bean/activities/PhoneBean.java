@@ -2,15 +2,14 @@ package com.zc.addmony.bean.activities;
 
 import java.util.List;
 
-import com.zc.addmony.adapter.activities.ColorBean;
-
 /** 活动手机bean */
 public class PhoneBean {
 
 	String phoneName;
 	String phoneUrl;
 	String phoneId;
-	String phoneTc;// 手机套餐
+	List<PhoneTCBean> phoneTC;// 手机套餐
+	String listUrl;// 列表手机图片
 	List<ColorBean> phoneColors;// 手机颜色
 
 	public String getPhoneName() {
@@ -37,12 +36,20 @@ public class PhoneBean {
 		this.phoneId = phoneId;
 	}
 
-	public String getPhoneTc() {
-		return phoneTc;
+	public List<PhoneTCBean> getPhoneTC() {
+		return phoneTC;
 	}
 
-	public void setPhoneTc(String phoneTc) {
-		this.phoneTc = phoneTc;
+	public void setPhoneTC(List<PhoneTCBean> phoneTC) {
+		this.phoneTC = phoneTC;
+	}
+
+	public String getListUrl() {
+		return listUrl;
+	}
+
+	public void setListUrl(String listUrl) {
+		this.listUrl = listUrl;
 	}
 
 	public List<ColorBean> getPhoneColors() {
@@ -52,7 +59,5 @@ public class PhoneBean {
 	public void setPhoneColors(List<ColorBean> phoneColors) {
 		this.phoneColors = phoneColors;
 	}
-
-	
 
 }

@@ -18,18 +18,23 @@ import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.buyproduct.BanksBean;
 import com.zc.addmony.bean.buyproduct.BranchBean;
+import com.zc.addmony.bean.myproduct.OpenBankBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicBuyProduct;
 import com.zc.addmony.ui.myproduct.RegisterSuccessActivity;
+import com.zc.addmony.ui.myproduct.RegisterThridActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
 import com.zc.addmony.utils.PatternUtil;
 
 /** 添加银行卡信息 */
 public class PerfectInformationActivity extends BaseActivity {
+	private MApplication mApplication;
+	private OpenBankBean obBean;
 	private EditText edtName, edtIdCard, edtBankNum, edtPhone, edtCode;
 	private TextView tvBanks, tvProvince, tvCity, tvBranch;
 	private LinearLayout llBanks, llProvince, llCity, llBranch;
@@ -39,7 +44,7 @@ public class PerfectInformationActivity extends BaseActivity {
 	private List<BanksBean> bean;
 	private Intent intent;
 	private String name, idCard, userName, bankNum, phone, checkCode;
-	private String accoreqserial="";// 获取验证码时返回的字段
+	private String accoreqserial = "";// 获取验证码时返回的字段
 	private int position;
 	private List<BranchBean> branchBean;
 
@@ -58,7 +63,8 @@ public class PerfectInformationActivity extends BaseActivity {
 		provinceList = new ArrayList<String>();
 		branchList = new ArrayList<String>();
 		cityList = new ArrayList<String>();
-
+		mApplication = (MApplication) this.getApplication();
+		obBean = mApplication.getObBean();
 	}
 
 	@Override
@@ -140,22 +146,21 @@ public class PerfectInformationActivity extends BaseActivity {
 		AjaxParams params = new AjaxParams();
 		params.put("phone", phone);// 手机号
 		params.put("banknum", bankNum);// 银行卡号
-		params.put("name", "高岳");// 姓名
-		params.put("idcard", "130223199107160617");// 身份证号
+		params.put("name", obBean.getName());// 姓名
+		params.put("idcard", obBean.getIdcard());// 身份证号
 		httpRequest.get(Urls.OPEN_BANK_CODE, params, callBack, 5);
 	}
-	
-	/** 验证信息*/
-	private void sendCheckMessage(){
-//		 checkMessage($accoreqserial,$mobileauthcode,$banknum,$idcard,$name,$phone)
+
+	/** 验证信息 */
+	private void sendCheckMessage() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
 		params.put("accoreqserial", accoreqserial);
 		params.put("mobileauthcode", checkCode);
 		params.put("phone", phone);// 手机号
 		params.put("banknum", bankNum);// 银行卡号
-		params.put("name", "高岳");// 姓名
-		params.put("idcard", "130223199107160617");// 身份证号
+		params.put("name", obBean.getName());// 姓名
+		params.put("idcard", obBean.getIdcard());// 身份证号
 		httpRequest.get(Urls.OPEN_BANK_CHECK, params, callBack, 6);
 	}
 
@@ -225,6 +230,10 @@ public class PerfectInformationActivity extends BaseActivity {
 			bankNum = edtBankNum.getText().toString();
 			phone = edtPhone.getText().toString().trim();
 			checkCode = edtCode.getText().toString().trim();
+			province = tvProvince.getText().toString();
+			banks = tvBanks.getText().toString();
+			city = tvCity.getText().toString();
+			branch = tvBranch.getText().toString();
 			if (TextUtils.isEmpty(bankNum)) {
 				showToast("请输入银行卡号");
 			} else if (TextUtils.isEmpty(phone)) {
@@ -344,7 +353,7 @@ public class PerfectInformationActivity extends BaseActivity {
 		case 4:
 			// showToast("提交成功！");
 			finish();
-			Intent intent = new Intent(this, RegisterSuccessActivity.class);
+			intent = new Intent(this, RegisterSuccessActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(this);
 			break;
@@ -359,6 +368,16 @@ public class PerfectInformationActivity extends BaseActivity {
 			}
 			break;
 		case 6:
+			obBean.setBnum(bankNum);
+			obBean.setBankcode(bankCode);
+			obBean.setBranchcode(branchCode);
+			obBean.setBranch(branch);
+			obBean.setPhone(phone);
+			obBean.setProvince(province);
+			obBean.setCity(city);
+			intent = new Intent(this, RegisterThridActivity.class);
+			startActivity(intent);
+			this.finish();
 			break;
 		}
 	}

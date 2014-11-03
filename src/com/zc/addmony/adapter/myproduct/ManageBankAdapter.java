@@ -57,7 +57,8 @@ public class ManageBankAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			view = View.inflate(context, R.layout.adapter_manage_bank_layout,
 					null);
-			holder.llHave = (LinearLayout) view.findViewById(R.id.adapter_manage_bank_ll_have);
+			holder.llHave = (LinearLayout) view
+					.findViewById(R.id.adapter_manage_bank_ll_have);
 			holder.tvName = (TextView) view
 					.findViewById(R.id.adapter_manage_bank_tv_name);
 			holder.tvLimit = (TextView) view
@@ -66,20 +67,30 @@ public class ManageBankAdapter extends BaseAdapter {
 					.findViewById(R.id.adapter_manage_bank_tv_check);
 			holder.tvUnbind = (TextView) view
 					.findViewById(R.id.adapter_manage_bank_tv_unbind);
-			holder.tvNull = (TextView) view.findViewById(R.id.adapter_manage_bank_tv_null);
+			holder.tvNull = (TextView) view
+					.findViewById(R.id.adapter_manage_bank_tv_null);
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();
 		}
 
-		if(banks.get(position).getFlag() == 0){
+		holder.tvName.setText(banks.get(position).getBankName()
+				+ "（***"
+				+ banks.get(position)
+						.getBankacco()
+						.substring(
+								banks.get(position).getBankacco().length() - 4,
+								banks.get(position).getBankacco().length())
+				+ "）");
+
+		if (banks.get(position).getFlag() == 0) {
 			holder.tvNull.setVisibility(View.VISIBLE);
 			holder.llHave.setVisibility(View.INVISIBLE);
-		}else{
+		} else {
 			holder.tvNull.setVisibility(View.GONE);
 			holder.llHave.setVisibility(View.VISIBLE);
 		}
-		
+
 		holder.tvCheck.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -102,7 +113,7 @@ public class ManageBankAdapter extends BaseAdapter {
 	}
 
 	class ViewHolder {
-		TextView tvName, tvLimit, tvCheck, tvUnbind,tvNull;
+		TextView tvName, tvLimit, tvCheck, tvUnbind, tvNull;
 		ImageView imageBank;
 		LinearLayout llHave;
 	}

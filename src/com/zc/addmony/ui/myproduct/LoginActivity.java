@@ -1,8 +1,15 @@
 package com.zc.addmony.ui.myproduct;
 
+import java.util.List;
+
+import org.apache.http.client.CookieStore;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,6 +85,7 @@ public class LoginActivity extends BaseActivity {
 			intent = new Intent(this, RegisterSecondActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(LoginActivity.this);
+			this.finish();
 			break;
 		case R.id.activity_login_bt_login:
 			mPhone = etPhone.getText().toString().trim();
@@ -111,24 +119,56 @@ public class LoginActivity extends BaseActivity {
 		params.put("username", mPhone);
 		params.put("password", mPwd);
 		httpRequest.get(Urls.LOGIN, params, callBack, 0);
+		DefaultHttpClient httpClient;
+		httpClient = (DefaultHttpClient) httpRequest.getHttpClient();
+		CookieStore mCookieStore = httpClient.getCookieStore();
+		List<Cookie> cookies = mCookieStore.getCookies();
+		String PHPSESSID = null;
+		for (int i = 0; i < cookies.size(); i++) {
+			// 这里是读取Cookie['PHPSESSID']的值存在静态变量中，保证每次都是同一个值
+			if ("PHPSESSID".equals(cookies.get(i).getName())) {
+				PHPSESSID = cookies.get(i).getValue();
+				userShare.SaveSession(PHPSESSID);
+				Log.e("", PHPSESSID+"");
+				break;
+			}
+		}
+	}
+	
+	/** 请求用户信息 */
+	public void requestUserInfo() {
+		AjaxParams params = new AjaxParams();
+		httpRequest.get(Urls.GET_USER_INRO, params, callBack, 1);
 	}
 
 	@Override
 	protected void handleJson(int reqeustCode, String jsonString, String message) {
 		// TODO Auto-generated method stub
 		super.handleJson(reqeustCode, jsonString, message);
-		showToast("登录成功");
-		bean = LogicPerson.parseLogin(jsonString);
-		userShare.SaveFlag(true);
-		userShare.SavePhone(etPhone.getText().toString().trim());
-		userShare.SavePwd(etPwd.getText().toString().trim());
-		userShare.SaveId(bean.getUser_id());
-		userShare.SaveName(bean.getUser_name());
-		userShare.SaveOpenFlag(bean.getOpenflag());
-		userShare.SaveBuyPwd(bean.getTrade_pwd());
-		userShare.SaveToken(bean.getToken());
-		userShare.SaveRealname(bean.getRealname());
-		userShare.SaveIdcard(bean.getIdcard());
-		this.finish();
+		switch (reqeustCode) {
+		case 0:
+			showToast("登录成功");
+			bean = LogicPerson.parseLogin(jsonString);
+			userShare.SaveFlag(true);
+			userShare.SavePhone(etPhone.getText().toString().trim());
+			userShare.SavePwd(etPwd.getText().toString().trim());
+			userShare.SavePhone(bean.getPhone());
+			userShare.SaveId(bean.getUser_id());
+			userShare.SaveName(bean.getUser_name());
+			userShare.SaveOpenFlag(bean.getOpenflag());
+			userShare.SaveBuyPwd(bean.getTrade_pwd());
+			userShare.SaveToken(bean.getToken());
+			userShare.SaveRealname(bean.getRealname());
+			userShare.SaveIdcard(bean.getIdcard());
+			this.finish();
+//			requestUserInfo();
+			break;
+		case 1:
+			
+			break;
+		default:
+			break;
+		}
+		
 	}
 }

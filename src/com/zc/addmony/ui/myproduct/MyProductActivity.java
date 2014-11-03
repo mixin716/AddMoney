@@ -1,10 +1,16 @@
 package com.zc.addmony.ui.myproduct;
 
+import java.util.List;
+
+import org.apache.http.client.CookieStore;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,6 +66,7 @@ public class MyProductActivity extends BaseActivity {
 		llYesterday.setOnClickListener(this);
 		llBuy.setOnClickListener(this);
 
+		Log.e("", userShare.GetFlag() + "  " + userShare.GetName());
 		if (userShare.GetOpenFlag() == 1) {// 已开户
 			requestUserInfo();
 		} else {
@@ -101,6 +108,8 @@ public class MyProductActivity extends BaseActivity {
 	/** 请求用户信息 */
 	public void requestUserInfo() {
 		AjaxParams params = new AjaxParams();
+		Log.e("", userShare.GetSession()+"  ");
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_USER_INRO, params, callBack, 0);
 	}
 

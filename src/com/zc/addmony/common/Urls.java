@@ -43,6 +43,8 @@ public class Urls {
 	public static String OPEN_BANK_CODE = common +"sendMessage";
 	/** 建议验证码是否正确*/
 	public static String OPEN_BANK_CHECK = common +"checkMessage";
+	/** 开户验证*/
+	public static String OPEN_CHECK= common +"meropenacco";
 	/** 完善信息 */
 	public static String PERFECT_INFORMATION = common + "apiDict";
 	/** 验证开户银行卡并且进行小额打款 */

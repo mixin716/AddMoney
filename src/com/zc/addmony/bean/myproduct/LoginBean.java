@@ -5,7 +5,8 @@ public class LoginBean {
 
 	int id;
 	String token;
-	String user_name;//手机号
+	String user_name;
+	String phone;//手机号
 	String realname;//真实姓名
 	String regtime;
 	String flag;
@@ -37,6 +38,14 @@ public class LoginBean {
 
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getRegtime() {

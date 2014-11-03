@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="请输入6~8位密码"
+            android:password="true"
             android:padding="13dp"
             android:textSize="18sp" />
 

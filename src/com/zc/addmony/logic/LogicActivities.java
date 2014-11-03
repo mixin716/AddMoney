@@ -10,10 +10,11 @@ import org.w3c.dom.ls.LSInput;
 
 import android.util.Log;
 
-import com.zc.addmony.adapter.activities.ColorBean;
 import com.zc.addmony.bean.activities.AddressBean;
+import com.zc.addmony.bean.activities.ColorBean;
 import com.zc.addmony.bean.activities.OrderDetailBean;
 import com.zc.addmony.bean.activities.PhoneBean;
+import com.zc.addmony.bean.activities.PhoneTCBean;
 import com.zc.addmony.bean.activities.ShowPhoneBean;
 
 /** 解析活动 */
@@ -47,8 +48,20 @@ public class LogicActivities {
 				bean.setPhoneColors(listColors);
 
 				// 套餐
-				JSONObject tcObj = new JSONObject(content.optString("tc"));
-				bean.setPhoneTc(tcObj.optString("content"));
+				JSONArray tcArray = new JSONArray(content.optString("tc"));
+				List<PhoneTCBean> tcList = new ArrayList<PhoneTCBean>();
+				for(int j = 0; j < tcArray.length(); j++){
+					PhoneTCBean tcBean = new PhoneTCBean();
+					JSONObject tcObj = tcArray.getJSONObject(j);
+					tcBean.setContent(tcObj.optString("content"));
+					tcBean.setM_id(tcObj.optString("M_id"));
+					tcBean.setP_id(tcObj.optString("P_id"));
+					tcBean.setP_name(tcObj.optString("p_name"));
+					tcBean.setPrice(tcObj.optString("price"));
+					tcBean.setShare(tcObj.optString("share"));
+					tcList.add(tcBean);
+				}
+				bean.setPhoneTC(tcList);
 				list.add(bean);
 			}
 		} catch (JSONException e) {

@@ -1,4 +1,4 @@
-package com.zc.addmony.adapter.activities;
+package com.zc.addmony.bean.activities;
 
 /** 手机颜色bean*/
 public class ColorBean {

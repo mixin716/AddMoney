@@ -120,27 +120,27 @@ public class ShoppingActivity extends BaseActivity implements
 				rbIphone6.setVisibility(View.VISIBLE);
 				if (i == 0) {
 					rbIphone6.setChecked(true);
-					tvTc.setText("套餐月租:" + phones.get(i).getPhoneTc());
-					apBean.setPhoneName("iphone6");
-					apBean.setPhoneTc(phones.get(i).getPhoneTc());
+					// tvTc.setText("套餐月租:" + phones.get(i).getPhoneTc());
+					// apBean.setPhoneName("iphone6");
+					// apBean.setPhoneTc(phones.get(i).getPhoneTc());
 				}
 			}
 			if ("iphone5".equals(phones.get(i).getPhoneName())) {
 				rbIphone5.setVisibility(View.VISIBLE);
 				if (i == 0) {
 					rbIphone5.setChecked(true);
-					tvTc.setText("套餐月租:" + phones.get(i).getPhoneTc());
-					apBean.setPhoneName("iphone5");
-					apBean.setPhoneTc(phones.get(i).getPhoneTc());
+					// tvTc.setText("套餐月租:" + phones.get(i).getPhoneTc());
+					// apBean.setPhoneName("iphone5");
+					// apBean.setPhoneTc(phones.get(i).getPhoneTc());
 				}
 			}
 			if ("iphone5s".equals(phones.get(i).getPhoneName())) {
 				rbIphone5s.setVisibility(View.VISIBLE);
 				if (i == 0) {
 					rbIphone5s.setChecked(true);
-					tvTc.setText("套餐月租:" + phones.get(i).getPhoneTc());
-					apBean.setPhoneName("iphone5s");
-					apBean.setPhoneTc(phones.get(i).getPhoneTc());
+					// tvTc.setText("套餐月租:" + phones.get(i).getPhoneTc());
+					// apBean.setPhoneName("iphone5s");
+					// apBean.setPhoneTc(phones.get(i).getPhoneTc());
 				}
 			}
 			for (int j = 0; j < phones.get(0).getPhoneColors().size(); j++) {
@@ -221,8 +221,8 @@ public class ShoppingActivity extends BaseActivity implements
 		rbColor3.setVisibility(View.INVISIBLE);
 		for (int i = 0; i < phones.size(); i++) {
 			if (phoneName.equals(phones.get(i).getPhoneName())) {
-				tvTc.setText("套餐月租:" + phones.get(i).getPhoneTc());
-				apBean.setPhoneTc(phones.get(i).getPhoneTc());
+				// tvTc.setText("套餐月租:" + phones.get(i).getPhoneTc());
+				// apBean.setPhoneTc(phones.get(i).getPhoneTc());
 				for (int j = 0; j < phones.get(i).getPhoneColors().size(); j++) {
 					rbs[j].setVisibility(View.VISIBLE);
 					rbs[j].setText(phones.get(i).getPhoneColors().get(j)

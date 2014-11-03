@@ -36,6 +36,16 @@ public class UserSharedData {
 	public boolean GetFlag() {
 		return share.getBoolean("user_flag", false);
 	}
+	/** 保存登录session*/
+	public void SaveSession(String session){
+		edit.putString("login_session", session);
+		edit.commit();
+	}
+	
+	/** 获取登录session*/
+	public String GetSession(){
+		return share.getString("login_session", null);
+	}
 
 	/** 保存token */
 	public void SaveToken(String token) {

@@ -35,9 +35,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:inputType="phone"
                 android:hint="身份证号"
                 android:padding="13dp"
-                android:password="true"
                 android:textSize="18sp" />
         </LinearLayout>
 

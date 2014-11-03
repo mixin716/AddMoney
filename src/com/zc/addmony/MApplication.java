@@ -5,12 +5,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.zc.addmony.bean.FundBean;
-import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
-import com.zc.addmony.common.UserSharedData;
-import com.zc.addmony.ui.lock.GestureActivity;
-import com.zc.addmony.view.lockview.LockPatternUtils;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
@@ -23,6 +17,12 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+
+import com.zc.addmony.bean.FundBean;
+import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
+import com.zc.addmony.bean.myproduct.OpenBankBean;
+import com.zc.addmony.ui.lock.GestureActivity;
+import com.zc.addmony.view.lockview.LockPatternUtils;
 
 /**
  * Application
@@ -39,6 +39,8 @@ public class MApplication extends Application {
 	public FundBean fundBean = new FundBean();
 	/** 活动保存的数据 */
 	public ActivitiesPhoneBean apBean;
+	/** 开户bean*/
+	public OpenBankBean obBean;
 	public static int width;
 	public static int height;
 	public static float density;
@@ -49,6 +51,7 @@ public class MApplication extends Application {
 		super.onCreate();
 		getDensity();
 		apBean = new ActivitiesPhoneBean();
+		obBean = new OpenBankBean();
 	}
 
 	/**
@@ -278,5 +281,16 @@ public class MApplication extends Application {
 	public void setApBean(ActivitiesPhoneBean apBean) {
 		this.apBean = apBean;
 	}
+	
+	/** 获取开户bean*/
+	public OpenBankBean getObBean() {
+		return obBean;
+	}
 
+	/** 保存活动bean*/
+	public void setObBean(OpenBankBean obBean) {
+		this.obBean = obBean;
+	}
+
+	
 }
