@@ -9,7 +9,9 @@
         android:id="@+id/lv_activity_phone_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_margin="10dp"
         android:divider="@null"
-        android:dividerHeight="3dp" />
+        android:dividerHeight="10dp"
+        android:scrollbars="none" />
 
 </LinearLayout>

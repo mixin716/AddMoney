@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_normal_white_normal"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/ic_phone_list_iphone5s" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/adapter_phone_list_tv_name"
+            style="@style/wrap"
+            android:text="IPhone5s"
+            android:textColor="@color/normal_purple"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/adapter_phone_list_tv_money"
+            style="@style/wrap"
+            android:layout_marginTop="5dp"
+            android:text="冻结基金:5288元"
+            android:textColor="@color/text_light"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/adapter_phone_list_tv_date"
+            style="@style/wrap"
+            android:layout_marginTop="3dp"
+            android:text="合约期:24个月"
+            android:textColor="@color/text_light"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/adapter_phone_list_tv_tc_money"
+            style="@style/wrap"
+            android:layout_marginTop="3dp"
+            android:text="套餐价格:288元"
+            android:textColor="@color/text_light"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>

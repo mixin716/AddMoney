@@ -43,7 +43,6 @@ public class ShoppingActivity extends BaseActivity implements
 		mApplication = (MApplication) this.getApplication();
 		apBean = mApplication.getApBean();
 		setViews();
-		requestPhone();
 	}
 
 	@Override
