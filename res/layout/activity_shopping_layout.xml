@@ -11,8 +11,9 @@
         android:orientation="vertical" >
 
         <ImageView
+            android:id="@+id/activity_shopping_img_top"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_shopping_top_icon" />
 
@@ -99,62 +100,19 @@
             android:orientation="vertical"
             android:paddingBottom="20dp" >
 
-            <RadioGroup
-                android:id="@+id/activity_shopping_rg_phone"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <RadioButton
-                    android:id="@+id/activity_shopping_rb_iphone5"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_radiobutton_phone_selector"
-                    android:button="@color/clear"
-                    android:checked="true"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="Iphone5"
-                    android:textColor="@color/text_color_666666"
-                    android:textSize="16sp" />
-
-                <RadioButton
-                    android:id="@+id/activity_shopping_rb_iphone5s"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_radiobutton_phone_selector"
-                    android:button="@color/clear"
-                    android:checked="true"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="Iphone5s"
-                    android:textColor="@color/text_color_666666"
-                    android:textSize="16sp" />
-
-                <RadioButton
-                    android:id="@+id/activity_shopping_rb_iphone6"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_radiobutton_phone_selector"
-                    android:button="@color/clear"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="Iphone6"
-                    android:textColor="@color/text_color_666666"
-                    android:textSize="16sp" />
-            </RadioGroup>
-
             <TextView
                 android:id="@+id/activity_shopping_tv_tc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="套餐月租:"
+                android:text="套餐:"
                 android:textColor="@color/normal_red"
                 android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/activity_shopping_img_tc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -162,7 +120,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/ic_normal_white_normal"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <LinearLayout
                     android:layout_width="fill_parent"

@@ -121,6 +121,7 @@ public class PhoneListActivity extends BaseActivity implements
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
+		mApplication.setpBean(showPhones.get(position));
 		Intent intent = new Intent(PhoneListActivity.this,
 				ShoppingActivity.class);
 		startActivity(intent);
