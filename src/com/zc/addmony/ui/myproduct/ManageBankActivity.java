@@ -22,6 +22,7 @@ import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicBase;
 import com.zc.addmony.logic.LogicBuyProduct;
 import com.zc.addmony.ui.buyproduct.CheckBankActivity;
+import com.zc.addmony.ui.buyproduct.PerfectInformationActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
 
@@ -147,7 +148,8 @@ public class ManageBankActivity extends BaseActivity implements
 			AnimUtil.pushRightInAndOut(ManageBankActivity.this);
 			break;
 		case R.id.activity_manage_bank_bt_add:
-			Intent intent = new Intent(this, CheckBankActivity.class);
+			Intent intent = new Intent(this, PerfectInformationActivity.class);
+			intent.putExtra("addOrRegister", 1);
 			startActivity(intent);
 			break;
 		default:

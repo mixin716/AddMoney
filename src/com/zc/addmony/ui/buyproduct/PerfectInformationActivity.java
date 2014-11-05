@@ -35,6 +35,7 @@ import com.zc.addmony.utils.PatternUtil;
 public class PerfectInformationActivity extends BaseActivity {
 	private MApplication mApplication;
 	private OpenBankBean obBean;
+	private TextView tvTop;//标记是注册还是添加银行卡
 	private EditText edtName, edtIdCard, edtBankNum, edtPhone, edtCode;
 	private TextView tvBanks, tvProvince, tvCity, tvBranch;
 	private LinearLayout llBanks, llProvince, llCity, llBranch;
@@ -47,6 +48,7 @@ public class PerfectInformationActivity extends BaseActivity {
 	private String accoreqserial = "";// 获取验证码时返回的字段
 	private int position;
 	private List<BranchBean> branchBean;
+	private int addOrRegister;//来源标记 0为注册  1位添加银行卡
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class PerfectInformationActivity extends BaseActivity {
 
 	@Override
 	protected void initVariable() {
+		addOrRegister = this.getIntent().getIntExtra("addOrRegister", 0);
 		branchBean = new ArrayList<BranchBean>();
 		bean = new ArrayList<BanksBean>();
 		banksList = new ArrayList<String>();
@@ -69,7 +72,11 @@ public class PerfectInformationActivity extends BaseActivity {
 
 	@Override
 	protected void setTitleViews() {
-		titleText.setText("注册");
+		if(addOrRegister == 1){
+			titleText.setText("添加银行卡");
+		}else{
+			titleText.setText("注册");
+		}
 
 	}
 
@@ -81,6 +88,7 @@ public class PerfectInformationActivity extends BaseActivity {
 		edtPhone = (EditText) findViewById(R.id.activity_perfect_information_edt_phone);
 		edtCode = (EditText) findViewById(R.id.activity_perfect_information_edt_checkcode);
 
+		tvTop = (TextView) findViewById(R.id.activity_perfect_information_tv_top);
 		tvBanks = (TextView) findViewById(R.id.activity_perfect_information_tv_bank);
 		tvBranch = (TextView) findViewById(R.id.activity_perfect_information_tv_branch);
 		tvCity = (TextView) findViewById(R.id.activity_perfect_information_tv_city);
@@ -99,6 +107,11 @@ public class PerfectInformationActivity extends BaseActivity {
 		llBranch.setOnClickListener(this);
 		llCity.setOnClickListener(this);
 		llProvince.setOnClickListener(this);
+		
+		if(addOrRegister == 1){
+			tvTop.setText("请添加银行卡");
+			btnNext.setText("添加");
+		}
 	}
 
 	/** 获取银行列表 */
@@ -245,8 +258,11 @@ public class PerfectInformationActivity extends BaseActivity {
 			} else if (checkCode.length() != 6) {
 				showToast("请输入6位验证码");
 			} else if (checkEmpty()) {
-				// sendPerfectRequest();
-				sendCheckMessage();
+				if(addOrRegister == 1){//添加银行卡
+					
+				}else{//注册流程
+					sendCheckMessage();
+				}
 			}
 			break;
 		case R.id.activity_perfect_information_btn_code:// 银行开户手机号验证

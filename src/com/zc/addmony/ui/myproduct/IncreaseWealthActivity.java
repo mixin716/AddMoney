@@ -22,6 +22,7 @@ import com.zc.addmony.R;
 import com.zc.addmony.adapter.myproduct.RecordDetailsAdapter;
 import com.zc.addmony.bean.myproduct.MoneyChangeBean;
 import com.zc.addmony.common.Urls;
+import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.ui.buyproduct.BuyProductActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.views.XListView;
@@ -35,6 +36,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 	private Intent intent;
 	private List<MoneyChangeBean> list;
 	private MApplication app;
+	private UserSharedData userShare;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 		list = new ArrayList<MoneyChangeBean>();
 		adapter = new RecordDetailsAdapter(getApplicationContext(), list);
 		app = (MApplication) getApplication();
+		userShare = UserSharedData.getInstance(getApplicationContext());
 	}
 
 	@Override
@@ -82,6 +85,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 	private void getgetUserInfo() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_USER_INRO, params, callBack, 0);
 
 	}
@@ -90,6 +94,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 		showLoading();
 		AjaxParams params = new AjaxParams();
 		params.put("fundcode", "320002");
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_MONEY_CHANGE, params, callBack, 1);
 
 	}

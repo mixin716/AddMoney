@@ -172,7 +172,7 @@ public class MApplication extends Application {
 			};
 		}
 		if (!isRunning) {
-			timer.schedule(timerTask, 6 * 1000, 6 * 1000);
+			timer.schedule(timerTask, 5*60 * 1000, 5*60 * 1000);
 			isRunning = true;
 		}
 	}

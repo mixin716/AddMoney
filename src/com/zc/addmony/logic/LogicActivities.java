@@ -33,6 +33,7 @@ public class LogicActivities {
 
 				JSONObject content = new JSONObject(obj.optString("content"));
 				bean.setPhoneUrl(content.optString("bannerUrl"));
+				bean.setListUrl(content.optString("listUrl"));
 				
 				// 颜色
 				JSONArray colors = new JSONArray(content.optString("colors"));

@@ -16,6 +16,7 @@ import com.zc.addmony.R;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.utils.AnimUtil;
 
+/** 提现赎回*/
 public class SaleMoneyActivity extends BaseActivity {
 	private MApplication app;
 	private TextView tvFundName, tvSaleMoney, tvHaveMoney, tvBankCode;

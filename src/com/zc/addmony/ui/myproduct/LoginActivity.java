@@ -8,6 +8,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -119,27 +120,26 @@ public class LoginActivity extends BaseActivity {
 		params.put("username", mPhone);
 		params.put("password", mPwd);
 		httpRequest.get(Urls.LOGIN, params, callBack, 0);
-		DefaultHttpClient httpClient;
-		httpClient = (DefaultHttpClient) httpRequest.getHttpClient();
-		CookieStore mCookieStore = httpClient.getCookieStore();
-		List<Cookie> cookies = mCookieStore.getCookies();
-		String PHPSESSID = null;
-		for (int i = 0; i < cookies.size(); i++) {
-			// 这里是读取Cookie['PHPSESSID']的值存在静态变量中，保证每次都是同一个值
-			if ("PHPSESSID".equals(cookies.get(i).getName())) {
-				PHPSESSID = cookies.get(i).getValue();
-				userShare.SaveSession(PHPSESSID);
-				Log.e("", PHPSESSID+"");
-				break;
+	}
+
+	private Handler cookieHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			DefaultHttpClient httpClient;
+			httpClient = (DefaultHttpClient) httpRequest.getHttpClient();
+			CookieStore mCookieStore = httpClient.getCookieStore();
+			List<Cookie> cookies = mCookieStore.getCookies();
+			String PHPSESSID = null;
+			for (int i = 0; i < cookies.size(); i++) {
+				// 这里是读取Cookie['PHPSESSID']的值存在静态变量中，保证每次都是同一个值
+				if ("PHPSESSID".equals(cookies.get(i).getName())) {
+					PHPSESSID = cookies.get(i).getValue();
+					userShare.SaveSession(PHPSESSID);
+					Log.e("PHPSESSID", PHPSESSID + "");
+					break;
+				}
 			}
-		}
-	}
-	
-	/** 请求用户信息 */
-	public void requestUserInfo() {
-		AjaxParams params = new AjaxParams();
-		httpRequest.get(Urls.GET_USER_INRO, params, callBack, 1);
-	}
+		};
+	};
 
 	@Override
 	protected void handleJson(int reqeustCode, String jsonString, String message) {
@@ -147,6 +147,7 @@ public class LoginActivity extends BaseActivity {
 		super.handleJson(reqeustCode, jsonString, message);
 		switch (reqeustCode) {
 		case 0:
+			cookieHandler.sendEmptyMessageDelayed(0, 200);
 			showToast("登录成功");
 			bean = LogicPerson.parseLogin(jsonString);
 			userShare.SaveFlag(true);
@@ -161,14 +162,12 @@ public class LoginActivity extends BaseActivity {
 			userShare.SaveRealname(bean.getRealname());
 			userShare.SaveIdcard(bean.getIdcard());
 			this.finish();
-//			requestUserInfo();
+			// requestUserInfo();
 			break;
 		case 1:
-			
-			break;
-		default:
+
 			break;
 		}
-		
+
 	}
 }

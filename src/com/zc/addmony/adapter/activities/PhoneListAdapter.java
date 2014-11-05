@@ -8,20 +8,26 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jky.struct2.bitmap.FinalBitmap;
+import com.jky.struct2.bitmap.FinalBitmapManager;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.activities.PhoneBean;
+import com.zc.addmony.common.Urls;
 
 /** 手机列表bean */
 public class PhoneListAdapter extends BaseAdapter {
 
 	private List<PhoneBean> phones;
 	private Context context;
+	private FinalBitmap finalBitmap;
 
 	public PhoneListAdapter(List<PhoneBean> phones, Context context) {
 		this.phones = phones;
 		this.context = context;
+		finalBitmap = FinalBitmapManager.getFinalBitmapManager(context).getFinalBitmap(FinalBitmapManager.IMG_BIG);
 	}
 
 	@Override
@@ -50,6 +56,7 @@ public class PhoneListAdapter extends BaseAdapter {
 			holder = new HolderView();
 			convertView = View.inflate(context,
 					R.layout.adapter_phone_list_layout, null);
+			holder.img = (ImageView) convertView.findViewById(R.id.adapter_phone_list_img);
 			holder.tvName = (TextView) convertView
 					.findViewById(R.id.adapter_phone_list_tv_name);
 			holder.tvMoney = (TextView) convertView
@@ -58,6 +65,7 @@ public class PhoneListAdapter extends BaseAdapter {
 					.findViewById(R.id.adapter_phone_list_tv_date);
 			holder.tvTcMoney = (TextView) convertView
 					.findViewById(R.id.adapter_phone_list_tv_tc_money);
+			convertView.setTag(holder);
 		} else {
 			holder = (HolderView) convertView.getTag();
 		}
@@ -67,10 +75,12 @@ public class PhoneListAdapter extends BaseAdapter {
 						.getShare())) + "元");
 		holder.tvTcMoney.setText("套餐价格:"
 				+ phones.get(position).getPhoneTC().get(0).getPrice() + "元");
+		finalBitmap.display(holder.img, Urls.url+phones.get(position).getListUrl(), R.drawable.ic_phone_list_iphone5s);
 		return convertView;
 	}
 
 	class HolderView {
+		ImageView img;
 		TextView tvName, tvMoney, tvTcMoney, tvDate;
 	}
 }

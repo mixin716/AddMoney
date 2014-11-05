@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 /**
- * ??¾å??å¯????å·¥å?·ç±»
+ * ??ï¿½ï¿½??ï¿½????å·¥ï¿½?ï¿½ç±»
  * 
  * @Package_Name : com.eastedge.cctv.widget.lock
  * @ClassName: LockPatternUtils
  * @author lumeng
- * @date 2013-11-19 ä¸????10:43:36
+ * @date 2013-11-19 ï¿½????10:43:36
  * @version V1.0
  */
 public class LockPatternUtils {
@@ -73,7 +74,7 @@ public class LockPatternUtils {
 		return Arrays.toString(res);
 	}
 	/**
-	 * ä¿?å­??????¿å?????
+	 * ï¿½?ï¿½??????ï¿½ï¿½?????
 	 * 
 	 * @param @param pattern
 	 * @param @param KEY_LOCK_PWD
@@ -86,7 +87,7 @@ public class LockPatternUtils {
 		editor.commit();
 	}
 	/**
-	 * ??·å??å½??????¨æ?·æ????¿å?????
+	 * ??ï¿½ï¿½??ï¿½??????ï¿½ï¿½?ï¿½ï¿½????ï¿½ï¿½?????
 	 * 
 	 * @param @param KEY_LOCK_PWD
 	 * @param @return
@@ -97,7 +98,7 @@ public class LockPatternUtils {
 		return preference.getString(KEY_LOCK_PWD+LOCK_PWD, "");
 	}
 	/**
-	 * æ£???¥æ????¿å???????????æ­£ç¡®
+	 * ï¿½???ï¿½ï¿½????ï¿½ï¿½???????????æ­£ç¡®
 	 * 
 	 * @param @param pattern
 	 * @param @param KEY_LOCK_PWD
@@ -105,7 +106,7 @@ public class LockPatternUtils {
 	 * @return int
 	 * @throws
 	 */
-	public int checkPattern(List<LockPatternView.Cell> pattern,String KEY_LOCK_PWD) {
+	@SuppressLint("NewApi") public int checkPattern(List<LockPatternView.Cell> pattern,String KEY_LOCK_PWD) {
 		String stored = getLockPaternString(KEY_LOCK_PWD);
 		if (!stored.isEmpty()) {
 			return stored.equals(patternToString(pattern)) ? 1 : 0;
@@ -113,7 +114,7 @@ public class LockPatternUtils {
 		return -1;
 	}
 	/**
-	 * æ¸?ç©ºæ????¿å?????
+	 * ï¿½?ç©ºï¿½????ï¿½ï¿½?????
 	 * 
 	 * @param @param KEY_LOCK_PWD
 	 * @return void
