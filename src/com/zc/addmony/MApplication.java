@@ -20,6 +20,7 @@ import android.util.Log;
 
 import com.zc.addmony.bean.FundBean;
 import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
+import com.zc.addmony.bean.activities.PhoneBean;
 import com.zc.addmony.bean.myproduct.OpenBankBean;
 import com.zc.addmony.ui.lock.GestureActivity;
 import com.zc.addmony.view.lockview.LockPatternUtils;
@@ -39,7 +40,9 @@ public class MApplication extends Application {
 	public FundBean fundBean = new FundBean();
 	/** 活动保存的数据 */
 	public ActivitiesPhoneBean apBean;
-	/** 开户bean*/
+	/** 活动保存所选择的手机 */
+	public PhoneBean pBean;
+	/** 开户bean */
 	public OpenBankBean obBean;
 	public static int width;
 	public static int height;
@@ -88,8 +91,8 @@ public class MApplication extends Application {
 	long lastTimeMillis = 0;
 
 	public void setLastTouchTime() {
-		Log.e(TAG,LockPatternUtils.getInstance(
-				getApplicationContext()).getLockPaternString("user_key")+ "");
+		Log.e(TAG, LockPatternUtils.getInstance(getApplicationContext())
+				.getLockPaternString("user_key") + "");
 		if (TextUtils.isEmpty(LockPatternUtils.getInstance(
 				getApplicationContext()).getLockPaternString("user_key"))) {
 			return;
@@ -281,16 +284,23 @@ public class MApplication extends Application {
 	public void setApBean(ActivitiesPhoneBean apBean) {
 		this.apBean = apBean;
 	}
-	
-	/** 获取开户bean*/
+
+	/** 获取开户bean */
 	public OpenBankBean getObBean() {
 		return obBean;
 	}
 
-	/** 保存活动bean*/
+	/** 保存活动bean */
 	public void setObBean(OpenBankBean obBean) {
 		this.obBean = obBean;
 	}
 
-	
+	public PhoneBean getpBean() {
+		return pBean;
+	}
+
+	public void setpBean(PhoneBean pBean) {
+		this.pBean = pBean;
+	}
+
 }

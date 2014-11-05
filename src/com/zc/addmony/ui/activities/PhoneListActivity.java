@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.activities.PhoneListAdapter;
 import com.zc.addmony.bean.activities.PhoneBean;
@@ -24,6 +25,7 @@ import com.zc.addmony.utils.AnimUtil;
 public class PhoneListActivity extends BaseActivity implements
 		OnItemClickListener {
 
+	private MApplication mApplication;
 	private ListView lv;
 	private List<PhoneBean> requestPhones, showPhones;
 	private PhoneListAdapter adapter;
@@ -40,6 +42,7 @@ public class PhoneListActivity extends BaseActivity implements
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
+		mApplication = (MApplication) this.getApplication();
 		requestPhones = new ArrayList<PhoneBean>();
 		showPhones = new ArrayList<PhoneBean>();
 		adapter = new PhoneListAdapter(showPhones, getApplicationContext());
