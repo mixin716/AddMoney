@@ -103,7 +103,7 @@ public class PhonesFragment extends ListFragment implements
 
 	@Override
 	public void onClick(View arg0) {
-		// TODO Auto-generated method
+		// TODO Auto-generated method stub
 		Intent intent;
 		switch (arg0.getId()) {
 		case R.id.activity_fragment_tv_previous://
