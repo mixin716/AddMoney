@@ -64,7 +64,7 @@ public class PhoneListAdapter extends BaseAdapter {
 		holder.tvName.setText(phones.get(position).getPhoneName());
 		holder.tvMoney.setText("冻结基金:"
 				+ (Integer.valueOf(phones.get(position).getPhoneTC().get(0)
-						.getShare()) * 10) + "元");
+						.getShare())) + "元");
 		holder.tvTcMoney.setText("套餐价格:"
 				+ phones.get(position).getPhoneTC().get(0).getPrice() + "元");
 		return convertView;
