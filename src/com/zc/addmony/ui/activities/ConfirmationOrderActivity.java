@@ -25,13 +25,15 @@ public class ConfirmationOrderActivity extends BaseActivity {
 	private MApplication mApplication;
 	private TextView tvPhoneName, tvColor, tvPackage, tvPhoneAddress,
 			tvPhoneSelect;
-	private EditText etProvince, etCity, etAddress, etPhone, etRemarks;
+	private EditText  etAddress, etPhone, etRemarks;
+	private TextView tvProvince,tvCity;
 	private CheckBox cbAgree;
 	private Button btNext;
 	private ActivitiesPhoneBean apBean;
 	private UserSharedData userShare;
 	private String strProvince, strCity, strAddress, strPhone, strRemark;
-
+	private String province;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -62,13 +64,15 @@ public class ConfirmationOrderActivity extends BaseActivity {
 		tvPackage = (TextView) findViewById(R.id.activity_confirmation_order_tv_package);
 		tvPhoneAddress = (TextView) findViewById(R.id.activity_confirmation_order_tv_phone_address);
 		tvPhoneSelect = (TextView) findViewById(R.id.activity_confirmation_order_tv_phone_select);
-		etProvince = (EditText) findViewById(R.id.activity_confirmation_order_et_province);
-		etCity = (EditText) findViewById(R.id.activity_confirmation_order_et_city);
+		tvProvince = (TextView) findViewById(R.id.activity_confirmation_order_tv_province);
+		tvCity = (TextView) findViewById(R.id.activity_confirmation_order_tv_city);
 		etAddress = (EditText) findViewById(R.id.activity_confirmation_order_et_address);
 		etPhone = (EditText) findViewById(R.id.activity_confirmation_order_et_phone);
 		etRemarks = (EditText) findViewById(R.id.activity_confirmation_order_et_remark);
 		cbAgree = (CheckBox) findViewById(R.id.activity_confirmation_order_cb_agree);
 		btNext = (Button) findViewById(R.id.activity_confirmation_order_bt_next);
+		tvProvince.setOnClickListener(this);
+		tvCity.setOnClickListener(this);
 		btNext.setOnClickListener(this);
 
 		if (!TextUtils.isEmpty(apBean.getPhoneName())) {
@@ -78,7 +82,7 @@ public class ConfirmationOrderActivity extends BaseActivity {
 			tvColor.setText(apBean.getPhoneColor());
 		}
 		if (!TextUtils.isEmpty(apBean.getPhoneTc())) {
-			tvPackage.setText(apBean.getPhoneTc());
+			tvPackage.setText(apBean.getPhoneTc()+"套餐");
 		}
 		if(!TextUtils.isDigitsOnly(apBean.getPhoneAdd())){
 			tvPhoneAddress.setText(apBean.getPhoneAdd());
@@ -87,6 +91,7 @@ public class ConfirmationOrderActivity extends BaseActivity {
 			tvPhoneSelect.setText(apBean.getPhoneNum());
 		}
 	}
+
 
 	@Override
 	protected void doClickAction(int viewId) {
@@ -98,26 +103,43 @@ public class ConfirmationOrderActivity extends BaseActivity {
 			this.finish();
 			AnimUtil.pushRightInAndOut(ConfirmationOrderActivity.this);
 			break;
+		case R.id.activity_confirmation_order_tv_province://选择省份
+			intent = new Intent(this,EmailAddressActivity.class);
+			intent.putExtra("type", 1);
+			startActivityForResult(intent, 0);
+			AnimUtil.pushLeftInAndOut(ConfirmationOrderActivity.this);
+			break;
+		case R.id.activity_confirmation_order_tv_city://选择市
+			if(TextUtils.isEmpty(tvProvince.getText().toString())){
+				showToast("请选择省份");
+			}else{
+				intent = new Intent(this,EmailAddressActivity.class);
+				intent.putExtra("type", 2);
+				intent.putExtra("province", province);
+				startActivityForResult(intent, 1);
+				AnimUtil.pushLeftInAndOut(ConfirmationOrderActivity.this);
+			}
+			break;
 		case R.id.activity_confirmation_order_bt_next:
 			// intent = new Intent(this, OrderSuccessActivity.class);
 			// startActivity(intent);
 			AnimUtil.pushLeftInAndOut(ConfirmationOrderActivity.this);
-			KeyBoard.demissKeyBoard(getApplicationContext(), etProvince);
-			KeyBoard.demissKeyBoard(getApplicationContext(), etCity);
+//			KeyBoard.demissKeyBoard(getApplicationContext(), etProvince);
+//			KeyBoard.demissKeyBoard(getApplicationContext(), etCity);
 			KeyBoard.demissKeyBoard(getApplicationContext(), etAddress);
 			KeyBoard.demissKeyBoard(getApplicationContext(), etPhone);
 			KeyBoard.demissKeyBoard(getApplicationContext(), etRemarks);
-			strProvince = etProvince.getText().toString().trim();
-			strCity = etCity.getText().toString().trim();
+			strProvince = tvProvince.getText().toString().trim();
+			strCity = tvCity.getText().toString().trim();
 			strAddress = etAddress.getText().toString().trim();
 			strPhone = etPhone.getText().toString().trim();
 			strRemark = etRemarks.getText().toString().trim();
 			if (TextUtils.isEmpty(strProvince)) {
 				showToast("请输入配送省份");
-			} else if (TextUtils.isEmpty(strAddress)) {
+			} else if (TextUtils.isEmpty(strCity)) {
 				showToast("请输入配送城市");
 			} else if (TextUtils.isEmpty(strAddress)) {
-				showToast("请输入配送地址");
+				showToast("请输入详细地址");
 			} else if (TextUtils.isEmpty(strPhone)) {
 				showToast("请输入手机号");
 			} else if (!PatternUtil.patternPhoneNumber(strPhone)) {
@@ -156,6 +178,25 @@ public class ConfirmationOrderActivity extends BaseActivity {
 		Intent intent = new Intent(this, OrderSuccessActivity.class);
 		startActivity(intent);
 		AnimUtil.pushLeftInAndOut(ConfirmationOrderActivity.this);
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case 0:
+			if(resultCode == RESULT_OK){
+				province = data.getStringExtra("address");
+				tvProvince.setText(province);
+			}
+			break;
+		case 1:
+			if(resultCode == RESULT_OK){
+				tvCity.setText(data.getStringExtra("address"));
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }

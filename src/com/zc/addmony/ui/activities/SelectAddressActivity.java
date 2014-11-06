@@ -93,6 +93,7 @@ public class SelectAddressActivity extends BaseActivity implements
 			try {
 				lvProvince.setVisibility(View.GONE);
 				lvCity.setVisibility(View.VISIBLE);
+				titleText.setText("选择城市");
 				list = new ArrayList<AddressBean>();
 				list = LogicActivities.parseGetAddress(jsonString);
 				adapter = new PhoneAddressAdapter(this, list);

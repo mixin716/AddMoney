@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/normal_bg" >
+    android:background="@color/white" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -13,9 +13,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_product_detail_top_view_background"
             android:orientation="vertical"
-            android:paddingBottom="10dp"
             android:paddingTop="10dp" >
 
             <LinearLayout
@@ -29,7 +27,7 @@
                     android:layout_weight="5"
                     android:gravity="right"
                     android:text="手机型号:"
-                    android:textColor="@color/text_deep"
+                    android:textColor="@color/text_light"
                     android:textSize="17sp" />
 
                 <TextView
@@ -39,35 +37,16 @@
                     android:layout_weight="3"
                     android:gravity="left"
                     android:paddingLeft="5dp"
-                    android:textColor="@color/text_light"
+                    android:textColor="@color/normal_purple"
                     android:textSize="17sp" />
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:gravity="right"
-                    android:text="颜色:"
-                    android:textColor="@color/text_deep"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:id="@+id/activity_confirmation_order_tv_phonecolor"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:gravity="left"
-                    android:paddingLeft="5dp"
-                    android:textColor="@color/text_light"
-                    android:textSize="17sp" />
-            </LinearLayout>
+                android:layout_height="0.5dip"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/text_light" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -81,7 +60,7 @@
                     android:layout_weight="5"
                     android:gravity="right"
                     android:text="套餐:"
-                    android:textColor="@color/text_deep"
+                    android:textColor="@color/text_light"
                     android:textSize="17sp" />
 
                 <TextView
@@ -91,9 +70,49 @@
                     android:layout_weight="3"
                     android:gravity="left"
                     android:paddingLeft="5dp"
-                    android:textColor="@color/text_light"
+                    android:textColor="@color/normal_purple"
                     android:textSize="17sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/text_light" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:gravity="right"
+                    android:text="颜色:"
+                    android:textColor="@color/text_light"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/activity_confirmation_order_tv_phonecolor"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="left"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/normal_purple"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/text_light" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -107,7 +126,7 @@
                     android:layout_weight="5"
                     android:gravity="right"
                     android:text="号码归属地:"
-                    android:textColor="@color/text_deep"
+                    android:textColor="@color/text_light"
                     android:textSize="17sp" />
 
                 <TextView
@@ -117,9 +136,16 @@
                     android:layout_weight="3"
                     android:gravity="left"
                     android:paddingLeft="5dp"
-                    android:textColor="@color/text_light"
+                    android:textColor="@color/normal_purple"
                     android:textSize="17sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/text_light" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -133,7 +159,7 @@
                     android:layout_weight="5"
                     android:gravity="right"
                     android:text="手机号码:"
-                    android:textColor="@color/text_deep"
+                    android:textColor="@color/text_light"
                     android:textSize="17sp" />
 
                 <TextView
@@ -143,19 +169,25 @@
                     android:layout_weight="3"
                     android:gravity="left"
                     android:paddingLeft="5dp"
-                    android:textColor="@color/text_light"
+                    android:textColor="@color/normal_purple"
                     android:textSize="17sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/text_light" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_item_normal_bg"
             android:orientation="vertical"
             android:paddingBottom="10dp"
-            android:paddingTop="10dp" >
+            android:paddingTop="5dp" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -168,7 +200,7 @@
                     android:layout_weight="11"
                     android:gravity="right"
                     android:text="配送地址:"
-                    android:textColor="@color/text_deep"
+                    android:textColor="@color/text_light"
                     android:textSize="17sp" />
 
                 <LinearLayout
@@ -183,8 +215,8 @@
                         style="@style/match_wrap"
                         android:orientation="horizontal" >
 
-                        <EditText
-                            android:id="@+id/activity_confirmation_order_et_province"
+                        <TextView
+                            android:id="@+id/activity_confirmation_order_tv_province"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="3dp"
@@ -194,11 +226,11 @@
                             android:paddingBottom="3dp"
                             android:paddingTop="3dp"
                             android:singleLine="true"
-                            android:textColor="@color/text_deep"
+                            android:textColor="@color/text_light"
                             android:textSize="17sp" />
 
-                        <EditText
-                            android:id="@+id/activity_confirmation_order_et_city"
+                        <TextView
+                            android:id="@+id/activity_confirmation_order_tv_city"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
@@ -208,7 +240,7 @@
                             android:paddingBottom="3dp"
                             android:paddingTop="3dp"
                             android:singleLine="true"
-                            android:textColor="@color/text_deep"
+                            android:textColor="@color/text_light"
                             android:textSize="17sp" />
                     </LinearLayout>
 
@@ -220,10 +252,11 @@
                         android:background="@drawable/ic_activities_input_normal"
                         android:gravity="top"
                         android:lines="3"
+                        android:hint="请输入详细地址"
                         android:paddingBottom="3dp"
                         android:paddingLeft="3dp"
                         android:paddingTop="3dp"
-                        android:textColor="@color/text_deep"
+                        android:textColor="@color/text_light"
                         android:textSize="17sp" />
                 </LinearLayout>
 
@@ -233,6 +266,13 @@
                     android:text="*"
                     android:textColor="@color/normal_red" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/text_light" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -245,8 +285,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="11"
                     android:gravity="right"
-                    android:text="联系号码:"
-                    android:textColor="@color/text_deep"
+                    android:text="联系电话:"
+                    android:textColor="@color/text_light"
                     android:textSize="17sp" />
 
                 <EditText
@@ -263,7 +303,7 @@
                     android:paddingLeft="5dp"
                     android:paddingTop="3dp"
                     android:singleLine="true"
-                    android:textColor="@color/text_deep"
+                    android:textColor="@color/text_light"
                     android:textSize="17sp" />
 
                 <TextView
@@ -272,6 +312,13 @@
                     android:text="*"
                     android:textColor="@color/normal_red" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/text_light" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -285,7 +332,7 @@
                     android:layout_weight="11"
                     android:gravity="right"
                     android:text="买家备注:"
-                    android:textColor="@color/text_deep"
+                    android:textColor="@color/text_light"
                     android:textSize="17sp" />
 
                 <EditText
@@ -301,7 +348,7 @@
                     android:paddingLeft="5dp"
                     android:paddingTop="3dp"
                     android:singleLine="true"
-                    android:textColor="@color/text_deep"
+                    android:textColor="@color/text_light"
                     android:textSize="17sp" />
 
                 <TextView
@@ -322,8 +369,9 @@
             android:checked="true"
             android:drawableLeft="@drawable/bg_activities_check_selector"
             android:text="  我同意《XX协议》"
-            android:textColor="@color/text_deep"
-            android:textSize="17sp" />
+            android:textColor="@color/text_light"
+            android:textSize="17sp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/activity_confirmation_order_bt_next"

@@ -15,6 +15,7 @@ import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.activities.PhoneListAdapter;
+import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
 import com.zc.addmony.bean.activities.PhoneBean;
 import com.zc.addmony.bean.activities.PhoneTCBean;
 import com.zc.addmony.common.Urls;
@@ -29,6 +30,7 @@ public class PhoneListActivity extends BaseActivity implements
 	private ListView lv;
 	private List<PhoneBean> requestPhones, showPhones;
 	private PhoneListAdapter adapter;
+	private ActivitiesPhoneBean apBean;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class PhoneListActivity extends BaseActivity implements
 	protected void initVariable() {
 		// TODO Auto-generated method stub
 		mApplication = (MApplication) this.getApplication();
+		apBean = mApplication.getApBean();
 		requestPhones = new ArrayList<PhoneBean>();
 		showPhones = new ArrayList<PhoneBean>();
 		adapter = new PhoneListAdapter(showPhones, getApplicationContext());
@@ -122,6 +125,7 @@ public class PhoneListActivity extends BaseActivity implements
 			long id) {
 		// TODO Auto-generated method stub
 		mApplication.setpBean(showPhones.get(position));
+		apBean.setPhoneName(showPhones.get(position).getPhoneName());
 		Intent intent = new Intent(PhoneListActivity.this,
 				ShoppingActivity.class);
 		startActivity(intent);

@@ -96,6 +96,7 @@ public class ShoppingActivity extends BaseActivity implements
 		rbs[0].setChecked(true);
 		apBean.setPhoneColor(pBean.getPhoneColors().get(0).getColor());
 		apBean.setPhoneColorId(pBean.getPhoneColors().get(0).getC_id());
+		apBean.setPhoneTc(pBean.getPhoneTC().get(0).getP_name());
 		
 		tvTc.setText("套餐:"+pBean.getPhoneTC().get(0).getP_name());
 		finalBitmap.display(imgTop, Urls.url+pBean.getPhoneUrl(), R.drawable.ic_shopping_top_icon);
