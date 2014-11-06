@@ -91,6 +91,8 @@ public class SelectAddressActivity extends BaseActivity implements
 			break;
 		case 1:
 			try {
+				lvProvince.setVisibility(View.GONE);
+				lvCity.setVisibility(View.VISIBLE);
 				list = new ArrayList<AddressBean>();
 				list = LogicActivities.parseGetAddress(jsonString);
 				adapter = new PhoneAddressAdapter(this, list);
@@ -108,8 +110,6 @@ public class SelectAddressActivity extends BaseActivity implements
 		case R.id.activity_select_address_lv_province:// 省份
 			getCityAddressRequest(list.get(arg2).getAid());
 			address = list.get(arg2).getArea();
-			lvProvince.setVisibility(View.GONE);
-			lvCity.setVisibility(View.VISIBLE);
 			break;
 		case R.id.activity_select_address_lv_city:// 市
 			address = address+list.get(arg2).getArea();

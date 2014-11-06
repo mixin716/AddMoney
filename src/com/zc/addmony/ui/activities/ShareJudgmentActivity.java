@@ -58,7 +58,7 @@ public class ShareJudgmentActivity extends BaseActivity{
 			AnimUtil.pushRightInAndOut(ShareJudgmentActivity.this);
 			break;
 		case R.id.activity_share_judgment_bt_full:
-			intent = new Intent(this,SelectPhoneActivity.class);
+			intent = new Intent(this,SelectPhoneNewActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(ShareJudgmentActivity.this);
 			break;

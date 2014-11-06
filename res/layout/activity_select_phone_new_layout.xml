@@ -60,6 +60,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/activity_select_phone_new_btn_ok"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
