@@ -2,6 +2,7 @@ package com.zc.addmony.ui.myproduct;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.crypto.spec.OAEPParameterSpec;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -87,6 +88,13 @@ public class ManageBankActivity extends BaseActivity implements
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_BANK_LIST, params, callBack, 0);
 	}
+	/** 解绑银行卡*/
+	public void requestUnbindBank(String id){
+		AjaxParams params = new AjaxParams();
+		params.put("id", id);
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
+		httpRequest.get(Urls.REQUEST_UNBIND_BANK, params, callBack, 1);
+	}
 
 	@Override
 	protected void handleResult(int requestCode, HttpResult result) {
@@ -133,7 +141,7 @@ public class ManageBankActivity extends BaseActivity implements
 			break;
 
 		case 2:// 解除绑定
-
+			requestUnbindBank(banks.get(org2).getId());//需确定是不是这个id
 			break;
 		}
 	}

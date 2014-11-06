@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RadioButton;
@@ -24,6 +25,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 public class HomeTabActivity extends TabActivity implements
 		OnCheckedChangeListener, OnClickListener {
   
+	private String TAG = "HomeTabActivity"	;
 	private String str ="";
 	private RadioGroup rg;
 	private RadioButton rbHome, rbProductList, rbMyProduct, rbMore;
@@ -37,12 +39,24 @@ public class HomeTabActivity extends TabActivity implements
 	private TabHost tabHost;
 	private int intoSelect = 1;//
 	private UserSharedData userShare;
+	
+	private BroadcastReceiver receive = new BroadcastReceiver() {
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			Log.e(TAG, "onReceive");
+			intoSelect = intent.getIntExtra("intoSelect", 1);
+			setCurrentActivity(intoSelect);
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_tab_layout);
+		Log.e(TAG, "onCreate");
 		this.tabHost = getTabHost();
 		intoSelect = this.getIntent().getIntExtra("into_tab", 0);
 		userShare = UserSharedData.getInstance(getApplicationContext());
@@ -50,6 +64,9 @@ public class HomeTabActivity extends TabActivity implements
 		InitIntent();
 		setupIntent();
 		setCurrentActivity(intoSelect);
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction("refresh_tab");
+		registerReceiver(receive, intentFilter);
 	}
 
 	private void InitViews() {
@@ -110,7 +127,7 @@ public class HomeTabActivity extends TabActivity implements
 				.setContent(content);
 	}
 
-	private void setCurrentActivity(int index) {
+	public void setCurrentActivity(int index) {
 		switch (index) {
 		case 1:
 			onCheckedChanged(rg, R.id.activity_home_rb_home);

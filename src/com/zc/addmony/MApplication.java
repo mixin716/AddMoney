@@ -122,6 +122,12 @@ public class MApplication extends Application {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			Log.e("handler", "handler");
+			Log.e(TAG, LockPatternUtils.getInstance(getApplicationContext())
+					.getLockPaternString("user_key") + "");
+			if (TextUtils.isEmpty(LockPatternUtils.getInstance(
+					getApplicationContext()).getLockPaternString("user_key"))) {
+				return;
+			}
 			verify();
 		}
 	};
@@ -134,6 +140,10 @@ public class MApplication extends Application {
 	 * @throws
 	 */
 	public void verify() {
+		if (TextUtils.isEmpty(LockPatternUtils.getInstance(
+				getApplicationContext()).getLockPaternString("user_key"))) {
+			return;
+		}
 		boolean isTopRunning = isRunningForeground(getApplicationContext());
 		if (isTopRunning) {
 			// 判断检测界面是否已经运行
@@ -172,7 +182,7 @@ public class MApplication extends Application {
 			};
 		}
 		if (!isRunning) {
-			timer.schedule(timerTask, 5*60 * 1000, 5*60 * 1000);
+			timer.schedule(timerTask, 5 * 1000, 5 * 1000);
 			isRunning = true;
 		}
 	}

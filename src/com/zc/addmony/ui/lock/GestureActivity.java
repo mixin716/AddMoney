@@ -4,11 +4,13 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.zc.addmony.R;
 import com.zc.addmony.common.ToastUtil;
+import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.view.lockview.LockPatternUtils;
 import com.zc.addmony.view.lockview.LockPatternView;
 import com.zc.addmony.view.lockview.LockPatternView.Cell;
@@ -33,8 +35,9 @@ public class GestureActivity extends BaseFragmentActivity implements
 	// public final static int GESTURE_MODE_LOGIN = 0x2;// 登陆
 	public final static int GESTURE_MODE_VERIFY = 0x3;// 验证
 	public final static int GESTURE_MODE_CHANGE = 0x4;// 修改
-
 	public static boolean IS_SHOW = false;// 是否运行了
+
+	private UserSharedData userShare;
 
 	@Override
 	protected int getContentViewID() {
@@ -53,7 +56,7 @@ public class GestureActivity extends BaseFragmentActivity implements
 	}
 
 	private LockPatternView lockPatternView;
-	private TextView tv_tip_gesture;
+	private TextView tv_tip_gesture, tvForget;
 
 	private String user_key = "user_key";
 
@@ -62,6 +65,7 @@ public class GestureActivity extends BaseFragmentActivity implements
 		super.initView(savedInstanceState);
 		lockPatternView = getView(R.id.lpv_lock);
 		tv_tip_gesture = getView(R.id.tv_tip_gesture);
+		tvForget = getView(R.id.activity_gesture_tv_forger);
 		IS_SHOW = true;
 		setVerify(false);
 		mApplication.stopVerify();
@@ -72,6 +76,16 @@ public class GestureActivity extends BaseFragmentActivity implements
 		} else if (MODE == GESTURE_MODE_CHANGE) {
 			tv_tip_gesture.setText("请输入原密码");
 		}
+
+		userShare = UserSharedData.getInstance(CTX);
+		tvForget.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				logout();
+			}
+		});
 	}
 
 	int verify_count = 0;
@@ -120,7 +134,8 @@ public class GestureActivity extends BaseFragmentActivity implements
 					if (result != 1) {
 						if (result == 0) {
 							if (verify_count >= 4) {
-								// ToastUtil.showShort(CTX, "密码错误,将退出程序!");
+								ToastUtil.showShort(CTX, "密码错误,请重新登录!");
+								logout();
 							} else {
 								verify_count++;
 								tv_tip_gesture.setText("密码错误，您可以再试"
@@ -161,6 +176,14 @@ public class GestureActivity extends BaseFragmentActivity implements
 			public void onPatternCellAdded(List<Cell> pattern) {
 			}
 		});
+	}
+
+	/** 忘记密码或密码输入错误 将重新登录 */
+	public void logout() {
+		userShare.clearUserInfomation();
+		LockPatternUtils.getInstance(CTX).saveLockPattern(
+				null, user_key);
+		GestureActivity.this.finish();
 	}
 
 	@Override

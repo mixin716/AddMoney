@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.HomeTabActivity;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.myproduct.LoginBean;
 import com.zc.addmony.common.Urls;
@@ -139,12 +141,12 @@ public class MyProductActivity extends BaseActivity {
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(MyProductActivity.this);
 			break;
-		case R.id.activity_my_product_ll_yestoday:
+		case R.id.activity_my_product_ll_yestoday://增财宝
 			intent = new Intent(this, IncreaseWealthActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(MyProductActivity.this);
 			break;
-		case R.id.activity_my_product_ll_buy:
+		case R.id.activity_my_product_ll_buy://进入基金列表界面
 			if ("共0个基金产品".equals(tvBuy.getText().toString().trim())) {
 				showToast("您暂未购买基金");
 			} else {
@@ -262,4 +264,15 @@ public class MyProductActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Intent intent = new Intent("refresh_tab");
+			intent.putExtra("intoSelect", 1);
+			this.sendBroadcast(intent);
+			return true;
+		}
+		return false;
+	}
 }

@@ -27,6 +27,8 @@ public class Urls {
 	public static String CHANGE_PWD = common + "updatePwd";
 	/** 获取银行列表 */
 	public static String GET_BANK_LIST = common + "getUserBankList";
+	/** 解绑银行卡*/
+	public static String REQUEST_UNBIND_BANK = common +"unbindBank";
 	/** 验证小额打款金额 */
 	public static String CHECK_TINY_PAY = common + "checkTinyPay";
 	/** 设置交易密码 */
@@ -55,6 +57,8 @@ public class Urls {
 	public static String GET_USER_FUND_INFO = common + "getUserFundInfo";
 	/** 赎回 */
 	public static String SALE_MONEY = common + "sale";
+	/** 获取我的基金列表*/
+	public static String GET_MY_BUY_ORDERS = common +"getUserOrderList";
 	/** 获取手机类型 */
 	public static String GET_PHONES = common + "getHdlist";
 	/** 获取号码归属地 */

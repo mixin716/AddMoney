@@ -154,4 +154,19 @@ public class UserSharedData {
 	public String GetBankSum() {
 		return share.getString("user_banksum", null);
 	}
+	
+	/** 清除用户数据*/
+	public void clearUserInfomation(){
+		this.SaveBankSum(null);
+		this.SaveBuyPwd(null);
+		this.SaveFlag(false);
+		this.SaveIdcard(null);
+		this.SaveName(null);
+		this.SaveOpenFlag(0);
+		this.SavePhone(null);
+		this.SavePwd(null);
+		this.SaveRealname(null);
+		this.SaveSession(null);
+		this.SaveToken(null);
+	}
 }

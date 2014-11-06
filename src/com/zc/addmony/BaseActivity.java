@@ -5,7 +5,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.jky.struct2.http.FinalHttp;
 import com.jky.struct2.http.core.AjaxCallBack;
 import com.jky.struct2.http.entityhandle.HttpExceptionResult;
@@ -30,6 +33,10 @@ import com.jky.struct2.http.entityhandle.HttpResult;
 import com.zc.addmony.bean.BaseBean;
 import com.zc.addmony.common.Constants;
 import com.zc.addmony.logic.LogicBase;
+import com.zc.addmony.ui.lock.GestureActivity;
+import com.zc.addmony.ui.lock.ScreenObserver;
+import com.zc.addmony.ui.lock.ScreenObserver.ScreenStateListener;
+import com.zc.addmony.view.lockview.LockPatternUtils;
 
 public abstract class BaseActivity extends Activity implements OnClickListener {
 
@@ -92,12 +99,139 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 		registerReceiver(receiverFinish, new IntentFilter(
 				Constants.INTENT_ACTION_FINISH_ALL));
 		httpRequest = new FinalHttp(this);
+		mApplication = (MApplication) getApplication();
+		mApplication.addActivity(BaseActivity.this);
 		getWindowHW();
 		initVariable();
 		initViews();
 		setTitleViews();
-		mApplication = (MApplication) getApplication();
+		mScreenObserver = new ScreenObserver(this);
+		mScreenObserver.requestScreenStateUpdate(new ScreenStateListener() {
+			@Override
+			public void onScreenStateChange(boolean isScreenOn) {
+				if (isScreenOn) {
+					doSomethingOnScreenOn();
+				} else {
+					doSomethingOnScreenOff();
+				}
+			}
+		});
 	};
+
+	private ScreenObserver mScreenObserver;
+
+	private void doSomethingOnScreenOn() {
+		// LogUtil.i("Screen is on");
+	}
+
+	private void doSomethingOnScreenOff() {
+		// LogUtil.i("Screen is off");
+		if (TextUtils.isEmpty(LockPatternUtils.getInstance(
+				getApplicationContext()).getLockPaternString("user_key"))) {
+			return;
+		}
+		if (!GestureActivity.IS_SHOW) {
+			Intent intent = new Intent();
+			intent.setClass(getApplicationContext(), GestureActivity.class);
+			intent.putExtra(GestureActivity.INTENT_MODE,
+					GestureActivity.GESTURE_MODE_VERIFY);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+		}
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		isForeGround = getBooleanInfof(BaseActivity.this, ISFOREGROUND_KEY);
+		if (!isForeGround) {
+			if (isVerify()) {
+				mApplication.verify();
+			}
+		}
+		if (!isForeGround) {
+			saveBoolean(BaseActivity.this, ISFOREGROUND_KEY, true);
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		isForeGround = getBooleanInfof(BaseActivity.this, ISFOREGROUND_KEY);
+		if (!isForeGround) {
+			if (isVerify()) {
+				mApplication.verify();
+			}
+		}
+		if (!isForeGround) {
+			saveBoolean(BaseActivity.this, ISFOREGROUND_KEY, true);
+		}
+	}
+
+	String ISFOREGROUND_KEY = "ISFOREGROUND_KEY";
+	boolean isForeGround = true;
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		isForeGround = mApplication.isRunningForeground(BaseActivity.this);
+
+		if (!isForeGround) {
+			saveBoolean(BaseActivity.this, ISFOREGROUND_KEY, isForeGround);
+		}
+	}
+
+	private String SPNAME = "SPNAME";
+
+	/**
+	 * 保存Boolean类型
+	 * 
+	 * @param context
+	 * @param key
+	 * @param value
+	 */
+	public void saveBoolean(Context context, String key, Boolean value) {
+		SharedPreferences sp = context.getSharedPreferences(SPNAME,
+				Context.MODE_PRIVATE);
+		sp.edit().putBoolean(key, value).commit();// 根据类型，强转，然后要commit
+	}
+
+	/**
+	 * 根据key获取 Boolean类型的 数据信息 默认返回false
+	 * 
+	 * @param context
+	 * @param key
+	 * @return 默认返回false
+	 */
+	public Boolean getBooleanInfof(Context context, String key) {
+		SharedPreferences sp = context.getSharedPreferences(SPNAME,
+				Context.MODE_PRIVATE);
+		return sp.getBoolean(key, false);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	private boolean isVerify = true;
+
+	public boolean isVerify() {
+		return isVerify;
+	}
+
+	public void setVerify(boolean isVerify) {
+		this.isVerify = isVerify;
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// 停止监听screen状态
+		mScreenObserver.stopScreenStateUpdate();
+		mApplication.removeActivity(BaseActivity.this);
+		unregisterReceiver(receiverFinish);
+	}
 
 	/**
 	 * 获取手机分辨率
@@ -354,12 +488,6 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 
 	protected void onReceiverFinish(Intent intent) {
 		finish();
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		unregisterReceiver(receiverFinish);
 	}
 
 	@Override

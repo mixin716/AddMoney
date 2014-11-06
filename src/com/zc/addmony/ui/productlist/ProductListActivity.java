@@ -6,8 +6,10 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -231,4 +233,15 @@ public class ProductListActivity extends BaseActivity implements
 
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Intent intent = new Intent("refresh_tab");
+			intent.putExtra("intoSelect", 1);
+			this.sendBroadcast(intent);
+			return true;
+		}
+		return false;
+	}
 }

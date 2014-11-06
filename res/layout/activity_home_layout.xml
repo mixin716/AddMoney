@@ -110,7 +110,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toLeftOf="@+id/activity_home_iv_today_arrow"
                 android:layout_toRightOf="@+id/activity_home_iv_today_icon"
-                android:text="南方现金货币"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -135,7 +134,6 @@
                     android:id="@+id/activity_home_today_tv_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3.99%"
                     android:textColor="@color/normal_red"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -173,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:text="213人已购买"
+                    android:text="人已购买"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>

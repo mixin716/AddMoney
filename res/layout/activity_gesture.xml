@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/match"
-    android:background="@color/white" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/ic_gesture_bg"
+    android:gravity="center"
+    android:orientation="vertical" >
 
-    <FrameLayout style="@style/match" >
+    <include
+        android:id="@+id/page_title"
+        layout="@layout/title_layout"
+        android:visibility="gone" />
 
-        <LinearLayout
-            style="@style/match"
-            android:gravity="center_horizontal"
-            android:orientation="vertical" >
+    <ImageView
+        android:id="@+id/iv_user_photo"
+        style="@style/wrap"
+        android:layout_margin="5dip"
+        android:src="@drawable/ic_launcher"
+        android:visibility="gone" />
 
-            <include
-                android:id="@+id/page_title"
-                android:visibility="gone"
-                layout="@layout/title_layout" />
+    <TextView
+        android:id="@+id/tv_tip_gesture"
+        style="@style/wrap"
+        android:gravity="center"
+        android:text="请输入手势密码"
+        android:textColor="@color/text_color_666666"
+        android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/iv_user_photo"
-                style="@style/wrap"
-                android:layout_margin="5dip"
-                android:src="@drawable/ic_launcher" />
+    <com.zc.addmony.view.lockview.LockPatternView
+        xmlns:app="http://schemas.android.com/apk/res/com.wgs.jiesuo"
+        android:id="@+id/lpv_lock"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dip" />
 
-            <TextView
-                android:id="@+id/tv_tip_gesture"
-                style="@style/wrap"
-                android:layout_marginTop="15dip"
-                android:gravity="center"
-                android:text="请绘制密码" />
+    <TextView
+        android:id="@+id/activity_gesture_tv_forger"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="忘记手势密码？"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
-            <com.zc.addmony.view.lockview.LockPatternView
-                xmlns:app="http://schemas.android.com/apk/res/com.wgs.jiesuo"
-                android:id="@+id/lpv_lock"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="30dip"
-                android:background="#334455" />
-        </LinearLayout>
-    </FrameLayout>
-
-</ScrollView>
+</LinearLayout>

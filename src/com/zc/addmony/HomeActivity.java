@@ -1,9 +1,7 @@
 package com.zc.addmony;
 
 import java.text.DecimalFormat;
-
 import org.json.JSONException;
-
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.bean.HomeBean;
 import com.zc.addmony.common.Urls;
@@ -20,13 +18,19 @@ import com.zc.addmony.ui.productlist.ProductDetailActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.view.lockview.LockPatternUtils;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends BaseActivity {
 	private TextView tvTimes, tvRate, tvBank, tvInstitution, tvName,
@@ -39,6 +43,8 @@ public class HomeActivity extends BaseActivity {
 	private MApplication app;
 	private UserSharedData User;
 	private ImageView ivTopActivity;
+	/** 用于判断退出 */
+	private boolean isExit = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +59,17 @@ public class HomeActivity extends BaseActivity {
 		app = (MApplication) getApplication();
 		User = UserSharedData.getInstance(getApplicationContext());
 		bean = new HomeBean();
- 
-		if (!TextUtils.isEmpty(LockPatternUtils.getInstance(this)
-				.getLockPaternString("user_key"))) {
-			app.startVerify();
-			Intent intent = new Intent();
-			intent.setClass(getApplicationContext(), GestureActivity.class);
-			intent.putExtra(GestureActivity.INTENT_MODE,
-					GestureActivity.GESTURE_MODE_VERIFY);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent);
-		}
+
+		// if (!TextUtils.isEmpty(LockPatternUtils.getInstance(this)
+		// .getLockPaternString("user_key"))) {
+		// app.startVerify();
+		// Intent intent = new Intent();
+		// intent.setClass(getApplicationContext(), GestureActivity.class);
+		// intent.putExtra(GestureActivity.INTENT_MODE,
+		// GestureActivity.GESTURE_MODE_VERIFY);
+		// intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		// startActivity(intent);
+		// }
 	}
 
 	@Override
@@ -149,8 +155,6 @@ public class HomeActivity extends BaseActivity {
 					bean = LogicHome.pareseHome(jsonString);
 					tvTimes.setText(bean.getBeishu() + "倍");
 					DecimalFormat df = new DecimalFormat("0.00");
-					tvRate.setText(df.format(Double.valueOf(bean.getTuijian()
-							.getIncomeratio())) + "%");
 					tvFristPhone
 							.setText(bean.getPaiming().get(0).getUsername());
 					tvFristMoney.setText("￥"
@@ -163,8 +167,11 @@ public class HomeActivity extends BaseActivity {
 							.setText(bean.getPaiming().get(2).getUsername());
 					tvThirdMoney.setText("￥"
 							+ bean.getPaiming().get(2).getIncome());
-					tvName.setText(bean.getTuijian().getFundname());
-					tvMinPrice.setText(bean.getTuijian().getMinprice() + "元起购");
+					
+					tvName.setText(bean.getTuijian().getFundname());//推荐基金名
+					tvRate.setText(df.format(Double.valueOf(bean.getTuijian()
+							.getIncomeratio())) + "%");//推进基金年化效益
+					tvMinPrice.setText(bean.getTuijian().getMinprice() + "起购");
 					tvBought.setText(bean.getTuijian().getBought() + "人已购");
 
 				}
@@ -179,4 +186,29 @@ public class HomeActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			ExitProgram();
+			return true;
+		}
+		return false;
+	}
+	
+	public void ExitProgram() {
+		if (!isExit) {
+			isExit = true;
+			showToast("再按一次\"退出\"程序");
+			exitHandler.sendEmptyMessageDelayed(0, 2000);
+		} else {
+			this.finish();
+		}
+	}
+
+	public Handler exitHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			isExit = false;
+		};
+	};
 }
