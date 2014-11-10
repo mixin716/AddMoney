@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/normal_bg" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <EditText
+            android:id="@+id/activity_find_pwd_et_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_item_normal_bg"
+            android:hint="请输入您的姓名"
+            android:padding="10dp"
+            android:textColor="@color/text_color_666666"
+            android:textColorHint="@color/text_light"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/activity_find_pwd_et_idcard"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_item_normal_bg"
+            android:hint="请输入您的身份证号"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textColor="@color/text_color_666666"
+            android:textColorHint="@color/text_light"
+            android:textSize="16sp" />
+
+        <TextView
+            style="@style/match_wrap"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="开户时绑定的银行卡"
+            android:textColor="@color/text_deep"
+            android:textSize="16sp" />
+
+        <TextView
+            style="@style/match_wrap"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="姓名身份证号与银行卡信息必须一致"
+            android:textColor="@color/text_light"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/activity_find_pwd_ll_banks"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_item_normal_bg"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/activity_find_pwd_tv_bank"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="请选择银行"
+                android:textColor="@color/text_color_666666"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:src="@drawable/ic_home_grey_arrow_down" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/activity_find_pwd_edt_bank_num"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_item_normal_bg"
+            android:hint="请输入您的银行卡号"
+            android:inputType="number"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/text_color_666666"
+            android:textColorHint="@color/text_light"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/activity_find_pwd_edt_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_item_normal_bg"
+            android:hint="请输入银行预留手机号"
+            android:inputType="number"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/text_color_666666"
+            android:textColorHint="@color/text_light"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/activity_find_pwd_edt_checkcode"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ic_item_normal_bg"
+                android:hint="输入收到的验证码"
+                android:inputType="number"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/text_color_666666"
+                android:textColorHint="@color/text_light"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/activity_find_pwd_btn_code"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_normal_white_selector"
+                android:padding="10dp"
+                android:text="发送验证码"
+                android:textColor="@color/normal_purple"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/activity_find_pwd_bt_next"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_normal_red_selector"
+            android:padding="10dp"
+            android:text="下一步"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</ScrollView>
