@@ -36,14 +36,25 @@ public class UserSharedData {
 	public boolean GetFlag() {
 		return share.getBoolean("user_flag", false);
 	}
-	/** 保存登录session*/
-	public void SaveSession(String session){
+	
+	/** 是否参加过活动*/
+	public void SaveActivity(boolean activitys){
+		edit.putBoolean("user_activitys", activitys);
+		edit.commit();
+	}
+	/** 是否参加过活动*/
+	public boolean GetActivitys(){
+		return share.getBoolean("user_activitys", false);
+	}
+
+	/** 保存登录session */
+	public void SaveSession(String session) {
 		edit.putString("login_session", session);
 		edit.commit();
 	}
-	
-	/** 获取登录session*/
-	public String GetSession(){
+
+	/** 获取登录session */
+	public String GetSession() {
 		return share.getString("login_session", null);
 	}
 
@@ -79,15 +90,15 @@ public class UserSharedData {
 	public String GetName() {
 		return share.getString("user_name", null);
 	}
-	
-	/** 保存用户名--真实*/
-	public void SaveRealname(String realname){
+
+	/** 保存用户名--真实 */
+	public void SaveRealname(String realname) {
 		edit.putString("realname", realname);
 		edit.commit();
 	}
-	
-	/** 获取用户名--真实*/
-	public String Getrealname(){
+
+	/** 获取用户名--真实 */
+	public String Getrealname() {
 		return share.getString("realname", null);
 	}
 
@@ -101,13 +112,15 @@ public class UserSharedData {
 	public String GetPhone() {
 		return share.getString("user_phone", null);
 	}
-	/** 保存身份证号*/
-	public void SaveIdcard(String idcard){
+
+	/** 保存身份证号 */
+	public void SaveIdcard(String idcard) {
 		edit.putString("idcard", idcard);
 		edit.commit();
 	}
-	/** 获取身份证号*/
-	public String GetIdcard(){
+
+	/** 获取身份证号 */
+	public String GetIdcard() {
 		return share.getString("idcard", null);
 	}
 
@@ -154,12 +167,22 @@ public class UserSharedData {
 	public String GetBankSum() {
 		return share.getString("user_banksum", null);
 	}
-	
-	/** 清除用户数据*/
-	public void clearUserInfomation(){
+
+	public void SaveTradeacco(String tradeacco) {
+		edit.putString("tradeacco", tradeacco);
+		edit.commit();
+	}
+
+	public String GetTradeacco() {
+		return share.getString("tradeacco", null);
+	}
+
+	/** 清除用户数据 */
+	public void clearUserInfomation() {
 		this.SaveBankSum(null);
 		this.SaveBuyPwd(null);
 		this.SaveFlag(false);
+		this.SaveActivity(false);
 		this.SaveIdcard(null);
 		this.SaveName(null);
 		this.SaveOpenFlag(0);
@@ -168,5 +191,6 @@ public class UserSharedData {
 		this.SaveRealname(null);
 		this.SaveSession(null);
 		this.SaveToken(null);
+		this.SaveTradeacco(null);
 	}
 }

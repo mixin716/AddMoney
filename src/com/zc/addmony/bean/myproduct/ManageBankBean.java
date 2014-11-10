@@ -7,14 +7,20 @@ public class ManageBankBean {
 	String bankName;// 银行名字
 	String bankFlag;// 银行标示
 	String bandLimit;// 限额
-	String bank_num;
-	String branchcode;
-	String bankacco;
-	String id;
-	String branch;
-	String bid;
-	String blag;
-	String bankserial;
+	String bank_num;//银行卡号
+	String bankfullname;//支行名字
+	String bankacconame;//开户名字
+	String idno;//身份证号
+	String bankserial;//银行编号
+	String tradeacco;//支付用到
+	
+	public String getBankserial() {
+		return bankserial;
+	}
+
+	public void setBankserial(String bankserial) {
+		this.bankserial = bankserial;
+	}
 
 	public int getFlag() {
 		return flag;
@@ -56,60 +62,39 @@ public class ManageBankBean {
 		this.bank_num = bank_num;
 	}
 
-	public String getBranchcode() {
-		return branchcode;
+	public String getBankfullname() {
+		return bankfullname;
 	}
 
-	public void setBranchcode(String branchcode) {
-		this.branchcode = branchcode;
+	public void setBankfullname(String bankfullname) {
+		this.bankfullname = bankfullname;
 	}
 
-	public String getBankacco() {
-		return bankacco;
+	public String getBankacconame() {
+		return bankacconame;
 	}
 
-	public void setBankacco(String bankacco) {
-		this.bankacco = bankacco;
+	public void setBankacconame(String bankacconame) {
+		this.bankacconame = bankacconame;
 	}
 
-	public String getId() {
-		return id;
+	public String getIdno() {
+		return idno;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIdno(String idno) {
+		this.idno = idno;
 	}
 
-	public String getBranch() {
-		return branch;
+	public String getTradeacco() {
+		return tradeacco;
 	}
 
-	public void setBranch(String branch) {
-		this.branch = branch;
+	public void setTradeacco(String tradeacco) {
+		this.tradeacco = tradeacco;
 	}
 
-	public String getBid() {
-		return bid;
-	}
-
-	public void setBid(String bid) {
-		this.bid = bid;
-	}
-
-	public String getBlag() {
-		return blag;
-	}
-
-	public void setBlag(String blag) {
-		this.blag = blag;
-	}
-
-	public String getBankserial() {
-		return bankserial;
-	}
-
-	public void setBankserial(String bankserial) {
-		this.bankserial = bankserial;
-	}
+	
+	
 
 }

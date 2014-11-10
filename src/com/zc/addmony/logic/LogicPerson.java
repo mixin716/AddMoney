@@ -25,6 +25,7 @@ public class LogicPerson {
 			bean.setRealname(obj.optString("realname"));
 			bean.setIdcard(obj.optString("idcard"));
 			bean.setPhone(obj.optString("phone"));
+			bean.setTradeacco(obj.optString("tradeacco"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

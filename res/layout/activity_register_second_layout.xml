@@ -35,8 +35,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:inputType="phone"
                 android:hint="身份证号"
+                android:inputType="phone"
                 android:padding="13dp"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -45,7 +45,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone" >
 
             <TextView
                 style="@style/wrap"
@@ -82,7 +83,7 @@
             android:padding="10dp"
             android:text="我已阅读并同意上述协议，下一步"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </ScrollView>

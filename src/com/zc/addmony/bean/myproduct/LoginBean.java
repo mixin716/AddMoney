@@ -6,15 +6,16 @@ public class LoginBean {
 	int id;
 	String token;
 	String user_name;
-	String phone;//手机号
-	String realname;//真实姓名
+	String phone;// 手机号
+	String realname;// 真实姓名
 	String regtime;
 	String flag;
-	String trade_pwd;//真实密码 未加密
+	String trade_pwd;// 真实密码 未加密
 	int user_id;
-	int openflag;//开户标示
-	String password;//加密密码
-	String idcard;//身份证号
+	int openflag;// 开户标示
+	String password;// 加密密码
+	String idcard;// 身份证号
+	String tradeacco;
 
 	public int getId() {
 		return id;
@@ -110,6 +111,14 @@ public class LoginBean {
 
 	public void setIdcard(String idcard) {
 		this.idcard = idcard;
+	}
+
+	public String getTradeacco() {
+		return tradeacco;
+	}
+
+	public void setTradeacco(String tradeacco) {
+		this.tradeacco = tradeacco;
 	}
 
 }

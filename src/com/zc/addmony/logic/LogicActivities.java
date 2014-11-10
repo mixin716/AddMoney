@@ -128,6 +128,7 @@ public class LogicActivities {
 			bean.setColor(obj.optString("color"));
 			bean.setPhone(obj.optString("phone"));
 			bean.setName(obj.optString("name"));
+			bean.setP_name(obj.optString("p_name"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

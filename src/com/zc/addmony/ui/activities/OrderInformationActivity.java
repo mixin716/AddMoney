@@ -60,6 +60,7 @@ public class OrderInformationActivity extends BaseActivity {
 		showLoading();
 		AjaxParams params = new AjaxParams();
 		params.put("idcard", userShare.GetIdcard());
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_ORDER, params, callBack, 0);
 	}
 	
@@ -74,7 +75,7 @@ public class OrderInformationActivity extends BaseActivity {
 		tvAdress.setText(bean.getO_contact());
 		tvPhoneName.setText(bean.getName());
 		tvPhoneColor.setText(bean.getColor());
-//		tvPhoneTc.setText(null);
+		tvPhoneTc.setText(bean.getP_name());
 		tvSelectPhone.setText(bean.getPhone());
 		tvRemark.setText(bean.getO_remarks());
 	}

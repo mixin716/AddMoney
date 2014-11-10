@@ -126,6 +126,9 @@ public class PhoneListActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 		mApplication.setpBean(showPhones.get(position));
 		apBean.setPhoneName(showPhones.get(position).getPhoneName());
+		apBean.setPhoneId(showPhones.get(position).getPhoneId());
+		apBean.setPhoneTcId(showPhones.get(position).getPhoneTC().get(0).getP_id());
+		mApplication.setApBean(apBean);
 		Intent intent = new Intent(PhoneListActivity.this,
 				ShoppingActivity.class);
 		startActivity(intent);

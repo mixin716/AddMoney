@@ -19,13 +19,14 @@
             android:layout_height="wrap_content"
             android:text="德芙股票"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingRight="10dp" >
 
             <TextView
                 android:id="@+id/activity_buy_product_btn_minprice"
@@ -34,15 +35,16 @@
                 android:layout_weight="1"
                 android:text="￥1元起购"
                 android:textColor="@color/text_color_666666"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="right"
                 android:text="手续费：0"
                 android:textColor="@color/text_color_666666"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -61,18 +63,19 @@
             android:layout_weight="0"
             android:text="购买金额:"
             android:textColor="@color/text_color_666666"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/activity_buy_product_edt_price"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
             android:background="@color/clear"
             android:hint=">1"
             android:inputType="number"
             android:textColor="@color/text_color_666666"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <Button

@@ -62,20 +62,20 @@ public class LogicBuyProduct {
 	public static List<ManageBankBean> parseMyBanks(String json){
 		List<ManageBankBean> list = new ArrayList<ManageBankBean>();
 		try {
-			JSONArray array = new JSONArray(json);
+			JSONObject jsonObj = new JSONObject(json);
+			JSONObject resultObj = new JSONObject(jsonObj.optString("results"));
+			JSONArray array = new JSONArray(resultObj.optString("tradeaccolist"));
 			for(int i =0; i <array.length(); i++){
 				JSONObject obj = array.getJSONObject(i);
 				ManageBankBean bean = new ManageBankBean();
 				bean.setFlag(1);
-				bean.setBankName(obj.optString("bank_name"));
-				bean.setBank_num(obj.optString("bank_num"));
-				bean.setBranchcode(obj.optString("branchcode"));
-				bean.setBankacco(obj.optString("bankacco"));
-				bean.setId(obj.optString("id"));
-				bean.setBranch(obj.optString("branch"));
-				bean.setBid(obj.optString("bid"));
-				bean.setBlag(obj.optString("blag"));
-				bean.setBankserial(obj.optString("bankserial"));
+				bean.setBankName(obj.optString("bankname"));//银行名字
+				bean.setBank_num(obj.optString("bankacco"));//银行卡号
+				bean.setBankfullname(obj.optString("bankfullname"));//支行
+				bean.setBankacconame(obj.optString("bankacconame"));//开户名字
+				bean.setIdno(obj.optString("idno"));//身份证号
+				bean.setBankserial(obj.optString("bankserial"));//银行编号
+				bean.setTradeacco(obj.optString("tradeacco"));//充值用到标示
 				list.add(bean);
 			}
 		} catch (JSONException e) {

@@ -113,7 +113,7 @@ public class SelectAddressActivity extends BaseActivity implements
 			address = list.get(arg2).getArea();
 			break;
 		case R.id.activity_select_address_lv_city:// 市
-			address = address+list.get(arg2).getArea();
+			address = address+"，"+list.get(arg2).getArea();
 			Intent intent = new Intent();
 			intent.putExtra("address", address);
 			intent.putExtra("aid", list.get(arg2).getAid());

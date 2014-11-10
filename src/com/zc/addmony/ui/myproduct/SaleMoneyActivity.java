@@ -14,6 +14,7 @@ import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.common.Urls;
+import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.utils.AnimUtil;
 
 /** 提现赎回*/
@@ -24,6 +25,7 @@ public class SaleMoneyActivity extends BaseActivity {
 	private Button btnOk;
 	private String fundName, saleMoney, haveMoney, bankName, bankCode,
 			minMoney, salePwd;
+	private UserSharedData userShare;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class SaleMoneyActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		app = (MApplication) getApplication();
-
+		userShare = UserSharedData.getInstance(getApplicationContext());
 	}
 
 	@Override
@@ -61,7 +63,9 @@ public class SaleMoneyActivity extends BaseActivity {
 
 	private void getUserFundInfoRequest() {
 		AjaxParams params = new AjaxParams();
-		params.put("fundcode", app.fundBean.getFundcode());
+		params.put("fundcode", "820002");
+//		params.put("fundcode", app.fundBean.getFundcode());
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_USER_FUND_INFO, params, callBack, 0);
 
 	}
@@ -71,6 +75,8 @@ public class SaleMoneyActivity extends BaseActivity {
 		params.put("fundcode", app.fundBean.getFundcode());
 		params.put("sharetype", app.fundBean.getSharetype());
 		params.put("applysum", minMoney);
+		params.put("tradeacco", "");
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.SALE_MONEY, params, callBack, 1);
 
 	}

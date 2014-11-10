@@ -3,14 +3,14 @@ package com.zc.addmony.ui.myproduct;
 import java.util.ArrayList;
 import java.util.List;
 import javax.crypto.spec.OAEPParameterSpec;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-
 import com.jky.struct2.http.core.AjaxParams;
 import com.jky.struct2.http.entityhandle.HttpResult;
 import com.zc.addmony.BaseActivity;
@@ -25,6 +25,7 @@ import com.zc.addmony.logic.LogicBuyProduct;
 import com.zc.addmony.ui.buyproduct.CheckBankActivity;
 import com.zc.addmony.ui.buyproduct.PerfectInformationActivity;
 import com.zc.addmony.utils.AnimUtil;
+import com.zc.addmony.utils.DialogUtil;
 import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
 
 /** 管理银行卡 */
@@ -36,6 +37,7 @@ public class ManageBankActivity extends BaseActivity implements
 	private ManageBankAdapter adapter;
 	private UserSharedData userShare;
 	private List<ManageBankBean> banks;
+	private int position;// 删除的posi
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +90,14 @@ public class ManageBankActivity extends BaseActivity implements
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_BANK_LIST, params, callBack, 0);
 	}
-	/** 解绑银行卡*/
-	public void requestUnbindBank(String id){
+
+	/** 解绑银行卡 */
+	public void requestUnbindBank(String id) {
+		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("id", id);
+		params.put("tradeacco", id);
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
-		httpRequest.get(Urls.REQUEST_UNBIND_BANK, params, callBack, 1);
+		httpRequest.get(Urls.DELETE_BANK, params, callBack, 1);
 	}
 
 	@Override
@@ -104,25 +108,28 @@ public class ManageBankActivity extends BaseActivity implements
 		String baseJson = result.baseJson;
 		System.out.println("-----json:------" + baseJson);
 		BaseBean baseBean = LogicBase.getInstance().parseData(baseJson);
-		switch (baseBean.getStatus()) {
-		case 1:
-			System.out.println("-----baseBean.getData():------"
-					+ baseBean.getContent());
-			banks = LogicBuyProduct.parseMyBanks(baseBean.getContent());
-			bean = new ManageBankBean();
-			bean.setFlag(0);
-			banks.add(bean);
-			adapter = new ManageBankAdapter(getApplicationContext(), banks);
-			lv.setAdapter(adapter);
-			break;
-		default:// 请求失败
-			showToast(baseBean.getMessage());
-			banks.clear();
-			bean = new ManageBankBean();
-			bean.setFlag(0);
-			banks.add(bean);
-			adapter.notifyDataSetChanged();
-			break;
+		if (requestCode == 0) {//获取银行卡列表
+			switch (baseBean.getStatus()) {
+			case 1:
+				System.out.println("-----baseBean.getData():------"
+						+ baseBean.getContent());
+				banks = LogicBuyProduct.parseMyBanks(baseBean.getContent());
+				bean = new ManageBankBean();
+				bean.setFlag(0);
+				banks.add(bean);
+				adapter = new ManageBankAdapter(getApplicationContext(), banks);
+				adapter.setListViewPassValuetoActivityListener(this);
+				lv.setAdapter(adapter);
+				break;
+			default:// 请求失败
+				showToast(baseBean.getMessage());
+				banks.clear();
+				bean = new ManageBankBean();
+				bean.setFlag(0);
+				banks.add(bean);
+				adapter.notifyDataSetChanged();
+				break;
+			}
 		}
 	}
 
@@ -130,10 +137,15 @@ public class ManageBankActivity extends BaseActivity implements
 	protected void handleJson(int reqeustCode, String jsonString, String message) {
 		// TODO Auto-generated method stub
 		super.handleJson(reqeustCode, jsonString, message);
+		if (reqeustCode == 1) {// 删除成功
+			banks.remove(position);
+			adapter.notifyDataSetChanged();
+		}
 	}
 
 	@Override
-	public void doPassActionListener(Object obj, int org1, int org2, String str) {
+	public void doPassActionListener(Object obj, int org1, final int org2,
+			String str) {
 		// TODO Auto-generated method stub
 		switch (org1) {
 		case 1:// 打款验证
@@ -141,7 +153,17 @@ public class ManageBankActivity extends BaseActivity implements
 			break;
 
 		case 2:// 解除绑定
-			requestUnbindBank(banks.get(org2).getId());//需确定是不是这个id
+			DialogUtil.showDialog(ManageBankActivity.this, "要删除该银行卡吗？      ",
+					"删除", "取消", new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (v.getId() == R.id.dialog_prompt_btn_ok) {
+								position = org2;
+								requestUnbindBank(banks.get(org2)
+										.getTradeacco());
+							}
+						}
+					});
 			break;
 		}
 	}

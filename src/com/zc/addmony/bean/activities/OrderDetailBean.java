@@ -15,6 +15,7 @@ public class OrderDetailBean {
 	String color;
 	String phone;
 	String name;
+	String p_name;
 
 	public String getO_order() {
 		return o_order;
@@ -110,6 +111,14 @@ public class OrderDetailBean {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
 
 }

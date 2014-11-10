@@ -1,6 +1,7 @@
 package com.zc.addmony.ui.more;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -98,9 +99,15 @@ public class MoreMainActivity extends BaseActivity {
 			AnimUtil.pushLeftInAndOut(MoreMainActivity.this);
 			break;
 		case R.id.activity_more_ll_opinion:
-			intent = new Intent(this, SuggesstionActivity.class);
-			startActivity(intent);
-			AnimUtil.pushLeftInAndOut(MoreMainActivity.this);
+			// intent = new Intent(this, SuggesstionActivity.class);
+			// startActivity(intent);
+			// AnimUtil.pushLeftInAndOut(MoreMainActivity.this);
+			// Intent data = new Intent(Intent.ACTION_SENDTO);
+			// data.setData(Uri.parse("97621232@qq.com"));
+			// data.putExtra(Intent.EXTRA_SUBJECT, "増财意见反馈");
+			// data.putExtra(Intent.EXTRA_TEXT, "欢迎您提出宝贵的建议：");
+			// startActivity(data);
+			sendMailByIntent();
 			break;
 		case R.id.activity_more_ll_update:
 
@@ -127,11 +134,7 @@ public class MoreMainActivity extends BaseActivity {
 		super.handleJson(reqeustCode, jsonString, message);
 		showToast(message);
 		btLogout.setVisibility(View.GONE);
-		userSharedData.SaveFlag(false);
-		userSharedData.SaveBuyPwd(null);
-		userSharedData.SaveId(0);
-		userSharedData.SaveName(null);
-		userSharedData.SaveOpenFlag(0);
+		userSharedData.clearUserInfomation();
 	}
 
 	@Override
@@ -154,5 +157,21 @@ public class MoreMainActivity extends BaseActivity {
 			return true;
 		}
 		return false;
+	}
+
+	public int sendMailByIntent() {
+		String[] reciver = new String[] { "service@zcvc.com.cn" };
+		String[] mySbuject = new String[] { "増财意见反馈" };
+		String myCc = "増财意见反馈";
+		String mybody = "欢迎您提出宝贵的建议：";
+		Intent myIntent = new Intent(android.content.Intent.ACTION_SEND);
+		myIntent.setType("plain/text");
+		myIntent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver);
+		// myIntent.putExtra(android.content.Intent.EXTRA_CC, myCc);
+		myIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, mySbuject);
+		myIntent.putExtra(android.content.Intent.EXTRA_TEXT, mybody);
+		startActivity(Intent.createChooser(myIntent, "増财意见反馈"));
+		return 1;
+
 	}
 }

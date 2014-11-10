@@ -6,6 +6,7 @@ import com.zc.addmony.bean.myproduct.ManageBankBean;
 import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ManageBankAdapter extends BaseAdapter {
 
@@ -69,6 +71,8 @@ public class ManageBankAdapter extends BaseAdapter {
 					.findViewById(R.id.adapter_manage_bank_tv_unbind);
 			holder.tvNull = (TextView) view
 					.findViewById(R.id.adapter_manage_bank_tv_null);
+			holder.imageBank = (ImageView) view
+					.findViewById(R.id.adapter_manage_bank_img_bank);
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();
@@ -77,10 +81,10 @@ public class ManageBankAdapter extends BaseAdapter {
 		holder.tvName.setText(banks.get(position).getBankName()
 				+ "（***"
 				+ banks.get(position)
-						.getBankacco()
+						.getBank_num()
 						.substring(
-								banks.get(position).getBankacco().length() - 4,
-								banks.get(position).getBankacco().length())
+								banks.get(position).getBank_num().length() - 4,
+								banks.get(position).getBank_num().length())
 				+ "）");
 
 		if (banks.get(position).getFlag() == 0) {
@@ -89,6 +93,28 @@ public class ManageBankAdapter extends BaseAdapter {
 		} else {
 			holder.tvNull.setVisibility(View.GONE);
 			holder.llHave.setVisibility(View.VISIBLE);
+		}
+		String bankName = banks.get(position).getBankName();
+		if (bankName.indexOf("工商") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_gongshang);
+		} else if (bankName.indexOf("光大") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_guangda);
+		} else if (bankName.indexOf("建设") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_jianshe);
+		} else if (bankName.indexOf("农业") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_nongye);
+		} else if (bankName.indexOf("平安") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_pingan);
+		} else if (bankName.indexOf("浦发") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_pufa);
+		} else if (bankName.indexOf("温州") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_wenzhou);
+		} else if (bankName.indexOf("兴业") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_xingye);
+		} else if (bankName.indexOf("中信") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_zhongxin);
+		} else if (bankName.indexOf("中国") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_zhongguo);
 		}
 
 		holder.tvCheck.setOnClickListener(new OnClickListener() {
@@ -105,8 +131,12 @@ public class ManageBankAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				activityListener
-						.doPassActionListener(null, 2, position, "解除绑定");
+				if (banks.size() > 2) {
+					activityListener.doPassActionListener(null, 2, position,
+							"解除绑定");
+				}else{
+					Toast.makeText(context, "您当前账户只有一张银行卡，暂不能解除绑定", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 		return view;

@@ -90,6 +90,7 @@ public class ConfirmationOrderActivity extends BaseActivity {
 		if(!TextUtils.isEmpty(apBean.getPhoneNum())){
 			tvPhoneSelect.setText(apBean.getPhoneNum());
 		}
+		etPhone.setText(userShare.GetPhone());
 	}
 
 
@@ -166,7 +167,7 @@ public class ConfirmationOrderActivity extends BaseActivity {
 		params.put("C_id", apBean.getPhoneColorId());// 颜色id
 		params.put("M_id", apBean.getPhoneId());// 手机型号id
 		params.put("phone", apBean.getPhoneNum());// 选择的手机号
-		// params.put("phone", "15652225505");// 选择的手机号
+		params.put("P_id", apBean.getPhoneTcId());// 套餐id
 		httpRequest.get(Urls.UPDATE_ACTIVITIES, params, callBack, 0);
 	}
 

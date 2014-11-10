@@ -86,7 +86,6 @@ public class LoginActivity extends BaseActivity {
 			intent = new Intent(this, RegisterSecondActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(LoginActivity.this);
-			this.finish();
 			break;
 		case R.id.activity_login_bt_login:
 			mPhone = etPhone.getText().toString().trim();
@@ -151,6 +150,7 @@ public class LoginActivity extends BaseActivity {
 			showToast("登录成功");
 			bean = LogicPerson.parseLogin(jsonString);
 			userShare.SaveFlag(true);
+			userShare.SaveActivity(false);
 			userShare.SavePhone(etPhone.getText().toString().trim());
 			userShare.SavePwd(etPwd.getText().toString().trim());
 			userShare.SavePhone(bean.getPhone());
@@ -161,6 +161,7 @@ public class LoginActivity extends BaseActivity {
 			userShare.SaveToken(bean.getToken());
 			userShare.SaveRealname(bean.getRealname());
 			userShare.SaveIdcard(bean.getIdcard());
+			userShare.SaveTradeacco(bean.getTradeacco());
 			this.finish();
 			// requestUserInfo();
 			break;

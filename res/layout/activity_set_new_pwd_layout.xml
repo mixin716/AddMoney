@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        style="@style/match_wrap"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="请设置新密码"
+        android:textColor="@color/text_deep"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/activity_set_new_pwd_et_first"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_item_normal_bg"
+        android:hint="输入6~8位密码"
+        android:padding="10dp"
+        android:password="true"
+        android:textColor="@color/text_color_666666"
+        android:textColorHint="@color/text_light"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/activity_set_new_pwd_et_second"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_item_normal_bg"
+        android:hint="确认密码"
+        android:padding="10dp"
+        android:password="true"
+        android:textColor="@color/text_color_666666"
+        android:textColorHint="@color/text_light"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/activity_set_new_pwd_bt_sure"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_normal_red_selector"
+        android:padding="10dp"
+        android:text="确认"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>

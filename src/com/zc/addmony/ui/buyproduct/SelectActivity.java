@@ -52,11 +52,9 @@ public class SelectActivity extends BaseActivity implements OnItemClickListener 
 	protected void doClickAction(int viewId) {
 		switch (viewId) {
 		case R.id.title_iv_left:
-			finish();
+			this.finish();
 			AnimUtil.pushRightInAndOut(this);
-			
 			break;
-
 		default:
 			break;
 		}

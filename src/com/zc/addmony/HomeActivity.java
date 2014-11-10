@@ -9,6 +9,7 @@ import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicHome;
 import com.zc.addmony.ui.activities.ActivitiesRuleActivity;
 import com.zc.addmony.ui.activities.ConfirmationOrderActivity;
+import com.zc.addmony.ui.activities.OrderInformationActivity;
 import com.zc.addmony.ui.activities.ShoppingActivity;
 import com.zc.addmony.ui.activities.ShowPhonesA;
 import com.zc.addmony.ui.lock.GestureActivity;
@@ -45,6 +46,7 @@ public class HomeActivity extends BaseActivity {
 	private ImageView ivTopActivity;
 	/** 用于判断退出 */
 	private boolean isExit = false;
+	private boolean activitysFlag = false;// 活动标示
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +104,9 @@ public class HomeActivity extends BaseActivity {
 		rlTodayContent.setOnClickListener(this);
 		ivTopActivity.setOnClickListener(this);
 		getInformationRequest();
-
+		if (User.GetFlag()) {
+			requestOrder();
+		}
 	}
 
 	private void getInformationRequest() {
@@ -110,11 +114,24 @@ public class HomeActivity extends BaseActivity {
 		httpRequest.get(Urls.HOME, params, callBack, 0);
 	}
 
+	/** 请求订单 */
+	public void requestOrder() {
+		showLoading();
+		AjaxParams params = new AjaxParams();
+		params.put("idcard", User.GetIdcard());
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + User.GetSession());
+		httpRequest.get(Urls.GET_ORDER, params, callBack, 1);
+	}
+
 	@Override
 	protected void doClickAction(int viewId) {
 		switch (viewId) {
 		case R.id.activity_home_iv_activity:// 活动
-			intent = new Intent(this, ActivitiesRuleActivity.class);
+			if (User.GetActivitys()) {
+				intent = new Intent(this, OrderInformationActivity.class);
+			} else {
+				intent = new Intent(this, ActivitiesRuleActivity.class);
+			}
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(this);
 			break;
@@ -167,10 +184,10 @@ public class HomeActivity extends BaseActivity {
 							.setText(bean.getPaiming().get(2).getUsername());
 					tvThirdMoney.setText("￥"
 							+ bean.getPaiming().get(2).getIncome());
-					
-					tvName.setText(bean.getTuijian().getFundname());//推荐基金名
+
+					tvName.setText(bean.getTuijian().getFundname());// 推荐基金名
 					tvRate.setText(df.format(Double.valueOf(bean.getTuijian()
-							.getIncomeratio())) + "%");//推进基金年化效益
+							.getIncomeratio())) + "%");// 推进基金年化效益
 					tvMinPrice.setText(bean.getTuijian().getMinprice() + "起购");
 					tvBought.setText(bean.getTuijian().getBought() + "人已购");
 
@@ -180,7 +197,10 @@ public class HomeActivity extends BaseActivity {
 				e.printStackTrace();
 			}
 			break;
-
+		case 1:
+			activitysFlag = true;
+			User.SaveActivity(true);
+			break;
 		default:
 			break;
 		}
@@ -195,7 +215,7 @@ public class HomeActivity extends BaseActivity {
 		}
 		return false;
 	}
-	
+
 	public void ExitProgram() {
 		if (!isExit) {
 			isExit = true;

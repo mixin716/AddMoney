@@ -24,9 +24,9 @@ public class Urls {
 	/** 获取用户信息 */
 	public static String GET_USER_INRO = common + "getUserInfo";
 	/** 更改密码 */
-	public static String CHANGE_PWD = common + "updatePwd";
+	public static String CHANGE_PWD = common + "setNewTradePwd";
 	/** 获取银行列表 */
-	public static String GET_BANK_LIST = common + "getUserBankList";
+	public static String GET_BANK_LIST = common + "getUserBankList"; 
 	/** 解绑银行卡*/
 	public static String REQUEST_UNBIND_BANK = common +"unbindBank";
 	/** 验证小额打款金额 */
@@ -69,4 +69,10 @@ public class Urls {
 	public static String UPDATE_ACTIVITIES  = common +"insertOrder";
 	/** 获取订单详情*/
 	public static String GET_ORDER = common +"getOrderInfo";
+	/** 活动查看基金份额*/
+	public static String CHECK_TOTALS = common +"getFundShare";
+	/** 注册时判断身份证号是否开过户*/
+	public static String CHECK_IDCARD=common +"checkHundsunUser";
+	/** 删除银行卡*/
+	public static String DELETE_BANK = common+"deleteTradeacco";
 }

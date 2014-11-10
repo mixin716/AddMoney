@@ -4,10 +4,11 @@ package com.zc.addmony.bean.activities;
 public class ActivitiesPhoneBean {
 
 	String phoneName;// 手机类型
-	String phoneId;// 手机id 
+	String phoneId;// 手机id
 	String phoneColor;// 手机颜色
 	String phoneColorId;// 颜色ID
 	String phoneTc;// 手机套餐
+	String PhoneTcId;// 套餐id
 	String phoneNum;// 手机号
 	String phoneAdd;// 手机号归属地
 	String phoneAddCity;// 手机号归属地
@@ -16,7 +17,7 @@ public class ActivitiesPhoneBean {
 	String addressContent;// 配送地址
 	String connectPhone;// 联系电话
 	String remarks;// 备注
-	
+
 	public String getPhoneAddCity() {
 		return phoneAddCity;
 	}
@@ -119,6 +120,14 @@ public class ActivitiesPhoneBean {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public String getPhoneTcId() {
+		return PhoneTcId;
+	}
+
+	public void setPhoneTcId(String phoneTcId) {
+		PhoneTcId = phoneTcId;
 	}
 
 }

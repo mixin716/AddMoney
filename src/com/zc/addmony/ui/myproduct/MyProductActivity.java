@@ -159,7 +159,6 @@ public class MyProductActivity extends BaseActivity {
 			intent = new Intent(this, RegisterSecondActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(MyProductActivity.this);
-			this.finish();
 			break;
 		case R.id.activity_login_bt_login:
 			mPhone = etPhone.getText().toString().trim();

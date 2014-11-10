@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:lines="1"
-                android:text="支付限额：每笔限额5万，日累计限额5万"
+                android:text="支付限额：5万"
                 android:textColor="@color/text_light"
                 android:textSize="15sp" />
 

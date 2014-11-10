@@ -112,14 +112,16 @@ public class IncreaseWealthActivity extends BaseActivity {
 			app.fundBean.setFundname("诺安货币A");
 			app.fundBean.setSharetype("A");
 			startActivity(intent);
+			AnimUtil.pushLeftInAndOut(this);
 			break;
 		case R.id.view_increase_wealth_list_btn_recharge:// 充值
 			intent = new Intent(this, BuyProductActivity.class);
 			app.fundBean.setFundcode("320002");
-			app.fundBean.setFundname("诺安货币A");
+			app.fundBean.setFundname("増财宝");
 			app.fundBean.setSharetype("A");
-			intent.putExtra("minPrice", "1元");
-			startActivity(intent);
+			intent.putExtra("minPrice", "1000");
+			startActivityForResult(intent, 101);
+			AnimUtil.pushLeftInAndOut(this);
 			break;
 
 		default:
@@ -166,6 +168,16 @@ public class IncreaseWealthActivity extends BaseActivity {
 
 		default:
 			break;
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == 101){//从充值或赎回界面返回，需要刷新界面
+			getgetUserInfo();
+			getMoneyChageRequest();
 		}
 	}
 

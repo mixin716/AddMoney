@@ -13,13 +13,18 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout.LayoutParams;
 
 import com.jky.struct2.http.core.AjaxParams;
+import com.jky.struct2.http.entityhandle.HttpResult;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
+import com.zc.addmony.bean.BaseBean;
 import com.zc.addmony.bean.myproduct.OpenBankBean;
+import com.zc.addmony.common.Urls;
+import com.zc.addmony.logic.LogicBase;
 import com.zc.addmony.ui.buyproduct.PerfectInformationActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
+import com.zc.addmony.utils.PatternUtil;
 
 /** 注册第一步 输入姓名身份证号 */
 public class RegisterSecondActivity extends BaseActivity {
@@ -101,16 +106,13 @@ public class RegisterSecondActivity extends BaseActivity {
 				showToast("请输入姓名");
 			} else if (TextUtils.isEmpty(strIdCard)) {
 				showToast("请输入身份证号");
-			} else if (strIdCard.length() != 18) {
+			} else if (!PatternUtil.patternIdCard(strIdCard)) {
 				showToast("请输入合理地身份证号");
 			} else {
 				obBean.setName(strName);
 				obBean.setIdcard(strIdCard);
 				mApplication.setObBean(obBean);
-				intent = new Intent(this, PerfectInformationActivity.class);
-				startActivity(intent);
-				AnimUtil.pushLeftInAndOut(this);
-				this.finish();
+				sendCheck();
 			}
 			break;
 		case R.id.pop_register_second_bt_login:
@@ -127,13 +129,28 @@ public class RegisterSecondActivity extends BaseActivity {
 	public void sendCheck() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("", "");
-		params.put("", "");
+		params.put("idcard", strIdCard);
+		httpRequest.get(Urls.CHECK_IDCARD, params, callBack, 0);
 	}
 
 	@Override
-	protected void handleJson(int reqeustCode, String jsonString, String message) {
+	protected void handleResult(int requestCode, HttpResult result) {
 		// TODO Auto-generated method stub
-		super.handleJson(reqeustCode, jsonString, message);
+		super.handleResult(requestCode, result);
+		String baseJson = result.baseJson;
+		System.out.println("-----json:------" + baseJson);
+		BaseBean baseBean = LogicBase.getInstance().parseData(baseJson);
+		switch (baseBean.getStatus()) {
+		case 1:
+			// showToast(baseBean.getMessage());
+			PopWindMsg();
+			break;
+		default:// 请求失败
+			intent = new Intent(this, PerfectInformationActivity.class);
+			startActivity(intent);
+			AnimUtil.pushLeftInAndOut(this);
+			break;
+		}
 	}
+
 }
