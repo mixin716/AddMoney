@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,7 @@ public class FindPwdActivity extends BaseActivity {
 	private String name, idCard, userName, bankNum, phone, checkCode;
 	private Intent intent;
 	private int position;
+	private int times;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +129,9 @@ public class FindPwdActivity extends BaseActivity {
 			} else if (checkCode.length() != 6) {
 				showToast("请输入6位验证码");
 			} else {
+				times = 0;
+				btnCode.setClickable(true);
+				btnCode.setText("发送验证码");
 				sendCheckMessage();
 			}
 			break;
@@ -214,6 +219,9 @@ public class FindPwdActivity extends BaseActivity {
 			break;
 		case 5:// 获取短信
 			showToast("信息发送成功，请注意查收");
+			btnCode.setClickable(false);
+			times = 59;
+			timeHandler.sendEmptyMessageDelayed(0, 1000);
 			try {
 				JSONObject obj = new JSONObject(jsonString);
 				accoreqserial = obj.getString("accoreqserial");
@@ -233,6 +241,21 @@ public class FindPwdActivity extends BaseActivity {
 			break;
 		}
 	}
+	
+	public Handler timeHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			if (times != 0 && times != 60) {
+				btnCode.setText(times + "秒后重发");
+				--times;
+				timeHandler.sendEmptyMessageDelayed(0, 1000);
+			} else {
+				times = 60;
+				btnCode.setClickable(true);
+				btnCode.setText("发送验证码");
+			}
+
+		};
+	};
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

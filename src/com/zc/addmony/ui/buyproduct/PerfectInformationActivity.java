@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,7 @@ public class PerfectInformationActivity extends BaseActivity {
 	private int position;
 	private List<BranchBean> branchBean;
 	private int addOrRegister;//来源标记 0为注册  1位添加银行卡
+	private int times;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -258,6 +260,9 @@ public class PerfectInformationActivity extends BaseActivity {
 			} else if (checkCode.length() != 6) {
 				showToast("请输入6位验证码");
 			} else if (checkEmpty()) {
+				times = 0;
+				btnCode.setClickable(true);
+				btnCode.setText("发送验证码");
 				if(addOrRegister == 1){//添加银行卡
 					
 				}else{//注册流程
@@ -375,6 +380,9 @@ public class PerfectInformationActivity extends BaseActivity {
 			break;
 		case 5:// 短信验证码
 			showToast("信息发送成功，请注意查收");
+			btnCode.setClickable(false);
+			times = 59;
+			timeHandler.sendEmptyMessageDelayed(0, 1000);
 			try {
 				JSONObject obj = new JSONObject(jsonString);
 				accoreqserial = obj.getString("accoreqserial");
@@ -397,6 +405,22 @@ public class PerfectInformationActivity extends BaseActivity {
 			break;
 		}
 	}
+	
+	public Handler timeHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			if (times != 0 && times != 60) {
+				btnCode.setText(times + "秒后重发");
+				--times;
+				timeHandler.sendEmptyMessageDelayed(0, 1000);
+			} else {
+				times = 60;
+				btnCode.setClickable(true);
+				btnCode.setText("发送验证码");
+			}
+
+		};
+	};
+
 
 	private boolean checkEmpty() {
 		if (TextUtils.isEmpty(banks)) {

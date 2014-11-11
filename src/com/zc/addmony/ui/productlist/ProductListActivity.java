@@ -99,6 +99,7 @@ public class ProductListActivity extends BaseActivity implements
 		case R.id.activity_product_list_ll_person:// 购买人数
 			clearTv();
 			allList.clear();
+			pages = 0;
 			tvPerson.setTextColor(this.getResources().getColor(
 					R.color.normal_purple));
 			if ("g".equals(act)) {
@@ -122,6 +123,7 @@ public class ProductListActivity extends BaseActivity implements
 		case R.id.activity_product_list_ll_wf:// 万份收益
 			clearTv();
 			allList.clear();
+			pages = 0;
 			tvWf.setTextColor(this.getResources().getColor(
 					R.color.normal_purple));
 			if ("w".equals(act)) {
@@ -142,6 +144,7 @@ public class ProductListActivity extends BaseActivity implements
 		case R.id.activity_product_list_ll_rate:// 收益率
 			clearTv();
 			allList.clear();
+			pages = 0;
 			tvRate.setTextColor(this.getResources().getColor(
 					R.color.normal_purple));
 			if ("w".equals(act) || "g".equals(act)) {
