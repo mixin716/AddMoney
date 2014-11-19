@@ -7,6 +7,7 @@ import com.zc.addmony.ui.more.MoreMainActivity;
 import com.zc.addmony.ui.myproduct.LoginActivity;
 import com.zc.addmony.ui.myproduct.MyProductActivity;
 import com.zc.addmony.ui.productlist.ProductListActivity;
+import com.zc.addmony.ui.productlist.ProductTabActivity;
 
 import android.app.TabActivity;
 import android.content.BroadcastReceiver;
@@ -86,7 +87,7 @@ public class HomeTabActivity extends TabActivity implements
 	private void InitIntent() {
 		mHomeIntent = new Intent(HomeTabActivity.this, HomeActivity.class);
 		mProductListIntent = new Intent(HomeTabActivity.this,
-				ProductListActivity.class);
+				ProductTabActivity.class);
 		mMyProductIntent = new Intent(HomeTabActivity.this,
 				MyProductActivity.class);
 		mMoreIntent = new Intent(HomeTabActivity.this, MoreMainActivity.class);

@@ -46,6 +46,7 @@ public class ProductListActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentViewRes(R.layout.activity_product_list_layout);
+		dismissTop();
 		setViews();
 		showLoading();
 		requestData();

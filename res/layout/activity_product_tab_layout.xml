@@ -10,6 +10,10 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
+        <include
+            android:id="@+id/page_title"
+            layout="@layout/title_layout" />
+
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
@@ -29,47 +33,48 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:textColor="@color/product_list_title_color_text"
-                android:text="全部"
-                android:textSize="16sp"
                 android:button="@null"
-                android:gravity="center" />
+                android:checked="true"
+                android:gravity="center"
+                android:text="全部"
+                android:textColor="@color/product_list_title_color_text"
+                android:textSize="14sp" />
 
             <RadioButton
                 android:id="@+id/activity_product_rb_money"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/product_list_title_color_text"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
                 android:text="货币型"
-                android:textSize="16sp"
-                android:button="@null"
-                android:gravity="center" />
+                android:textColor="@color/product_list_title_color_text"
+                android:textSize="14sp" />
 
             <RadioButton
-                android:id="@+id/activity_product_rb_myproduct"
+                android:id="@+id/activity_product_rb_stock"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:textColor="@color/product_list_title_color_text"
+                android:button="@null"
+                android:gravity="center"
                 android:text="股票型"
-                android:textSize="16sp"
-                android:button="@null"
-                android:gravity="center" />
+                android:textColor="@color/product_list_title_color_text"
+                android:textSize="14sp" />
 
             <RadioButton
-                android:id="@+id/activity_product_rb_more"
+                android:id="@+id/activity_product_rb_bond"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:textColor="@color/product_list_title_color_text"
-                android:text="债券型"
-                android:textSize="16sp"
                 android:button="@null"
-                android:gravity="center" />
+                android:gravity="center"
+                android:text="债券型"
+                android:textColor="@color/product_list_title_color_text"
+                android:textSize="14sp" />
         </RadioGroup>
 
         <FrameLayout

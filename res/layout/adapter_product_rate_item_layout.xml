@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adapter_product_rate_item_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:padding="5dp" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical" >
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="浦银日日盈A"
+            android:text="1.2750"
             android:textColor="@color/text_deep"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="13542"
+            android:text="14-01-05"
             android:textColor="@color/text_light"
             android:textSize="14sp" />
     </LinearLayout>
@@ -28,48 +32,50 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:text="13.253%"
+        android:text="13.23%"
+        android:layout_marginLeft="15dp"
         android:textColor="@color/normal_red"
         android:textSize="16sp" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:text="13.253%"
+        android:text="13.53%"
+        android:layout_marginLeft="15dp"
         android:textColor="@color/normal_red"
         android:textSize="16sp" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:text="13.253%"
+        android:text="13.23%"
+        android:layout_marginLeft="15dp"
         android:textColor="@color/normal_red"
         android:textSize="16sp" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:text="13.253%"
+        android:text="13.53%"
+        android:layout_marginLeft="15dp"
         android:textColor="@color/normal_red"
         android:textSize="16sp" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:text="13.253%"
-        android:textColor="@color/normal_red"
-        android:textSize="16sp" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="13.253%"
+        android:text="13.23%"
+        android:layout_marginLeft="15dp"
         android:textColor="@color/normal_red"
         android:textSize="16sp" />
 

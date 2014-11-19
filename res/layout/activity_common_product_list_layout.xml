@@ -20,7 +20,7 @@
         <HorizontalScrollView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3" >
+            android:layout_weight="1" >
 
             <ListView
                 android:id="@+id/activity_common_product_list_lv_rate"
