@@ -96,8 +96,6 @@ public class LoginActivity extends BaseActivity {
 				showToast("请输入手机号");
 			} else if (TextUtils.isEmpty(mPwd)) {
 				showToast("请输入密码");
-			} else if (!PatternUtil.patternPhoneNumber(mPhone)) {
-				showToast("请输入正确的手机号");
 			} else {
 				requestLogin();
 			}
