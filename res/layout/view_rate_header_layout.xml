@@ -7,58 +7,59 @@
     android:padding="10dp" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
         android:text="单位净值"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:textColor="@color/text_color_888888"
         android:textSize="16sp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:gravity="center"
         android:text="近1周"
-        android:layout_marginLeft="10dp"
         android:textColor="@color/text_color_888888"
         android:textSize="16sp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:gravity="center"
         android:text="近1月"
-        android:layout_marginLeft="20dp"
         android:textColor="@color/text_color_888888"
         android:textSize="16sp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:gravity="center"
         android:text="近3月"
-        android:layout_marginLeft="20dp"
         android:textColor="@color/text_color_888888"
         android:textSize="16sp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:gravity="center"
         android:text="今年来"
-        android:layout_marginLeft="20dp"
         android:textColor="@color/text_color_888888"
         android:textSize="16sp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="近1年"
-        android:layout_marginLeft="20dp"
         android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="近1年"
         android:textColor="@color/text_color_888888"
         android:textSize="16sp" />
 

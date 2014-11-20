@@ -16,8 +16,9 @@ import com.zc.addmony.R;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.utils.AnimUtil;
+import com.zc.addmony.utils.KeyBoard;
 
-/** 提现赎回*/
+/** 提现赎回 */
 public class SaleMoneyActivity extends BaseActivity {
 	private MApplication app;
 	private TextView tvFundName, tvSaleMoney, tvHaveMoney, tvBankCode;
@@ -62,17 +63,20 @@ public class SaleMoneyActivity extends BaseActivity {
 	}
 
 	private void getUserFundInfoRequest() {
+		showLoading();
 		AjaxParams params = new AjaxParams();
 		params.put("fundcode", "820002");
-//		params.put("fundcode", app.fundBean.getFundcode());
+		// params.put("fundcode", app.fundBean.getFundcode());
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_USER_FUND_INFO, params, callBack, 0);
 
 	}
 
 	private void getSaleMoneyRequest() {
+		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("fundcode", app.fundBean.getFundcode());
+		params.put("fundcode", "820002");
+		// params.put("fundcode", app.fundBean.getFundcode());
 		params.put("sharetype", app.fundBean.getSharetype());
 		params.put("applysum", minMoney);
 		params.put("tradeacco", "");
@@ -89,14 +93,19 @@ public class SaleMoneyActivity extends BaseActivity {
 			AnimUtil.pushRightInAndOut(this);
 			break;
 		case R.id.activity_sale_money_btn_ok:
+			KeyBoard.demissKeyBoard(getApplicationContext(), edtMinSaleMoney);
 			minMoney = edtMinSaleMoney.getText().toString();
 			salePwd = edtSalePwd.getText().toString();
 			if (TextUtils.isEmpty(minMoney)) {
 				showToast("请输入赎回金额");
 			} else if (TextUtils.isEmpty(salePwd)) {
 				showToast("请输入交易密码");
-			}else{
-				getSaleMoneyRequest();
+			} else {
+				if(Integer.valueOf(minMoney) <1000){
+					showToast("最低赎回金额为1000");
+				}else{
+					getSaleMoneyRequest();
+				}
 			}
 			break;
 
@@ -119,7 +128,15 @@ public class SaleMoneyActivity extends BaseActivity {
 					haveMoney = obj.optString("unpaidincome");
 					bankName = obj.optString("bankname");
 					bankCode = obj.optString("bankacco");
-					tvBankCode.setText(bankName + "(" + bankCode + ")");
+					if (!TextUtils.isEmpty(bankCode)) {
+						String code = "***"
+								+ bankCode.substring(bankCode.length() - 4,
+										bankCode.length());
+						tvBankCode.setText(bankName + "(" + code + ")");
+					} else {
+						tvBankCode.setText(bankName);
+					}
+
 					tvFundName.setText(fundName);
 					tvHaveMoney.setText("￥" + haveMoney);
 					tvSaleMoney.setText("￥" + saleMoney);
@@ -130,6 +147,7 @@ public class SaleMoneyActivity extends BaseActivity {
 			}
 			break;
 		case 1:
+			this.setResult(101);
 			finish();
 			AnimUtil.pushRightInAndOut(this);
 			showToast("赎回成功");

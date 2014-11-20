@@ -27,6 +27,7 @@ import com.zc.addmony.ui.buyproduct.BuyProductActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.views.XListView;
 
+/** 增财宝 */
 public class IncreaseWealthActivity extends BaseActivity {
 	private XListView lvContent;
 	private View view;
@@ -37,6 +38,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 	private List<MoneyChangeBean> list;
 	private MApplication app;
 	private UserSharedData userShare;
+	private String zcbsum = "0", zrsy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 		btnMention.setOnClickListener(this);
 		btnRecharge.setOnClickListener(this);
 		getgetUserInfo();
+		getMoneyChageRequest();
 
 	}
 
@@ -107,11 +110,15 @@ public class IncreaseWealthActivity extends BaseActivity {
 			AnimUtil.pushRightInAndOut(this);
 			break;
 		case R.id.view_increase_wealth_list_btn_mention:// 提现/赎回
+			if (Integer.valueOf(zcbsum) == 0) {
+				showToast("当前可用余额为0");
+				return;
+			}
 			intent = new Intent(this, SaleMoneyActivity.class);
 			app.fundBean.setFundcode("320002");
 			app.fundBean.setFundname("诺安货币A");
 			app.fundBean.setSharetype("A");
-			startActivity(intent);
+			startActivityForResult(intent, 101);
 			AnimUtil.pushLeftInAndOut(this);
 			break;
 		case R.id.view_increase_wealth_list_btn_recharge:// 充值
@@ -135,8 +142,8 @@ public class IncreaseWealthActivity extends BaseActivity {
 		case 0:
 			try {
 				JSONObject obj = new JSONObject(jsonString);
-				String zrsy = obj.optString("zrsy");
-				String zcbsum = obj.optString("zcbsum");
+				zrsy = obj.optString("zrsy");
+				zcbsum = obj.optString("zcbsum");
 				tvYesterdayMoney.setText("￥" + zrsy);
 				tvAllMoney.setText("￥" + zcbsum);
 				getMoneyChageRequest();
@@ -170,12 +177,12 @@ public class IncreaseWealthActivity extends BaseActivity {
 			break;
 		}
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if(resultCode == 101){//从充值或赎回界面返回，需要刷新界面
+		if (resultCode == 101) {// 从充值或赎回界面返回，需要刷新界面
 			getgetUserInfo();
 			getMoneyChageRequest();
 		}

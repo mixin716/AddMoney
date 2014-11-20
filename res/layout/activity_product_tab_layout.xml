@@ -24,7 +24,7 @@
             android:id="@+id/buttom_rgroup"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:background="@color/normal_purple"
+            android:background="#4f004f"
             android:orientation="horizontal" >
 
             <RadioButton

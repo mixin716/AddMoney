@@ -24,12 +24,13 @@ import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicProductList;
 import com.zc.addmony.ui.buyproduct.BuyProductActivity;
 import com.zc.addmony.utils.AnimUtil;
+import com.zc.addmony.utils.KeyBoard;
 
 public class ProductDetailActivity extends BaseActivity implements
 		OnCheckedChangeListener {
 	private RadioGroup rgContent;
 	private LinearLayout llIncome, llInformation;
-	private TextView tvFundName, tvMinPrice, tvIncomeRate, tvPeople;
+	private TextView tvFundName, tvMinPrice, tvIncomeRate, tvPeople,tvBankRate;
 	private Button btnBuy, btnCount;
 	private EditText edtMoney, edtDay;
 	private TextView tvIncome, tvBankIncome, tvYearRate, tvWeekRate,
@@ -49,7 +50,7 @@ public class ProductDetailActivity extends BaseActivity implements
 	protected void initVariable() {
 		app = (MApplication) getApplication();
 		fundcode = app.fundBean.getFundcode();
-
+		bean = new TuijianBean();
 	}
 
 	@Override
@@ -67,6 +68,7 @@ public class ProductDetailActivity extends BaseActivity implements
 		btnCount = (Button) findViewById(R.id.activity_product_detail_btn_ok);
 
 		tvBankIncome = (TextView) findViewById(R.id.activity_product_detail_tv_bank_input);
+		tvBankRate = (TextView) findViewById(R.id.activity_product_detail_tv_rate_bank);
 		tvFundName = (TextView) findViewById(R.id.activity_product_detail_tv_fundname);
 		tvFundCompany = (TextView) findViewById(R.id.activity_product_detail_tv_fund_company);
 		tvIncome = (TextView) findViewById(R.id.activity_product_detail_tv_input);
@@ -110,15 +112,24 @@ public class ProductDetailActivity extends BaseActivity implements
 			break;
 		case R.id.activity_product_detail_btn_buy:// 购买
 			Intent intent = new Intent(this, BuyProductActivity.class);
-			intent.putExtra("minPrice", bean.getMinprice());
+			String minPrice;
+			if(!TextUtils.isEmpty(bean.getMinprice())){
+				minPrice = bean.getMinprice().substring(0, bean.getMinprice().length()-1);
+			}else{
+				minPrice = "0";
+			}
+			intent.putExtra("minPrice", minPrice);
 			startActivity(intent);
 
 			break;
 		case R.id.activity_product_detail_btn_ok:// 计算
+			KeyBoard.demissKeyBoard(getApplicationContext(), edtDay);
 			String day = edtDay.getText().toString();
 			String everyprice = edtMoney.getText().toString();
 			int dayNum,
-			priceNum;
+			priceNum;//价格 天数
+			float bankRate;//银行获取利率
+			bankRate = Float.valueOf(bean.getCurrentInterest().substring(0, bean.getCurrentInterest().length()-1));
 			if (TextUtils.isEmpty(everyprice)) {
 				showToast("请输入购买金额");
 			} else if (TextUtils.isEmpty(day)) {
@@ -128,10 +139,11 @@ public class ProductDetailActivity extends BaseActivity implements
 				priceNum = Integer.valueOf(everyprice);
 				double product = dayNum * priceNum
 						* Double.valueOf(bean.getIncomeratio());
-				double bankIncome = dayNum * priceNum * 0.35;
+				
+				double bankIncome = dayNum * priceNum * bankRate;
 				DecimalFormat df = new DecimalFormat("0.00");
 				tvIncome.setText("￥" + df.format(product / (100 * 365)) + "元");
-				tvBankIncome.setText("￥" + df.format(bankIncome / (100 * 365))
+				tvBankIncome.setText("￥" + df.format(bankIncome / (100*365))
 						+ "元");
 
 			}
@@ -153,7 +165,7 @@ public class ProductDetailActivity extends BaseActivity implements
 				tvMinPrice.setText("起购金币：￥" + bean.getMinprice());
 				DecimalFormat df = new DecimalFormat("0.00");
 				tvIncomeRate.setText(df.format(Double.valueOf(bean
-						.getIncomeratio())) + "%");
+						.getIncomeratio())) + "%");//近期收益率
 				tvPeople.setText("购买人数：" + bean.getBought() + "人");
 				tvYearRate.setText(df.format(Double.valueOf(bean.getYnzf()))
 						+ "%");
@@ -165,7 +177,7 @@ public class ProductDetailActivity extends BaseActivity implements
 						.getHf_incomeratio())) + "%");
 				tvFundCompany.setText(bean.getFundCompany());
 				tvFundName.setText(bean.getFundname());
-
+				tvBankRate.setText(bean.getCurrentInterest());//银行活期利益
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

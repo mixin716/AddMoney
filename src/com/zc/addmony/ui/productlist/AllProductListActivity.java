@@ -1,18 +1,21 @@
 package com.zc.addmony.ui.productlist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.R;
-import com.zc.addmony.R.layout;
 import com.zc.addmony.adapter.productlist.ProductNameAdapter;
 import com.zc.addmony.adapter.productlist.ProductRateAdapter;
+import com.zc.addmony.utils.AnimUtil;
 
-public class AllProductListActivity extends BaseActivity {
+public class AllProductListActivity extends BaseActivity implements OnItemClickListener{
 	private ListView lvName, lvRate;
 	private ProductNameAdapter nameAdapter;
 	private ProductRateAdapter rataAdapter;
@@ -55,7 +58,8 @@ public class AllProductListActivity extends BaseActivity {
 		lvRate.setAdapter(rataAdapter);
 		setListViewHeightBasedOnChildren(lvName);
 		setListViewHeightBasedOnChildren(lvRate);
-
+		lvName.setOnItemClickListener(this);
+		lvRate.setOnItemClickListener(this);
 	}
 
 	/**
@@ -84,6 +88,15 @@ public class AllProductListActivity extends BaseActivity {
 		params.height = totalHeight
 				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 		listView.setLayoutParams(params);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(this,StockDetailActivity.class);
+		startActivity(intent);
+		AnimUtil.pushLeftInAndOut(this);
 	}
 
 }
