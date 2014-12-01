@@ -47,7 +47,7 @@ public class ProductListActivity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 		setContentViewRes(R.layout.activity_product_list_layout);
 		dismissTop();
-		setViews();
+		setViews();  
 		showLoading();
 		requestData();
 	}
