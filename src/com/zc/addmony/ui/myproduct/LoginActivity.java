@@ -93,7 +93,7 @@ public class LoginActivity extends BaseActivity {
 			KeyBoard.demissKeyBoard(getApplicationContext(), etPhone);
 			KeyBoard.demissKeyBoard(getApplicationContext(), etPwd);
 			if (TextUtils.isEmpty(mPhone)) {
-				showToast("请输入手机号");
+				showToast("请输入请输入手机号或身份证号");
 			} else if (TextUtils.isEmpty(mPwd)) {
 				showToast("请输入密码");
 			} else {

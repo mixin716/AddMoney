@@ -112,6 +112,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/activity_product_detail_tv_rate_bank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
