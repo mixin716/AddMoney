@@ -69,7 +69,7 @@ public class HomeActivity extends BaseActivity {
 		// intent.setClass(getApplicationContext(), GestureActivity.class);
 		// intent.putExtra(GestureActivity.INTENT_MODE,
 		// GestureActivity.GESTURE_MODE_VERIFY);
-		// intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		// intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 		// startActivity(intent);
 		// }
 	}
