@@ -86,7 +86,7 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 		@Override
 		public void onFailure(int which, HttpExceptionResult result) {
 			dismissLoading();
-			System.out.println("---------请求失败-------->>");
+			System.out.println("---------请求失败------->>");
 			handleNetErr(which, result.code);
 		};
 	};
