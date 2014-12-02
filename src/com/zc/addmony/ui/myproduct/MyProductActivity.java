@@ -35,8 +35,8 @@ import com.zc.addmony.utils.PatternUtil;
 public class MyProductActivity extends BaseActivity {
 
 	private LinearLayout llIsLogin, llNoLogin;
-	private TextView tvName, tvPhone, tvMoneyAll, tvMoneyYes, tvBuy;
-	private LinearLayout llTop, llYesterday, llBuy;
+	private TextView tvName, tvPhone, tvMoneyAll, tvMoneyYes, tvBuy,tvDeal;
+	private LinearLayout llTop, llYesterday, llBuy,llDeal;
 	private UserSharedData userShare;
 	// 登录控件及数据
 	private EditText etPhone, etPwd;
@@ -96,12 +96,17 @@ public class MyProductActivity extends BaseActivity {
 		tvMoneyAll = (TextView) findViewById(R.id.activity_my_product_tv_moneyAll);
 		tvMoneyYes = (TextView) findViewById(R.id.activity_my_product_tv_moneyYes);
 		tvBuy = (TextView) findViewById(R.id.activity_my_product_tv_already);
+		tvDeal = (TextView) findViewById(R.id.activity_my_product_tv_deal);
 		llTop = (LinearLayout) findViewById(R.id.activity_my_product_ll_top);
 		llYesterday = (LinearLayout) findViewById(R.id.activity_my_product_ll_yestoday);
 		llBuy = (LinearLayout) findViewById(R.id.activity_my_product_ll_buy);
+		llDeal = (LinearLayout) findViewById(R.id.activity_my_product_ll_deal);
+		
+		
 		llTop.setOnClickListener(this);
 		llYesterday.setOnClickListener(this);
 		llBuy.setOnClickListener(this);
+		llDeal.setOnClickListener(this);
 		etPhone = (EditText) findViewById(R.id.activity_login_et_phone);
 		etPwd = (EditText) findViewById(R.id.activity_login_et_pwd);
 		tvForget = (TextView) findViewById(R.id.activity_login_tv_forget);
@@ -154,6 +159,11 @@ public class MyProductActivity extends BaseActivity {
 				startActivity(intent);
 				AnimUtil.pushLeftInAndOut(MyProductActivity.this);
 			}
+			break;
+		case R.id.activity_my_product_ll_deal://进入当日交易申请界面
+			intent = new Intent(this, TodayDealActivity.class);
+			startActivity(intent);
+			AnimUtil.pushLeftInAndOut(MyProductActivity.this);
 			break;
 		case R.id.activity_login_bt_register:
 			intent = new Intent(this, RegisterSecondActivity.class);
