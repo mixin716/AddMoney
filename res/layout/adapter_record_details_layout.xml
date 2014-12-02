@@ -30,9 +30,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="2014-09-21"
                 android:textColor="@color/text_color_888888"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,9 +45,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="+800"
-                android:textColor="@color/normal_red"
-                android:textSize="16sp" />
+                android:textColor="@color/text_color_666666"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/adapter_record_detail_tv_prompt"
@@ -56,9 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="right"
-                android:text="七日年化收益：4.88%"
+                android:text="交易成功"
                 android:textColor="@color/text_color_888888"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 

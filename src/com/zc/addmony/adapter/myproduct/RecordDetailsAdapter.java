@@ -60,6 +60,7 @@ public class RecordDetailsAdapter extends BaseAdapter {
 		}
 		holder.tvName.setText(list.get(position).getFundname());
 		holder.tvMoney.setText(list.get(position).getHappeningsum());
+		holder.tvDate.setText(list.get(position).getDate());
 		return convertView;
 	}
 

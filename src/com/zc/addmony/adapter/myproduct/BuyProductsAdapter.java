@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zc.addmony.R;
@@ -32,7 +33,7 @@ public class BuyProductsAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 5;
+		return list.size();
 	}
 
 	@Override
@@ -73,17 +74,19 @@ public class BuyProductsAdapter extends BaseAdapter {
 					.findViewById(R.id.adapter_buy_products_tv_buy);
 			holder.tvRedeem = (TextView) convertView
 					.findViewById(R.id.adapter_buy_products_tv_redeem);
+			holder.rlInRedeem = (RelativeLayout) convertView
+					.findViewById(R.id.adapter_buy_products_rl_inredeem);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		// holder.tvName.setText(list.get(position).getmName());
-		// holder.tvWf.setText(list.get(position).getmWf());
-		// holder.tvHave.setText(list.get(position).getmHave());
-		// holder.tvYestorday.setText(list.get(position).getmYestorday());
-		// holder.tvNot.setText(list.get(position).getmNot());
-		// holder.tvInRedeem.setText(list.get(position).getmRedeem());
-		// holder.tvBank.setText(list.get(position).getmBank());
+		holder.tvName.setText(list.get(position).getmName());
+		holder.tvWf.setText(list.get(position).getmWf());
+		holder.tvHave.setText(list.get(position).getmHave());
+		holder.tvYestorday.setText(list.get(position).getmYestorday());
+		holder.tvNot.setText(list.get(position).getmNot());
+		holder.tvInRedeem.setText(list.get(position).getmRedeem());
+		holder.tvBank.setText(list.get(position).getmBank());
 
 		holder.tvBuy.setOnClickListener(new OnClickListener() {
 
@@ -107,6 +110,7 @@ public class BuyProductsAdapter extends BaseAdapter {
 	class ViewHolder {
 		TextView tvName, tvWf, tvHave, tvYestorday, tvNot, tvInRedeem, tvBuy,
 				tvRedeem, tvBank;
+		RelativeLayout rlInRedeem;
 	}
 
 }

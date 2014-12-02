@@ -154,13 +154,17 @@ public class IncreaseWealthActivity extends BaseActivity {
 		case 1:
 			try {
 				dismissLoading();
-				JSONArray array = new JSONArray(jsonString);
+				JSONObject ojb = new JSONObject(jsonString);
+				JSONObject resultObj = new JSONObject(ojb.optString("results"));
+				JSONArray array = new JSONArray(resultObj.optString("returnlist"));
 				int len = array.length();
 				for (int i = 0; i < len; i++) {
 					MoneyChangeBean bean = new MoneyChangeBean();
 					JSONObject obj = array.getJSONObject(i);
 					bean.setFundname(obj.optString("fundname"));
 					bean.setHappeningsum(obj.optString("happeningsum"));
+					String time = obj.optString("date");
+					bean.setDate(time.substring(0, 4)+"-"+time.substring(4, 6)+"-"+time.substring(6, 8));
 					list.add(bean);
 				}
 				// adapter = new RecordDetailsAdapter(getApplicationContext(),

@@ -3,6 +3,8 @@ package com.zc.addmony.bean.myproduct;
 public class MoneyChangeBean {
 	private String happeningsum;
 	private String fundname;
+	private String date;
+	
 	public String getHappeningsum() {
 		return happeningsum;
 	}
@@ -15,6 +17,11 @@ public class MoneyChangeBean {
 	public void setFundname(String fundname) {
 		this.fundname = fundname;
 	}
-	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 }

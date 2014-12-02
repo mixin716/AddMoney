@@ -10,6 +10,8 @@ public class BuyProductsBean {
 	String mNot;// 未结算收益
 	String mRedeem;// 赎回中
 	String mBank;// 银行卡
+	String mBankName;// 银行名字
+	String shuhui;// 赎回标识
 
 	public String getmName() {
 		return mName;
@@ -65,6 +67,22 @@ public class BuyProductsBean {
 
 	public void setmBank(String mBank) {
 		this.mBank = mBank;
+	}
+
+	public String getShuhui() {
+		return shuhui;
+	}
+
+	public void setShuhui(String shuhui) {
+		this.shuhui = shuhui;
+	}
+
+	public String getmBankName() {
+		return mBankName;
+	}
+
+	public void setmBankName(String mBankName) {
+		this.mBankName = mBankName;
 	}
 
 }

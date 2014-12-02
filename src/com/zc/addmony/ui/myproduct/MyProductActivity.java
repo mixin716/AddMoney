@@ -238,11 +238,12 @@ public class MyProductActivity extends BaseActivity {
 			try {
 				JSONObject obj = new JSONObject(jsonString);
 				tvMoneyAll.setText(obj.optInt("sum") + "元");
-				tvMoneyYes.setText(obj.optInt("content") + "元");
-				tvBuy.setText("共0个基金产品");
+				tvMoneyYes.setText(obj.optDouble("zrsy") + "元");
+				tvBuy.setText("共"+obj.optInt("count")+"个基金产品");
 				tvName.setText(obj.optString("realname"));
 				tvPhone.setText(obj.optString("phone"));
 				userShare.SaveBankSum(obj.optString("banksum"));
+				obj.optString("todayTransaction");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
