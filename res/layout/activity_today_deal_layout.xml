@@ -4,12 +4,14 @@
     android:layout_height="match_parent"
     android:background="@color/normal_bg"
     android:orientation="vertical" >
- <ListView
-     android:id="@+id/activity_today_deal_lv_content"
-     android:layout_width="fill_parent"
-     android:layout_height="wrap_content"
-     android:scrollbars="none"
-     android:divider="@color/clear"
-     android:dividerHeight="1dp"/>   
+
+    <ListView
+        android:id="@+id/activity_today_deal_lv_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/clear"
+        android:dividerHeight="2dp"
+        android:padding="15dp"
+        android:scrollbars="none" />
 
 </LinearLayout>

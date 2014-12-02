@@ -9,6 +9,16 @@ public class ProductBean {
 	private String incomeratio;// ��洪����剁�����
 	private String hf_incomeratio;// 涓�浠芥�剁��
 	private String fundCompany;// ��洪��������
+	private String applysum;//申请金额
+
+	
+	public String getApplysum() {
+		return applysum;
+	}
+
+	public void setApplysum(String applysum) {
+		this.applysum = applysum;
+	}
 
 	public String getFundname() {
 		return fundname;

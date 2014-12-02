@@ -75,4 +75,6 @@ public class Urls {
 	public static String CHECK_IDCARD=common +"checkHundsunUser";
 	/** 删除银行卡*/
 	public static String DELETE_BANK = common+"deleteTradeacco";
+	/** 当日交易申请列表*/
+	public static String TODAY_DEAL_LIST = common+"getTodayTransactionList";
 }

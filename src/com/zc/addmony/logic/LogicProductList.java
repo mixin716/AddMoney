@@ -63,4 +63,25 @@ public class LogicProductList {
 		return tuiBean;
 		
 	}
+	
+	/** 解析当日交易申请列表*/
+	public static List<ProductBean> parseTodayDealList(String json){
+		List<ProductBean> list = new ArrayList<ProductBean>();
+		try {
+			JSONArray array = new JSONArray(json);
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject obj = array.getJSONObject(i);
+				ProductBean bean = new ProductBean();
+				bean.setFundcode(obj.optString("fundcode"));
+				bean.setFundname(obj.optString("fundname"));
+				bean.setApplysum(obj.optString("applysum"));
+				list.add(bean);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }
