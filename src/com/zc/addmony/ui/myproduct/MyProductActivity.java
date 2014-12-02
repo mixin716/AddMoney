@@ -243,7 +243,8 @@ public class MyProductActivity extends BaseActivity {
 				tvName.setText(obj.optString("realname"));
 				tvPhone.setText(obj.optString("phone"));
 				userShare.SaveBankSum(obj.optString("banksum"));
-				obj.optString("todayTransaction");
+				tvDeal.setText("共"+obj.optString("todayTransaction")+"条交易申请");
+				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
