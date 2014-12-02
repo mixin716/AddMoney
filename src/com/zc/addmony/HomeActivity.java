@@ -41,7 +41,7 @@ public class HomeActivity extends BaseActivity {
 	private HomeBean bean;
 	private RelativeLayout rlTodayContent, rlIncreaseWealth;
 	private Intent intent;
-	private MApplication app; 
+	private MApplication app;
 	private UserSharedData User;
 	private ImageView ivTopActivity;
 	/** 用于判断退出 */
