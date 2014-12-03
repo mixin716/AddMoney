@@ -7,6 +7,7 @@
     android:padding="10dp" >
 
     <TextView
+        android:id="@+id/view_rate_header_tv_unit"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -18,15 +19,17 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/view_rate_header_tv_week"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:text="近1周"
+        android:text="近1周↓"
         android:textColor="@color/text_color_888888"
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/view_rate_header_tv_month"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -36,6 +39,7 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/view_rate_header_tv_three"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -45,15 +49,17 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/view_rate_header_tv_six_month"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:text="今年来"
+        android:text="近半年"
         android:textColor="@color/text_color_888888"
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/view_rate_header_tv_recent_year"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

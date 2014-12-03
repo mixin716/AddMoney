@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/normal_bg"
     android:orientation="vertical"
+    android:id="@+id/activity_common_product_list_sv"
     android:scrollbars="none" >
 
     <LinearLayout

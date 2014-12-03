@@ -26,13 +26,15 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/adapter_product_rate_item_tv_unit"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="1.2750"
+                android:text="1.2700"
                 android:textColor="@color/text_deep"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/adapter_product_rate_item_tv_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="14-01-05"
@@ -41,6 +43,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/adapter_product_rate_item_tv_week"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -51,6 +54,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/adapter_product_rate_item_tv_month"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -61,6 +65,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/adapter_product_rate_item_tv_three_month"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -71,6 +76,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/adapter_product_rate_item_tv_six_month"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -81,6 +87,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/adapter_product_rate_item_tv_year"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

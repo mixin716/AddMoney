@@ -9,11 +9,12 @@ import org.json.JSONObject;
 
 import com.zc.addmony.bean.TuijianBean;
 import com.zc.addmony.bean.productlist.ProductBean;
+import com.zc.addmony.bean.productlist.ProductListBean;
 
 public class LogicProductList {
 
-	/** 解析产品列表*/
-	public static List<ProductBean> parseProductList(String json){
+	/** 解析产品列表 */
+	public static List<ProductBean> parseProductList(String json) {
 		List<ProductBean> list = new ArrayList<ProductBean>();
 		try {
 			JSONArray array = new JSONArray(json);
@@ -32,10 +33,12 @@ public class LogicProductList {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
-	public static TuijianBean parseProductDetail(String json) throws JSONException{
+
+	public static TuijianBean parseProductDetail(String json)
+			throws JSONException {
 		JSONObject tuiObj = new JSONObject(json);
 		TuijianBean tuiBean = new TuijianBean();
 		tuiBean.setBought(tuiObj.optString("bought"));
@@ -49,7 +52,7 @@ public class LogicProductList {
 		tuiBean.setHf_incomeratio(tuiObj.optString("hf_incomeratio"));
 		tuiBean.setHx_f_incomeratio(tuiObj.optString("hx_f_incomeratio"));
 		tuiBean.setHx_hf_incomeratio(tuiObj.optString("hx_hf_incomeratio"));
-		tuiBean.setId(tuiObj.optString("id")); 
+		tuiBean.setId(tuiObj.optString("id"));
 		tuiBean.setIncome(tuiObj.optString("income"));
 		tuiBean.setIncomeratio(tuiObj.optString("incomeratio"));
 		tuiBean.setIs_index(tuiObj.optString("is_index"));
@@ -61,11 +64,11 @@ public class LogicProductList {
 		tuiBean.setTotalnetvalue(tuiObj.optString("totalnetvalue"));
 		tuiBean.setYnzf(tuiObj.optString("ynzf"));
 		return tuiBean;
-		
+
 	}
-	
-	/** 解析当日交易申请列表*/
-	public static List<ProductBean> parseTodayDealList(String json){
+
+	/** 解析当日交易申请列表 */
+	public static List<ProductBean> parseTodayDealList(String json) {
 		List<ProductBean> list = new ArrayList<ProductBean>();
 		try {
 			JSONArray array = new JSONArray(json);
@@ -81,7 +84,34 @@ public class LogicProductList {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		return list;
+	}
+
+	/** 解析产品列表2 */
+	public static List<ProductListBean> parseProductListElse(String json) {
+		List<ProductListBean> list = new ArrayList<ProductListBean>();
+		try {
+			JSONArray array = new JSONArray(json);
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject obj = array.getJSONObject(i);
+				ProductListBean bean = new ProductListBean();
+				bean.setFundcode(obj.optString("fundcode"));
+				bean.setFundname(obj.optString("fundname"));
+				bean.setNavdate(obj.optString("navdate"));
+				bean.setRRInSingleMonth(obj.optString("rRInSingleMonth"));
+				bean.setRRInSingleWeek(obj.optString("rRInSingleWeek"));
+				bean.setRRInSingleYear(obj.optString("rRInSingleYear"));
+				bean.setRRInSixMonth(obj.optString("rRInSixMonth"));
+				bean.setRRInThreeMonth(obj.optString("rRInThreeMonth"));
+				bean.setUnitNV(obj.optString("unitNV"));
+				list.add(bean);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return list;
 	}
 }
