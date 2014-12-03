@@ -4,6 +4,9 @@ package com.zc.addmony.bean.myproduct;
 public class BuyProductsBean {
 
 	String mName;// 基金名称
+	String mFundcode;
+	String mFundname;
+	String mSharetype;
 	String mWf;// 万份收益
 	String mHave;// 持有金额
 	String mYestorday;// 昨日收益
@@ -19,6 +22,30 @@ public class BuyProductsBean {
 
 	public void setmName(String mName) {
 		this.mName = mName;
+	}
+
+	public String getmFundcode() {
+		return mFundcode;
+	}
+
+	public void setmFundcode(String mFundcode) {
+		this.mFundcode = mFundcode;
+	}
+
+	public String getmFundname() {
+		return mFundname;
+	}
+
+	public void setmFundname(String mFundname) {
+		this.mFundname = mFundname;
+	}
+
+	public String getmSharetype() {
+		return mSharetype;
+	}
+
+	public void setmSharetype(String mSharetype) {
+		this.mSharetype = mSharetype;
 	}
 
 	public String getmWf() {

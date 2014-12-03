@@ -19,6 +19,8 @@ public class BuyProductsAdapter extends BaseAdapter {
 	private Context context;
 	private List<BuyProductsBean> list;
 	private ListViewPassValuetoActivityListener activityListener;
+	private String names[] = new String[] { "工商", "农业", "建设", "招商", "平安", "浦发",
+			"光大", "农业", "华夏","温州","中信" ,"中国"};
 
 	public BuyProductsAdapter(Context context, List<BuyProductsBean> list) {
 		this.context = context;
@@ -82,12 +84,30 @@ public class BuyProductsAdapter extends BaseAdapter {
 		}
 		holder.tvName.setText(list.get(position).getmName());
 		holder.tvWf.setText(list.get(position).getmWf());
-		holder.tvHave.setText(list.get(position).getmHave());
+		holder.tvHave.setText("￥" + list.get(position).getmHave() + "元");
 		holder.tvYestorday.setText(list.get(position).getmYestorday());
 		holder.tvNot.setText(list.get(position).getmNot());
-		holder.tvInRedeem.setText(list.get(position).getmRedeem());
-		holder.tvBank.setText(list.get(position).getmBank());
+		String bankNum = list.get(position).getmBank();
+		holder.tvBank.setText(list.get(position).getmBankName()
+				+ list.get(position).getmBank()
+						.substring(bankNum.length() - 7, bankNum.length()));
+		for (int i = 0; i < names.length; i++) {
+			if (list.get(position).getmBankName().indexOf(names[i]) != -1) {
+				holder.tvBank.setText(names[i]
+						+ list.get(position)
+								.getmBank()
+								.substring(bankNum.length() - 7,
+										bankNum.length()));
 
+			}
+		}
+
+		if(list.get(position).getShuhui().equals("0")){
+			holder.rlInRedeem.setVisibility(View.INVISIBLE);
+		}else{
+			holder.tvInRedeem.setText(list.get(position).getShuhui()+"");
+		}
+		
 		holder.tvBuy.setOnClickListener(new OnClickListener() {
 
 			@Override

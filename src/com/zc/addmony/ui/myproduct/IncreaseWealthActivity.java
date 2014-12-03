@@ -115,7 +115,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 				return;
 			}
 			intent = new Intent(this, SaleMoneyActivity.class);
-			app.fundBean.setFundcode("320002");
+			app.fundBean.setFundcode("820002");
 			app.fundBean.setFundname("诺安货币A");
 			app.fundBean.setSharetype("A");
 			startActivityForResult(intent, 101);
@@ -123,7 +123,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 			break;
 		case R.id.view_increase_wealth_list_btn_recharge:// 充值
 			intent = new Intent(this, BuyProductActivity.class);
-			app.fundBean.setFundcode("320002");
+			app.fundBean.setFundcode("820002");
 			app.fundBean.setFundname("増财宝");
 			app.fundBean.setSharetype("A");
 			intent.putExtra("minPrice", "1000");

@@ -226,7 +226,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@color/clear"
+                            android:hint="10000"
                             android:textColor="@color/text_color_888888"
+                            android:textColorHint="@color/text_light"
                             android:textSize="14sp" />
 
                         <TextView
@@ -254,7 +256,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@color/clear"
+                            android:hint="365"
                             android:textColor="@color/text_color_888888"
+                            android:textColorHint="@color/text_light"
                             android:textSize="14sp" />
 
                         <TextView
@@ -301,6 +305,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
+                                android:text="￥0.00元"
                                 android:textColor="@color/normal_red"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -324,7 +329,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
-                                android:textColor="@color/normal_red"
+                                android:text="￥35.00元"
+                                android:textColor="#3D991D"
                                 android:textSize="16sp" />
                         </LinearLayout>
                     </LinearLayout>

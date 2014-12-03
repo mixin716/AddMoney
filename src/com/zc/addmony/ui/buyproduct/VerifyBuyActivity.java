@@ -34,14 +34,14 @@ public class VerifyBuyActivity extends BaseActivity {
 	private RelativeLayout rlBank;
 	private EditText etPwd;
 	private Button btBuy;
-	private String money;//金额
+	private String money;// 金额
 	private MApplication app;
 	private UserSharedData userShare;
 	private List<ManageBankBean> banks;
 	private ArrayList<String> bankList;// 银行卡名字
 	private Intent intent;
-	private String name,bankName,password;//选择的银行名字  获取的tv银行名字  交易密码
-	private int position;//选择银行的位置
+	private String name, bankName, password;// 选择的银行名字 获取的tv银行名字 交易密码
+	private int position;// 选择银行的位置
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +103,11 @@ public class VerifyBuyActivity extends BaseActivity {
 			KeyBoard.demissKeyBoard(getApplicationContext(), etPwd);
 			bankName = tvBankName.getText().toString();
 			password = etPwd.getText().toString().trim();
-			if("请选择银行卡".equals(bankName)){
+			if ("请选择银行卡".equals(bankName)) {
 				showToast("请选择银行卡");
-			}else if(TextUtils.isEmpty(password)){
+			} else if (TextUtils.isEmpty(password)) {
 				showToast("请输入密码");
-			}else{
+			} else {
 				requestBuy();
 			}
 			break;
@@ -124,14 +124,13 @@ public class VerifyBuyActivity extends BaseActivity {
 	/** 购买基金 */
 	public void requestBuy() {
 		AjaxParams params = new AjaxParams();
-		params.put("fundcode", "820002");// 基金代码
-//		params.put("fundcode", app.fundBean.getFundcode());// 基金代码
+		// params.put("fundcode", "820002");// 基金代码
+		params.put("fundcode", app.fundBean.getFundcode());// 基金代码
 		params.put("money", money);// 钱
 		params.put("tradeacco", banks.get(position).getTradeacco());// 交易账号
 		params.put("password", password);// 交易密码
 		httpRequest.get(Urls.BUY_PRODUCT, params, callBack, 1);
 	}
-
 
 	@Override
 	protected void handleResult(int requestCode, HttpResult result) {
@@ -174,14 +173,15 @@ public class VerifyBuyActivity extends BaseActivity {
 	protected void handleJson(int reqeustCode, String jsonString, String message) {
 		// TODO Auto-generated method stub
 		super.handleJson(reqeustCode, jsonString, message);
-		if(reqeustCode == 1){
+		if (reqeustCode == 1) {
+			sendBroadcast(new Intent("refresh_products"));
 			showToast("购买成功");
 			this.setResult(101);
 			this.finish();
 			AnimUtil.pushRightInAndOut(this);
 		}
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

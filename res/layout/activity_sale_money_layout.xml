@@ -77,7 +77,6 @@
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="￥100元"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -150,6 +149,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/ic_normal_white_normal"
             android:hint="最低赎回：1000元"
+            android:inputType="number"
             android:padding="15dp"
             android:textColor="@color/text_color_666666"
             android:textSize="16sp" />
@@ -161,8 +161,8 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/ic_normal_white_normal"
             android:hint="输入交易密码"
-            android:inputType="numberPassword"
             android:padding="15dp"
+            android:password="true"
             android:textColor="@color/text_color_666666"
             android:textSize="16sp" />
 

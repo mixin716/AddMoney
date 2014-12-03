@@ -35,8 +35,8 @@ import com.zc.addmony.utils.PatternUtil;
 public class MyProductActivity extends BaseActivity {
 
 	private LinearLayout llIsLogin, llNoLogin;
-	private TextView tvName, tvPhone, tvMoneyAll, tvMoneyYes, tvBuy,tvDeal;
-	private LinearLayout llTop, llYesterday, llBuy,llDeal;
+	private TextView tvName, tvPhone, tvMoneyAll, tvMoneyYes, tvBuy, tvDeal;
+	private LinearLayout llTop, llYesterday, llBuy, llDeal;
 	private UserSharedData userShare;
 	// 登录控件及数据
 	private EditText etPhone, etPwd;
@@ -64,6 +64,7 @@ public class MyProductActivity extends BaseActivity {
 				llNoLogin.setVisibility(View.GONE);
 				llIsLogin.setVisibility(View.VISIBLE);
 			}
+			requestUserInfo();
 		} else {
 			if (llNoLogin != null) {
 				llNoLogin.setVisibility(View.VISIBLE);
@@ -101,8 +102,7 @@ public class MyProductActivity extends BaseActivity {
 		llYesterday = (LinearLayout) findViewById(R.id.activity_my_product_ll_yestoday);
 		llBuy = (LinearLayout) findViewById(R.id.activity_my_product_ll_buy);
 		llDeal = (LinearLayout) findViewById(R.id.activity_my_product_ll_deal);
-		
-		
+
 		llTop.setOnClickListener(this);
 		llYesterday.setOnClickListener(this);
 		llBuy.setOnClickListener(this);
@@ -146,12 +146,12 @@ public class MyProductActivity extends BaseActivity {
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(MyProductActivity.this);
 			break;
-		case R.id.activity_my_product_ll_yestoday://增财宝
+		case R.id.activity_my_product_ll_yestoday:// 增财宝
 			intent = new Intent(this, IncreaseWealthActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(MyProductActivity.this);
 			break;
-		case R.id.activity_my_product_ll_buy://进入基金列表界面
+		case R.id.activity_my_product_ll_buy:// 进入基金列表界面
 			if ("共0个基金产品".equals(tvBuy.getText().toString().trim())) {
 				showToast("您暂未购买基金");
 			} else {
@@ -160,7 +160,7 @@ public class MyProductActivity extends BaseActivity {
 				AnimUtil.pushLeftInAndOut(MyProductActivity.this);
 			}
 			break;
-		case R.id.activity_my_product_ll_deal://进入当日交易申请界面
+		case R.id.activity_my_product_ll_deal:// 进入当日交易申请界面
 			intent = new Intent(this, TodayDealActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(MyProductActivity.this);
@@ -193,10 +193,12 @@ public class MyProductActivity extends BaseActivity {
 
 	/** 请求用户信息 */
 	public void requestUserInfo() {
+		showLoading();
 		AjaxParams params = new AjaxParams();
 		Log.e("", userShare.GetSession() + "  ");
-		if(TextUtils.isEmpty(PHPSESSID)){
-			httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
+		if (TextUtils.isEmpty(PHPSESSID)) {
+			httpRequest.addHeader("Cookie",
+					"PHPSESSID=" + userShare.GetSession());
 		}
 		httpRequest.get(Urls.GET_USER_INRO, params, callBack, 0);
 	}
@@ -239,12 +241,13 @@ public class MyProductActivity extends BaseActivity {
 				JSONObject obj = new JSONObject(jsonString);
 				tvMoneyAll.setText(obj.optInt("sum") + "元");
 				tvMoneyYes.setText(obj.optDouble("zrsy") + "元");
-				tvBuy.setText("共"+obj.optInt("count")+"个基金产品");
+				tvBuy.setText("共" + obj.optInt("count") + "个基金产品");
 				tvName.setText(obj.optString("realname"));
 				tvPhone.setText(obj.optString("phone"));
 				userShare.SaveBankSum(obj.optString("banksum"));
-				tvDeal.setText("共"+obj.optString("todayTransaction")+"条交易申请");
-				
+				tvDeal.setText("共" + obj.optString("todayTransaction")
+						+ "条交易申请");
+
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

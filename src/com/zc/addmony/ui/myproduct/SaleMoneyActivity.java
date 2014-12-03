@@ -3,6 +3,7 @@ package com.zc.addmony.ui.myproduct;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -65,8 +66,8 @@ public class SaleMoneyActivity extends BaseActivity {
 	private void getUserFundInfoRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("fundcode", "820002");
-		// params.put("fundcode", app.fundBean.getFundcode());
+		// params.put("fundcode", "820002");
+		params.put("fundcode", app.fundBean.getFundcode());
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_USER_FUND_INFO, params, callBack, 0);
 
@@ -75,11 +76,10 @@ public class SaleMoneyActivity extends BaseActivity {
 	private void getSaleMoneyRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("fundcode", "820002");
-		// params.put("fundcode", app.fundBean.getFundcode());
+		// params.put("fundcode", "820002");
+		params.put("fundcode", app.fundBean.getFundcode());
 		params.put("sharetype", app.fundBean.getSharetype());
 		params.put("applysum", minMoney);
-		params.put("tradeacco", "");
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.SALE_MONEY, params, callBack, 1);
 
@@ -101,9 +101,9 @@ public class SaleMoneyActivity extends BaseActivity {
 			} else if (TextUtils.isEmpty(salePwd)) {
 				showToast("请输入交易密码");
 			} else {
-				if(Integer.valueOf(minMoney) <1000){
+				if (Integer.valueOf(minMoney) < 1000) {
 					showToast("最低赎回金额为1000");
-				}else{
+				} else {
 					getSaleMoneyRequest();
 				}
 			}
@@ -147,6 +147,7 @@ public class SaleMoneyActivity extends BaseActivity {
 			}
 			break;
 		case 1:
+			sendBroadcast(new Intent("refresh_products"));
 			this.setResult(101);
 			finish();
 			AnimUtil.pushRightInAndOut(this);

@@ -30,7 +30,8 @@ public class ProductDetailActivity extends BaseActivity implements
 		OnCheckedChangeListener {
 	private RadioGroup rgContent;
 	private LinearLayout llIncome, llInformation;
-	private TextView tvFundName, tvMinPrice, tvIncomeRate, tvPeople,tvBankRate;
+	private TextView tvFundName, tvMinPrice, tvIncomeRate, tvPeople,
+			tvBankRate;
 	private Button btnBuy, btnCount;
 	private EditText edtMoney, edtDay;
 	private TextView tvIncome, tvBankIncome, tvYearRate, tvWeekRate,
@@ -113,9 +114,10 @@ public class ProductDetailActivity extends BaseActivity implements
 		case R.id.activity_product_detail_btn_buy:// 购买
 			Intent intent = new Intent(this, BuyProductActivity.class);
 			String minPrice;
-			if(!TextUtils.isEmpty(bean.getMinprice())){
-				minPrice = bean.getMinprice().substring(0, bean.getMinprice().length()-1);
-			}else{
+			if (!TextUtils.isEmpty(bean.getMinprice())) {
+				minPrice = bean.getMinprice().substring(0,
+						bean.getMinprice().length() - 1);
+			} else {
 				minPrice = "0";
 			}
 			intent.putExtra("minPrice", minPrice);
@@ -127,9 +129,8 @@ public class ProductDetailActivity extends BaseActivity implements
 			String day = edtDay.getText().toString();
 			String everyprice = edtMoney.getText().toString();
 			int dayNum,
-			priceNum;//价格 天数
-			float bankRate;//银行获取利率
-			bankRate = Float.valueOf(bean.getCurrentInterest().substring(0, bean.getCurrentInterest().length()-1));
+			priceNum;// 价格 天数
+			float bankRate=(float) 0.35;// 银行获取利率
 			if (TextUtils.isEmpty(everyprice)) {
 				showToast("请输入购买金额");
 			} else if (TextUtils.isEmpty(day)) {
@@ -139,11 +140,11 @@ public class ProductDetailActivity extends BaseActivity implements
 				priceNum = Integer.valueOf(everyprice);
 				double product = dayNum * priceNum
 						* Double.valueOf(bean.getIncomeratio());
-				
+
 				double bankIncome = dayNum * priceNum * bankRate;
 				DecimalFormat df = new DecimalFormat("0.00");
 				tvIncome.setText("￥" + df.format(product / (100 * 365)) + "元");
-				tvBankIncome.setText("￥" + df.format(bankIncome / (100*365))
+				tvBankIncome.setText("￥" + df.format(bankIncome / (100 * 365))
 						+ "元");
 
 			}
@@ -165,19 +166,39 @@ public class ProductDetailActivity extends BaseActivity implements
 				tvMinPrice.setText("起购金币：￥" + bean.getMinprice());
 				DecimalFormat df = new DecimalFormat("0.00");
 				tvIncomeRate.setText(df.format(Double.valueOf(bean
-						.getIncomeratio())) + "%");//近期收益率
+						.getIncomeratio())) + "%");// 近期收益率
 				tvPeople.setText("购买人数：" + bean.getBought() + "人");
-				tvYearRate.setText(df.format(Double.valueOf(bean.getYnzf()))
-						+ "%");
-				tvWeekRate.setText(df.format(Double.valueOf(bean.getQrnh()))
-						+ "%");
-				tvMonthRate.setText(df.format(Double.valueOf(bean.getLyzf()))
-						+ "%");
-				tvMillionRate.setText(df.format(Double.valueOf(bean
-						.getHf_incomeratio())) + "%");
+				tvBankRate.setText("0.35%");// 银行活期利益
+				if (TextUtils.isEmpty(bean.getYnzf())) {
+					tvYearRate.setText("0.00%");
+				} else {
+					tvYearRate
+							.setText(df.format(Double.valueOf(bean.getYnzf()))
+									+ "%");
+				}
+				if (TextUtils.isEmpty(bean.getQrnh())) {
+					tvWeekRate.setText("0.00%");
+				} else {
+					tvWeekRate
+							.setText(df.format(Double.valueOf(bean.getQrnh()))
+									+ "%");
+				}
+				if (TextUtils.isEmpty(bean.getLyzf())) {
+					tvMonthRate.setText("0.00%");
+				} else {
+					tvMonthRate
+							.setText(df.format(Double.valueOf(bean.getLyzf()))
+									+ "%");
+				}
+				if (TextUtils.isEmpty(bean.getHf_incomeratio())) {
+					tvMillionRate.setText("0.00%");
+				} else {
+					tvMillionRate.setText(df.format(Double.valueOf(bean
+							.getHf_incomeratio())) + "%");
+				}
+
 				tvFundCompany.setText(bean.getFundCompany());
 				tvFundName.setText(bean.getFundname());
-				tvBankRate.setText(bean.getCurrentInterest());//银行活期利益
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

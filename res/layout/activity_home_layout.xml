@@ -73,7 +73,6 @@
                     android:id="@+id/activity_home_money_tv_times"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15.85倍"
                     android:textColor="@color/normal_red"
                     android:textSize="18sp" />
             </LinearLayout>

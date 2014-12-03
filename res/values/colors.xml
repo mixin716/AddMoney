@@ -166,7 +166,7 @@
     <color name="gray_normal">#666667</color>
     <color name="grid_state_pressed">#1Affffff</color>
     <color name="grid_state_focused">#80000000</color>
-    <color name="normal_red">#ff3300</color>
+    <color name="normal_red">#DF292E</color>
     <color name="normal_bg">#e5e5e5</color>
     <color name="normal_purple">#820f94</color>
     <color name="normal_green">#66cc00</color>
