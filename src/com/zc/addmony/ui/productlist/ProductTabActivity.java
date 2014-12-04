@@ -36,8 +36,8 @@ public class ProductTabActivity extends TabActivity implements OnClickListener {
 	private Intent mAllIntent, mMoneyIntent, mStockIntent, mBondIntent, intent;
 	private final String TAB_ALL = "AllProductListActivity";
 	private final String TAB_MONEY = "ProductListActivity";
-	private final String TAB_STOCK = "AllProductListActivity";
-	private final String TAB_BOND = "AllProductListActivity";
+	private final String TAB_STOCK = "StockProductListActivity";
+	private final String TAB_BOND = "BondProductListActivity";
 	private TabHost tabHost;
 	private int intoSelect = 1;//
 	private UserSharedData userShare;
@@ -106,10 +106,10 @@ public class ProductTabActivity extends TabActivity implements OnClickListener {
 		mMoneyIntent = new Intent(ProductTabActivity.this,
 				ProductListActivity.class);
 		mStockIntent = new Intent(ProductTabActivity.this,
-				AllProductListActivity.class);
+				StockProductListActivity.class);
 		mAllIntent.putExtra("type", 2);
 		mBondIntent = new Intent(ProductTabActivity.this,
-				AllProductListActivity.class);
+				BondProductListActivity.class);
 		mAllIntent.putExtra("type", 3);
 	}
 
