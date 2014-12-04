@@ -40,6 +40,7 @@ public class ConfirmationOrderActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentViewRes(R.layout.activity_confirmation_order_layout);
 		mApplication = (MApplication) this.getApplication();
+		mApplication.addActivitys(this);
 		apBean = mApplication.getApBean();
 		setViews();
 	}

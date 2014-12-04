@@ -127,11 +127,11 @@ public class HomeActivity extends BaseActivity {
 	protected void doClickAction(int viewId) {
 		switch (viewId) {
 		case R.id.activity_home_iv_activity:// 活动
-			if (User.GetActivitys()) {
-				intent = new Intent(this, OrderInformationActivity.class);
-			} else {
+//			if (User.GetActivitys()) {
+//				intent = new Intent(this, OrderInformationActivity.class);
+//			} else {
 				intent = new Intent(this, ActivitiesRuleActivity.class);
-			}
+//			}
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(this);
 			break;

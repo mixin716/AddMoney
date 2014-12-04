@@ -44,6 +44,8 @@ public class MApplication extends Application {
 	public PhoneBean pBean;
 	/** 开户bean */
 	public OpenBankBean obBean;
+	/** 保存活动打开的activity*/
+	private List<Activity> activitys;
 	public static int width;
 	public static int height;
 	public static float density;
@@ -55,6 +57,7 @@ public class MApplication extends Application {
 		getDensity();
 		apBean = new ActivitiesPhoneBean();
 		obBean = new OpenBankBean();
+		activitys = new ArrayList<Activity>();
 	}
 
 	/**
@@ -311,6 +314,21 @@ public class MApplication extends Application {
 
 	public void setpBean(PhoneBean pBean) {
 		this.pBean = pBean;
+	}
+	/** 添加活动activity*/
+	public void addActivitys(Activity activity){
+		if(activity != null){
+			activitys.add(activity);
+		}
+	}
+	
+	/** 退出活动activity*/
+	public void outActivitys(){
+		for(Activity activity : activitys){
+			if(activity != null){
+				activity.finish();
+			}
+		}
 	}
 
 }

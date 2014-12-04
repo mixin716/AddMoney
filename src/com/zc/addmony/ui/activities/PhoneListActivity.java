@@ -45,6 +45,7 @@ public class PhoneListActivity extends BaseActivity implements
 	protected void initVariable() {
 		// TODO Auto-generated method stub
 		mApplication = (MApplication) this.getApplication();
+		mApplication.addActivitys(this);
 		apBean = mApplication.getApBean();
 		requestPhones = new ArrayList<PhoneBean>();
 		showPhones = new ArrayList<PhoneBean>();

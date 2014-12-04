@@ -14,6 +14,7 @@ import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
 import com.zc.addmony.utils.AnimUtil;
 
 public class SelectPhoneNewActivity extends BaseActivity {
+	
 	private LinearLayout llSelectAddress, llSelectPhone;
 	private TextView tvAddress, tvPhone;
 	private Intent intent;
@@ -32,6 +33,7 @@ public class SelectPhoneNewActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		mApplication = (MApplication) this.getApplication();
+		mApplication.addActivitys(this);
 		apBean = mApplication.getApBean();
 
 	}

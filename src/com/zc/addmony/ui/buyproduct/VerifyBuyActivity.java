@@ -175,6 +175,7 @@ public class VerifyBuyActivity extends BaseActivity {
 		super.handleJson(reqeustCode, jsonString, message);
 		if (reqeustCode == 1) {
 			sendBroadcast(new Intent("refresh_products"));
+			sendBroadcast(new Intent("refresh_judgment"));
 			showToast("购买成功");
 			this.setResult(101);
 			this.finish();

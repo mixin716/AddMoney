@@ -3,8 +3,12 @@ package com.zc.addmony.ui.activities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +26,7 @@ import com.zc.addmony.logic.LogicBase;
 import com.zc.addmony.ui.buyproduct.BuyProductActivity;
 import com.zc.addmony.utils.AnimUtil;
 
+/** 判断套餐份额*/
 public class ShareJudgmentActivity extends BaseActivity {
 
 	private String TAG = "ShareJudgmentActivity";
@@ -34,6 +39,24 @@ public class ShareJudgmentActivity extends BaseActivity {
 	private String fundcode, fundname;// 基金id
 	private String total = "0";// 基金份额
 	private boolean requestFlag = false;// 网络请求成功标示
+
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			if ("refresh_judgment".equals(intent.getAction())) {
+				handler.sendEmptyMessageDelayed(0, 2000);
+			}
+		}
+	};
+
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			Log.e(TAG, "充值成功之后需要刷新界面");
+			requestProduct();
+		};
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +72,11 @@ public class ShareJudgmentActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		userShare = UserSharedData.getInstance(getApplicationContext());
 		mApplication = (MApplication) this.getApplication();
+		mApplication.addActivitys(this);
 		pBean = mApplication.getpBean();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("refresh_judgment");
+		registerReceiver(receiver, filter);
 	}
 
 	@Override
@@ -92,8 +119,12 @@ public class ShareJudgmentActivity extends BaseActivity {
 				}
 			} else {
 				showToast("份额不足，请购买基金");
+				mApplication.fundBean.setFundcode(fundcode);
+				mApplication.fundBean.setFundname(fundname);
+				mApplication.fundBean.setSharetype("A");
 				intent = new Intent(this, BuyProductActivity.class);
-				startActivity(intent);
+				intent.putExtra("minPrice", "1000");
+				startActivityForResult(intent, 101);
 				AnimUtil.pushLeftInAndOut(ShareJudgmentActivity.this);
 			}
 			break;
@@ -131,6 +162,7 @@ public class ShareJudgmentActivity extends BaseActivity {
 				JSONObject obj = new JSONObject(baseBean.getContent());
 				fundcode = obj.optString("fundcode");
 				fundname = obj.optString("fundname");
+				total = obj.optString("total");
 				tvName.setText(fundname + "基金");
 				tvNumber.setText(obj.optString("total"));
 			} catch (JSONException e) {
@@ -160,7 +192,6 @@ public class ShareJudgmentActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 101) {// 充值成功之后需要刷新界面
-			requestProduct();
 		}
 	}
 }

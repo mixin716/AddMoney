@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.utils.AnimUtil;
 
@@ -12,6 +13,7 @@ import com.zc.addmony.utils.AnimUtil;
 public class OrderSuccessActivity extends BaseActivity {
 
 	private Button btInfor, btProducts;
+	private MApplication mAppliacton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,8 @@ public class OrderSuccessActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
-
+		mAppliacton = (MApplication) this.getApplication();
+		mAppliacton.addActivitys(this);
 	}
 
 	@Override
@@ -50,7 +53,7 @@ public class OrderSuccessActivity extends BaseActivity {
 		Intent intent;
 		switch (viewId) {
 		case R.id.title_iv_left:
-			this.finish();
+			mAppliacton.outActivitys();
 			AnimUtil.pushRightInAndOut(OrderSuccessActivity.this);
 			break;
 		case R.id.activity_order_success_bt_infor:
@@ -59,7 +62,10 @@ public class OrderSuccessActivity extends BaseActivity {
 			AnimUtil.pushLeftInAndOut(OrderSuccessActivity.this);
 			break;
 		case R.id.activity_order_success_bt_other:
-
+			mAppliacton.outActivitys();
+			intent = new Intent("refresh_tab");
+			intent.putExtra("intoSelect", 2);
+			sendBroadcast(intent);
 			break;
 		}
 	}

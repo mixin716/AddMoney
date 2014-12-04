@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.jky.struct2.http.core.AjaxParams;
 import com.jky.struct2.http.entityhandle.HttpResult;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.BaseBean;
 import com.zc.addmony.common.Urls;
@@ -19,6 +20,8 @@ import com.zc.addmony.ui.myproduct.LoginActivity;
 import com.zc.addmony.utils.AnimUtil;
 
 public class ActivitiesRuleActivity extends BaseActivity {
+	
+	private MApplication mApplication;
 	private TextView tvMore;
 	private LinearLayout llMoreContent;
 	private Button btnOk;
@@ -35,6 +38,8 @@ public class ActivitiesRuleActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
+		mApplication= (MApplication) this.getApplication();
+		mApplication.addActivitys(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
 	}
 

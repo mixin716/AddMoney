@@ -31,6 +31,7 @@ import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicActivities;
 import com.zc.addmony.utils.AnimUtil;
 
+/** 根据手机选择套餐*/
 public class ShoppingActivity extends BaseActivity implements
 		OnCheckedChangeListener {
 
@@ -51,6 +52,7 @@ public class ShoppingActivity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 		setContentViewRes(R.layout.activity_shopping_layout);
 		mApplication = (MApplication) this.getApplication();
+		mApplication.addActivitys(this);
 		apBean = mApplication.getApBean();
 		pBean = mApplication.getpBean();
 		setViews();
