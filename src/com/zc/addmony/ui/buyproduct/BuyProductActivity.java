@@ -60,7 +60,9 @@ public class BuyProductActivity extends BaseActivity {
 		edtPrice = (EditText) findViewById(R.id.activity_buy_product_edt_price);
 		btnNext = (Button) findViewById(R.id.activity_buy_product_btn_next);
 		btnNext.setOnClickListener(this);
-		tvFundName.setText(fundName);
+		if(!TextUtils.isEmpty(fundName) && !"null".equals(fundName)){
+			tvFundName.setText(fundName);
+		}
 		tvMinPrice.setText("￥" + minPrice + "元起购");
 		edtPrice.setHint(">" + minPrice + "元");
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.productlist.ProductNameAdapter;
 import com.zc.addmony.adapter.productlist.ProductRateAdapter;
@@ -30,6 +32,8 @@ import com.zc.addmony.utils.AnimUtil;
 
 public class AllProductListActivity extends BaseActivity implements
 		OnItemClickListener, OnTouchListener {
+
+	private MApplication app;
 	private ListView lvName, lvRate;
 	private ProductNameAdapter nameAdapter;
 	private ProductRateAdapter rataAdapter;
@@ -54,6 +58,7 @@ public class AllProductListActivity extends BaseActivity implements
 
 	@Override
 	protected void initVariable() {
+		app = (MApplication) this.getApplication();
 		allList = new ArrayList<ProductListBean>();
 		list = new ArrayList<ProductListBean>();
 
@@ -128,8 +133,6 @@ public class AllProductListActivity extends BaseActivity implements
 				list = new ArrayList<ProductListBean>();
 				list = LogicProductList.parseProductListElse(jsonString);
 				allList.addAll(list);
-				System.out.println("-----list.size:----->>"+list.size());
-				System.out.println("-----allList.size:----->>"+allList.size());
 				lvName.setAdapter(nameAdapter);
 				lvRate.setAdapter(rataAdapter);
 				setListViewHeightBasedOnChildren(lvName);
@@ -175,7 +178,22 @@ public class AllProductListActivity extends BaseActivity implements
 			long id) {
 		// TODO Auto-generated method stub
 		if (position > 0) {
-			Intent intent = new Intent(this, StockDetailActivity.class);
+			if (TextUtils.isEmpty(allList.get(position - 1).getSharetype())
+					|| "null".equals(allList.get(position - 1).getSharetype())) {
+				app.fundBean.setSharetype("A");
+			} else {
+				app.fundBean.setSharetype(allList.get(position - 1)
+						.getSharetype());
+			}
+			app.fundBean.setFundname(allList.get(position - 1).getFundname());
+			app.fundBean.setFundcode(allList.get(position - 1).getFundcode());
+			app.setPdBean(allList.get(position - 1));
+			Intent intent;
+			if("1109".equals(allList.get(position).getFundTypeCode())){
+				intent = new Intent(this, StockDetailActivity.class);
+			}else{
+				intent = new Intent(this, ProductDetailActivity.class);
+			}
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(this);
 		}

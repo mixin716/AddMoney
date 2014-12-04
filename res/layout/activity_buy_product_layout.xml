@@ -17,7 +17,7 @@
             android:id="@+id/activity_buy_product_tv_fundname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="德芙股票"
+            android:text="基金名称"
             android:textColor="@color/black"
             android:textSize="18sp" />
 

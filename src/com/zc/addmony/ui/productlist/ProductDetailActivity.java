@@ -120,6 +120,9 @@ public class ProductDetailActivity extends BaseActivity implements
 			} else {
 				minPrice = "0";
 			}
+			if(TextUtils.isEmpty(minPrice) || "0".equals(minPrice)){
+				minPrice = "1000";
+			}
 			intent.putExtra("minPrice", minPrice);
 			startActivity(intent);
 
@@ -198,7 +201,9 @@ public class ProductDetailActivity extends BaseActivity implements
 				}
 
 				tvFundCompany.setText(bean.getFundCompany());
-				tvFundName.setText(bean.getFundname());
+				if(!TextUtils.isEmpty(bean.getFundname())){
+					tvFundName.setText(bean.getFundname());
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

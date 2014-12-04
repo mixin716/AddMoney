@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.zc.addmony.bean.buyproduct.BanksBean;
 import com.zc.addmony.bean.buyproduct.BranchBean;
+import com.zc.addmony.bean.myproduct.FundBankListBean;
 import com.zc.addmony.bean.myproduct.ManageBankBean;
 
 public class LogicBuyProduct {
@@ -83,6 +84,28 @@ public class LogicBuyProduct {
 			e.printStackTrace();
 		}
 		
+		return list;
+	}
+	
+	/** 解析支持银行卡*/
+	public static List<FundBankListBean> parseFundBankList(String json){
+		List<FundBankListBean> list = new ArrayList<FundBankListBean>();
+		try {
+			JSONObject contentOjb = new JSONObject(json);
+			JSONObject resultsObj = new JSONObject(contentOjb.optString("results"));
+			JSONArray array = new JSONArray(resultsObj.optString("items"));
+			for (int i = 0; i < array.length(); i++) {
+				FundBankListBean bean = new FundBankListBean();
+				JSONObject obj = array.getJSONObject(i);
+				bean.setBankname(obj.optString("bankname"));
+				bean.setTradeacco(obj.optString("tradeacco"));
+				bean.setBankacco(obj.optString("bankacco"));
+				list.add(bean);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return list;
 	}
 

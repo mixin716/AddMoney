@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,17 +20,20 @@ import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.productlist.ProductListAdapter;
 import com.zc.addmony.bean.productlist.ProductBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicProductList;
+import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.views.XListView;
 import com.zc.addmony.views.XListView.IXListViewListener;
 
 public class ProductListActivity extends BaseActivity implements
 		IXListViewListener, OnItemClickListener {
 
+	private MApplication app;
 	private String TAG = "ProductListActivity";
 	private XListView lv;
 	private LinearLayout llPerson, llWf, llRate;
@@ -47,7 +51,7 @@ public class ProductListActivity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 		setContentViewRes(R.layout.activity_product_list_layout);
 		dismissTop();
-		setViews();  
+		setViews();
 		showLoading();
 		requestData();
 	}
@@ -55,6 +59,7 @@ public class ProductListActivity extends BaseActivity implements
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
+		app = (MApplication) this.getApplication();
 		requestList = new ArrayList<ProductBean>();
 		allList = new ArrayList<ProductBean>();
 		adapter = new ProductListAdapter(getApplicationContext(), allList);
@@ -234,7 +239,17 @@ public class ProductListActivity extends BaseActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
-
+		Intent intent = new Intent(this, ProductDetailActivity.class);
+		if (TextUtils.isEmpty(allList.get(arg2 - 1).getSharetype())
+				||"null".equals(allList.get(arg2 - 1).getSharetype())) {
+			app.fundBean.setSharetype("A");
+		} else {
+			app.fundBean.setSharetype(allList.get(arg2 - 1).getSharetype());
+		}
+		app.fundBean.setFundname(allList.get(arg2 - 1).getFundname());
+		app.fundBean.setFundcode(allList.get(arg2 - 1).getFundcode());
+		startActivity(intent);
+		AnimUtil.pushLeftInAndOut(this);
 	}
 
 	@Override

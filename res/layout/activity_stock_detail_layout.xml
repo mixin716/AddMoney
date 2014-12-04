@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/normal_bg"
@@ -33,13 +34,13 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/activity_product_detail_tv_minprice"
+                    android:id="@+id/activity_stock_detail_tv_dm"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="代码：0012456"
                     android:textColor="@color/text_color_666666"
-                    android:textSize="14sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -47,7 +48,7 @@
                     android:layout_weight="0"
                     android:text="近1月收益率"
                     android:textColor="@color/text_color_888888"
-                    android:textSize="14sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -57,15 +58,16 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                     android:id="@+id/activity_stock_detail_tv_jz"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="净值：1.235"
                     android:textColor="@color/text_color_666666"
-                    android:textSize="14sp" />
+                    android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/activity_product_detail_tv_rate"
+                    android:id="@+id/activity_stock_detail_tv_jyysyl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
@@ -81,12 +83,13 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                     android:id="@+id/activity_stock_detail_tv_rq"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="日期：2014-11-11"
                     android:textColor="@color/text_color_666666"
-                    android:textSize="14sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -94,7 +97,7 @@
                     android:layout_weight="0"
                     android:text="近1周利益率"
                     android:textColor="@color/text_color_888888"
-                    android:textSize="14sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -104,26 +107,27 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/activity_product_detail_tv_people"
+                    android:id="@+id/activity_stock_detail_tv_rzdf"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="日涨幅：0.52%"
+                    android:text="日涨跌幅：0.52%"
                     android:textColor="@color/text_color_666666"
-                    android:textSize="14sp" />
+                    android:textSize="17sp" />
 
                 <TextView
+                     android:id="@+id/activity_stock_detail_tv_jyzsyl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="13.48%"
                     android:textColor="@color/text_color_666666"
-                    android:textSize="14sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
         </LinearLayout>
 
         <Button
-            android:id="@+id/activity_product_detail_btn_buy"
+            android:id="@+id/activity_stock_detail_btn_buy"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -132,7 +136,7 @@
             android:padding="10dp"
             android:text="购买"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="17sp" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -142,13 +146,13 @@
             android:orientation="vertical" >
 
             <RadioGroup
-                android:id="@+id/activity_product_detail_rg"
+                android:id="@+id/activity_stock_detail_rg"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
                 <RadioButton
-                    android:id="@+id/activity_product_detail_rb_income"
+                    android:id="@+id/activity_stock_detail_rb_sy"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -157,12 +161,12 @@
                     android:checked="true"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="基金概况"
+                    android:text="收益情况"
                     android:textColor="@color/text_color_333333"
-                    android:textSize="16sp" />
+                    android:textSize="17sp" />
 
                 <RadioButton
-                    android:id="@+id/activity_product_detail_rb_information"
+                    android:id="@+id/activity_stock_detail_rb_normal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -170,27 +174,14 @@
                     android:button="@color/clear"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="基金经理简介"
+                    android:text="基本情况"
                     android:textColor="@color/text_color_333333"
-                    android:textSize="16sp" />
+                    android:textSize="17sp" />
             </RadioGroup>
             <!-- 计算收益 -->
 
             <LinearLayout
-                android:id="@+id/activity_product_detail_ll_income"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="100dp" >
-                </LinearLayout>
-            </LinearLayout>
-            <!-- 基本信息 -->
-
-            <LinearLayout
-                android:id="@+id/activity_product_detail_ll_information"
+                android:id="@+id/activity_stock_detail_ll_sy"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -199,7 +190,451 @@
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="100dp" >
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:text="单位净值"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_dwjz"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="1.11"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:text="净值日期"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_jzrq"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="20140101"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:text="累计净值"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_ljjz"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="2.000"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:text="总收益率"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_zsyl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="1.55%"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.5dip"
+                    android:layout_height="fill_parent"
+                    android:background="@color/text_color_888888" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="季度收益率"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_jdsyl"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:singleLine="true"
+                            android:text="11.11%"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="半年收益率"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_bnsyl"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:singleLine="true"
+                            android:text="1.11%"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="一年收益率"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                             android:id="@+id/activity_stock_detail_tv_ynsyl"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:singleLine="true"
+                            android:text="2.22%"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="三年收益率"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_snsyl"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:singleLine="true"
+                            android:text="2.22%"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 基本信息 -->
+
+            <LinearLayout
+                android:id="@+id/activity_stock_detail_ll_normal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                tools:ignore="DuplicateIds" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:text="基金代码"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_jjdm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:text="份额类别"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_felb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:text="基金经历"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_jjjl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:text="风险等级"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_fxdj"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.5dip"
+                    android:layout_height="fill_parent"
+                    android:background="@color/text_color_888888" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="基金状态"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_jjzt"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="申购状态"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_sgzt"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="赎回状态"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                             android:id="@+id/activity_stock_detail_tv_shzt"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:text="认购状态"
+                            android:textColor="@color/text_color_666666"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/activity_stock_detail_tv_rgzt"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

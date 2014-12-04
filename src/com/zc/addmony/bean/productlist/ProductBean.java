@@ -1,6 +1,6 @@
 package com.zc.addmony.bean.productlist;
 
-/** ��洪��bean  */
+/** ��洪��bean */
 public class ProductBean {
 
 	private String fundname;// ��洪�����绉�
@@ -9,9 +9,9 @@ public class ProductBean {
 	private String incomeratio;// ��洪����剁�����
 	private String hf_incomeratio;// 涓�浠芥�剁��
 	private String fundCompany;// ��洪��������
-	private String applysum;//申请金额
+	private String applysum;// 申请金额
+	private String sharetype;
 
-	
 	public String getApplysum() {
 		return applysum;
 	}
@@ -66,6 +66,14 @@ public class ProductBean {
 
 	public void setFundCompany(String fundCompany) {
 		this.fundCompany = fundCompany;
+	}
+
+	public String getSharetype() {
+		return sharetype;
+	}
+
+	public void setSharetype(String sharetype) {
+		this.sharetype = sharetype;
 	}
 
 }

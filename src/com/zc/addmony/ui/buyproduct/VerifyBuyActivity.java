@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -17,8 +16,8 @@ import com.jky.struct2.http.entityhandle.HttpResult;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
-import com.zc.addmony.adapter.myproduct.ManageBankAdapter;
 import com.zc.addmony.bean.BaseBean;
+import com.zc.addmony.bean.myproduct.FundBankListBean;
 import com.zc.addmony.bean.myproduct.ManageBankBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
@@ -37,7 +36,7 @@ public class VerifyBuyActivity extends BaseActivity {
 	private String money;// 金额
 	private MApplication app;
 	private UserSharedData userShare;
-	private List<ManageBankBean> banks;
+	private List<FundBankListBean> banks;
 	private ArrayList<String> bankList;// 银行卡名字
 	private Intent intent;
 	private String name, bankName, password;// 选择的银行名字 获取的tv银行名字 交易密码
@@ -57,7 +56,7 @@ public class VerifyBuyActivity extends BaseActivity {
 		money = this.getIntent().getStringExtra("money");
 		app = (MApplication) getApplication();
 		userShare = UserSharedData.getInstance(getApplicationContext());
-		banks = new ArrayList<ManageBankBean>();
+		banks = new ArrayList<FundBankListBean>();
 		bankList = new ArrayList<String>();
 	}
 
@@ -81,7 +80,11 @@ public class VerifyBuyActivity extends BaseActivity {
 		rlBank.setOnClickListener(this);
 		btBuy.setOnClickListener(this);
 
-		tvName.setText(app.fundBean.getFundname());
+		if (!TextUtils.isEmpty(app.fundBean.getFundname())
+				&& !"null".equals(app.fundBean.getFundname())) {
+			tvName.setText(app.fundBean.getFundname());
+		}
+		// tvName.setText(app.fundBean.getFundname());
 		tvMoney.setText(money);
 	}
 
@@ -117,12 +120,15 @@ public class VerifyBuyActivity extends BaseActivity {
 	/** 获取银行卡列表 */
 	public void getBankList() {
 		AjaxParams params = new AjaxParams();
+		params.put("fundcode", app.fundBean.getFundcode());// 基金代码
+		params.put("sharetype", app.fundBean.getSharetype());
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
-		httpRequest.get(Urls.GET_BANK_LIST, params, callBack, 0);
+		httpRequest.get(Urls.GET_FUND_BANKS, params, callBack, 0);
 	}
 
 	/** 购买基金 */
 	public void requestBuy() {
+		showLoading();
 		AjaxParams params = new AjaxParams();
 		// params.put("fundcode", "820002");// 基金代码
 		params.put("fundcode", app.fundBean.getFundcode());// 基金代码
@@ -145,13 +151,14 @@ public class VerifyBuyActivity extends BaseActivity {
 			case 1:
 				System.out.println("-----baseBean.getData():------"
 						+ baseBean.getContent());
-				banks = LogicBuyProduct.parseMyBanks(baseBean.getContent());
-				for (ManageBankBean bean : banks) {
-					bankList.add(bean.getBankName()
+				
+				banks = LogicBuyProduct.parseFundBankList(baseBean.getContent());
+				for (FundBankListBean bean : banks) {
+					bankList.add(bean.getBankname()
 							+ "（***"
-							+ bean.getBank_num().substring(
-									bean.getBank_num().length() - 4,
-									bean.getBank_num().length()) + "）");
+							+ bean.getBankacco().substring(
+									bean.getBankacco().length() - 4,
+									bean.getBankacco().length()) + "）");
 				}
 				intent = new Intent(this, SelectActivity.class);
 				intent.putStringArrayListExtra("nameList", bankList);

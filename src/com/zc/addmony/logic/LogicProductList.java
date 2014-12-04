@@ -29,6 +29,7 @@ public class LogicProductList {
 				bean.setFundname(obj.optString("fundname"));
 				bean.setHf_incomeratio(obj.optString("hf_incomeratio"));
 				bean.setIncomeratio(obj.optString("incomeratio"));
+				bean.setSharetype(obj.optString("sharetype"));
 				list.add(bean);
 			}
 		} catch (JSONException e) {
@@ -100,17 +101,31 @@ public class LogicProductList {
 				ProductListBean bean = new ProductListBean();
 				bean.setFundcode(obj.optString("fundcode"));
 				bean.setFundname(obj.optString("fundname"));
+				bean.setUnitNV(getFourNum(obj.optString("UnitNV")));
 				bean.setNavdate(obj.optString("navdate"));
-				bean.setRRInSingleMonth(getTwoNum(obj
-						.optString("RRInSingleMonth")));
 				bean.setRRInSingleWeek(getTwoNum(obj
 						.optString("RRInSingleWeek")));
-				bean.setRRInSingleYear(getTwoNum(obj
-						.optString("RRInSingleYear")));
-				bean.setRRInSixMonth(getTwoNum(obj.optString("RRInSixMonth")));
+				bean.setRRInSingleMonth(getTwoNum(obj
+						.optString("RRInSingleMonth")));
 				bean.setRRInThreeMonth(getTwoNum(obj
 						.optString("RRInThreeMonth")));
-				bean.setUnitNV(getFourNum(obj.optString("UnitNV")));
+				bean.setRRInSixMonth(getTwoNum(obj.optString("RRInSixMonth")));
+				bean.setRRInSingleYear(getTwoNum(obj
+						.optString("RRInSingleYear")));
+				bean.setRRInThreeYear(getTwoNum(obj.optString("RRInThreeYear")));
+				bean.setRRSinceStart(getTwoNum(obj.optString("RRSinceStart")));
+				bean.setDate1(obj.optString("date1"));
+				bean.setDate2(obj.optString("date2"));
+				bean.setDayinc(getTwoNum(obj.optString("dayinc")));
+				bean.setTotalnetvalue(getFourNum(obj.optString("totalnetvalue")));
+				bean.setSharetype(obj.optString("sharetype"));
+				bean.setManager(obj.optString("Manager"));
+				bean.setFundrisklevel(obj.optString("fundrisklevel"));
+				bean.setFundstate(obj.optString("fundstate"));
+				bean.setDeclarestate(obj.optString("declarestate"));
+				bean.setWithdrawstate(obj.optString("withdrawstate"));
+				bean.setSubscribestate(obj.optString("subscribestate"));
+				bean.setFundTypeCode(obj.optString("FundTypeCode"));
 				list.add(bean);
 			}
 		} catch (JSONException e) {

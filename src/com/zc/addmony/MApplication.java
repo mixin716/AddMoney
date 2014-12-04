@@ -22,6 +22,7 @@ import com.zc.addmony.bean.FundBean;
 import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
 import com.zc.addmony.bean.activities.PhoneBean;
 import com.zc.addmony.bean.myproduct.OpenBankBean;
+import com.zc.addmony.bean.productlist.ProductListBean;
 import com.zc.addmony.ui.lock.GestureActivity;
 import com.zc.addmony.view.lockview.LockPatternUtils;
 
@@ -44,8 +45,10 @@ public class MApplication extends Application {
 	public PhoneBean pBean;
 	/** 开户bean */
 	public OpenBankBean obBean;
-	/** 保存活动打开的activity*/
+	/** 保存活动打开的activity */
 	private List<Activity> activitys;
+	/** 货币bean */
+	private ProductListBean pdBean;
 	public static int width;
 	public static int height;
 	public static float density;
@@ -315,17 +318,26 @@ public class MApplication extends Application {
 	public void setpBean(PhoneBean pBean) {
 		this.pBean = pBean;
 	}
-	/** 添加活动activity*/
-	public void addActivitys(Activity activity){
-		if(activity != null){
+
+	public ProductListBean getPdBean() {
+		return pdBean;
+	}
+
+	public void setPdBean(ProductListBean pdBean) {
+		this.pdBean = pdBean;
+	}
+
+	/** 添加活动activity */
+	public void addActivitys(Activity activity) {
+		if (activity != null) {
 			activitys.add(activity);
 		}
 	}
-	
-	/** 退出活动activity*/
-	public void outActivitys(){
-		for(Activity activity : activitys){
-			if(activity != null){
+
+	/** 退出活动activity */
+	public void outActivitys() {
+		for (Activity activity : activitys) {
+			if (activity != null) {
 				activity.finish();
 			}
 		}
