@@ -20,7 +20,7 @@ public class Urls {
 	/**  产品列表 */
 	public static String PRODUCT_LIST = common + "getFundList";
 	/**  产品列表 2*/
-	public static String PRODUCT_LIST_TWO = common + "getFundList2";
+	public static String PRODUCT_LIST_TWO = common + "getFundlist2";
 	/**  产品详情 */
 	public static String PRODUCT_DETAIL = common + "getFundInfo";
 	/** 获取用户信息 */

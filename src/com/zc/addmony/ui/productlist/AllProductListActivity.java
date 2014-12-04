@@ -108,7 +108,7 @@ public class AllProductListActivity extends BaseActivity implements
 	private void getProductListRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("ordetvy", order);// 倒序还是正序，asc 正；desc 倒
+		params.put("orderby", order);// 倒序还是正序，asc 正；desc 倒
 		params.put("key", key);// 排序参照的字段
 		params.put("page", page + "");// 页码 1开始
 		params.put("listRows", 10 + "");// 每页条数

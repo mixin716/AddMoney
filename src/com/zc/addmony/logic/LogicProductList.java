@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.text.TextUtils;
+
 import com.zc.addmony.bean.TuijianBean;
 import com.zc.addmony.bean.productlist.ProductBean;
 import com.zc.addmony.bean.productlist.ProductListBean;
@@ -99,12 +101,16 @@ public class LogicProductList {
 				bean.setFundcode(obj.optString("fundcode"));
 				bean.setFundname(obj.optString("fundname"));
 				bean.setNavdate(obj.optString("navdate"));
-				bean.setRRInSingleMonth(obj.optString("rRInSingleMonth"));
-				bean.setRRInSingleWeek(obj.optString("rRInSingleWeek"));
-				bean.setRRInSingleYear(obj.optString("rRInSingleYear"));
-				bean.setRRInSixMonth(obj.optString("rRInSixMonth"));
-				bean.setRRInThreeMonth(obj.optString("rRInThreeMonth"));
-				bean.setUnitNV(obj.optString("unitNV"));
+				bean.setRRInSingleMonth(getTwoNum(obj
+						.optString("RRInSingleMonth")));
+				bean.setRRInSingleWeek(getTwoNum(obj
+						.optString("RRInSingleWeek")));
+				bean.setRRInSingleYear(getTwoNum(obj
+						.optString("RRInSingleYear")));
+				bean.setRRInSixMonth(getTwoNum(obj.optString("RRInSixMonth")));
+				bean.setRRInThreeMonth(getTwoNum(obj
+						.optString("RRInThreeMonth")));
+				bean.setUnitNV(getFourNum(obj.optString("UnitNV")));
 				list.add(bean);
 			}
 		} catch (JSONException e) {
@@ -113,5 +119,27 @@ public class LogicProductList {
 		}
 
 		return list;
+	}
+
+	private static String getFourNum(String num) {
+		if (TextUtils.isEmpty(num)) {
+			return "0.0000";
+		} else if (num.substring(num.indexOf("."), num.length()).length() > 4) {
+			return num.substring(0, num.indexOf(".") + 5);
+		} else {
+			return num;
+		}
+
+	}
+
+	private static String getTwoNum(String num) {
+		if (TextUtils.isEmpty(num)) {
+			return "0.00";
+		} else if (num.substring(num.indexOf("."), num.length()).length() > 2) {
+			return num.substring(0, num.indexOf(".") + 3);
+		} else {
+			return num;
+		}
+
 	}
 }
