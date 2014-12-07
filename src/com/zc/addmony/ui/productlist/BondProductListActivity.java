@@ -309,8 +309,12 @@ public class BondProductListActivity extends BaseActivity implements
 
 			} else if (svContent.getChildAt(0).getMeasuredHeight() <= v
 					.getHeight() + v.getScrollY()) {// 底部
-				page++;
-				getProductListRequest();
+				if(list.size()<10){
+					showToast("没有更多数据");
+				}else{
+					page++;
+					getProductListRequest();
+				}
 
 			}
 			break;
