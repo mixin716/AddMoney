@@ -10,10 +10,12 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.productlist.ProductListBean;
+import com.zc.addmony.common.Urls;
 import com.zc.addmony.ui.buyproduct.BuyProductActivity;
 import com.zc.addmony.utils.AnimUtil;
 
@@ -30,6 +32,7 @@ public class StockDetailActivity extends BaseActivity implements
 			tvRgzt;
 	private MApplication app;
 	private ProductListBean bean;
+	private String minPrice;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,14 @@ public class StockDetailActivity extends BaseActivity implements
 		llSyInfo.setVisibility(View.VISIBLE);
 		llNormalInfo.setVisibility(View.GONE);
 		setData();
+		getNumberDetail();
+	}
+
+	/** 请求获取最低购买金额 */
+	private void getNumberDetail() {
+		AjaxParams params = new AjaxParams();
+		params.put("fundcode", bean.getFundcode());
+		httpRequest.get(Urls.GET_PRODUCT_NUMBER, params, callBack, 1);
 	}
 
 	public void setData() {
@@ -208,8 +219,6 @@ public class StockDetailActivity extends BaseActivity implements
 			break;
 		case R.id.activity_stock_detail_btn_buy:
 			Intent intent = new Intent(this, BuyProductActivity.class);
-			String minPrice;
-			minPrice = "1000";
 			intent.putExtra("minPrice", minPrice);
 			startActivity(intent);
 			break;
@@ -233,4 +242,11 @@ public class StockDetailActivity extends BaseActivity implements
 		}
 	}
 
+	@Override
+	protected void handleJson(int reqeustCode, String jsonString, String message) {
+		// TODO Auto-generated method stub
+		super.handleJson(reqeustCode, jsonString, message);
+		minPrice = jsonString;
+	}
+	
 }

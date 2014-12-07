@@ -11,8 +11,9 @@ import android.widget.TextView;
 
 public class HelperCenterAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
-	private String[] title = { "什么是七日年化收益率及万分收益", "关于银行卡验证", "基金的赎回流程", "安全保障",
-			"货币基金本金与收益如何计算", "货币基金的申购流程", "登录与注册" };
+	private String[] title = { "关于身份证位数", "关于银行验证", "关于银行预留手机号码", "关于资金安全保障",
+			"基金净值", "累计净值", "七日年化收益率", "万份收益", "关于T日", "金额购买 份额赎回", "赎回款到账日期",
+			"货币基金收益", "关于增财宝" };
 
 	public HelperCenterAdapter(Context context) {
 		inflater = LayoutInflater.from(context);

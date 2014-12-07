@@ -1,6 +1,9 @@
 package com.zc.addmony.ui.myproduct;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,6 +24,17 @@ public class ProductSetActivity extends BaseActivity {
 	private UserSharedData userShare;
 	private String user_key = "user_key";
 
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			if ("close_product_set".equals(intent.getAction())) {
+				ProductSetActivity.this.finish();
+			}
+		}
+	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -33,6 +47,9 @@ public class ProductSetActivity extends BaseActivity {
 	protected void initVariable() {
 		// TODO Auto-generated method stub
 		userShare = UserSharedData.getInstance(getApplicationContext());
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("close_product_set");
+		registerReceiver(receiver, filter);
 	}
 
 	@Override
@@ -87,7 +104,7 @@ public class ProductSetActivity extends BaseActivity {
 					.getLockPaternString(user_key))) {
 				intent.putExtra(GestureActivity.INTENT_MODE,
 						GestureActivity.GESTURE_MODE_SET);
-			}else{
+			} else {
 				intent.putExtra(GestureActivity.INTENT_MODE,
 						GestureActivity.GESTURE_MODE_CHANGE);
 			}

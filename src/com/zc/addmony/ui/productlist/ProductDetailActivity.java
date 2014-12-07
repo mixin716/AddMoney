@@ -7,6 +7,7 @@ import org.json.JSONException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +40,7 @@ public class ProductDetailActivity extends BaseActivity implements
 	private String fundcode;
 	private TuijianBean bean;
 	private MApplication app;
+	private String minPrice;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +92,7 @@ public class ProductDetailActivity extends BaseActivity implements
 		llIncome.setVisibility(View.VISIBLE);
 		llInformation.setVisibility(View.GONE);
 		getProductDetail();
-
+		getNumberDetail();
 	}
 
 	/**
@@ -101,7 +103,13 @@ public class ProductDetailActivity extends BaseActivity implements
 		AjaxParams params = new AjaxParams();
 		params.put("fundcode", fundcode);
 		httpRequest.get(Urls.PRODUCT_DETAIL, params, callBack, 0);
-
+	}
+	/** 请求获取最低购买金额*/
+	private void getNumberDetail(){
+		showLoading();
+		AjaxParams params = new AjaxParams();
+		params.put("fundcode", fundcode);
+		httpRequest.get(Urls.GET_PRODUCT_NUMBER, params, callBack, 1);
 	}
 
 	@Override
@@ -113,13 +121,7 @@ public class ProductDetailActivity extends BaseActivity implements
 			break;
 		case R.id.activity_product_detail_btn_buy:// 购买
 			Intent intent = new Intent(this, BuyProductActivity.class);
-			String minPrice;
-			if (!TextUtils.isEmpty(bean.getMinprice())) {
-				minPrice = bean.getMinprice().substring(0,
-						bean.getMinprice().length() - 1);
-			} else {
-				minPrice = "0";
-			}
+			
 			if(TextUtils.isEmpty(minPrice) || "0".equals(minPrice)){
 				minPrice = "1000";
 			}
@@ -166,7 +168,6 @@ public class ProductDetailActivity extends BaseActivity implements
 		case 0:
 			try {
 				bean = LogicProductList.parseProductDetail(jsonString);
-				tvMinPrice.setText("起购金币：￥" + bean.getMinprice());
 				DecimalFormat df = new DecimalFormat("0.00");
 				tvIncomeRate.setText(df.format(Double.valueOf(bean
 						.getIncomeratio())) + "%");// 近期收益率
@@ -208,8 +209,9 @@ public class ProductDetailActivity extends BaseActivity implements
 				e.printStackTrace();
 			}
 			break;
-
-		default:
+		case 1:
+			tvMinPrice.setText("起购金额：￥" + jsonString);
+			minPrice = jsonString;
 			break;
 		}
 	}

@@ -16,13 +16,19 @@ public class HelperCenterActivity extends BaseActivity implements
 		OnItemClickListener {
 	private ListView lvContent;
 	private HelperCenterAdapter adapter;
-	private String[] urls = { "http://115.28.20.187/zcapi/help/1.html",
-			"http://115.28.20.187/zcapi/help/2.html",
-			"http://115.28.20.187/zcapi/help/3.html",
-			"http://115.28.20.187/zcapi/help/4.html",
-			"http://115.28.20.187/zcapi/help/5.html",
-			"http://115.28.20.187/zcapi/help/6.html",
-			"http://115.28.20.187/zcapi/help/7.html" };
+	private String[] urls = { "http://114.113.227.234/zcapi/help/1.html",
+			"http://114.113.227.234/zcapi/help/2.html",
+			"http://114.113.227.234/zcapi/help/3.html",
+			"http://114.113.227.234/zcapi/help/4.html",
+			"http://114.113.227.234/zcapi/help/5.html",
+			"http://114.113.227.234/zcapi/help/6.html",
+			"http://114.113.227.234/zcapi/help/7.html",
+			"http://114.113.227.234/zcapi/help/8.html",
+			"http://114.113.227.234/zcapi/help/9.html",
+			"http://114.113.227.234/zcapi/help/10.html",
+			"http://114.113.227.234/zcapi/help/11.html",
+			"http://114.113.227.234/zcapi/help/12.html",
+			"http://114.113.227.234/zcapi/help/13.html" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +58,12 @@ public class HelperCenterActivity extends BaseActivity implements
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		Intent intent = new Intent(this,HelperDetailActivity.class);
+		Intent intent = new Intent(this, HelperDetailActivity.class);
 		intent.putExtra("url", urls[arg2]);
 		startActivity(intent);
 		AnimUtil.pushLeftInAndOut(this);
 	}
-	
+
 	@Override
 	protected void doClickAction(int viewId) {
 		// TODO Auto-generated method stub

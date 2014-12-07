@@ -82,7 +82,7 @@ public class BuyProductActivity extends BaseActivity {
 			} else if (Integer.valueOf(price) < Integer.valueOf(minPrice)) {
 				showToast("当前购买金额小于起购金额");
 			} else {
-				if (intoFlag == 0) {// 已登录
+				if (User.GetFlag()) {// 已登录
 					// 未绑定银行卡
 					intent = new Intent(this, VerifyBuyActivity.class);
 					intent.putExtra("money", price);

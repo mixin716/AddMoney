@@ -23,6 +23,8 @@ public class Urls {
 	public static String PRODUCT_LIST_TWO = common + "getFundlist2";
 	/**  产品详情 */
 	public static String PRODUCT_DETAIL = common + "getFundInfo";
+	/** 获取基金起购金额*/
+	public static String GET_PRODUCT_NUMBER = common +"getFundMinValue";
 	/** 获取用户信息 */
 	public static String GET_USER_INRO = common + "getUserInfo";
 	/** 更改密码 */

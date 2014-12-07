@@ -2,11 +2,14 @@ package com.zc.addmony.ui.lock;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zc.addmony.R;
 import com.zc.addmony.common.ToastUtil;
@@ -83,7 +86,12 @@ public class GestureActivity extends BaseFragmentActivity implements
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				logout();
+				if(TextUtils.isEmpty(LockPatternUtils.getInstance(
+						getApplicationContext()).getLockPaternString("user_key")) ){
+					Toast.makeText(GestureActivity.this, "您还没用设置密码", 0).show();
+				}else{
+					logout();
+				}
 			}
 		});
 	}
@@ -180,10 +188,12 @@ public class GestureActivity extends BaseFragmentActivity implements
 
 	/** 忘记密码或密码输入错误 将重新登录 */
 	public void logout() {
+		sendBroadcast(new Intent("close_product_set"));
 		userShare.clearUserInfomation();
 		LockPatternUtils.getInstance(CTX).saveLockPattern(
 				null, user_key);
 		GestureActivity.this.finish();
+		
 	}
 
 	@Override

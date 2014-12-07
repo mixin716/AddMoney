@@ -1,8 +1,8 @@
 package com.zc.addmony.ui.more;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -110,7 +110,8 @@ public class MoreMainActivity extends BaseActivity {
 			sendMailByIntent();
 			break;
 		case R.id.activity_more_ll_update:
-
+			showLoading();
+			update.sendEmptyMessageDelayed(0, 2000);
 			break;
 		case R.id.activity_more_ll_about:
 			intent = new Intent(this, AboutAsActivity.class);
@@ -172,6 +173,12 @@ public class MoreMainActivity extends BaseActivity {
 		myIntent.putExtra(android.content.Intent.EXTRA_TEXT, mybody);
 		startActivity(Intent.createChooser(myIntent, "増财意见反馈"));
 		return 1;
-
 	}
+
+	public Handler update = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			dismissLoading();
+			showToast("您当前是最新版本");
+		};
+	};
 }

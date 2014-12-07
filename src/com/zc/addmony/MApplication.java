@@ -23,6 +23,7 @@ import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
 import com.zc.addmony.bean.activities.PhoneBean;
 import com.zc.addmony.bean.myproduct.OpenBankBean;
 import com.zc.addmony.bean.productlist.ProductListBean;
+import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.ui.lock.GestureActivity;
 import com.zc.addmony.view.lockview.LockPatternUtils;
 
@@ -49,6 +50,7 @@ public class MApplication extends Application {
 	private List<Activity> activitys;
 	/** 货币bean */
 	private ProductListBean pdBean;
+	private UserSharedData userShare;
 	public static int width;
 	public static int height;
 	public static float density;
@@ -61,6 +63,7 @@ public class MApplication extends Application {
 		apBean = new ActivitiesPhoneBean();
 		obBean = new OpenBankBean();
 		activitys = new ArrayList<Activity>();
+		userShare = UserSharedData.getInstance(getApplicationContext());
 	}
 
 	/**
@@ -100,7 +103,8 @@ public class MApplication extends Application {
 		Log.e(TAG, LockPatternUtils.getInstance(getApplicationContext())
 				.getLockPaternString("user_key") + "");
 		if (TextUtils.isEmpty(LockPatternUtils.getInstance(
-				getApplicationContext()).getLockPaternString("user_key"))) {
+				getApplicationContext()).getLockPaternString("user_key"))
+				|| !userShare.GetFlag()) {
 			return;
 		}
 
@@ -115,7 +119,7 @@ public class MApplication extends Application {
 			// 时间差
 			long temp = currentTimeMillis - lastTimeMillis;
 			// 如果时间差小于5分钟，就先停掉前一次的监听，再重新开启
-			if (temp < 1000 * 60 * 5) {
+			if (temp < 1000 * 60 * 500) {
 				stopVerify();
 				startVerify();
 			}
@@ -131,7 +135,8 @@ public class MApplication extends Application {
 			Log.e(TAG, LockPatternUtils.getInstance(getApplicationContext())
 					.getLockPaternString("user_key") + "");
 			if (TextUtils.isEmpty(LockPatternUtils.getInstance(
-					getApplicationContext()).getLockPaternString("user_key"))) {
+					getApplicationContext()).getLockPaternString("user_key"))
+					|| !userShare.GetFlag()) {
 				return;
 			}
 			verify();
@@ -188,7 +193,7 @@ public class MApplication extends Application {
 			};
 		}
 		if (!isRunning) {
-			timer.schedule(timerTask, 5 * 1000, 5 * 1000);
+			timer.schedule(timerTask, 500 * 60 * 1000, 500 * 60 * 1000);
 			isRunning = true;
 		}
 	}
