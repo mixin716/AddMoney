@@ -104,7 +104,7 @@ public class ProductTabActivity extends TabActivity implements OnClickListener {
 				AllProductListActivity.class);
 		mAllIntent.putExtra("type", 1);
 		mMoneyIntent = new Intent(ProductTabActivity.this,
-				ProductListActivity.class);
+				MoneyProductListActivity.class);
 		mStockIntent = new Intent(ProductTabActivity.this,
 				StockProductListActivity.class);
 		mAllIntent.putExtra("type", 2);

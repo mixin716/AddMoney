@@ -30,8 +30,9 @@ import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicProductList;
 import com.zc.addmony.utils.AnimUtil;
 
-public class BondProductListActivity extends BaseActivity implements
+public class MoneyProductListActivity extends BaseActivity implements
 		OnItemClickListener, OnTouchListener {
+
 	private MApplication app;
 	private ListView lvName, lvRate;
 	private ProductNameAdapter nameAdapter;
@@ -116,7 +117,7 @@ public class BondProductListActivity extends BaseActivity implements
 		params.put("key", key);// 排序参照的字段
 		params.put("page", page + "");// 页码 1开始
 		params.put("listRows", 10 + "");// 每页条数
-		params.put("fundType", "1105");// 基金类型 
+		params.put("fundType", "1109");// 基金类型
 		httpRequest.get(Urls.PRODUCT_LIST_TWO, params, callBack, 0);
 
 	}
@@ -126,7 +127,7 @@ public class BondProductListActivity extends BaseActivity implements
 		dismissLoading();
 		switch (reqeustCode) {
 		case 0:
-			if (jsonString.equals("null")) {
+			if (jsonString.equals("nnull")) {
 				showToast("没有更多数据");
 			} else {
 				list = new ArrayList<ProductListBean>();
@@ -309,12 +310,12 @@ public class BondProductListActivity extends BaseActivity implements
 
 			} else if (svContent.getChildAt(0).getMeasuredHeight() <= v
 					.getHeight() + v.getScrollY()) {// 底部
-				if(list.size()<10){
-					showToast("没有更多数据");
-				}else{
-					page++;
-					getProductListRequest();
-				}
+			if(list.size()<10){
+				showToast("没有更多数据");
+			}else{
+				page++;
+				getProductListRequest();
+			}
 
 			}
 			break;

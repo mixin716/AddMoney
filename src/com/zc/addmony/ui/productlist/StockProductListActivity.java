@@ -116,7 +116,7 @@ public class StockProductListActivity extends BaseActivity implements
 		params.put("key", key);// 排序参照的字段
 		params.put("page", page + "");// 页码 1开始
 		params.put("listRows", 10 + "");// 每页条数
-		params.put("fundType", "");// 基金类型,
+		params.put("fundType", "1101");// 基金类型,
 		httpRequest.get(Urls.PRODUCT_LIST_TWO, params, callBack, 0);
 
 	}
@@ -188,7 +188,7 @@ public class StockProductListActivity extends BaseActivity implements
 			app.fundBean.setFundcode(allList.get(position - 1).getFundcode());
 			app.setPdBean(allList.get(position - 1));
 			Intent intent;
-			if("1109".equals(allList.get(position).getFundTypeCode())){
+			if("1109".equals(allList.get(position-1).getFundTypeCode())){
 				intent = new Intent(this, StockDetailActivity.class);
 			}else{
 				intent = new Intent(this, ProductDetailActivity.class);
