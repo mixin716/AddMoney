@@ -161,9 +161,13 @@ public class MyProductActivity extends BaseActivity {
 			}
 			break;
 		case R.id.activity_my_product_ll_deal:// 进入当日交易申请界面
+			if("共0条交易申请".equals(tvDeal.getText().toString())){
+				showToast("您没有交易申请");
+			}else{
 			intent = new Intent(this, TodayDealActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(MyProductActivity.this);
+			}
 			break;
 		case R.id.activity_login_bt_register:
 			intent = new Intent(this, RegisterSecondActivity.class);
