@@ -160,7 +160,7 @@
 
                         <TextView
                             style="@style/wrap"
-                            android:text="昨日收益："
+                            android:text="总金额："
                             android:textColor="@color/text_light"
                             android:textSize="15sp" />
 

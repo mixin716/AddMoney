@@ -55,6 +55,7 @@ public class VerifyBuyActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		money = this.getIntent().getStringExtra("money");
 		app = (MApplication) getApplication();
+		app.addAllActivity(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
 		banks = new ArrayList<FundBankListBean>();
 		bankList = new ArrayList<String>();
@@ -184,6 +185,7 @@ public class VerifyBuyActivity extends BaseActivity {
 			sendBroadcast(new Intent("refresh_products"));
 			sendBroadcast(new Intent("refresh_judgment"));
 			showToast("购买成功");
+			sendBroadcast(new Intent("refresh_my_product"));
 			this.setResult(101);
 			this.finish();
 			AnimUtil.pushRightInAndOut(this);

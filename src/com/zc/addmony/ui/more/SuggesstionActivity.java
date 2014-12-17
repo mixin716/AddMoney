@@ -1,11 +1,13 @@
 package com.zc.addmony.ui.more;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
@@ -16,6 +18,7 @@ public class SuggesstionActivity extends BaseActivity {
 	private EditText etSuggestion;
 	private Button btSub;
 	private String strSugges;
+	private MApplication app;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,8 @@ public class SuggesstionActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
-
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 	}
 
 	@Override

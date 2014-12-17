@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.utils.AnimUtil;
 
@@ -15,6 +16,7 @@ public class AboutAsActivity extends BaseActivity {
 
 	private RelativeLayout rlWelcom;
 	private LinearLayout llPhone, llEmail, llWeb;
+	private MApplication app;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,8 @@ public class AboutAsActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
-
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 	}
 
 	@Override

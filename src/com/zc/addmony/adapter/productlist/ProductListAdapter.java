@@ -4,9 +4,6 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import com.zc.addmony.R;
-import com.zc.addmony.bean.productlist.ProductBean;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
@@ -14,13 +11,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.zc.addmony.R;
+import com.zc.addmony.bean.productlist.ProductListBean;
+
 /** 产品列表adapter */
 public class ProductListAdapter extends BaseAdapter {
 
 	private Context context;
-	private List<ProductBean> list;
+	private List<ProductListBean> list;
 
-	public ProductListAdapter(Context context, List<ProductBean> list) {
+	public ProductListAdapter(Context context, List<ProductListBean> list) {
 		this.context = context;
 		this.list = list;
 	}
@@ -63,19 +63,19 @@ public class ProductListAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) view.getTag();
 		}
+		holder.tvName.setText(list.get(position).getFundname());
+		holder.tvPerson.setText(list.get(position).getFundcode() + "");
+		
 		DecimalFormat df = new DecimalFormat(".00");
-		Log.e("", list.get(position).getIncomeratio());
-		if ("-".equals(list.get(position).getIncomeratio())) {
+		if ("-".equals(list.get(position).getLatestWeeklyYield())) {
 			holder.tvRate.setText("0.00%");
 		} else {
-			BigDecimal bg = new BigDecimal(list.get(position).getIncomeratio());
+			BigDecimal bg = new BigDecimal(list.get(position).getLatestWeeklyYield());
 			double j = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 			holder.tvRate.setText(j + "%");
 		}
 
-		holder.tvName.setText(list.get(position).getFundname());
-		holder.tvPerson.setText(list.get(position).getBought() + "人已购");
-		BigDecimal bg = new BigDecimal(list.get(position).getHf_incomeratio());
+		BigDecimal bg = new BigDecimal(list.get(position).getDailyProfit());
 		double money = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 		holder.tvMoney.setText(money + "元");
 		return view;

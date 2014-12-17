@@ -8,6 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
@@ -57,6 +62,7 @@ public class BuyProductsActivity extends BaseActivity implements
 	protected void initVariable() {
 		// TODO Auto-generated method stub
 		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		list = new ArrayList<BuyProductsBean>();
 		userShare = UserSharedData.getInstance(getApplicationContext());
 		adapter = new BuyProductsAdapter(getApplicationContext(), list);
@@ -79,6 +85,20 @@ public class BuyProductsActivity extends BaseActivity implements
 		lv.setAdapter(adapter);
 		lv.setPullLoadEnable(false);
 		lv.setPullRefreshEnable(false);
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(BuyProductsActivity.this,
+						FundHistoryActivity.class);
+				intent.putExtra("fundcode", list.get(position - 1)
+						.getmFundcode());
+				startActivity(intent);
+				AnimUtil.pushLeftInAndOut(BuyProductsActivity.this);
+			}
+		});
 	}
 
 	@Override
@@ -91,9 +111,18 @@ public class BuyProductsActivity extends BaseActivity implements
 		Intent intent = null;
 		if (org1 == 1) {// 购买
 			intent = new Intent(this, BuyProductActivity.class);
+			intent.putExtra("getFundTypeCode", list.get(position).getmFundTypeCode());
 			intent.putExtra("minPrice", "1000");
 		} else if (org1 == 2) {// 赎回
-			intent = new Intent(this, SaleMoneyActivity.class);
+			if (TextUtils.isEmpty(list.get(position).getmHave())) {
+				intent = new Intent(this, SaleMoneyActivity.class);
+			} else {
+				if (Float.valueOf(list.get(position).getmHave()) > 0) {
+					intent = new Intent(this, SaleMoneyActivity.class);
+				} else {
+					showToast("您当前持有金额为0，不能赎回");
+				}
+			}
 		}
 		startActivity(intent);
 		AnimUtil.pushLeftInAndOut(BuyProductsActivity.this);

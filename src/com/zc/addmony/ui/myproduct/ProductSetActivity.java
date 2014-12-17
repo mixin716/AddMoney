@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.ui.lock.GestureActivity;
@@ -19,6 +20,7 @@ import com.zc.addmony.view.lockview.LockPatternUtils;
 
 public class ProductSetActivity extends BaseActivity {
 
+	private MApplication app;
 	private LinearLayout llBank, llPwd, llGes;
 	private TextView tvBankSum;
 	private UserSharedData userShare;
@@ -46,6 +48,8 @@ public class ProductSetActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
 		IntentFilter filter = new IntentFilter();
 		filter.addAction("close_product_set");

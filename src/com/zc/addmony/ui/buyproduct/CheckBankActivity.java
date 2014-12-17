@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.utils.AnimUtil;
@@ -22,6 +23,7 @@ public class CheckBankActivity extends BaseActivity {
 	private Button btNext;
 	private String strMoney, strBank;
 	private String orderno;//小额打款编号
+	private MApplication app;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class CheckBankActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		strBank = this.getIntent().getStringExtra("");// 获取银行卡号
 		orderno = this.getIntent().getStringExtra("orderno");
 	}

@@ -33,11 +33,11 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/activity_product_detail_tv_minprice"
+                    android:id="@+id/activity_product_detail_tv_fundcode"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="起购金币：￥1元"
+                    android:text="基金代码："
                     android:textColor="@color/text_color_666666"
                     android:textSize="14sp" />
 
@@ -57,10 +57,11 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/activity_product_detail_tv_minprice"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="理财期限：随买随卖"
+                    android:text="起购金币：￥  元"
                     android:textColor="@color/text_color_666666"
                     android:textSize="14sp" />
 
@@ -83,7 +84,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="风险水平：极低"
+                    android:text="理财期限：随买随卖"
                     android:textColor="@color/text_color_666666"
                     android:textSize="14sp" />
 
@@ -103,11 +104,11 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/activity_product_detail_tv_people"
+                    android:id="@+id/activity_product_detail_tv_risklevel"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="购买人数："
+                    android:text="风险水平：极低"
                     android:textColor="@color/text_color_666666"
                     android:textSize="14sp" />
 
@@ -227,6 +228,7 @@
                             android:layout_weight="1"
                             android:background="@color/clear"
                             android:hint="10000"
+                            android:inputType="number"
                             android:textColor="@color/text_color_888888"
                             android:textColorHint="@color/text_light"
                             android:textSize="14sp" />
@@ -257,6 +259,7 @@
                             android:layout_weight="1"
                             android:background="@color/clear"
                             android:hint="365"
+                            android:inputType="number"
                             android:textColor="@color/text_color_888888"
                             android:textColorHint="@color/text_light"
                             android:textSize="14sp" />
@@ -522,7 +525,6 @@
                             android:layout_weight="1"
                             android:gravity="right"
                             android:singleLine="true"
-                            android:text="诺安基金管理有限公司"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -537,11 +539,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
-                            android:text="基金规模"
+                            android:text="基金经理"
                             android:textColor="@color/text_color_666666"
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/activity_product_detail_tv_fund_jjjl"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -567,6 +570,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/activity_product_detail_tv_fund_fundtype"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

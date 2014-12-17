@@ -17,11 +17,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
+import com.jky.struct2.http.entityhandle.HttpResult;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
+import com.zc.addmony.bean.BaseBean;
 import com.zc.addmony.bean.buyproduct.BanksBean;
 import com.zc.addmony.common.Urls;
+import com.zc.addmony.logic.LogicBase;
 import com.zc.addmony.logic.LogicBuyProduct;
+import com.zc.addmony.ui.buyproduct.PerfectInformationActivity;
 import com.zc.addmony.ui.buyproduct.SelectActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
@@ -43,7 +48,8 @@ public class FindPwdActivity extends BaseActivity {
 	private Intent intent;
 	private int position;
 	private int times;
-
+	private MApplication app;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -55,6 +61,8 @@ public class FindPwdActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		banksList = new ArrayList<String>();
 		bean = new ArrayList<BanksBean>();
 	}
@@ -118,6 +126,8 @@ public class FindPwdActivity extends BaseActivity {
 				showToast("请输入身份证号");
 			} else if (!PatternUtil.patternIdCard(idCard)) {
 				showToast("请输入正确地身份证号");
+			}else if(TextUtils.isEmpty(banks)){
+				showToast("请先选择银行");
 			} else if (TextUtils.isEmpty(bankNum)) {
 				showToast("请输入银行卡号");
 			} else if (TextUtils.isEmpty(phone)) {
@@ -128,11 +138,14 @@ public class FindPwdActivity extends BaseActivity {
 				showToast("请输入收到的验证码");
 			} else if (checkCode.length() != 6) {
 				showToast("请输入6位验证码");
+			}else if(TextUtils.isEmpty(accoreqserial)){
+				showToast("请先获取验证码");
 			} else {
 				times = 0;
 				btnCode.setClickable(true);
 				btnCode.setText("发送验证码");
 				sendCheckMessage();
+				
 			}
 			break;
 		case R.id.activity_find_pwd_btn_code:// 获取短信
@@ -155,7 +168,7 @@ public class FindPwdActivity extends BaseActivity {
 			} else if (phone.length() != 11) {
 				showToast("请输入正确的手机号");
 			} else {
-				getMessage();
+				sendCheck();
 			}
 			break;
 		default:
@@ -193,6 +206,43 @@ public class FindPwdActivity extends BaseActivity {
 		params.put("name", userName);// 姓名
 		params.put("idcard", idCard);// 身份证号
 		httpRequest.get(Urls.OPEN_BANK_CHECK, params, callBack, 6);
+	}
+	
+	/** 检验该账号是否已经注册 */
+	public void sendCheck() {
+		showLoading();
+		AjaxParams params = new AjaxParams();
+		params.put("idcard", idCard);
+		httpRequest.get(Urls.CHECK_IDCARD, params, callBack, 7);
+	}
+
+	@Override
+	protected void handleResult(int requestCode, HttpResult result) {
+		// TODO Auto-generated method stub
+		super.handleResult(requestCode, result);
+		switch (requestCode) {
+		case 7:
+			String baseJson = result.baseJson;
+			System.out.println("-----json:------" + baseJson);
+			BaseBean baseBean = LogicBase.getInstance().parseData(baseJson);
+			switch (baseBean.getStatus()) {
+			case 1://用户存在，可直接获取验证码
+				getMessage();
+				break;
+			default:// 请求失败
+				showToast("您尚未开户，请先开户");
+				mApplication.obBean.setName("userName");
+				mApplication.obBean.setIdcard("idCard");
+				intent = new Intent(this, PerfectInformationActivity.class);
+				startActivity(intent);
+				AnimUtil.pushLeftInAndOut(this);
+				break;
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	@Override

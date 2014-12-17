@@ -3,17 +3,27 @@ package com.zc.addmony.ui.myproduct;
 import java.util.ArrayList;
 import java.util.List;
 import javax.crypto.spec.OAEPParameterSpec;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import com.jky.struct2.http.core.AjaxParams;
 import com.jky.struct2.http.entityhandle.HttpResult;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.myproduct.ManageBankAdapter;
 import com.zc.addmony.bean.BaseBean;
@@ -32,6 +42,7 @@ import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
 public class ManageBankActivity extends BaseActivity implements
 		ListViewPassValuetoActivityListener {
 
+	private MApplication app;
 	private ListView lv;
 	private Button btAdd;
 	private ManageBankAdapter adapter;
@@ -39,6 +50,17 @@ public class ManageBankActivity extends BaseActivity implements
 	private List<ManageBankBean> banks;
 	private int position;// 删除的posi
 
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			if("refresh_banks".equals(intent.getAction())){
+				getBankList();
+			}
+		}
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -51,10 +73,16 @@ public class ManageBankActivity extends BaseActivity implements
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
 		banks = new ArrayList<ManageBankBean>();
 		adapter = new ManageBankAdapter(getApplicationContext(), banks);
 		adapter.setListViewPassValuetoActivityListener(this);
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("refresh_banks");
+		registerReceiver(receiver, filter);
+		
 	}
 
 	@Override
@@ -91,11 +119,19 @@ public class ManageBankActivity extends BaseActivity implements
 		httpRequest.get(Urls.GET_BANK_LIST, params, callBack, 0);
 	}
 
+	/** 获取银行卡限额*/
+	public void getBankCode(){
+		AjaxParams params = new AjaxParams();
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
+		httpRequest.get(Urls.GET_BANK_CODE, params, callBack, 2);
+	}
+	
 	/** 解绑银行卡 */
 	public void requestUnbindBank(String id) {
 		showLoading();
 		AjaxParams params = new AjaxParams();
 		params.put("tradeacco", id);
+		params.put("tradepwd", userShare.GetPwd());
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.DELETE_BANK, params, callBack, 1);
 	}
@@ -114,12 +150,14 @@ public class ManageBankActivity extends BaseActivity implements
 				System.out.println("-----baseBean.getData():------"
 						+ baseBean.getContent());
 				banks = LogicBuyProduct.parseMyBanks(baseBean.getContent());
-				bean = new ManageBankBean();
-				bean.setFlag(0);
-				banks.add(bean);
+//				bean = new ManageBankBean();
+//				bean.setFlag(0);
+//				banks.add(bean);
 				adapter = new ManageBankAdapter(getApplicationContext(), banks);
 				adapter.setListViewPassValuetoActivityListener(this);
 				lv.setAdapter(adapter);
+				setListViewHeightBasedOnChildren(lv);
+				
 				break;
 			default:// 请求失败
 				showToast(baseBean.getMessage());
@@ -138,8 +176,22 @@ public class ManageBankActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 		super.handleJson(reqeustCode, jsonString, message);
 		if (reqeustCode == 1) {// 删除成功
+			showToast("删除成功");
 			banks.remove(position);
 			adapter.notifyDataSetChanged();
+		}else if(reqeustCode == 2){
+			try {
+				JSONArray array = new JSONArray(jsonString);
+				for(int i =0; i < array.length(); i++){
+					JSONObject obj = array.getJSONObject(i);
+					String str1 = obj.optString("default");
+					Log.e("", str1+"");
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 
@@ -185,6 +237,34 @@ public class ManageBankActivity extends BaseActivity implements
 		default:
 			break;
 		}
+	}
+	
+	/**
+	 * 动态设置ListView的高度
+	 * 
+	 * @param listView
+	 */
+	public static void setListViewHeightBasedOnChildren(ListView listView) {
+		if (listView == null)
+			return;
+
+		ListAdapter listAdapter = listView.getAdapter();
+		if (listAdapter == null) {
+			// pre-condition
+			return;
+		}
+
+		int totalHeight = 0;
+		for (int i = 0; i < listAdapter.getCount(); i++) {
+			View listItem = listAdapter.getView(i, null, listView);
+			listItem.measure(0, 0);
+			totalHeight += listItem.getMeasuredHeight();
+		}
+
+		ViewGroup.LayoutParams params = listView.getLayoutParams();
+		params.height = totalHeight
+				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+		listView.setLayoutParams(params);
 	}
 
 }

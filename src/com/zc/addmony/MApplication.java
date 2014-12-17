@@ -48,9 +48,14 @@ public class MApplication extends Application {
 	public OpenBankBean obBean;
 	/** 保存活动打开的activity */
 	private List<Activity> activitys;
+	/** 打开的activity*/
+	private List<Activity> allActivitys;
 	/** 货币bean */
 	private ProductListBean pdBean;
 	private UserSharedData userShare;
+	public String zcbCode;
+	public String zcbShareType;
+	public String zcbFundtypecode;
 	public static int width;
 	public static int height;
 	public static float density;
@@ -63,6 +68,7 @@ public class MApplication extends Application {
 		apBean = new ActivitiesPhoneBean();
 		obBean = new OpenBankBean();
 		activitys = new ArrayList<Activity>();
+		allActivitys = new ArrayList<Activity>();
 		userShare = UserSharedData.getInstance(getApplicationContext());
 	}
 
@@ -332,6 +338,20 @@ public class MApplication extends Application {
 		this.pdBean = pdBean;
 	}
 
+	/** 添加activity*/
+	public void addAllActivity(Activity activity){
+		if(activity != null){
+			allActivitys.add(activity);
+		}
+	}
+	
+	/** 退出*/
+	public void clearAllActivity(){
+		for(Activity a: allActivitys){
+			a.finish();
+		}
+	}
+	
 	/** 添加活动activity */
 	public void addActivitys(Activity activity) {
 		if (activity != null) {

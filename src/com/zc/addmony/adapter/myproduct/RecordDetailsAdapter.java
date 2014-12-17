@@ -3,6 +3,7 @@ package com.zc.addmony.adapter.myproduct;
 import java.util.List;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,9 +59,19 @@ public class RecordDetailsAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.tvName.setText(list.get(position).getFundname());
-		holder.tvMoney.setText(list.get(position).getHappeningsum());
-		holder.tvDate.setText(list.get(position).getDate());
+		if (!TextUtils.isEmpty(list.get(position).getBusinflagStr())) {
+			holder.tvName.setText(list.get(position).getBusinflagStr());
+		} else {
+			if ("024".equals(list.get(position).getCallingcode())) {
+				holder.tvName.setText("取现");
+				holder.tvMoney.setText(list.get(position).getApplyshare());
+			} else {
+				holder.tvName.setText("充值");
+				holder.tvMoney.setText(list.get(position).getApplysum());
+
+			}
+		}
+		holder.tvDate.setText(list.get(position).getApplydate());
 		return convertView;
 	}
 

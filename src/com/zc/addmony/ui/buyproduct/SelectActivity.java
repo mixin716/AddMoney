@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.buyproduct.SelectAdapter;
 import com.zc.addmony.utils.AnimUtil;
@@ -19,6 +20,7 @@ public class SelectActivity extends BaseActivity implements OnItemClickListener 
 	private ListView lvContent;
 	private SelectAdapter adapter;
 	private List<String> list;
+	private MApplication app;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class SelectActivity extends BaseActivity implements OnItemClickListener 
 
 	@Override
 	protected void initVariable() {
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		list = new ArrayList<String>();
 		list = getIntent().getStringArrayListExtra("nameList");
 		adapter = new SelectAdapter(getApplicationContext(), list);

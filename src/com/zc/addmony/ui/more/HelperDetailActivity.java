@@ -12,12 +12,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.utils.AnimUtil;
 
 public class HelperDetailActivity extends BaseActivity {
 	private WebView webContent;
 	private String url;
+	private MApplication app;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,6 +30,8 @@ public class HelperDetailActivity extends BaseActivity {
 
 	@Override
 	protected void initVariable() {
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		url = getIntent().getStringExtra("url");
 	}
 

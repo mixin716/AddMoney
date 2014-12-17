@@ -126,6 +126,8 @@ public class LogicProductList {
 				bean.setWithdrawstate(obj.optString("withdrawstate"));
 				bean.setSubscribestate(obj.optString("subscribestate"));
 				bean.setFundTypeCode(obj.optString("FundTypeCode"));
+				bean.setDailyProfit(obj.optString("DailyProfit"));// 万分收益
+				bean.setLatestWeeklyYield(obj.optString("LatestWeeklyYield"));
 				list.add(bean);
 			}
 		} catch (JSONException e) {
@@ -134,6 +136,44 @@ public class LogicProductList {
 		}
 
 		return list;
+	}
+
+	/** 解析产品详情  新*/
+	public static ProductListBean parseFundDetail(String json) {
+		ProductListBean bean = new ProductListBean();
+		try {
+			JSONObject obj = new JSONObject(json);
+			bean.setFundcode(obj.optString("fundcode"));
+			bean.setFundname(obj.optString("fundname"));
+			bean.setUnitNV(getFourNum(obj.optString("UnitNV")));
+			bean.setNavdate(obj.optString("navdate"));
+			bean.setRRInSingleWeek(getTwoNum(obj.optString("RRInSingleWeek")));
+			bean.setRRInSingleMonth(getTwoNum(obj.optString("RRInSingleMonth")));
+			bean.setRRInThreeMonth(getTwoNum(obj.optString("RRInThreeMonth")));
+			bean.setRRInSixMonth(getTwoNum(obj.optString("RRInSixMonth")));
+			bean.setRRInSingleYear(getTwoNum(obj.optString("RRInSingleYear")));
+			bean.setRRInThreeYear(getTwoNum(obj.optString("RRInThreeYear")));
+			bean.setRRSinceStart(getTwoNum(obj.optString("RRSinceStart")));
+			bean.setDate1(obj.optString("date1"));
+			bean.setDate2(obj.optString("date2"));
+			bean.setDayinc(getTwoNum(obj.optString("dayinc")));
+			bean.setTotalnetvalue(getFourNum(obj.optString("totalnetvalue")));
+			bean.setSharetype(obj.optString("sharetype"));
+			bean.setManager(obj.optString("Manager"));
+			bean.setFundrisklevel(obj.optString("fundrisklevel"));
+			bean.setFundstate(obj.optString("fundstate"));
+			bean.setDeclarestate(obj.optString("declarestate"));
+			bean.setWithdrawstate(obj.optString("withdrawstate"));
+			bean.setSubscribestate(obj.optString("subscribestate"));
+			bean.setFundTypeCode(obj.optString("FundTypeCode"));
+			bean.setDailyProfit(obj.optString("DailyProfit"));// 万分收益
+			bean.setLatestWeeklyYield(obj.optString("LatestWeeklyYield"));
+			bean.setInvestAdvisorName(obj.optString("InvestAdvisorName"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bean;
 	}
 
 	private static String getFourNum(String num) {

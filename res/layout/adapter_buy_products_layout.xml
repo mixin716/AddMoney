@@ -24,7 +24,7 @@
             style="@style/wrap"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="万分收益：1.12元"
+            android:text="基金代码： "
             android:textColor="@color/text_light"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -53,7 +53,6 @@
             style="@style/wrap"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="￥1000元"
             android:textColor="@color/text_light"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -61,7 +60,8 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp" >
+        android:layout_marginTop="7dp"
+        android:visibility="gone" >
 
         <TextView
             style="@style/wrap"
@@ -76,7 +76,6 @@
             style="@style/wrap"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="￥0.29元"
             android:textColor="@color/normal_red"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -87,6 +86,7 @@
         android:layout_marginTop="7dp" >
 
         <TextView
+            android:id="@+id/adapter_buy_products_tv_unit"
             style="@style/wrap"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
@@ -99,7 +99,6 @@
             style="@style/wrap"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="￥5.29元"
             android:textColor="@color/text_light"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -108,6 +107,7 @@
         android:id="@+id/adapter_buy_products_rl_inredeem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="7dp" >
 
         <TextView
@@ -123,7 +123,6 @@
             style="@style/wrap"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="￥100.1元"
             android:textColor="@color/normal_red"
             android:textSize="15sp" />
     </RelativeLayout>

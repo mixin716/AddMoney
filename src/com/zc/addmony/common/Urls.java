@@ -47,6 +47,7 @@ public class Urls {
 	public static String GET_SUPPORT_BANKS = common +"getBnakList";
 	/** 银行开户手机号获取验证码*/
 	public static String OPEN_BANK_CODE = common +"sendMessage";
+	public static String OPEN_BANK_CODE_TWO = common +"sendMessage2";
 	/** 建议验证码是否正确*/
 	public static String OPEN_BANK_CHECK = common +"checkMessage";
 	/** 开户验证*/
@@ -57,6 +58,8 @@ public class Urls {
 	public static String PERFECT_INFORMATION_NEXT = common + "checkAndPay";
 	/** 得到资金变动列表 */
 	public static String GET_MONEY_CHANGE = common + "getMoneyChageList";
+	/** 増财宝详情*/
+	public static String GET_ZCB_BUTTOM_INFO = common +"getTransactionList";
 	/** 用户基金详情 */
 	public static String GET_USER_FUND_INFO = common + "getUserFundInfo";
 	/** 赎回 */
@@ -81,4 +84,10 @@ public class Urls {
 	public static String DELETE_BANK = common+"deleteTradeacco";
 	/** 当日交易申请列表*/
 	public static String TODAY_DEAL_LIST = common+"getTodayTransactionList";
+	/** 増财宝获取基金详情*/
+	public static String ZCBINFO = common +"getZCBInfo";
+	/** 添加银行卡*/
+	public static String REQUEST_ADD_BANK = common +"addUserBank";
+	/** 获取银行卡限额*/
+	public static String GET_BANK_CODE = common +"getBankQuota";
 }

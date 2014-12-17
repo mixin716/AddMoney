@@ -6,8 +6,10 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
@@ -22,7 +24,8 @@ import com.zc.addmony.utils.KeyBoard;
 /** 提现赎回 */
 public class SaleMoneyActivity extends BaseActivity {
 	private MApplication app;
-	private TextView tvFundName, tvSaleMoney, tvHaveMoney, tvBankCode;
+	private LinearLayout llNo;
+	private TextView tvFundName, tvSaleMoney,tvSaleTitle, tvHaveMoney, tvBankCode;
 	private EditText edtMinSaleMoney, edtSalePwd;
 	private Button btnOk;
 	private String fundName, saleMoney, haveMoney, bankName, bankCode,
@@ -39,6 +42,7 @@ public class SaleMoneyActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		app = (MApplication) getApplication();
+		app.addAllActivity(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
 	}
 
@@ -50,10 +54,12 @@ public class SaleMoneyActivity extends BaseActivity {
 
 	@Override
 	protected void setViews() {
+		llNo = (LinearLayout) findViewById(R.id.activity_sale_money_ll_no);
 		tvBankCode = (TextView) findViewById(R.id.activity_sale_money_tv_bank_code);
 		tvFundName = (TextView) findViewById(R.id.activity_sale_money_tv_fund_name);
 		tvHaveMoney = (TextView) findViewById(R.id.activity_sale_money_tv_have_money);
 		tvSaleMoney = (TextView) findViewById(R.id.activity_sale_money_tv_have_sale);
+		tvSaleTitle = (TextView) findViewById(R.id.activity_sale_money_tv_have_sale_title);
 
 		edtMinSaleMoney = (EditText) findViewById(R.id.activity_sale_money_edt_minmoney);
 		edtSalePwd = (EditText) findViewById(R.id.activity_sale_money_edt_pwd);
@@ -66,7 +72,6 @@ public class SaleMoneyActivity extends BaseActivity {
 	private void getUserFundInfoRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		// params.put("fundcode", "820002");
 		params.put("fundcode", app.fundBean.getFundcode());
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_USER_FUND_INFO, params, callBack, 0);
@@ -101,8 +106,8 @@ public class SaleMoneyActivity extends BaseActivity {
 			} else if (TextUtils.isEmpty(salePwd)) {
 				showToast("请输入交易密码");
 			} else {
-				if (Integer.valueOf(minMoney) < 1000) {
-					showToast("最低赎回金额为1000");
+				if (Integer.valueOf(minMoney) < 100) {
+					showToast("最低赎回金额为100");
 				} else {
 					getSaleMoneyRequest();
 				}
@@ -140,6 +145,16 @@ public class SaleMoneyActivity extends BaseActivity {
 					tvFundName.setText(fundName);
 					tvHaveMoney.setText("￥" + haveMoney);
 					tvSaleMoney.setText("￥" + saleMoney);
+					
+					JSONObject fundObj = new JSONObject(obj.optString("fundinfo"));
+					if(!TextUtils.isEmpty(fundObj.optString("FundTypeCode"))){
+						if("1109".equals(fundObj.optString("FundTypeCode"))){
+							tvSaleTitle.setText("可赎回金额:");
+						}else{
+							tvSaleTitle.setText("可赎回份额:");
+							llNo.setVisibility(View.GONE);
+						}
+					}
 				}
 
 			} catch (JSONException e) {
@@ -148,6 +163,7 @@ public class SaleMoneyActivity extends BaseActivity {
 			break;
 		case 1:
 			sendBroadcast(new Intent("refresh_products"));
+			sendBroadcast(new Intent("refresh_my_product"));
 			this.setResult(101);
 			finish();
 			AnimUtil.pushRightInAndOut(this);

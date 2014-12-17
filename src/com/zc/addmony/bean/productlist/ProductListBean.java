@@ -24,7 +24,10 @@ public class ProductListBean {
 	private String declarestate;// 申购状态
 	private String withdrawstate;// 赎回状态
 	private String subscribestate;// 认购状态
-	private String FundTypeCode;
+	private String FundTypeCode;//基金类型
+	private String DailyProfit;// 万分收益
+	private String LatestWeeklyYield;// 近7日收益率
+	private String InvestAdvisorName;// 基金公司
 
 	public String getFundname() {
 		return fundname;
@@ -208,6 +211,30 @@ public class ProductListBean {
 
 	public void setFundTypeCode(String fundTypeCode) {
 		FundTypeCode = fundTypeCode;
+	}
+
+	public String getDailyProfit() {
+		return DailyProfit;
+	}
+
+	public void setDailyProfit(String dailyProfit) {
+		DailyProfit = dailyProfit;
+	}
+
+	public String getLatestWeeklyYield() {
+		return LatestWeeklyYield;
+	}
+
+	public void setLatestWeeklyYield(String latestWeeklyYield) {
+		LatestWeeklyYield = latestWeeklyYield;
+	}
+
+	public String getInvestAdvisorName() {
+		return InvestAdvisorName;
+	}
+
+	public void setInvestAdvisorName(String investAdvisorName) {
+		InvestAdvisorName = investAdvisorName;
 	}
 
 }

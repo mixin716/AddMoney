@@ -88,8 +88,8 @@
 
             <ImageView
                 android:id="@+id/activity_home_iv_today_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_home_today_icon" />
@@ -151,11 +151,12 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="1元起购"
+                    android:text=" 元起购"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/activity_home_today_tv_smsm"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"

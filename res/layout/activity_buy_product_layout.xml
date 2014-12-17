@@ -38,11 +38,11 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/activity_buy_product_tv_sxf"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="手续费：0"
                 android:textColor="@color/text_color_666666"
                 android:textSize="15sp" />
         </LinearLayout>

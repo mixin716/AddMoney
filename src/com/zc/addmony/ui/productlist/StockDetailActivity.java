@@ -46,6 +46,7 @@ public class StockDetailActivity extends BaseActivity implements
 	protected void initVariable() {
 		// TODO Auto-generated method stub
 		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		bean = app.getPdBean();
 	}
 
@@ -218,7 +219,9 @@ public class StockDetailActivity extends BaseActivity implements
 			AnimUtil.pushRightInAndOut(this);
 			break;
 		case R.id.activity_stock_detail_btn_buy:
+			mApplication.fundBean.setFundcode(bean.getFundcode());
 			Intent intent = new Intent(this, BuyProductActivity.class);
+			intent.putExtra("FundTypeCode", bean.getFundTypeCode());
 			intent.putExtra("minPrice", minPrice);
 			startActivity(intent);
 			break;
@@ -248,5 +251,5 @@ public class StockDetailActivity extends BaseActivity implements
 		super.handleJson(reqeustCode, jsonString, message);
 		minPrice = jsonString;
 	}
-	
+
 }

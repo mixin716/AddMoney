@@ -15,6 +15,9 @@ public class BuyProductsBean {
 	String mBank;// 银行卡
 	String mBankName;// 银行名字
 	String shuhui;// 赎回标识
+	String mFundTypeCode;
+	String UnitNV;
+	String marketvalue;
 
 	public String getmName() {
 		return mName;
@@ -110,6 +113,30 @@ public class BuyProductsBean {
 
 	public void setmBankName(String mBankName) {
 		this.mBankName = mBankName;
+	}
+
+	public String getmFundTypeCode() {
+		return mFundTypeCode;
+	}
+
+	public void setmFundTypeCode(String mFundTypeCode) {
+		this.mFundTypeCode = mFundTypeCode;
+	}
+
+	public String getUnitNV() {
+		return UnitNV;
+	}
+
+	public void setUnitNV(String unitNV) {
+		UnitNV = unitNV;
+	}
+
+	public String getMarketvalue() {
+		return marketvalue;
+	}
+
+	public void setMarketvalue(String marketvalue) {
+		this.marketvalue = marketvalue;
 	}
 
 }

@@ -487,7 +487,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:singleLine="true"
-                            android:text="基金经历"
+                            android:text="基金经理"
                             android:textColor="@color/text_color_666666"
                             android:textSize="17sp" />
 

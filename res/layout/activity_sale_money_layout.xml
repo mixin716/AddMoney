@@ -61,6 +61,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/activity_sale_money_tv_have_sale_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -82,6 +83,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/activity_sale_money_ll_no"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -148,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/ic_normal_white_normal"
-            android:hint="最低赎回：1000元"
+            android:hint="最低赎回：100元"
             android:inputType="number"
             android:padding="15dp"
             android:textColor="@color/text_color_666666"

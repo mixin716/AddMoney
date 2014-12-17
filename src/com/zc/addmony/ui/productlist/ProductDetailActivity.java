@@ -7,7 +7,6 @@ import org.json.JSONException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +20,7 @@ import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.TuijianBean;
+import com.zc.addmony.bean.productlist.ProductListBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicProductList;
 import com.zc.addmony.ui.buyproduct.BuyProductActivity;
@@ -31,14 +31,14 @@ public class ProductDetailActivity extends BaseActivity implements
 		OnCheckedChangeListener {
 	private RadioGroup rgContent;
 	private LinearLayout llIncome, llInformation;
-	private TextView tvFundName, tvMinPrice, tvIncomeRate, tvPeople,
-			tvBankRate;
+	private TextView tvFundName, tvMinPrice, tvIncomeRate, tvFundCode,
+			tvBankRate, tvRiskLevel;
 	private Button btnBuy, btnCount;
 	private EditText edtMoney, edtDay;
 	private TextView tvIncome, tvBankIncome, tvYearRate, tvWeekRate,
-			tvMonthRate, tvMillionRate, tvFundCompany;
+			tvMonthRate, tvMillionRate, tvFundCompany, tvJjjl, tvFundType;
 	private String fundcode;
-	private TuijianBean bean;
+	private ProductListBean bean;
 	private MApplication app;
 	private String minPrice;
 
@@ -52,8 +52,9 @@ public class ProductDetailActivity extends BaseActivity implements
 	@Override
 	protected void initVariable() {
 		app = (MApplication) getApplication();
+		app.addAllActivity(this);
 		fundcode = app.fundBean.getFundcode();
-		bean = new TuijianBean();
+		bean = new ProductListBean();
 	}
 
 	@Override
@@ -72,14 +73,17 @@ public class ProductDetailActivity extends BaseActivity implements
 
 		tvBankIncome = (TextView) findViewById(R.id.activity_product_detail_tv_bank_input);
 		tvBankRate = (TextView) findViewById(R.id.activity_product_detail_tv_rate_bank);
+		tvRiskLevel = (TextView) findViewById(R.id.activity_product_detail_tv_risklevel);
 		tvFundName = (TextView) findViewById(R.id.activity_product_detail_tv_fundname);
 		tvFundCompany = (TextView) findViewById(R.id.activity_product_detail_tv_fund_company);
 		tvIncome = (TextView) findViewById(R.id.activity_product_detail_tv_input);
 		tvIncomeRate = (TextView) findViewById(R.id.activity_product_detail_tv_rate);
 		tvMillionRate = (TextView) findViewById(R.id.activity_product_detail_tv_million_rate);
+		tvJjjl = (TextView) findViewById(R.id.activity_product_detail_tv_fund_jjjl);
+		tvFundType = (TextView) findViewById(R.id.activity_product_detail_tv_fund_fundtype);
 		tvMinPrice = (TextView) findViewById(R.id.activity_product_detail_tv_minprice);
 		tvMonthRate = (TextView) findViewById(R.id.activity_product_detail_tv_month_rate);
-		tvPeople = (TextView) findViewById(R.id.activity_product_detail_tv_people);
+		tvFundCode = (TextView) findViewById(R.id.activity_product_detail_tv_fundcode);
 		tvWeekRate = (TextView) findViewById(R.id.activity_product_detail_tv_week_rate);
 		tvYearRate = (TextView) findViewById(R.id.activity_product_detail_tv_year_rate);
 		edtDay = (EditText) findViewById(R.id.activity_product_detail_edt_day);
@@ -104,8 +108,9 @@ public class ProductDetailActivity extends BaseActivity implements
 		params.put("fundcode", fundcode);
 		httpRequest.get(Urls.PRODUCT_DETAIL, params, callBack, 0);
 	}
-	/** 请求获取最低购买金额*/
-	private void getNumberDetail(){
+
+	/** 请求获取最低购买金额 */
+	private void getNumberDetail() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
 		params.put("fundcode", fundcode);
@@ -121,13 +126,14 @@ public class ProductDetailActivity extends BaseActivity implements
 			break;
 		case R.id.activity_product_detail_btn_buy:// 购买
 			Intent intent = new Intent(this, BuyProductActivity.class);
-			
-			if(TextUtils.isEmpty(minPrice) || "0".equals(minPrice)){
+			mApplication.fundBean.setFundcode(fundcode);
+			if (TextUtils.isEmpty(minPrice) || "0".equals(minPrice)) {
 				minPrice = "1000";
 			}
+			intent.putExtra("FundTypeCode", bean.getFundTypeCode());
 			intent.putExtra("minPrice", minPrice);
 			startActivity(intent);
-
+			AnimUtil.pushRightInAndOut(this);
 			break;
 		case R.id.activity_product_detail_btn_ok:// 计算
 			KeyBoard.demissKeyBoard(getApplicationContext(), edtDay);
@@ -135,7 +141,7 @@ public class ProductDetailActivity extends BaseActivity implements
 			String everyprice = edtMoney.getText().toString();
 			int dayNum,
 			priceNum;// 价格 天数
-			float bankRate=(float) 0.35;// 银行获取利率
+			float bankRate = (float) 0.35;// 银行获取利率
 			if (TextUtils.isEmpty(everyprice)) {
 				showToast("请输入购买金额");
 			} else if (TextUtils.isEmpty(day)) {
@@ -144,7 +150,7 @@ public class ProductDetailActivity extends BaseActivity implements
 				dayNum = Integer.valueOf(day);
 				priceNum = Integer.valueOf(everyprice);
 				double product = dayNum * priceNum
-						* Double.valueOf(bean.getIncomeratio());
+						* Double.valueOf(bean.getLatestWeeklyYield());
 
 				double bankIncome = dayNum * priceNum * bankRate;
 				DecimalFormat df = new DecimalFormat("0.00");
@@ -166,47 +172,95 @@ public class ProductDetailActivity extends BaseActivity implements
 		dismissLoading();
 		switch (reqeustCode) {
 		case 0:
-			try {
-				bean = LogicProductList.parseProductDetail(jsonString);
-				DecimalFormat df = new DecimalFormat("0.00");
+			bean = LogicProductList.parseFundDetail(jsonString);
+			DecimalFormat df = new DecimalFormat("0.00");
+			if (TextUtils.isEmpty(bean.getLatestWeeklyYield())) {
+				tvIncomeRate.setText("0.00%");
+			} else {
 				tvIncomeRate.setText(df.format(Double.valueOf(bean
-						.getIncomeratio())) + "%");// 近期收益率
-				tvPeople.setText("购买人数：" + bean.getBought() + "人");
-				tvBankRate.setText("0.35%");// 银行活期利益
-				if (TextUtils.isEmpty(bean.getYnzf())) {
-					tvYearRate.setText("0.00%");
-				} else {
-					tvYearRate
-							.setText(df.format(Double.valueOf(bean.getYnzf()))
-									+ "%");
-				}
-				if (TextUtils.isEmpty(bean.getQrnh())) {
-					tvWeekRate.setText("0.00%");
-				} else {
-					tvWeekRate
-							.setText(df.format(Double.valueOf(bean.getQrnh()))
-									+ "%");
-				}
-				if (TextUtils.isEmpty(bean.getLyzf())) {
-					tvMonthRate.setText("0.00%");
-				} else {
-					tvMonthRate
-							.setText(df.format(Double.valueOf(bean.getLyzf()))
-									+ "%");
-				}
-				if (TextUtils.isEmpty(bean.getHf_incomeratio())) {
-					tvMillionRate.setText("0.00%");
-				} else {
-					tvMillionRate.setText(df.format(Double.valueOf(bean
-							.getHf_incomeratio())) + "%");
-				}
+						.getLatestWeeklyYield())) + "%");// 近期收益率
+			}
+			tvBankRate.setText("0.35%");// 银行活期利益
+			if (TextUtils.isEmpty(bean.getRRInSingleYear())) {
+				tvYearRate.setText("0.00%");
+			} else {
+				tvYearRate.setText(df.format(Double.valueOf(bean
+						.getRRInSingleYear())) + "%");
+			}
+			if (TextUtils.isEmpty(bean.getLatestWeeklyYield())) {
+				tvWeekRate.setText("0.00%");
+			} else {
+				tvWeekRate.setText(df.format(Double.valueOf(bean
+						.getLatestWeeklyYield())) + "%");
+			}
+			if (TextUtils.isEmpty(bean.getRRInSixMonth())) {
+				tvMonthRate.setText("0.00%");
+			} else {
+				tvMonthRate.setText(df.format(Double.valueOf(bean
+						.getRRInSixMonth())) + "%");
+			}
+			if (TextUtils.isEmpty(bean.getDailyProfit())) {
+				tvMillionRate.setText("0.00%");
+			} else {
+				tvMillionRate.setText(df.format(Double.valueOf(bean
+						.getDailyProfit())) + "%");
+			}
+			tvJjjl.setText(bean.getManager());// 基金经理
 
-				tvFundCompany.setText(bean.getFundCompany());
-				if(!TextUtils.isEmpty(bean.getFundname())){
-					tvFundName.setText(bean.getFundname());
+			tvFundCompany.setText(bean.getInvestAdvisorName());// 公司
+			// 基金名称
+			if (!TextUtils.isEmpty(bean.getFundname())) {
+				tvFundName.setText(bean.getFundname());
+			}
+			if (!TextUtils.isEmpty(bean.getFundcode())) {
+				tvFundCode.setText("基金代码：" + bean.getFundcode());
+			}
+			// 设置风险水平
+			if (TextUtils.isEmpty(bean.getFundrisklevel())) {
+				tvRiskLevel.setText("风险水平：低风险");
+			} else {
+				switch (Integer.valueOf(bean.getFundrisklevel())) {
+				case 0:
+					tvRiskLevel.setText("风险水平：低风险");
+					break;
+				case 1:
+					tvRiskLevel.setText("风险水平：中风险");
+					break;
+				case 2:
+					tvRiskLevel.setText("风险水平：高风险");
+					break;
+				case 3:
+					tvRiskLevel.setText("风险水平：中低风险");
+					break;
+				case 4:
+					tvRiskLevel.setText("风险水平：中高风险");
+					break;
 				}
-			} catch (JSONException e) {
-				e.printStackTrace();
+			}
+			// 设置基金类型
+			if (TextUtils.isEmpty(bean.getFundTypeCode())) {
+				tvFundType.setText("");
+			} else {
+				switch (Integer.valueOf(bean.getFundTypeCode())) {
+				case 1101:
+					tvFundType.setText("股票型");
+					break;
+				case 1103:
+					tvFundType.setText("混合型");
+					break;
+				case 1105:
+					tvFundType.setText("债券型");
+					break;
+				case 1107:
+					tvFundType.setText("保本型");
+					break;
+				case 1109:
+					tvFundType.setText("货币型");
+					break;
+				case 1199:
+					tvFundType.setText("其他型");
+					break;
+				}
 			}
 			break;
 		case 1:

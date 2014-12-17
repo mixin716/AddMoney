@@ -14,8 +14,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.TextView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -23,6 +21,7 @@ import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
+import com.zc.addmony.adapter.productlist.FundListAdapter;
 import com.zc.addmony.adapter.productlist.ProductNameAdapter;
 import com.zc.addmony.adapter.productlist.ProductRateAdapter;
 import com.zc.addmony.bean.productlist.ProductListBean;
@@ -36,17 +35,18 @@ public class MoneyProductListActivity extends BaseActivity implements
 	private MApplication app;
 	private ListView lvName, lvRate;
 	private ProductNameAdapter nameAdapter;
-	private ProductRateAdapter rataAdapter;
+	private FundListAdapter rataAdapter;
 	private View nameHeader, rateHeader;
-	private TextView tvUnit, tvWeek, tvMonth, tvThreeMonth, tvSixMonth,
-			tvRecentYear;
+	private TextView tvUnit, tvQrnh, tvWfsy, tvWeek, tvMonth, tvThreeMonth,
+			tvSixMonth, tvRecentYear;
 	private List<ProductListBean> allList;
 	private List<ProductListBean> list;
 	private ScrollView svContent;
 	private int page = 1;
-	private String order = "desc", key = "RRInSingleWeek";
-	private boolean isWeek = false, isMonth = false, isThreeMonth = false,
-			isSixMonth = false, isYear = false;
+	private String order = "desc", key = "LatestWeeklyYield";
+	private boolean isQrnh = true, isWfsy = true, isWeek = true,
+			isMonth = true, isThreeMonth = true, isSixMonth = true,
+			isYear = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class MoneyProductListActivity extends BaseActivity implements
 		nameHeader = View.inflate(getApplicationContext(),
 				R.layout.view_name_header_layout, null);
 		rateHeader = View.inflate(getApplicationContext(),
-				R.layout.view_rate_header_layout, null);
+				R.layout.view_fund_rate_header_layout, null);
 		tvMonth = (TextView) rateHeader
 				.findViewById(R.id.view_rate_header_tv_month);
 		tvRecentYear = (TextView) rateHeader
@@ -87,6 +87,10 @@ public class MoneyProductListActivity extends BaseActivity implements
 				.findViewById(R.id.view_rate_header_tv_three);
 		tvUnit = (TextView) rateHeader
 				.findViewById(R.id.view_rate_header_tv_unit);
+		tvQrnh = (TextView) rateHeader
+				.findViewById(R.id.view_rate_header_tv_qrnh);
+		tvWfsy = (TextView) rateHeader
+				.findViewById(R.id.view_rate_header_tv_wfsy);
 		tvWeek = (TextView) rateHeader
 				.findViewById(R.id.view_rate_header_tv_week);
 		tvSixMonth = (TextView) rateHeader
@@ -94,6 +98,8 @@ public class MoneyProductListActivity extends BaseActivity implements
 		lvName.setOnItemClickListener(this);
 		lvRate.setOnItemClickListener(this);
 		tvMonth.setOnClickListener(this);
+		tvQrnh.setOnClickListener(this);
+		tvWfsy.setOnClickListener(this);
 		tvRecentYear.setOnClickListener(this);
 		tvSixMonth.setOnClickListener(this);
 		tvThreeMonth.setOnClickListener(this);
@@ -101,7 +107,7 @@ public class MoneyProductListActivity extends BaseActivity implements
 		tvWeek.setOnClickListener(this);
 		svContent.setOnTouchListener(this);
 		nameAdapter = new ProductNameAdapter(getApplicationContext(), allList);
-		rataAdapter = new ProductRateAdapter(getApplicationContext(), allList);
+		rataAdapter = new FundListAdapter(getApplicationContext(), allList);
 		lvName.addHeaderView(nameHeader);
 		lvRate.addHeaderView(rateHeader);
 		getProductListRequest();
@@ -189,10 +195,10 @@ public class MoneyProductListActivity extends BaseActivity implements
 			app.fundBean.setFundcode(allList.get(position - 1).getFundcode());
 			app.setPdBean(allList.get(position - 1));
 			Intent intent;
-			if("1101".equals(allList.get(position-1).getFundTypeCode())){
-				intent = new Intent(this, StockDetailActivity.class);
-			}else{
+			if ("1109".equals(allList.get(position - 1).getFundTypeCode())) {
 				intent = new Intent(this, ProductDetailActivity.class);
+			} else {
+				intent = new Intent(this, StockDetailActivity.class);
 			}
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(this);
@@ -204,6 +210,46 @@ public class MoneyProductListActivity extends BaseActivity implements
 		page = 1;
 		allList.clear();
 		switch (viewId) {
+		case R.id.view_rate_header_tv_qrnh:// 七日年化
+			if (!isQrnh) {
+				tvQrnh.setText("7日年化↑");
+				isQrnh = true;
+				order = "asc";
+				key = "LatestWeeklyYield";
+			} else {
+				tvQrnh.setText("7日年化↓");
+				isQrnh = false;
+				order = "asc";
+				key = "LatestWeeklyYield";
+			}
+			tvWfsy.setText("万分收益");
+			tvWeek.setText("近1周");
+			tvMonth.setText("近1月");
+			tvThreeMonth.setText("近3月");
+			tvSixMonth.setText("近6月");
+			tvRecentYear.setText("近1年");
+			getProductListRequest();
+			break;
+		case R.id.view_rate_header_tv_wfsy:// 万分收益
+			if (!isWfsy) {
+				tvWfsy.setText("万分收益↑");
+				isWfsy = true;
+				order = "asc";
+				key = "DailyProfit";
+			} else {
+				tvWfsy.setText("万分收益↓");
+				isWfsy = false;
+				order = "asc";
+				key = "DailyProfit";
+			}
+			tvQrnh.setText("7日年化");
+			tvWeek.setText("近1周");
+			tvMonth.setText("近1月");
+			tvThreeMonth.setText("近3月");
+			tvSixMonth.setText("近6月");
+			tvRecentYear.setText("近1年");
+			getProductListRequest();
+			break;
 		case R.id.view_rate_header_tv_week:// 近一周
 			if (!isWeek) {
 				tvWeek.setText("近1周↑");
@@ -216,6 +262,8 @@ public class MoneyProductListActivity extends BaseActivity implements
 				order = "desc";
 				key = "RRInSingleWeek";
 			}
+			tvQrnh.setText("7日年化");
+			tvWfsy.setText("万分收益");
 			tvMonth.setText("近1月");
 			tvThreeMonth.setText("近3月");
 			tvSixMonth.setText("近6月");
@@ -234,6 +282,8 @@ public class MoneyProductListActivity extends BaseActivity implements
 				order = "desc";
 				key = "RRInSingleMonth";
 			}
+			tvQrnh.setText("7日年化");
+			tvWfsy.setText("万分收益");
 			tvWeek.setText("近1周");
 			tvThreeMonth.setText("近3月");
 			tvSixMonth.setText("近6月");
@@ -252,6 +302,8 @@ public class MoneyProductListActivity extends BaseActivity implements
 				order = "desc";
 				key = "RRInThreeMonth";
 			}
+			tvQrnh.setText("7日年化");
+			tvWfsy.setText("万分收益");
 			tvWeek.setText("近1周");
 			tvMonth.setText("近1月");
 			tvSixMonth.setText("近6月");
@@ -270,6 +322,8 @@ public class MoneyProductListActivity extends BaseActivity implements
 				order = "desc";
 				key = "RRInSixMonth";
 			}
+			tvQrnh.setText("7日年化");
+			tvWfsy.setText("万分收益");
 			tvWeek.setText("近1周");
 			tvMonth.setText("近1月");
 			tvThreeMonth.setText("近3月");
@@ -288,6 +342,8 @@ public class MoneyProductListActivity extends BaseActivity implements
 				order = "desc";
 				key = "RRInSingleYear";
 			}
+			tvQrnh.setText("7日年化");
+			tvWfsy.setText("万分收益");
 			tvWeek.setText("近1周");
 			tvMonth.setText("近1月");
 			tvThreeMonth.setText("近3月");
@@ -310,12 +366,12 @@ public class MoneyProductListActivity extends BaseActivity implements
 
 			} else if (svContent.getChildAt(0).getMeasuredHeight() <= v
 					.getHeight() + v.getScrollY()) {// 底部
-			if(list.size()<10){
-				showToast("没有更多数据");
-			}else{
-				page++;
-				getProductListRequest();
-			}
+				if (list.size() < 10) {
+					showToast("没有更多数据");
+				} else {
+					page++;
+					getProductListRequest();
+				}
 
 			}
 			break;

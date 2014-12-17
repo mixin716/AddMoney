@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,8 +22,10 @@ import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.myproduct.RecordDetailsAdapter;
 import com.zc.addmony.bean.myproduct.MoneyChangeBean;
+import com.zc.addmony.bean.productlist.ProductListBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
+import com.zc.addmony.logic.LogicProductList;
 import com.zc.addmony.ui.buyproduct.BuyProductActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.views.XListView;
@@ -37,6 +40,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 	private Intent intent;
 	private List<MoneyChangeBean> list;
 	private MApplication app;
+	private ProductListBean bean;
 	private UserSharedData userShare;
 	private String zcbsum = "0", zrsy;
 
@@ -52,6 +56,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 		list = new ArrayList<MoneyChangeBean>();
 		adapter = new RecordDetailsAdapter(getApplicationContext(), list);
 		app = (MApplication) getApplication();
+		app.addAllActivity(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
 	}
 
@@ -81,7 +86,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 		btnMention.setOnClickListener(this);
 		btnRecharge.setOnClickListener(this);
 		getgetUserInfo();
-		getMoneyChageRequest();
+		// getZCBInfo();
 
 	}
 
@@ -90,15 +95,21 @@ public class IncreaseWealthActivity extends BaseActivity {
 		AjaxParams params = new AjaxParams();
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_USER_INRO, params, callBack, 0);
+	}
 
+	private void getZCBInfo() {
+		showLoading();
+		AjaxParams params = new AjaxParams();
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
+		httpRequest.get(Urls.ZCBINFO, params, callBack, 2);
 	}
 
 	private void getMoneyChageRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("fundcode", "320002");
+		// params.put("fundcode", "000380");
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
-		httpRequest.get(Urls.GET_MONEY_CHANGE, params, callBack, 1);
+		httpRequest.get(Urls.GET_ZCB_BUTTOM_INFO, params, callBack, 1);
 
 	}
 
@@ -115,18 +126,19 @@ public class IncreaseWealthActivity extends BaseActivity {
 				return;
 			}
 			intent = new Intent(this, SaleMoneyActivity.class);
-			app.fundBean.setFundcode("820002");
-			app.fundBean.setFundname("诺安货币A");
-			app.fundBean.setSharetype("A");
+			app.fundBean.setFundcode(app.zcbCode);
+			app.fundBean.setFundname("増财宝");
+			app.fundBean.setSharetype(app.zcbShareType);
 			startActivityForResult(intent, 101);
 			AnimUtil.pushLeftInAndOut(this);
 			break;
 		case R.id.view_increase_wealth_list_btn_recharge:// 充值
 			intent = new Intent(this, BuyProductActivity.class);
-			app.fundBean.setFundcode("820002");
+			app.fundBean.setFundcode(app.zcbCode);
 			app.fundBean.setFundname("増财宝");
-			app.fundBean.setSharetype("A");
+			app.fundBean.setSharetype(app.zcbShareType);
 			intent.putExtra("minPrice", "1000");
+			intent.putExtra("FundTypeCode", app.zcbFundtypecode);
 			startActivityForResult(intent, 101);
 			AnimUtil.pushLeftInAndOut(this);
 			break;
@@ -154,17 +166,25 @@ public class IncreaseWealthActivity extends BaseActivity {
 		case 1:
 			try {
 				dismissLoading();
-				JSONObject ojb = new JSONObject(jsonString);
-				JSONObject resultObj = new JSONObject(ojb.optString("results"));
-				JSONArray array = new JSONArray(resultObj.optString("returnlist"));
+				// JSONObject ojb = new JSONObject(jsonString);
+				// JSONObject resultObj = new
+				// JSONObject(ojb.optString("results"));
+				JSONArray array = new JSONArray(jsonString);
 				int len = array.length();
+				Log.e("lend...", len + "");
 				for (int i = 0; i < len; i++) {
 					MoneyChangeBean bean = new MoneyChangeBean();
 					JSONObject obj = array.getJSONObject(i);
 					bean.setFundname(obj.optString("fundname"));
 					bean.setHappeningsum(obj.optString("happeningsum"));
-					String time = obj.optString("date");
-					bean.setDate(time.substring(0, 4)+"-"+time.substring(4, 6)+"-"+time.substring(6, 8));
+					bean.setApplydate(obj.optString("applydate"));
+					bean.setApplyshare(obj.optString("applyshare"));
+					bean.setApplysum(obj.optString("applysum"));
+					bean.setCallingcode(obj.optString("callingcode"));
+					// bean.setBusinflagStr(obj.optString("businflagStr"));
+					// String time = obj.optString("date");
+					// bean.setDate(time.substring(0, 4) + "-"
+					// + time.substring(4, 6) + "-" + time.substring(6, 8));
 					list.add(bean);
 				}
 				// adapter = new RecordDetailsAdapter(getApplicationContext(),
@@ -176,7 +196,12 @@ public class IncreaseWealthActivity extends BaseActivity {
 				e.printStackTrace();
 			}
 			break;
-
+		case 2:
+			bean = LogicProductList.parseFundDetail(jsonString);
+			app.fundBean.setFundcode(bean.getFundcode());
+			app.fundBean.setFundname(bean.getFundname());
+			app.fundBean.setSharetype(bean.getSharetype());
+			break;
 		default:
 			break;
 		}

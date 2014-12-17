@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.jky.struct2.http.core.AjaxParams;
 import com.jky.struct2.http.entityhandle.HttpExceptionResult;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
@@ -21,6 +22,7 @@ public class MoreMainActivity extends BaseActivity {
 	private Button btLogout;
 	private UserSharedData userSharedData;
 	private LinearLayout llShare, llHelp, llOpinion, llUpdate, llAbout;
+	private MApplication app;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MoreMainActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
+		app = (MApplication) this.getApplication();
 		userSharedData = UserSharedData.getInstance(getApplicationContext());
 	}
 

@@ -25,6 +25,7 @@ import com.zc.addmony.bean.buyproduct.BanksBean;
 import com.zc.addmony.bean.buyproduct.BranchBean;
 import com.zc.addmony.bean.myproduct.OpenBankBean;
 import com.zc.addmony.common.Urls;
+import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicBuyProduct;
 import com.zc.addmony.ui.myproduct.RegisterSuccessActivity;
 import com.zc.addmony.ui.myproduct.RegisterThridActivity;
@@ -36,7 +37,7 @@ import com.zc.addmony.utils.PatternUtil;
 public class PerfectInformationActivity extends BaseActivity {
 	private MApplication mApplication;
 	private OpenBankBean obBean;
-	private TextView tvTop;//标记是注册还是添加银行卡
+	private TextView tvTop;// 标记是注册还是添加银行卡
 	private EditText edtName, edtIdCard, edtBankNum, edtPhone, edtCode;
 	private TextView tvBanks, tvProvince, tvCity, tvBranch;
 	private LinearLayout llBanks, llProvince, llCity, llBranch;
@@ -49,8 +50,9 @@ public class PerfectInformationActivity extends BaseActivity {
 	private String accoreqserial = "";// 获取验证码时返回的字段
 	private int position;
 	private List<BranchBean> branchBean;
-	private int addOrRegister;//来源标记 0为注册  1位添加银行卡
+	private int addOrRegister;// 来源标记 0为注册 1位添加银行卡
 	private int times;
+	private UserSharedData userShare;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class PerfectInformationActivity extends BaseActivity {
 
 	@Override
 	protected void initVariable() {
+		userShare = UserSharedData.getInstance(getApplicationContext());
 		addOrRegister = this.getIntent().getIntExtra("addOrRegister", 0);
 		branchBean = new ArrayList<BranchBean>();
 		bean = new ArrayList<BanksBean>();
@@ -69,14 +72,15 @@ public class PerfectInformationActivity extends BaseActivity {
 		branchList = new ArrayList<String>();
 		cityList = new ArrayList<String>();
 		mApplication = (MApplication) this.getApplication();
+		mApplication.addAllActivity(this);
 		obBean = mApplication.getObBean();
 	}
 
 	@Override
 	protected void setTitleViews() {
-		if(addOrRegister == 1){
+		if (addOrRegister == 1) {
 			titleText.setText("添加银行卡");
-		}else{
+		} else {
 			titleText.setText("注册");
 		}
 
@@ -109,8 +113,8 @@ public class PerfectInformationActivity extends BaseActivity {
 		llBranch.setOnClickListener(this);
 		llCity.setOnClickListener(this);
 		llProvince.setOnClickListener(this);
-		
-		if(addOrRegister == 1){
+
+		if (addOrRegister == 1) {
 			tvTop.setText("请添加银行卡");
 			btnNext.setText("添加");
 		}
@@ -161,9 +165,17 @@ public class PerfectInformationActivity extends BaseActivity {
 		AjaxParams params = new AjaxParams();
 		params.put("phone", phone);// 手机号
 		params.put("banknum", bankNum);// 银行卡号
-		params.put("name", obBean.getName());// 姓名
-		params.put("idcard", obBean.getIdcard());// 身份证号
-		httpRequest.get(Urls.OPEN_BANK_CODE, params, callBack, 5);
+		if(TextUtils.isEmpty(userShare.GetName())){
+			params.put("name", obBean.getName());// 姓名
+		}else{
+			params.put("name", userShare.GetName());// 姓名
+		}
+		if(TextUtils.isEmpty(userShare.GetIdcard())){
+			params.put("idcard", obBean.getIdcard());// 身份证号
+		}else{
+			params.put("idcard",userShare.GetIdcard());// 身份证号
+		}
+		httpRequest.get(Urls.OPEN_BANK_CODE_TWO, params, callBack, 5);
 	}
 
 	/** 验证信息 */
@@ -174,9 +186,37 @@ public class PerfectInformationActivity extends BaseActivity {
 		params.put("mobileauthcode", checkCode);
 		params.put("phone", phone);// 手机号
 		params.put("banknum", bankNum);// 银行卡号
-		params.put("name", obBean.getName());// 姓名
-		params.put("idcard", obBean.getIdcard());// 身份证号
+		if(TextUtils.isEmpty(userShare.GetName())){
+			params.put("name", obBean.getName());// 姓名
+		}else{
+			params.put("name", userShare.GetName());// 姓名
+		}
+		if(TextUtils.isEmpty(userShare.GetIdcard())){
+			params.put("idcard", obBean.getIdcard());// 身份证号
+		}else{
+			params.put("idcard",userShare.GetIdcard());// 身份证号
+		}
 		httpRequest.get(Urls.OPEN_BANK_CHECK, params, callBack, 6);
+	}
+
+	/** 添加银行卡 */
+	private void sendAddBank() {
+		showLoading();
+		AjaxParams params = new AjaxParams();
+		params.put("bnum", bankNum);// 银行卡号
+		params.put("bankcode", branchCode);// 银行代号
+		params.put("bankname", branch);// 银行名称
+		if(TextUtils.isEmpty(userShare.GetName())){
+			params.put("name", obBean.getName());// 姓名
+		}else{
+			params.put("name", userShare.GetName());// 姓名
+		}
+		if(TextUtils.isEmpty(userShare.GetIdcard())){
+			params.put("idcard", obBean.getIdcard());// 身份证号
+		}else{
+			params.put("idcard",userShare.GetIdcard());// 身份证号
+		}
+		httpRequest.get(Urls.REQUEST_ADD_BANK, params, callBack, 7);
 	}
 
 	private void sendPerfectRequest() {
@@ -259,15 +299,17 @@ public class PerfectInformationActivity extends BaseActivity {
 				showToast("请输入收到的验证码");
 			} else if (checkCode.length() != 6) {
 				showToast("请输入6位验证码");
+			} else if (TextUtils.isEmpty(accoreqserial)) {
+				showToast("请先获取验证码");
 			} else if (checkEmpty()) {
 				times = 0;
 				btnCode.setClickable(true);
 				btnCode.setText("发送验证码");
-				if(addOrRegister == 1){//添加银行卡
-					
-				}else{//注册流程
-					sendCheckMessage();
-				}
+				// if (addOrRegister == 1) {// 添加银行卡
+				//
+				// } else {// 注册流程
+				sendCheckMessage();
+				// }
 			}
 			break;
 		case R.id.activity_perfect_information_btn_code:// 银行开户手机号验证
@@ -399,13 +441,21 @@ public class PerfectInformationActivity extends BaseActivity {
 			obBean.setPhone(phone);
 			obBean.setProvince(province);
 			obBean.setCity(city);
-			intent = new Intent(this, RegisterThridActivity.class);
-			startActivity(intent);
+			if (addOrRegister == 1) {// 添加银行卡
+				sendAddBank();
+			} else {// 注册流程
+				intent = new Intent(this, RegisterThridActivity.class);
+				startActivity(intent);
+				this.finish();
+			}
+		case 7:
+			showToast("添加银行卡成功");
+			sendBroadcast(new Intent("refresh_banks"));
 			this.finish();
 			break;
 		}
 	}
-	
+
 	public Handler timeHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			if (times != 0 && times != 60) {
@@ -420,7 +470,6 @@ public class PerfectInformationActivity extends BaseActivity {
 
 		};
 	};
-
 
 	private boolean checkEmpty() {
 		if (TextUtils.isEmpty(banks)) {

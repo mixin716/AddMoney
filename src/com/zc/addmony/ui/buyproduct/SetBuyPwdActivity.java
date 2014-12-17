@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
@@ -21,6 +22,7 @@ public class SetBuyPwdActivity extends BaseActivity{
 	private Button btSure;
 	private UserSharedData userShare;
 	private String pwd;
+	private MApplication app;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class SetBuyPwdActivity extends BaseActivity{
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
 	}
 

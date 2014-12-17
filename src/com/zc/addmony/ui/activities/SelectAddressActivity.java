@@ -19,6 +19,7 @@ import com.zc.addmony.adapter.activities.PhoneAddressAdapter;
 import com.zc.addmony.bean.activities.AddressBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicActivities;
+import com.zc.addmony.utils.AnimUtil;
 
 public class SelectAddressActivity extends BaseActivity implements
 		OnItemClickListener {
@@ -113,7 +114,7 @@ public class SelectAddressActivity extends BaseActivity implements
 			address = list.get(arg2).getArea();
 			break;
 		case R.id.activity_select_address_lv_city:// 市
-			address = address+"，"+list.get(arg2).getArea();
+			address = address + "，" + list.get(arg2).getArea();
 			Intent intent = new Intent();
 			intent.putExtra("address", address);
 			intent.putExtra("aid", list.get(arg2).getAid());
@@ -125,6 +126,21 @@ public class SelectAddressActivity extends BaseActivity implements
 			break;
 		}
 
+	}
+
+	@Override
+	protected void doClickAction(int viewId) {
+		// TODO Auto-generated method stub
+		super.doClickAction(viewId);
+		switch (viewId) {
+		case R.id.title_iv_left:
+			this.finish();
+			AnimUtil.pushRightInAndOut(this);
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }

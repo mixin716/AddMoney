@@ -3,6 +3,7 @@ package com.zc.addmony.adapter.myproduct;
 import java.util.List;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ public class BuyProductsAdapter extends BaseAdapter {
 	private List<BuyProductsBean> list;
 	private ListViewPassValuetoActivityListener activityListener;
 	private String names[] = new String[] { "工商", "农业", "建设", "招商", "平安", "浦发",
-			"光大", "农业", "华夏","温州","中信" ,"中国"};
+			"光大", "农业", "华夏", "温州", "中信", "中国" };
 
 	public BuyProductsAdapter(Context context, List<BuyProductsBean> list) {
 		this.context = context;
@@ -78,15 +79,20 @@ public class BuyProductsAdapter extends BaseAdapter {
 					.findViewById(R.id.adapter_buy_products_tv_redeem);
 			holder.rlInRedeem = (RelativeLayout) convertView
 					.findViewById(R.id.adapter_buy_products_rl_inredeem);
+			holder.tvUnit = (TextView) convertView.findViewById(R.id.adapter_buy_products_tv_unit);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.tvName.setText(list.get(position).getmName());
-		holder.tvWf.setText(list.get(position).getmWf());
+		// if (TextUtils.isEmpty(list.get(position).getmWf())) {
+		// holder.tvWf.setText("万分收益：0.0000");
+		// } else {
+		holder.tvWf.setText("基金代码： " + list.get(position).getmFundcode());
+		// }
 		holder.tvHave.setText("￥" + list.get(position).getmHave() + "元");
 		holder.tvYestorday.setText(list.get(position).getmYestorday());
-		holder.tvNot.setText(list.get(position).getmNot());
+		
 		String bankNum = list.get(position).getmBank();
 		holder.tvBank.setText(list.get(position).getmBankName()
 				+ list.get(position).getmBank()
@@ -94,20 +100,33 @@ public class BuyProductsAdapter extends BaseAdapter {
 		for (int i = 0; i < names.length; i++) {
 			if (list.get(position).getmBankName().indexOf(names[i]) != -1) {
 				holder.tvBank.setText(names[i]
+						+ "("
 						+ list.get(position)
 								.getmBank()
 								.substring(bankNum.length() - 7,
-										bankNum.length()));
+										bankNum.length()) + ")");
 
 			}
 		}
-
-		if(list.get(position).getShuhui().equals("0")){
-			holder.rlInRedeem.setVisibility(View.INVISIBLE);
-		}else{
-			holder.tvInRedeem.setText(list.get(position).getShuhui()+"");
-		}
 		
+		if(!TextUtils.isEmpty(list.get(position).getmFundTypeCode())){
+			if(!"1109".equals(list.get(position).getmFundTypeCode())){
+				holder.tvUnit.setText("基金市值：");
+				holder.tvNot.setText(list.get(position).getMarketvalue());
+			}else{
+				holder.tvUnit.setText("未结算收益：");
+				holder.tvNot.setText(list.get(position).getmNot());
+			}
+		}
+			
+//			list.get(position).getMarketvalue()
+
+		// if(list.get(position).getShuhui().equals("0")){
+		// holder.rlInRedeem.setVisibility(View.INVISIBLE);
+		// }else{
+		// holder.tvInRedeem.setText(list.get(position).getShuhui()+"");
+		// }
+		//
 		holder.tvBuy.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -129,7 +148,7 @@ public class BuyProductsAdapter extends BaseAdapter {
 
 	class ViewHolder {
 		TextView tvName, tvWf, tvHave, tvYestorday, tvNot, tvInRedeem, tvBuy,
-				tvRedeem, tvBank;
+				tvRedeem, tvBank,tvUnit;
 		RelativeLayout rlInRedeem;
 	}
 

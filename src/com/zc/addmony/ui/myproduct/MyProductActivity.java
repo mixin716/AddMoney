@@ -8,7 +8,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -23,6 +26,7 @@ import android.widget.TextView;
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.HomeTabActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.myproduct.LoginBean;
 import com.zc.addmony.common.Urls;
@@ -46,6 +50,17 @@ public class MyProductActivity extends BaseActivity {
 	private LoginBean bean;
 	private String PHPSESSID = null;
 
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			if("refresh_my_product".equals(intent.getAction())){
+				requestUserInfo();
+			}
+		}
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -64,7 +79,7 @@ public class MyProductActivity extends BaseActivity {
 				llNoLogin.setVisibility(View.GONE);
 				llIsLogin.setVisibility(View.VISIBLE);
 			}
-			requestUserInfo();
+			
 		} else {
 			if (llNoLogin != null) {
 				llNoLogin.setVisibility(View.VISIBLE);
@@ -77,6 +92,9 @@ public class MyProductActivity extends BaseActivity {
 	protected void initVariable() {
 		// TODO Auto-generated method stub
 		bean = new LoginBean();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("refresh_my_product");
+		registerReceiver(receiver, filter);
 	}
 
 	@Override
@@ -227,7 +245,6 @@ public class MyProductActivity extends BaseActivity {
 				if ("PHPSESSID".equals(cookies.get(i).getName())) {
 					PHPSESSID = cookies.get(i).getValue();
 					userShare.SaveSession(PHPSESSID);
-					Log.e("PHPSESSID", PHPSESSID + "");
 					break;
 				}
 			}
@@ -242,9 +259,11 @@ public class MyProductActivity extends BaseActivity {
 		switch (reqeustCode) {
 		case 0:
 			try {
+				llNoLogin.setVisibility(View.GONE);
+				llIsLogin.setVisibility(View.VISIBLE);
 				JSONObject obj = new JSONObject(jsonString);
 				tvMoneyAll.setText(obj.optInt("sum") + "元");
-				tvMoneyYes.setText(obj.optDouble("zrsy") + "元");
+				tvMoneyYes.setText(obj.optString("zcbsum") + "元");
 				tvBuy.setText("共" + obj.optInt("count") + "个基金产品");
 				tvName.setText(obj.optString("realname"));
 				tvPhone.setText(obj.optString("phone"));
@@ -272,8 +291,6 @@ public class MyProductActivity extends BaseActivity {
 			userShare.SaveToken(bean.getToken());
 			userShare.SaveRealname(bean.getRealname());
 			userShare.SaveIdcard(bean.getIdcard());
-			llNoLogin.setVisibility(View.GONE);
-			llIsLogin.setVisibility(View.VISIBLE);
 			break;
 		default:
 			break;

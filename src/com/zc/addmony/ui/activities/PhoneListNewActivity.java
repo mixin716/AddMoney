@@ -22,6 +22,7 @@ import com.zc.addmony.adapter.activities.PhoneListNewAdapter;
 import com.zc.addmony.bean.activities.ShowPhoneBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicActivities;
+import com.zc.addmony.utils.AnimUtil;
 
 public class PhoneListNewActivity extends BaseActivity implements OnItemClickListener {
 	private ListView lvPhone;
@@ -108,6 +109,21 @@ public class PhoneListNewActivity extends BaseActivity implements OnItemClickLis
 		setResult(RESULT_OK, intent);
 		finish();
 		
+	}
+	
+	@Override
+	protected void doClickAction(int viewId) {
+		// TODO Auto-generated method stub
+		super.doClickAction(viewId);
+		switch (viewId) {
+		case R.id.title_iv_left:
+			this.finish();
+			AnimUtil.pushRightInAndOut(this);
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }

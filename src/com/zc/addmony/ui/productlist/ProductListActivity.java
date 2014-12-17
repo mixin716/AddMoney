@@ -24,6 +24,7 @@ import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.productlist.ProductListAdapter;
 import com.zc.addmony.bean.productlist.ProductBean;
+import com.zc.addmony.bean.productlist.ProductListBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicProductList;
 import com.zc.addmony.utils.AnimUtil;
@@ -39,10 +40,13 @@ public class ProductListActivity extends BaseActivity implements
 	private LinearLayout llPerson, llWf, llRate;
 	private TextView tvPerson, tvWf, tvRate;
 	private ImageView imgPerson, imgWf, imgRate;
-	private List<ProductBean> requestList, allList;
+	private List<ProductListBean> allList;
+	private List<ProductListBean> list;
 	private ProductListAdapter adapter;
 	private int pages = 1, pageSize;
-	private String act = "g";// g 购买人数 w 万分收益
+	private String key = "DailyProfit";// g 购买人数 DailyProfit 万分收益
+										// LatestWeeklyYield
+	private String orderby = "asc";// 倒序还是正序，asc 正；desc 倒
 	private int desc = 1;
 
 	@Override
@@ -60,8 +64,8 @@ public class ProductListActivity extends BaseActivity implements
 	protected void initVariable() {
 		// TODO Auto-generated method stub
 		app = (MApplication) this.getApplication();
-		requestList = new ArrayList<ProductBean>();
-		allList = new ArrayList<ProductBean>();
+		list = new ArrayList<ProductListBean>();
+		allList = new ArrayList<ProductListBean>();
 		adapter = new ProductListAdapter(getApplicationContext(), allList);
 	}
 
@@ -108,7 +112,7 @@ public class ProductListActivity extends BaseActivity implements
 			pages = 0;
 			tvPerson.setTextColor(this.getResources().getColor(
 					R.color.normal_purple));
-			if ("g".equals(act)) {
+			if ("DailyProfit".equals(key)) {
 				if (desc == 0) {
 					imgPerson
 							.setImageResource(R.drawable.ic_product_list_arrow_bttom_press);
@@ -121,7 +125,7 @@ public class ProductListActivity extends BaseActivity implements
 			} else {
 				imgPerson
 						.setImageResource(R.drawable.ic_product_list_arrow_bttom_press);
-				act = "g";
+				key = "DailyProfit";
 				desc = 1;
 			}
 			requestData();
@@ -132,7 +136,7 @@ public class ProductListActivity extends BaseActivity implements
 			pages = 0;
 			tvWf.setTextColor(this.getResources().getColor(
 					R.color.normal_purple));
-			if ("w".equals(act)) {
+			if ("DailyProfit".equals(key)) {
 				if (desc == 0) {
 					imgWf.setImageResource(R.drawable.ic_product_list_arrow_bttom_press);
 					desc = 1;
@@ -142,7 +146,7 @@ public class ProductListActivity extends BaseActivity implements
 				}
 			} else {
 				imgWf.setImageResource(R.drawable.ic_product_list_arrow_bttom_press);
-				act = "w";
+				key = "DailyProfit";
 				desc = 1;
 			}
 			requestData();
@@ -153,7 +157,7 @@ public class ProductListActivity extends BaseActivity implements
 			pages = 0;
 			tvRate.setTextColor(this.getResources().getColor(
 					R.color.normal_purple));
-			if ("w".equals(act) || "g".equals(act)) {
+			if ("DailyProfit".equals(key) || "DailyProfit".equals(key)) {
 				imgRate.setImageResource(R.drawable.ic_product_list_arrow_bttom_press);
 				desc = 1;
 			} else {
@@ -165,7 +169,7 @@ public class ProductListActivity extends BaseActivity implements
 					desc = 0;
 				}
 			}
-			act = "y";
+			key = "LatestWeeklyYield";
 			requestData();
 			break;
 		default:
@@ -204,11 +208,16 @@ public class ProductListActivity extends BaseActivity implements
 	/** 请求数据 */
 	public void requestData() {
 		AjaxParams params = new AjaxParams();
-		params.put("act", act);
-		params.put("desc", desc + "");
-		params.put("my", 10 + "");
-		params.put("p", pages + "");
-		httpRequest.get(Urls.PRODUCT_LIST, params, callBack, 0);
+		if (desc == 0) {
+			params.put("orderby", "desc");// 倒序还是正序，asc 正；desc 倒
+		} else {
+			params.put("orderby", "asc");// 倒序还是正序，asc 正；desc 倒
+		}
+		params.put("key", key);// 排序参照的字段
+		params.put("page", pages + "");// 页码 1开始
+		params.put("listRows", 10 + "");// 每页条数
+		params.put("fundType", "1109");// 基金类型
+		httpRequest.get(Urls.PRODUCT_LIST_TWO, params, callBack, 0);
 	}
 
 	public void stop() {
@@ -220,20 +229,13 @@ public class ProductListActivity extends BaseActivity implements
 	protected void handleJson(int reqeustCode, String jsonString, String message) {
 		// TODO Auto-generated method stub
 		super.handleJson(reqeustCode, jsonString, message);
-		try {
-			JSONObject obj = new JSONObject(jsonString);
-			requestList.clear();
-			requestList = LogicProductList.parseProductList(obj
-					.optString("list"));
-			for (ProductBean bean : requestList) {
-				allList.add(bean);
-			}
-			adapter.notifyDataSetChanged();
-			stop();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		list.clear();
+		list = LogicProductList.parseProductListElse(jsonString);
+		for (ProductListBean bean : list) {
+			allList.add(bean);
 		}
+		adapter.notifyDataSetChanged();
+		stop();
 	}
 
 	@Override
@@ -241,7 +243,7 @@ public class ProductListActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(this, ProductDetailActivity.class);
 		if (TextUtils.isEmpty(allList.get(arg2 - 1).getSharetype())
-				||"null".equals(allList.get(arg2 - 1).getSharetype())) {
+				|| "null".equals(allList.get(arg2 - 1).getSharetype())) {
 			app.fundBean.setSharetype("A");
 		} else {
 			app.fundBean.setSharetype(allList.get(arg2 - 1).getSharetype());

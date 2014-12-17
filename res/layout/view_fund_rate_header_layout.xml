@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/view_rate_header_tv_unit"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="单位净值"
+        android:textColor="@color/text_color_888888"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/view_rate_header_tv_qrnh"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="7日年化↓"
+        android:textColor="@color/text_color_888888"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/view_rate_header_tv_wfsy"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="万分收益"
+        android:textColor="@color/text_color_888888"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/view_rate_header_tv_week"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="近1周"
+        android:textColor="@color/text_color_888888"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/view_rate_header_tv_month"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="近1月"
+        android:textColor="@color/text_color_888888"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/view_rate_header_tv_three"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="近3月"
+        android:textColor="@color/text_color_888888"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/view_rate_header_tv_six_month"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="近半年"
+        android:textColor="@color/text_color_888888"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/view_rate_header_tv_recent_year"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="近1年"
+        android:textColor="@color/text_color_888888"
+        android:textSize="16sp" />
+
+</LinearLayout>

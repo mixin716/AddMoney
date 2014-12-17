@@ -188,10 +188,10 @@ public class BondProductListActivity extends BaseActivity implements
 			app.fundBean.setFundcode(allList.get(position - 1).getFundcode());
 			app.setPdBean(allList.get(position - 1));
 			Intent intent;
-			if("1101".equals(allList.get(position-1).getFundTypeCode())){
-				intent = new Intent(this, StockDetailActivity.class);
-			}else{
+			if("1109".equals(allList.get(position-1).getFundTypeCode())){
 				intent = new Intent(this, ProductDetailActivity.class);
+			}else{
+				intent = new Intent(this, StockDetailActivity.class);
 			}
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(this);

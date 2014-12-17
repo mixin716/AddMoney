@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.myproduct.TodayDealAdapter;
 import com.zc.addmony.bean.productlist.ProductBean;
@@ -17,8 +18,10 @@ import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicProductList;
 import com.zc.addmony.utils.AnimUtil;
 
+/** 当日交易申请*/
 public class TodayDealActivity extends BaseActivity {
 
+	private MApplication app;
 	private ListView lvContent;
 	private TodayDealAdapter adapter;
 	private List<ProductBean> list;
@@ -33,6 +36,8 @@ public class TodayDealActivity extends BaseActivity {
 
 	@Override
 	protected void initVariable() {
+		app = (MApplication) this.getApplication();
+		app.addAllActivity(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
 		list = new ArrayList<ProductBean>();
 		getTodayDealRequest();

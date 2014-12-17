@@ -2,6 +2,9 @@ package com.zc.addmony;
 
 import java.text.DecimalFormat;
 import org.json.JSONException;
+
+import com.jky.struct2.bitmap.FinalBitmap;
+import com.jky.struct2.bitmap.FinalBitmapManager;
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.bean.HomeBean;
 import com.zc.addmony.common.Urls;
@@ -35,15 +38,17 @@ import android.widget.Toast;
 
 public class HomeActivity extends BaseActivity {
 	private TextView tvTimes, tvRate, tvBank, tvInstitution, tvName,
-			tvMinPrice, tvBought;
+			tvMinPrice, tvBought, tvSmsm;
 	private TextView tvFristPhone, tvFristMoney, tvSecondPhone, tvSecondMoney,
 			tvThirdPhone, tvThirdMoney;
+	private ImageView imgFund;
 	private HomeBean bean;
 	private RelativeLayout rlTodayContent, rlIncreaseWealth;
 	private Intent intent;
 	private MApplication app;
 	private UserSharedData User;
 	private ImageView ivTopActivity;
+	private FinalBitmap finalBitmap;
 	/** 用于判断退出 */
 	private boolean isExit = false;
 	private boolean activitysFlag = false;// 活动标示
@@ -61,7 +66,9 @@ public class HomeActivity extends BaseActivity {
 		app = (MApplication) getApplication();
 		User = UserSharedData.getInstance(getApplicationContext());
 		bean = new HomeBean();
-
+		finalBitmap = FinalBitmapManager.getFinalBitmapManager(
+				getApplicationContext()).getFinalBitmap(
+				FinalBitmapManager.IMG_SMALL);
 		// if (!TextUtils.isEmpty(LockPatternUtils.getInstance(this)
 		// .getLockPaternString("user_key"))) {
 		// app.startVerify();
@@ -84,6 +91,7 @@ public class HomeActivity extends BaseActivity {
 
 	@Override
 	protected void setViews() {
+		imgFund = (ImageView) findViewById(R.id.activity_home_iv_today_icon);
 		ivTopActivity = (ImageView) findViewById(R.id.activity_home_iv_activity);
 		tvBank = (TextView) findViewById(R.id.activity_home_tv_supervise_bank);
 		tvFristMoney = (TextView) findViewById(R.id.activity_home_income_tv_frist_money);
@@ -98,6 +106,7 @@ public class HomeActivity extends BaseActivity {
 		tvName = (TextView) findViewById(R.id.activity_home_today_tv_name);
 		tvMinPrice = (TextView) findViewById(R.id.activity_home_today_tv_minprice);
 		tvBought = (TextView) findViewById(R.id.activity_home_today_tv_bought);
+		tvSmsm = (TextView) findViewById(R.id.activity_home_today_tv_smsm);
 		rlIncreaseWealth = (RelativeLayout) findViewById(R.id.activity_home_rl_increase_wealth);
 		rlTodayContent = (RelativeLayout) findViewById(R.id.activity_home_rl_today_content);
 		rlIncreaseWealth.setOnClickListener(this);
@@ -127,13 +136,13 @@ public class HomeActivity extends BaseActivity {
 	protected void doClickAction(int viewId) {
 		switch (viewId) {
 		case R.id.activity_home_iv_activity:// 活动
-//			if (User.GetActivitys()) {
-//				intent = new Intent(this, OrderInformationActivity.class);
-//			} else {
+			if ("0".equals(bean.getActivitysType())) {
+				showToast(bean.getActivitysMessage());
+			} else {
 				intent = new Intent(this, ActivitiesRuleActivity.class);
-//			}
-			startActivity(intent);
-			AnimUtil.pushLeftInAndOut(this);
+				startActivity(intent);
+				AnimUtil.pushLeftInAndOut(this);
+			}
 			break;
 		case R.id.activity_home_rl_increase_wealth:// 增财宝
 			if (User.GetFlag()) {
@@ -170,27 +179,34 @@ public class HomeActivity extends BaseActivity {
 					showToast("数据为空");
 				} else {
 					bean = LogicHome.pareseHome(jsonString);
+					app.zcbCode = bean.getZcbCode();
+					app.zcbShareType = bean.getZcbShareType();
+					app.zcbFundtypecode = bean.getZcbFundtypecode();
 					tvTimes.setText(bean.getBeishu() + "倍");
 					DecimalFormat df = new DecimalFormat("0.00");
-					tvFristPhone
-							.setText(bean.getPaiming().get(0).getUsername());
-					tvFristMoney.setText("￥"
-							+ bean.getPaiming().get(0).getIncome());
-					tvSecondPhone.setText(bean.getPaiming().get(1)
-							.getUsername());
-					tvSecondMoney.setText("￥"
-							+ bean.getPaiming().get(1).getIncome());
-					tvThirdPhone
-							.setText(bean.getPaiming().get(2).getUsername());
-					tvThirdMoney.setText("￥"
-							+ bean.getPaiming().get(2).getIncome());
+					// tvFristPhone
+					// .setText(bean.getPaiming().get(0).getUsername());
+					// tvFristMoney.setText("￥"
+					// + bean.getPaiming().get(0).getIncome());
+					// tvSecondPhone.setText(bean.getPaiming().get(1)
+					// .getUsername());
+					// tvSecondMoney.setText("￥"
+					// + bean.getPaiming().get(1).getIncome());
+					// tvThirdPhone
+					// .setText(bean.getPaiming().get(2).getUsername());
+					// tvThirdMoney.setText("￥"
+					// + bean.getPaiming().get(2).getIncome());
 
 					tvName.setText(bean.getTuijian().getFundname());// 推荐基金名
 					tvRate.setText(df.format(Double.valueOf(bean.getTuijian()
 							.getIncomeratio())) + "%");// 推进基金年化效益
 					tvMinPrice.setText(bean.getTuijian().getMinprice() + "起购");
 					tvBought.setText(bean.getTuijian().getBought() + "人已购");
-
+					tvSmsm.setText(bean.getTuijian().getBuyinfo());
+					finalBitmap.display(imgFund, bean.getImgUrl(),
+							R.drawable.ic_home_today_icon);
+					finalBitmap.display(ivTopActivity, bean.getActivitysImg(),
+							R.drawable.ic_home_activity_top_icon);
 				}
 
 			} catch (JSONException e) {

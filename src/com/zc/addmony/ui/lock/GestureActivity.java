@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.common.ToastUtil;
 import com.zc.addmony.common.UserSharedData;
@@ -41,6 +42,7 @@ public class GestureActivity extends BaseFragmentActivity implements
 	public static boolean IS_SHOW = false;// 是否运行了
 
 	private UserSharedData userShare;
+	private MApplication app;
 
 	@Override
 	protected int getContentViewID() {
@@ -190,6 +192,10 @@ public class GestureActivity extends BaseFragmentActivity implements
 	public void logout() {
 		sendBroadcast(new Intent("close_product_set"));
 		userShare.clearUserInfomation();
+		mApplication.clearAllActivity();
+		Intent intent = new Intent("refresh_tab");
+		intent.putExtra("intoSelect", 3);
+		sendBroadcast(intent);
 		LockPatternUtils.getInstance(CTX).saveLockPattern(
 				null, user_key);
 		GestureActivity.this.finish();

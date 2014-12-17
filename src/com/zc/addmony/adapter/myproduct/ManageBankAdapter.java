@@ -6,6 +6,7 @@ import com.zc.addmony.bean.myproduct.ManageBankBean;
 import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -78,14 +79,20 @@ public class ManageBankAdapter extends BaseAdapter {
 			holder = (ViewHolder) view.getTag();
 		}
 
-		holder.tvName.setText(banks.get(position).getBankName()
-				+ "（***"
-				+ banks.get(position)
-						.getBank_num()
-						.substring(
-								banks.get(position).getBank_num().length() - 4,
-								banks.get(position).getBank_num().length())
-				+ "）");
+		if (!TextUtils.isEmpty(banks.get(position).getBank_num())) {
+			holder.tvName
+					.setText(banks.get(position).getBankName()
+							+ "（***"
+							+ banks.get(position)
+									.getBank_num()
+									.substring(
+											banks.get(position).getBank_num()
+													.length() - 4,
+											banks.get(position).getBank_num()
+													.length()) + "）");
+		}else{
+			holder.tvName.setText(banks.get(position).getBankName());
+		}
 
 		if (banks.get(position).getFlag() == 0) {
 			holder.tvNull.setVisibility(View.VISIBLE);
@@ -94,6 +101,18 @@ public class ManageBankAdapter extends BaseAdapter {
 			holder.tvNull.setVisibility(View.GONE);
 			holder.llHave.setVisibility(View.VISIBLE);
 		}
+
+		if (banks.get(position).getLimits() != null
+				&& banks.get(position).getLimits().size() != 0) {
+			// for (int i = 0; i < banks.get(position).getLimits().size(); i++)
+			// {
+			// banks.get(position).getLimits().get(i) = string;
+			// }
+			holder.tvLimit.setText("支付限额：单笔限额"
+					+ banks.get(position).getLimits().get(0) + ",单日限额"
+					+ banks.get(position).getLimits().get(1));
+		}
+
 		String bankName = banks.get(position).getBankName();
 		if (bankName.indexOf("工商") != -1) {
 			holder.imageBank.setImageResource(R.drawable.ic_bank_gongshang);
@@ -134,8 +153,9 @@ public class ManageBankAdapter extends BaseAdapter {
 				if (banks.size() > 2) {
 					activityListener.doPassActionListener(null, 2, position,
 							"解除绑定");
-				}else{
-					Toast.makeText(context, "您当前账户只有一张银行卡，暂不能解除绑定", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(context, "您当前账户只有一张银行卡，暂不能解除绑定",
+							Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
