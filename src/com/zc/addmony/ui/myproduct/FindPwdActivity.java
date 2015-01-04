@@ -42,6 +42,7 @@ public class FindPwdActivity extends BaseActivity {
 	private ArrayList<String> banksList;
 	private List<BanksBean> bean;
 	private String accoreqserial = "";// 获取验证码时返回的字段
+	private String otherserial;
 	private String mPhone;
 	public String banks, province, city, branch, bankCode, branchCode;
 	private String name, idCard, userName, bankNum, phone, checkCode;
@@ -201,6 +202,7 @@ public class FindPwdActivity extends BaseActivity {
 		AjaxParams params = new AjaxParams();
 		params.put("accoreqserial", accoreqserial);
 		params.put("mobileauthcode", checkCode);
+		params.put("otherserial", otherserial);
 		params.put("phone", phone);// 手机号
 		params.put("banknum", bankNum);// 银行卡号
 		params.put("name", userName);// 姓名
@@ -275,6 +277,7 @@ public class FindPwdActivity extends BaseActivity {
 			try {
 				JSONObject obj = new JSONObject(jsonString);
 				accoreqserial = obj.getString("accoreqserial");
+				otherserial = obj.optString("otherserial");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

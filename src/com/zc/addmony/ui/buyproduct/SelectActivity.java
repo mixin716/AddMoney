@@ -72,7 +72,6 @@ public class SelectActivity extends BaseActivity implements OnItemClickListener 
 		setResult(RESULT_OK, intent);
 		finish();
 		AnimUtil.pushRightInAndOut(this);
-		
 	}
 
 }

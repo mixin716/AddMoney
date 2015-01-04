@@ -11,6 +11,8 @@ public class ProductBean {
 	private String fundCompany;// ��洪��������
 	private String applysum;// 申请金额
 	private String sharetype;
+	private String applyshare;
+	private String callingcode;
 
 	public String getApplysum() {
 		return applysum;
@@ -74,6 +76,22 @@ public class ProductBean {
 
 	public void setSharetype(String sharetype) {
 		this.sharetype = sharetype;
+	}
+
+	public String getApplyshare() {
+		return applyshare;
+	}
+
+	public void setApplyshare(String applyshare) {
+		this.applyshare = applyshare;
+	}
+
+	public String getCallingcode() {
+		return callingcode;
+	}
+
+	public void setCallingcode(String callingcode) {
+		this.callingcode = callingcode;
 	}
 
 }

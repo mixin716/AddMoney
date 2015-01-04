@@ -176,6 +176,15 @@ public class UserSharedData {
 	public String GetTradeacco() {
 		return share.getString("tradeacco", null);
 	}
+	/** 保存登录账号*/
+	public void SaveLoginAccount(String str){
+		edit.putString("account", str);
+		edit.commit();
+	}
+	/** 获取登录账号*/
+	public String getAccount(){
+		return share.getString("account", null);
+	}
 
 	/** 清除用户数据 */
 	public void clearUserInfomation() {
@@ -192,5 +201,6 @@ public class UserSharedData {
 		this.SaveSession(null);
 		this.SaveToken(null);
 		this.SaveTradeacco(null);
+		this.SaveLoginAccount(null);
 	}
 }

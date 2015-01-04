@@ -44,7 +44,7 @@ public class Urls {
 	/** 购买基金 */
 	public static String BUY_PRODUCT = common + "buyFund";
 	/** 注册获取银行列表*/
-	public static String GET_SUPPORT_BANKS = common +"getBnakList";
+	public static String GET_SUPPORT_BANKS = common +"getBankList";
 	/** 银行开户手机号获取验证码*/
 	public static String OPEN_BANK_CODE = common +"sendMessage";
 	public static String OPEN_BANK_CODE_TWO = common +"sendMessage2";
@@ -64,6 +64,8 @@ public class Urls {
 	public static String GET_USER_FUND_INFO = common + "getUserFundInfo";
 	/** 赎回 */
 	public static String SALE_MONEY = common + "sale";
+	/** 赎回获取银行卡*/
+	public static String GETFundSharelist =common+ "getFundSharelist";
 	/** 获取我的基金列表*/
 	public static String GET_MY_BUY_ORDERS = common +"getUserOrderList";
 	/** 获取手机类型 */

@@ -121,7 +121,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 			AnimUtil.pushRightInAndOut(this);
 			break;
 		case R.id.view_increase_wealth_list_btn_mention:// 提现/赎回
-			if (Integer.valueOf(zcbsum) == 0) {
+			if (Float.valueOf(zcbsum) == 0) {
 				showToast("当前可用余额为0");
 				return;
 			}
@@ -171,7 +171,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 				// JSONObject(ojb.optString("results"));
 				JSONArray array = new JSONArray(jsonString);
 				int len = array.length();
-				Log.e("lend...", len + "");
+				list.clear();
 				for (int i = 0; i < len; i++) {
 					MoneyChangeBean bean = new MoneyChangeBean();
 					JSONObject obj = array.getJSONObject(i);

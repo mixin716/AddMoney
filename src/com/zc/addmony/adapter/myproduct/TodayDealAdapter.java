@@ -63,7 +63,12 @@ public class TodayDealAdapter extends BaseAdapter {
 		String foundCode = list.get(position).getFundcode();
 		holder.tvName.setText(list.get(position).getFundname());
 		holder.tvCode.setText(foundCode);
-		holder.tvMoney.setText(list.get(position).getApplysum() + "");
+		//024 sum
+		if("024".equals(list.get(position).getCallingcode())){
+			holder.tvMoney.setText(list.get(position).getApplyshare()+"");
+	 	}else{
+	 		holder.tvMoney.setText(list.get(position).getApplysum() + "");
+	 	}
 		if (foundCode.equals("0")) {// 未校验
 			holder.tvState.setText("未校验");
 		} else if (foundCode.equals("1")) {

@@ -1,5 +1,8 @@
 package com.zc.addmony.ui.myproduct;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,8 +19,11 @@ import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
+import com.zc.addmony.bean.myproduct.SaleBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
+import com.zc.addmony.logic.LogicMyProduct;
+import com.zc.addmony.ui.buyproduct.SelectActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
 
@@ -25,12 +31,16 @@ import com.zc.addmony.utils.KeyBoard;
 public class SaleMoneyActivity extends BaseActivity {
 	private MApplication app;
 	private LinearLayout llNo;
-	private TextView tvFundName, tvSaleMoney,tvSaleTitle, tvHaveMoney, tvBankCode;
+	private TextView tvFundName, tvSaleMoney, tvSaleTitle, tvHaveMoney,
+			tvBankCode;
 	private EditText edtMinSaleMoney, edtSalePwd;
 	private Button btnOk;
 	private String fundName, saleMoney, haveMoney, bankName, bankCode,
 			minMoney, salePwd;
 	private UserSharedData userShare;
+	private List<SaleBean> list;
+	private ArrayList<String> names;
+	private int position = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +54,8 @@ public class SaleMoneyActivity extends BaseActivity {
 		app = (MApplication) getApplication();
 		app.addAllActivity(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
+		list = new ArrayList<SaleBean>();
+		names = new ArrayList<String>();
 	}
 
 	@Override
@@ -65,14 +77,16 @@ public class SaleMoneyActivity extends BaseActivity {
 		edtSalePwd = (EditText) findViewById(R.id.activity_sale_money_edt_pwd);
 		btnOk = (Button) findViewById(R.id.activity_sale_money_btn_ok);
 		btnOk.setOnClickListener(this);
-		getUserFundInfoRequest();
-
+		tvBankCode.setOnClickListener(this);
+		// getUserFundInfoRequest();
+		getFundSharelist();
 	}
 
-	private void getUserFundInfoRequest() {
+	private void getUserFundInfoRequest(String fundcode) {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("fundcode", app.fundBean.getFundcode());
+		params.put("fundcode", fundcode);
+		// params.put("fundcode", app.fundBean.getFundcode());
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.GET_USER_FUND_INFO, params, callBack, 0);
 
@@ -81,13 +95,19 @@ public class SaleMoneyActivity extends BaseActivity {
 	private void getSaleMoneyRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		// params.put("fundcode", "820002");
-		params.put("fundcode", app.fundBean.getFundcode());
-		params.put("sharetype", app.fundBean.getSharetype());
+		params.put("fundcode", list.get(position).getFundcode());
+		params.put("sharetype", list.get(position).getSharetype());
 		params.put("applysum", minMoney);
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.SALE_MONEY, params, callBack, 1);
+	}
 
+	/** 可赎回金额 */
+	private void getFundSharelist() {
+		AjaxParams params = new AjaxParams();
+		params.put("fundcode", app.zcbCode);
+		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
+		httpRequest.get(Urls.GETFundSharelist, params, callBack, 2);
 	}
 
 	@Override
@@ -113,7 +133,15 @@ public class SaleMoneyActivity extends BaseActivity {
 				}
 			}
 			break;
+		case R.id.activity_sale_money_tv_bank_code:
+			if (list.size() > 1) {
 
+				Intent intent = new Intent(this, SelectActivity.class);
+				intent.putStringArrayListExtra("nameList", names);
+				startActivityForResult(intent, 101);
+				AnimUtil.pushLeftInAndOut(this);
+			}
+			break;
 		default:
 			break;
 		}
@@ -145,12 +173,13 @@ public class SaleMoneyActivity extends BaseActivity {
 					tvFundName.setText(fundName);
 					tvHaveMoney.setText("￥" + haveMoney);
 					tvSaleMoney.setText("￥" + saleMoney);
-					
-					JSONObject fundObj = new JSONObject(obj.optString("fundinfo"));
-					if(!TextUtils.isEmpty(fundObj.optString("FundTypeCode"))){
-						if("1109".equals(fundObj.optString("FundTypeCode"))){
+
+					JSONObject fundObj = new JSONObject(
+							obj.optString("fundinfo"));
+					if (!TextUtils.isEmpty(fundObj.optString("FundTypeCode"))) {
+						if ("1109".equals(fundObj.optString("FundTypeCode"))) {
 							tvSaleTitle.setText("可赎回金额:");
-						}else{
+						} else {
 							tvSaleTitle.setText("可赎回份额:");
 							llNo.setVisibility(View.GONE);
 						}
@@ -169,9 +198,63 @@ public class SaleMoneyActivity extends BaseActivity {
 			AnimUtil.pushRightInAndOut(this);
 			showToast("赎回成功");
 			break;
+		case 2:
+			list = LogicMyProduct.parseSale(jsonString);
+			setData(0);
+			for (SaleBean bean : list) {
+				if (!TextUtils.isEmpty(bean.getBankacco())) {
+					String code = "***"
+							+ bean.getBankacco().substring(
+									bean.getBankacco().length() - 4,
+									bean.getBankacco().length());
+					names.add(bean.getBankname() + "(" + code + ")");
+				} else {
+					names.add(bean.getBankname());
+				}
 
-		default:
+			}
 			break;
+		}
+	}
+
+	public void setData(int pos) {
+		position = pos;
+		SaleBean bean = list.get(pos);
+		getUserFundInfoRequest(list.get(position).getFundcode());
+		if (!TextUtils.isEmpty(bean.getBankacco())) {
+			String code = "***"
+					+ bean.getBankacco().substring(
+							bean.getBankacco().length() - 4,
+							bean.getBankacco().length());
+			tvBankCode.setText(bean.getBankname() + "(" + code + ")");
+		} else {
+			tvBankCode.setText(bean.getBankname());
+		}
+
+		tvFundName.setText(bean.getFundname());
+		tvHaveMoney.setText("￥" + bean.getUnpaidincome());
+		tvSaleMoney.setText("￥" + bean.getUsableremainshare());
+
+		if (!TextUtils.isEmpty(bean.getFundTypeCode())) {
+			if ("1109".equals(bean.getFundTypeCode())) {
+				tvSaleTitle.setText("可赎回金额:");
+			} else {
+				tvSaleTitle.setText("可赎回份额:");
+				llNo.setVisibility(View.GONE);
+			}
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (data != null) {
+
+			String name = data.getStringExtra("name");
+			position = data.getIntExtra("postion", 0);
+			// tvBankCode.setText(name);
+			setData(position);
 		}
 	}
 

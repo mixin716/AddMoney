@@ -149,6 +149,7 @@ public class LoginActivity extends BaseActivity {
 			bean = LogicPerson.parseLogin(jsonString);
 			userShare.SaveFlag(true);
 			userShare.SaveActivity(false);
+			userShare.SaveLoginAccount(mPhone);
 			userShare.SavePhone(etPhone.getText().toString().trim());
 			userShare.SavePwd(etPwd.getText().toString().trim());
 			userShare.SavePhone(bean.getPhone());

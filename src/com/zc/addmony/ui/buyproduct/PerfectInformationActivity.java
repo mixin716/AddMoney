@@ -48,6 +48,7 @@ public class PerfectInformationActivity extends BaseActivity {
 	private Intent intent;
 	private String name, idCard, userName, bankNum, phone, checkCode;
 	private String accoreqserial = "";// 获取验证码时返回的字段
+	private String otherserial;
 	private int position;
 	private List<BranchBean> branchBean;
 	private int addOrRegister;// 来源标记 0为注册 1位添加银行卡
@@ -183,6 +184,7 @@ public class PerfectInformationActivity extends BaseActivity {
 		showLoading();
 		AjaxParams params = new AjaxParams();
 		params.put("accoreqserial", accoreqserial);
+		params.put("otherserial", otherserial);
 		params.put("mobileauthcode", checkCode);
 		params.put("phone", phone);// 手机号
 		params.put("banknum", bankNum);// 银行卡号
@@ -428,6 +430,7 @@ public class PerfectInformationActivity extends BaseActivity {
 			try {
 				JSONObject obj = new JSONObject(jsonString);
 				accoreqserial = obj.getString("accoreqserial");
+				otherserial = obj.optString("otherserial");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

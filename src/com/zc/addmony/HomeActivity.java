@@ -1,6 +1,11 @@
 package com.zc.addmony;
 
 import java.text.DecimalFormat;
+import java.util.List;
+
+import org.apache.http.client.CookieStore;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 
 import com.jky.struct2.bitmap.FinalBitmap;
@@ -52,6 +57,7 @@ public class HomeActivity extends BaseActivity {
 	/** 用于判断退出 */
 	private boolean isExit = false;
 	private boolean activitysFlag = false;// 活动标示
+	private String PHPSESSID = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +137,32 @@ public class HomeActivity extends BaseActivity {
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + User.GetSession());
 		httpRequest.get(Urls.GET_ORDER, params, callBack, 1);
 	}
+	
+	/** 登录 */
+	public void requestLogin() {
+		showLoading();
+		AjaxParams params = new AjaxParams();
+		params.put("username", User.getAccount());
+		params.put("password", User.GetPwd());
+		httpRequest.get(Urls.LOGIN, params, callBack, 2);
+	}
+	
+	private Handler cookieHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			DefaultHttpClient httpClient;
+			httpClient = (DefaultHttpClient) httpRequest.getHttpClient();
+			CookieStore mCookieStore = httpClient.getCookieStore();
+			List<Cookie> cookies = mCookieStore.getCookies();
+			for (int i = 0; i < cookies.size(); i++) {
+				// 这里是读取Cookie['PHPSESSID']的值存在静态变量中，保证每次都是同一个值
+				if ("PHPSESSID".equals(cookies.get(i).getName())) {
+					PHPSESSID = cookies.get(i).getValue();
+					User.SaveSession(PHPSESSID);
+					break;
+				}
+			}
+		};
+	};
 
 	@Override
 	protected void doClickAction(int viewId) {
@@ -175,6 +207,9 @@ public class HomeActivity extends BaseActivity {
 		switch (reqeustCode) {
 		case 0:
 			try {
+				if(User.GetFlag()){
+					requestLogin();
+				}
 				if (TextUtils.isEmpty(jsonString) || jsonString.equals("null")) {
 					showToast("数据为空");
 				} else {
@@ -217,7 +252,8 @@ public class HomeActivity extends BaseActivity {
 			activitysFlag = true;
 			User.SaveActivity(true);
 			break;
-		default:
+		case 2:
+			cookieHandler.sendEmptyMessageDelayed(0, 200);
 			break;
 		}
 	}

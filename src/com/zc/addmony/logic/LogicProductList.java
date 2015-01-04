@@ -81,6 +81,8 @@ public class LogicProductList {
 				bean.setFundcode(obj.optString("fundcode"));
 				bean.setFundname(obj.optString("fundname"));
 				bean.setApplysum(obj.optString("applysum"));
+				bean.setApplyshare(obj.optString("applyshare"));
+				bean.setCallingcode(obj.optString("callingcode"));
 				list.add(bean);
 			}
 		} catch (JSONException e) {

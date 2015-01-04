@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.text.TextUtils;
 
 import com.zc.addmony.bean.myproduct.BuyProductsBean;
+import com.zc.addmony.bean.myproduct.SaleBean;
 
 /** 解析我的増财 */
 public class LogicMyProduct {
@@ -55,6 +56,30 @@ public class LogicMyProduct {
 			e.printStackTrace();
 		}
 
+		return list;
+	}
+	/** 解析赎回*/
+	public static List<SaleBean> parseSale(String json){
+		List<SaleBean> list = new ArrayList<SaleBean>();
+		try {
+			JSONArray array = new JSONArray(json);
+			for (int i = 0; i < array.length(); i++) {
+				SaleBean bean = new SaleBean();
+				JSONObject obj = array.getJSONObject(i);
+				bean.setBankacco( obj.optString("bankacco"));
+				bean.setBankname(obj.optString("bankname"));
+				bean.setFundname(obj.optString("fundname"));
+				bean.setFundTypeCode("1101");
+				bean.setUnpaidincome( obj.optString("unpaidincome"));
+				bean.setUsableremainshare(obj.optString("usableremainshare"));
+				bean.setSharetype(obj.optString("sharetype"));
+				bean.setFundcode(obj.optString("fundcode"));
+				list.add(bean);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return list;
 	}
 

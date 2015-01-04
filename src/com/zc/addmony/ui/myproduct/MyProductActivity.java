@@ -281,6 +281,7 @@ public class MyProductActivity extends BaseActivity {
 			showToast("登录成功");
 			bean = LogicPerson.parseLogin(jsonString);
 			userShare.SaveFlag(true);
+			userShare.SaveLoginAccount(mPhone);
 			userShare.SavePhone(etPhone.getText().toString().trim());
 			userShare.SavePwd(etPwd.getText().toString().trim());
 			userShare.SavePhone(bean.getPhone());
