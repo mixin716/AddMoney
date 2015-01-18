@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -201,6 +202,10 @@ public class AllProductListActivity extends BaseActivity implements
 
 	@Override
 	protected void doClickAction(int viewId) {
+		if(viewId == R.id.view_rate_header_tv_unit){
+			Log.e("", "doclick");
+			return;
+		}
 		page = 1;
 		allList.clear();
 		switch (viewId) {

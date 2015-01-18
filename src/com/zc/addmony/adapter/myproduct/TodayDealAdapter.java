@@ -55,6 +55,10 @@ public class TodayDealAdapter extends BaseAdapter {
 					.findViewById(R.id.adapter_today_deal_tv_name);
 			holder.tvState = (TextView) convertView
 					.findViewById(R.id.adapter_today_deal_tv_state);
+			holder.tvNumber = (TextView) convertView
+					.findViewById(R.id.adapter_today_deal_tv_number);
+			holder.tvYewu = (TextView) convertView
+					.findViewById(R.id.adapter_today_deal_tv_yewu);
 			convertView.setTag(holder);
 
 		} else {
@@ -83,7 +87,7 @@ public class TodayDealAdapter extends BaseAdapter {
 	}
 
 	class ViewHolder {
-		TextView tvName, tvCode, tvMoney, tvState;
+		TextView tvName, tvCode, tvMoney, tvState,tvNumber,tvYewu;
 	}
 
 }

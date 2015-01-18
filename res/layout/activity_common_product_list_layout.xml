@@ -17,6 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="2"
+            android:dividerHeight="1dp"
+            android:divider="#dddddd"
             android:scrollbars="none" />
 
         <HorizontalScrollView
@@ -27,7 +29,9 @@
             <ListView
                 android:id="@+id/activity_common_product_list_lv_rate"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+                android:layout_height="fill_parent"
+                android:dividerHeight="1dp"
+                android:divider="#dddddd" />
         </HorizontalScrollView>
     </LinearLayout>
 

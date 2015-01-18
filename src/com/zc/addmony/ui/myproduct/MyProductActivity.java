@@ -20,7 +20,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
@@ -39,6 +41,8 @@ import com.zc.addmony.utils.PatternUtil;
 public class MyProductActivity extends BaseActivity {
 
 	private LinearLayout llIsLogin, llNoLogin;
+	private ImageView imgHead;//头像
+	private RelativeLayout rlInfo;//顶部姓名身份证号
 	private TextView tvName, tvPhone, tvMoneyAll, tvMoneyYes, tvBuy, tvDeal;
 	private LinearLayout llTop, llYesterday, llBuy, llDeal;
 	private UserSharedData userShare;
@@ -120,11 +124,15 @@ public class MyProductActivity extends BaseActivity {
 		llYesterday = (LinearLayout) findViewById(R.id.activity_my_product_ll_yestoday);
 		llBuy = (LinearLayout) findViewById(R.id.activity_my_product_ll_buy);
 		llDeal = (LinearLayout) findViewById(R.id.activity_my_product_ll_deal);
+		imgHead = (ImageView) findViewById(R.id.activity_my_product_img_head);
+		rlInfo = (RelativeLayout) findViewById(R.id.activity_my_product_rl_info);
 
 		llTop.setOnClickListener(this);
 		llYesterday.setOnClickListener(this);
 		llBuy.setOnClickListener(this);
 		llDeal.setOnClickListener(this);
+		imgHead.setOnClickListener(this);
+		rlInfo.setOnClickListener(this);
 		etPhone = (EditText) findViewById(R.id.activity_login_et_phone);
 		etPwd = (EditText) findViewById(R.id.activity_login_et_pwd);
 		tvForget = (TextView) findViewById(R.id.activity_login_tv_forget);
@@ -159,7 +167,9 @@ public class MyProductActivity extends BaseActivity {
 		super.doClickAction(viewId);
 		Intent intent;
 		switch (viewId) {
-		case R.id.activity_my_product_ll_top:
+//		case R.id.activity_my_product_ll_top:
+		case R.id.activity_my_product_img_head:
+		case R.id.activity_my_product_rl_info:
 			intent = new Intent(this, ProductSetActivity.class);
 			startActivity(intent);
 			AnimUtil.pushLeftInAndOut(MyProductActivity.this);

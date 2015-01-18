@@ -28,6 +28,7 @@
                 android:padding="10dp" >
 
                 <ImageView
+                    android:id="@+id/activity_my_product_img_head"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="top"
@@ -40,6 +41,7 @@
                     android:orientation="vertical" >
 
                     <RelativeLayout
+                        android:id="@+id/activity_my_product_rl_info"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -310,7 +312,7 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
-                    android:background="@drawable/ic_line_background" />
+                    android:background="#dddddd" />
 
                 <EditText
                     android:id="@+id/activity_login_et_pwd"

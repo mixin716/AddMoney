@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -188,9 +189,9 @@ public class StockProductListActivity extends BaseActivity implements
 			app.fundBean.setFundcode(allList.get(position - 1).getFundcode());
 			app.setPdBean(allList.get(position - 1));
 			Intent intent;
-			if("1100".equals(allList.get(position-1).getFundTypeCode())){
+			if ("1100".equals(allList.get(position - 1).getFundTypeCode())) {
 				intent = new Intent(this, ProductDetailActivity.class);
-			}else{
+			} else {
 				intent = new Intent(this, StockDetailActivity.class);
 			}
 			startActivity(intent);
@@ -200,6 +201,10 @@ public class StockProductListActivity extends BaseActivity implements
 
 	@Override
 	protected void doClickAction(int viewId) {
+		if (viewId == R.id.view_rate_header_tv_unit) {
+			Log.e("", "doclick");
+			return;
+		}
 		page = 1;
 		allList.clear();
 		switch (viewId) {
@@ -309,9 +314,9 @@ public class StockProductListActivity extends BaseActivity implements
 
 			} else if (svContent.getChildAt(0).getMeasuredHeight() <= v
 					.getHeight() + v.getScrollY()) {// 底部
-				if(list.size()<10){
+				if (list.size() < 10) {
 					showToast("没有更多数据");
-				}else{
+				} else {
 					page++;
 					getProductListRequest();
 				}

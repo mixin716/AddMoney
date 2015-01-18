@@ -49,6 +49,7 @@ public class RegisterSecondActivity extends BaseActivity {
 	protected void initVariable() {
 		// TODO Auto-generated method stub
 		mApplication = (MApplication) this.getApplication();
+		mApplication.addAllActivity(this);
 		obBean = mApplication.getObBean();
 	}
 
@@ -99,6 +100,8 @@ public class RegisterSecondActivity extends BaseActivity {
 			break;
 		case R.id.activity_register_second_bt_next:
 			// PopWindMsg();
+			Intent intent = new Intent(this,RegisterSuccessActivity.class);
+			startActivity(intent);
 			KeyBoard.demissKeyBoard(getApplicationContext(), etName);
 			strName = etName.getText().toString().trim();
 			strIdCard = etIdCard.getText().toString().trim();

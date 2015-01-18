@@ -27,7 +27,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@drawable/ic_line_background" />
+            android:background="#dddddd" />
 
         <EditText
             android:id="@+id/activity_login_et_pwd"

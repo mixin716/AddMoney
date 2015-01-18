@@ -28,7 +28,7 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/ic_line_background" />
+                android:background="#dddddd" />
 
             <EditText
                 android:id="@+id/activity_register_second_et_idcode"
@@ -81,7 +81,7 @@
             android:background="@drawable/bg_normal_red_selector"
             android:gravity="center"
             android:padding="10dp"
-            android:text="我已阅读并同意上述协议，下一步"
+            android:text="下一步"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </LinearLayout>

@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class SaleMoneyActivity extends BaseActivity {
 			tvBankCode;
 	private EditText edtMinSaleMoney, edtSalePwd;
 	private Button btnOk;
+	private ImageView imgBank;
 	private String fundName, saleMoney, haveMoney, bankName, bankCode,
 			minMoney, salePwd;
 	private UserSharedData userShare;
@@ -72,6 +74,8 @@ public class SaleMoneyActivity extends BaseActivity {
 		tvHaveMoney = (TextView) findViewById(R.id.activity_sale_money_tv_have_money);
 		tvSaleMoney = (TextView) findViewById(R.id.activity_sale_money_tv_have_sale);
 		tvSaleTitle = (TextView) findViewById(R.id.activity_sale_money_tv_have_sale_title);
+		
+		imgBank = (ImageView) findViewById(R.id.activity_sale_money_img_bank);
 
 		edtMinSaleMoney = (EditText) findViewById(R.id.activity_sale_money_edt_minmoney);
 		edtSalePwd = (EditText) findViewById(R.id.activity_sale_money_edt_pwd);
@@ -162,7 +166,7 @@ public class SaleMoneyActivity extends BaseActivity {
 					bankName = obj.optString("bankname");
 					bankCode = obj.optString("bankacco");
 					if (!TextUtils.isEmpty(bankCode)) {
-						String code = "***"
+						String code =bankCode.substring(0,6)+ "***"
 								+ bankCode.substring(bankCode.length() - 4,
 										bankCode.length());
 						tvBankCode.setText(bankName + "(" + code + ")");
@@ -203,7 +207,7 @@ public class SaleMoneyActivity extends BaseActivity {
 			setData(0);
 			for (SaleBean bean : list) {
 				if (!TextUtils.isEmpty(bean.getBankacco())) {
-					String code = "***"
+					String code =bean.getBankacco().substring(0,6)+ "***"
 							+ bean.getBankacco().substring(
 									bean.getBankacco().length() - 4,
 									bean.getBankacco().length());
@@ -211,7 +215,11 @@ public class SaleMoneyActivity extends BaseActivity {
 				} else {
 					names.add(bean.getBankname());
 				}
-
+				if(list.size() > 1){
+					imgBank.setVisibility(View.VISIBLE);
+				}else{
+					imgBank.setVisibility(View.GONE);
+				}
 			}
 			break;
 		}
@@ -220,9 +228,9 @@ public class SaleMoneyActivity extends BaseActivity {
 	public void setData(int pos) {
 		position = pos;
 		SaleBean bean = list.get(pos);
-		getUserFundInfoRequest(list.get(position).getFundcode());
+//		getUserFundInfoRequest(list.get(position).getFundcode());//每次赎回份额是否一定如果一定就不用请求了
 		if (!TextUtils.isEmpty(bean.getBankacco())) {
-			String code = "***"
+			String code =bean.getBankacco().substring(0,6)+ "***"
 					+ bean.getBankacco().substring(
 							bean.getBankacco().length() - 4,
 							bean.getBankacco().length());

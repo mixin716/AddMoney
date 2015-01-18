@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.jky.struct2.http.core.AjaxParams;
 import com.jky.struct2.http.entityhandle.HttpResult;
 import com.zc.addmony.BaseActivity;
+import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.BaseBean;
 import com.zc.addmony.common.Urls;
@@ -25,6 +26,7 @@ public class RegisterActivity extends BaseActivity {
 	private EditText etPhone, etPwd, etPwdSecond, etCheck;
 	private Button btCheck, btRegister;
 	private TextView tvCheck;
+	private MApplication mApp;
 	private int seconds = 60;
 	private String mPhone, mPwd, mPwdSecond, mCheck;
 
@@ -39,7 +41,8 @@ public class RegisterActivity extends BaseActivity {
 	@Override
 	protected void initVariable() {
 		// TODO Auto-generated method stub
-
+		mApp = (MApplication) this.getApplication();
+		mApp.addAllActivity(this);
 	}
 
 	@Override
