@@ -63,7 +63,11 @@ public class RegisterSuccessActivity extends BaseActivity {
 			mApp.clearAllActivity();
 			break;
 		case R.id.activity_register_success_ll_into:
-			
+			Intent intoIntent = new Intent("refresh_tab");
+			intoIntent.putExtra("intoSelect", 3);
+			sendBroadcast(intoIntent);
+			sendBroadcast(new Intent("login_my_product"));
+			mApp.clearAllActivity();
 			break;
 		}
 	}

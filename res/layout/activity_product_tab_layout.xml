@@ -38,7 +38,7 @@
                 android:gravity="center"
                 android:text="全部"
                 android:textColor="@color/product_list_title_color_text"
-                android:textSize="14sp" />
+                android:textSize="17sp" />
 
             <RadioButton
                 android:id="@+id/activity_product_rb_money"
@@ -50,7 +50,7 @@
                 android:gravity="center"
                 android:text="货币型"
                 android:textColor="@color/product_list_title_color_text"
-                android:textSize="14sp" />
+                android:textSize="17sp" />
 
             <RadioButton
                 android:id="@+id/activity_product_rb_stock"
@@ -62,7 +62,7 @@
                 android:gravity="center"
                 android:text="股票型"
                 android:textColor="@color/product_list_title_color_text"
-                android:textSize="14sp" />
+                android:textSize="17sp" />
 
             <RadioButton
                 android:id="@+id/activity_product_rb_bond"
@@ -74,7 +74,7 @@
                 android:gravity="center"
                 android:text="债券型"
                 android:textColor="@color/product_list_title_color_text"
-                android:textSize="14sp" />
+                android:textSize="17sp" />
         </RadioGroup>
 
         <FrameLayout

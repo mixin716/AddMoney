@@ -13,6 +13,8 @@ public class ProductBean {
 	private String sharetype;
 	private String applyshare;
 	private String callingcode;
+	private String applyserial;
+	private String kkstat;
 
 	public String getApplysum() {
 		return applysum;
@@ -92,6 +94,22 @@ public class ProductBean {
 
 	public void setCallingcode(String callingcode) {
 		this.callingcode = callingcode;
+	}
+
+	public String getApplyserial() {
+		return applyserial;
+	}
+
+	public void setApplyserial(String applyserial) {
+		this.applyserial = applyserial;
+	}
+
+	public String getKkstat() {
+		return kkstat;
+	}
+
+	public void setKkstat(String kkstat) {
+		this.kkstat = kkstat;
 	}
 
 }

@@ -102,7 +102,7 @@ public class BuyProductActivity extends BaseActivity {
 			price = edtPrice.getText().toString().trim();
 			if (TextUtils.isEmpty(price)) {
 				showToast("请输入购买金额");
-			} else if (Integer.valueOf(price) < Integer.valueOf(minPrice)) {
+			} else if (Float.valueOf(price) < Float.valueOf(minPrice)) {
 				showToast("当前购买金额小于起购金额");
 			} else {
 				if (User.GetFlag()) {// 已登录

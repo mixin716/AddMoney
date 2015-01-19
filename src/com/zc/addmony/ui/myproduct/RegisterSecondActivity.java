@@ -100,8 +100,8 @@ public class RegisterSecondActivity extends BaseActivity {
 			break;
 		case R.id.activity_register_second_bt_next:
 			// PopWindMsg();
-			Intent intent = new Intent(this,RegisterSuccessActivity.class);
-			startActivity(intent);
+			// Intent intent = new Intent(this,RegisterSuccessActivity.class);
+			// startActivity(intent);
 			KeyBoard.demissKeyBoard(getApplicationContext(), etName);
 			strName = etName.getText().toString().trim();
 			strIdCard = etIdCard.getText().toString().trim();

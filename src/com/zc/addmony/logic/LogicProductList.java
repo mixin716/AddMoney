@@ -83,6 +83,8 @@ public class LogicProductList {
 				bean.setApplysum(obj.optString("applysum"));
 				bean.setApplyshare(obj.optString("applyshare"));
 				bean.setCallingcode(obj.optString("callingcode"));
+				bean.setApplyserial(obj.optString("applyserial"));
+				bean.setKkstat(obj.optString("kkstat"));
 				list.add(bean);
 			}
 		} catch (JSONException e) {

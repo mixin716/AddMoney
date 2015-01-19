@@ -61,6 +61,8 @@ public class MyProductActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			if("refresh_my_product".equals(intent.getAction())){
 				requestUserInfo();
+			}else if("login_my_product".equals(intent.getAction())){
+				requestLogin();
 			}
 		}
 	};
@@ -98,6 +100,7 @@ public class MyProductActivity extends BaseActivity {
 		bean = new LoginBean();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction("refresh_my_product");
+		filter.addAction("login_my_product");
 		registerReceiver(receiver, filter);
 	}
 

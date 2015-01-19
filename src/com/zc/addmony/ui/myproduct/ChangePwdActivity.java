@@ -93,8 +93,9 @@ public class ChangePwdActivity extends BaseActivity {
 
 	/** 登录 */
 	public void requestLogin() {
+		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("username", userShare.GetPhone());
+		params.put("username", userShare.getAccount());
 		params.put("password", userShare.GetPwd());
 		httpRequest.get(Urls.LOGIN, params, callBack, 0);
 	}
