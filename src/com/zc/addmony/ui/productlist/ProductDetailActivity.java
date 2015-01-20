@@ -1,5 +1,6 @@
 package com.zc.addmony.ui.productlist;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 import org.json.JSONException;
@@ -173,37 +174,37 @@ public class ProductDetailActivity extends BaseActivity implements
 		switch (reqeustCode) {
 		case 0:
 			bean = LogicProductList.parseFundDetail(jsonString);
-			DecimalFormat df = new DecimalFormat("0.00");
-			if (TextUtils.isEmpty(bean.getLatestWeeklyYield())) {
+			// DecimalFormat df = new DecimalFormat("0.00");
+			if (TextUtils.isEmpty(bean.getIncomeratio())) {
 				tvIncomeRate.setText("0.00%");
 			} else {
-				tvIncomeRate.setText(df.format(Double.valueOf(bean
-						.getLatestWeeklyYield())) + "%");// 近期收益率
+				BigDecimal b = new BigDecimal(bean.getIncomeratio());
+				tvIncomeRate.setText(b.setScale(2,   BigDecimal.ROUND_HALF_UP).floatValue() + "%");// 近期收益率
 			}
 			tvBankRate.setText("0.35%");// 银行活期利益
 			if (TextUtils.isEmpty(bean.getRRInSingleYear())) {
 				tvYearRate.setText("0.00%");
 			} else {
-				tvYearRate.setText(df.format(Double.valueOf(bean
-						.getRRInSingleYear())) + "%");
+				BigDecimal b = new BigDecimal(bean.getRRInSingleYear());
+				tvYearRate.setText(b.setScale(2,   BigDecimal.ROUND_HALF_UP).floatValue() + "%");
 			}
 			if (TextUtils.isEmpty(bean.getLatestWeeklyYield())) {
 				tvWeekRate.setText("0.00%");
 			} else {
-				tvWeekRate.setText(df.format(Double.valueOf(bean
-						.getLatestWeeklyYield())) + "%");
+				BigDecimal b = new BigDecimal(bean.getLatestWeeklyYield());
+				tvWeekRate.setText(b.setScale(2,   BigDecimal.ROUND_HALF_UP).floatValue() + "%");
 			}
 			if (TextUtils.isEmpty(bean.getRRInSixMonth())) {
 				tvMonthRate.setText("0.00%");
 			} else {
-				tvMonthRate.setText(df.format(Double.valueOf(bean
-						.getRRInSixMonth())) + "%");
+				BigDecimal b = new BigDecimal(bean.getRRInSixMonth());
+				tvMonthRate.setText(b.setScale(2,   BigDecimal.ROUND_HALF_UP).floatValue() + "%");
 			}
-			if (TextUtils.isEmpty(bean.getDailyProfit())) {
+			if (TextUtils.isEmpty(bean.getHfincomeratio())) {
 				tvMillionRate.setText("0.00%");
 			} else {
-				tvMillionRate.setText(df.format(Double.valueOf(bean
-						.getDailyProfit())) + "%");
+				BigDecimal b = new BigDecimal(bean.getHfincomeratio());
+				tvMillionRate.setText(b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue() + "%");
 			}
 			tvJjjl.setText(bean.getManager());// 基金经理
 

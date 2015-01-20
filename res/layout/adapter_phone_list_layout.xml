@@ -9,8 +9,9 @@
     <ImageView
         android:id="@+id/adapter_phone_list_img"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_weight="1"
+        android:scaleType="fitXY"
         android:src="@drawable/ic_phone_list_iphone5s" />
 
     <LinearLayout

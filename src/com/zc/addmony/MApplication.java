@@ -21,6 +21,7 @@ import android.util.Log;
 import com.zc.addmony.bean.FundBean;
 import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
 import com.zc.addmony.bean.activities.PhoneBean;
+import com.zc.addmony.bean.myproduct.BuyProductsBean;
 import com.zc.addmony.bean.myproduct.OpenBankBean;
 import com.zc.addmony.bean.productlist.ProductListBean;
 import com.zc.addmony.common.UserSharedData;
@@ -46,6 +47,8 @@ public class MApplication extends Application {
 	public PhoneBean pBean;
 	/** 开户bean */
 	public OpenBankBean obBean;
+	/** 购买基金bean*/
+	public BuyProductsBean bpBean;
 	/** 保存活动打开的activity */
 	private List<Activity> activitys;
 	/** 打开的activity*/
@@ -67,6 +70,7 @@ public class MApplication extends Application {
 		getDensity();
 		apBean = new ActivitiesPhoneBean();
 		obBean = new OpenBankBean();
+		bpBean = new BuyProductsBean();
 		activitys = new ArrayList<Activity>();
 		allActivitys = new ArrayList<Activity>();
 		userShare = UserSharedData.getInstance(getApplicationContext());
@@ -336,6 +340,16 @@ public class MApplication extends Application {
 
 	public void setPdBean(ProductListBean pdBean) {
 		this.pdBean = pdBean;
+	}
+	
+	
+
+	public BuyProductsBean getBpBean() {
+		return bpBean;
+	}
+
+	public void setBpBean(BuyProductsBean bpBean) {
+		this.bpBean = bpBean;
 	}
 
 	/** 添加activity*/

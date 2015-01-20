@@ -29,7 +29,7 @@
         android:textSize="16sp" />
     <TextView
         android:id="@+id/view_rate_header_tv_wfsy"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center"

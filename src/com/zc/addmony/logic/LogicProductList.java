@@ -1,5 +1,6 @@
 package com.zc.addmony.logic;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,6 +174,8 @@ public class LogicProductList {
 			bean.setDailyProfit(obj.optString("DailyProfit"));// 万分收益
 			bean.setLatestWeeklyYield(obj.optString("LatestWeeklyYield"));
 			bean.setInvestAdvisorName(obj.optString("InvestAdvisorName"));
+			bean.setIncomeratio(obj.optString("incomeratio"));
+			bean.setHfincomeratio(obj.optString("hfincomeratio"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -194,10 +197,9 @@ public class LogicProductList {
 	private static String getTwoNum(String num) {
 		if (TextUtils.isEmpty(num)) {
 			return "0.00";
-		} else if (num.substring(num.indexOf("."), num.length()).length() > 2) {
-			return num.substring(0, num.indexOf(".") + 3);
-		} else {
-			return num;
+		} else  {
+			BigDecimal b = new BigDecimal(num);
+			return b.setScale(2,BigDecimal.ROUND_HALF_UP).floatValue() + "";
 		}
 
 	}

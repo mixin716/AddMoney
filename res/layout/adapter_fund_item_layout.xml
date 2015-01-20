@@ -53,7 +53,7 @@
             android:textSize="16sp" />
         <TextView
             android:id="@+id/adapter_product_rate_item_tv_wfsy"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"

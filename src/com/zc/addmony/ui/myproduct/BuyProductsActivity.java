@@ -114,11 +114,14 @@ public class BuyProductsActivity extends BaseActivity implements
 			intent.putExtra("getFundTypeCode", list.get(position).getmFundTypeCode());
 			intent.putExtra("minPrice", "1000");
 		} else if (org1 == 2) {// 赎回
+			app.setBpBean(list.get(position));
 			if (TextUtils.isEmpty(list.get(position).getmHave())) {
 				intent = new Intent(this, SaleMoneyActivity.class);
+				intent.putExtra("fundcode", list.get(position).getmFundcode());
 			} else {
 				if (Float.valueOf(list.get(position).getmHave()) > 0) {
 					intent = new Intent(this, SaleMoneyActivity.class);
+					intent.putExtra("fundcode", list.get(position).getmFundcode());
 				} else {
 					showToast("您当前持有金额为0，不能赎回");
 				}

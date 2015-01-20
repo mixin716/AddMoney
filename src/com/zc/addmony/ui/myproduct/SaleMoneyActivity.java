@@ -20,6 +20,7 @@ import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
+import com.zc.addmony.bean.myproduct.BuyProductsBean;
 import com.zc.addmony.bean.myproduct.SaleBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
@@ -32,17 +33,19 @@ import com.zc.addmony.utils.KeyBoard;
 public class SaleMoneyActivity extends BaseActivity {
 	private MApplication app;
 	private LinearLayout llNo;
-	private TextView tvFundName, tvSaleMoney, tvSaleTitle, tvHaveMoney,
+	private TextView tvFundName, tvSaleMoney, tvSaleTitle, tvHaveMoney,tvHaveMoneyTitle,
 			tvBankCode;
 	private EditText edtMinSaleMoney, edtSalePwd;
 	private Button btnOk;
 	private ImageView imgBank;
 	private String fundName, saleMoney, haveMoney, bankName, bankCode,
-			minMoney, salePwd;
+			minMoney, salePwd, marketvalue,sharetype;
 	private UserSharedData userShare;
 	private List<SaleBean> list;
 	private ArrayList<String> names;
 	private int position = 0;
+	private String fundcode;
+	private BuyProductsBean bpBean;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class SaleMoneyActivity extends BaseActivity {
 
 	@Override
 	protected void initVariable() {
+		fundcode = this.getIntent().getStringExtra("fundcode");
 		app = (MApplication) getApplication();
 		app.addAllActivity(this);
 		userShare = UserSharedData.getInstance(getApplicationContext());
@@ -72,9 +76,10 @@ public class SaleMoneyActivity extends BaseActivity {
 		tvBankCode = (TextView) findViewById(R.id.activity_sale_money_tv_bank_code);
 		tvFundName = (TextView) findViewById(R.id.activity_sale_money_tv_fund_name);
 		tvHaveMoney = (TextView) findViewById(R.id.activity_sale_money_tv_have_money);
+		tvHaveMoneyTitle = (TextView) findViewById(R.id.activity_sale_money_tv_have_money_title);
 		tvSaleMoney = (TextView) findViewById(R.id.activity_sale_money_tv_have_sale);
 		tvSaleTitle = (TextView) findViewById(R.id.activity_sale_money_tv_have_sale_title);
-		
+
 		imgBank = (ImageView) findViewById(R.id.activity_sale_money_img_bank);
 
 		edtMinSaleMoney = (EditText) findViewById(R.id.activity_sale_money_edt_minmoney);
@@ -82,11 +87,36 @@ public class SaleMoneyActivity extends BaseActivity {
 		btnOk = (Button) findViewById(R.id.activity_sale_money_btn_ok);
 		btnOk.setOnClickListener(this);
 		tvBankCode.setOnClickListener(this);
-		// getUserFundInfoRequest();
-		getFundSharelist();
+
+		if (app.zcbCode.equals(fundcode)) {
+			imgBank.setVisibility(View.VISIBLE);
+			getFundSharelist();
+			getUserFundInfoRequest();
+		} else {
+			imgBank.setVisibility(View.GONE);
+			bpBean = app.bpBean;
+			fundcode = bpBean.getmFundcode();
+			sharetype = bpBean.getmSharetype();
+			fundName = bpBean.getmFundname();
+			tvFundName.setText(bpBean.getmFundname());
+			tvBankCode.setText(bpBean.getmBankName()+"("+bpBean.getmBank()+")");
+			tvSaleMoney.setText("￥" + bpBean.getmHave());
+			if ("1109".equals(bpBean.getmFundTypeCode())) {
+				tvSaleTitle.setText("可赎回金额:");
+				tvHaveMoneyTitle.setText("未结算收益：");
+				tvHaveMoney.setText("￥" + bpBean.getmNot());
+			} else {
+				tvSaleTitle.setText("可赎回份额:");
+				//基金市值
+				tvHaveMoneyTitle.setText("基金市值：");
+				tvHaveMoney.setText("￥" + bpBean.getMarketvalue());
+			}
+			
+		}
+
 	}
 
-	private void getUserFundInfoRequest(String fundcode) {
+	private void getUserFundInfoRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
 		params.put("fundcode", fundcode);
@@ -99,8 +129,8 @@ public class SaleMoneyActivity extends BaseActivity {
 	private void getSaleMoneyRequest() {
 		showLoading();
 		AjaxParams params = new AjaxParams();
-		params.put("fundcode", list.get(position).getFundcode());
-		params.put("sharetype", list.get(position).getSharetype());
+		params.put("fundcode", fundcode);
+		params.put("sharetype", sharetype);
 		params.put("applysum", minMoney);
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + userShare.GetSession());
 		httpRequest.get(Urls.SALE_MONEY, params, callBack, 1);
@@ -127,8 +157,9 @@ public class SaleMoneyActivity extends BaseActivity {
 			salePwd = edtSalePwd.getText().toString();
 			if (TextUtils.isEmpty(minMoney)) {
 				showToast("请输入赎回金额");
-			} else if (TextUtils.isEmpty(salePwd)) {
-				showToast("请输入交易密码");
+				// } else if (TextUtils.isEmpty(salePwd)) {
+				// showToast("请输入交易密码");
+				// } else {
 			} else {
 				if (Integer.valueOf(minMoney) < 100) {
 					showToast("最低赎回金额为100");
@@ -138,8 +169,7 @@ public class SaleMoneyActivity extends BaseActivity {
 			}
 			break;
 		case R.id.activity_sale_money_tv_bank_code:
-			if (list.size() > 1) {
-
+			if (app.zcbCode.equals(fundcode)) {
 				Intent intent = new Intent(this, SelectActivity.class);
 				intent.putStringArrayListExtra("nameList", names);
 				startActivityForResult(intent, 101);
@@ -165,8 +195,11 @@ public class SaleMoneyActivity extends BaseActivity {
 					haveMoney = obj.optString("unpaidincome");
 					bankName = obj.optString("bankname");
 					bankCode = obj.optString("bankacco");
+					sharetype = obj.optString("sharetype");
+					marketvalue = obj.optString("marketvalue");
 					if (!TextUtils.isEmpty(bankCode)) {
-						String code =bankCode.substring(0,6)+ "***"
+						String code = bankCode.substring(0, 6)
+								+ "***"
 								+ bankCode.substring(bankCode.length() - 4,
 										bankCode.length());
 						tvBankCode.setText(bankName + "(" + code + ")");
@@ -175,7 +208,6 @@ public class SaleMoneyActivity extends BaseActivity {
 					}
 
 					tvFundName.setText(fundName);
-					tvHaveMoney.setText("￥" + haveMoney);
 					tvSaleMoney.setText("￥" + saleMoney);
 
 					JSONObject fundObj = new JSONObject(
@@ -183,9 +215,12 @@ public class SaleMoneyActivity extends BaseActivity {
 					if (!TextUtils.isEmpty(fundObj.optString("FundTypeCode"))) {
 						if ("1109".equals(fundObj.optString("FundTypeCode"))) {
 							tvSaleTitle.setText("可赎回金额:");
+							tvHaveMoneyTitle.setText("未结算金额：");
+							tvHaveMoney.setText("￥" + haveMoney);
 						} else {
 							tvSaleTitle.setText("可赎回份额:");
-							llNo.setVisibility(View.GONE);
+							tvHaveMoneyTitle.setText("基金市值：");
+							tvHaveMoney.setText("￥" + marketvalue);
 						}
 					}
 				}
@@ -204,21 +239,17 @@ public class SaleMoneyActivity extends BaseActivity {
 			break;
 		case 2:
 			list = LogicMyProduct.parseSale(jsonString);
-			setData(0);
+//			 setData(0);
 			for (SaleBean bean : list) {
 				if (!TextUtils.isEmpty(bean.getBankacco())) {
-					String code =bean.getBankacco().substring(0,6)+ "***"
+					String code = bean.getBankacco().substring(0, 6)
+							+ "***"
 							+ bean.getBankacco().substring(
 									bean.getBankacco().length() - 4,
 									bean.getBankacco().length());
 					names.add(bean.getBankname() + "(" + code + ")");
 				} else {
 					names.add(bean.getBankname());
-				}
-				if(list.size() > 1){
-					imgBank.setVisibility(View.VISIBLE);
-				}else{
-					imgBank.setVisibility(View.GONE);
 				}
 			}
 			break;
@@ -228,9 +259,10 @@ public class SaleMoneyActivity extends BaseActivity {
 	public void setData(int pos) {
 		position = pos;
 		SaleBean bean = list.get(pos);
-//		getUserFundInfoRequest(list.get(position).getFundcode());//每次赎回份额是否一定如果一定就不用请求了
+		// getUserFundInfoRequest(list.get(position).getFundcode());//每次赎回份额是否一定如果一定就不用请求了
 		if (!TextUtils.isEmpty(bean.getBankacco())) {
-			String code =bean.getBankacco().substring(0,6)+ "***"
+			String code = bean.getBankacco().substring(0, 6)
+					+ "***"
 					+ bean.getBankacco().substring(
 							bean.getBankacco().length() - 4,
 							bean.getBankacco().length());
@@ -240,15 +272,15 @@ public class SaleMoneyActivity extends BaseActivity {
 		}
 
 		tvFundName.setText(bean.getFundname());
-		tvHaveMoney.setText("￥" + bean.getUnpaidincome());
 		tvSaleMoney.setText("￥" + bean.getUsableremainshare());
 
 		if (!TextUtils.isEmpty(bean.getFundTypeCode())) {
 			if ("1109".equals(bean.getFundTypeCode())) {
 				tvSaleTitle.setText("可赎回金额:");
+				tvHaveMoney.setText("￥" + bean.getUnpaidincome());
 			} else {
 				tvSaleTitle.setText("可赎回份额:");
-				llNo.setVisibility(View.GONE);
+				tvHaveMoney.setText("￥" + bean.getMarketvalue());
 			}
 		}
 	}
@@ -261,8 +293,14 @@ public class SaleMoneyActivity extends BaseActivity {
 
 			String name = data.getStringExtra("name");
 			position = data.getIntExtra("postion", 0);
-			// tvBankCode.setText(name);
-			setData(position);
+			SaleBean bean = list.get(position);
+			String code = bean.getBankacco().substring(0, 6)
+					+ "***"
+					+ bean.getBankacco().substring(
+							bean.getBankacco().length() - 4,
+							bean.getBankacco().length());
+			tvBankCode.setText(bean.getBankname() + "(" + code + ")");
+//			setData(position);
 		}
 	}
 

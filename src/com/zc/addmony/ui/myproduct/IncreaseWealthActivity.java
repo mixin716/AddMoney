@@ -126,6 +126,7 @@ public class IncreaseWealthActivity extends BaseActivity {
 				return;
 			}
 			intent = new Intent(this, SaleMoneyActivity.class);
+			intent.putExtra("fundcode", app.zcbCode);
 			app.fundBean.setFundcode(app.zcbCode);
 			app.fundBean.setFundname("増财宝");
 			app.fundBean.setSharetype(app.zcbShareType);
@@ -156,8 +157,10 @@ public class IncreaseWealthActivity extends BaseActivity {
 				JSONObject obj = new JSONObject(jsonString);
 				zrsy = obj.optString("zrsy");
 				zcbsum = obj.optString("zcbsum");
-				tvYesterdayMoney.setText("￥" + zrsy);
-				tvAllMoney.setText("￥" + zcbsum);
+				tvYesterdayMoney.setText("￥" + zcbsum);
+//				tvYesterdayMoney.setText("￥" + zrsy);
+//				tvAllMoney.setText("￥" + zcbsum);
+				tvAllMoney.setText("￥" + zrsy);
 				getMoneyChageRequest();
 			} catch (JSONException e) {
 				e.printStackTrace();

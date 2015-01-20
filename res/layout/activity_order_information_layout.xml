@@ -36,9 +36,10 @@
                 android:padding="5dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
+                    android:gravity="center_vertical|right"
                     android:text="用户:"
                     android:textColor="@color/text_color_333333"
                     android:textSize="16sp" />
@@ -52,6 +53,11 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dddddd" />
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -59,10 +65,11 @@
                 android:padding="5dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="身份证号："
+                    android:gravity="center_vertical|right"
+                    android:text="身份证号:"
                     android:textColor="@color/text_color_333333"
                     android:textSize="16sp" />
 
@@ -71,9 +78,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/text_color_666666"
+                    android:textColor="@color/normal_purple"
                     android:textSize="16sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dddddd" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -82,10 +94,11 @@
                 android:padding="5dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="联系方式："
+                    android:gravity="center_vertical|right"
+                    android:text="联系方式:"
                     android:textColor="@color/text_color_333333"
                     android:textSize="16sp" />
 
@@ -94,9 +107,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/text_color_666666"
+                    android:textColor="@color/normal_purple"
                     android:textSize="16sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dddddd" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -105,10 +123,40 @@
                 android:padding="5dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="配送地址："
+                    android:gravity="center_vertical|right"
+                    android:text="买家备注:"
+                    android:textColor="@color/text_color_333333"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/activity_order_detail_tv_remark"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/normal_purple"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dddddd" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center_vertical|right"
+                    android:text="配送地址:"
                     android:textColor="@color/text_color_333333"
                     android:textSize="16sp" />
 
@@ -117,7 +165,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/text_color_666666"
+                    android:textColor="@color/normal_purple"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
@@ -144,10 +192,11 @@
                 android:padding="5dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="型号："
+                    android:gravity="center_vertical|right"
+                    android:text="型号:"
                     android:textColor="@color/text_color_333333"
                     android:textSize="16sp" />
 
@@ -156,9 +205,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/text_color_666666"
+                    android:textColor="@color/normal_purple"
                     android:textSize="16sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dddddd" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -167,10 +221,11 @@
                 android:padding="5dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="颜色："
+                    android:gravity="center_vertical|right"
+                    android:text="颜色:"
                     android:textColor="@color/text_color_333333"
                     android:textSize="16sp" />
 
@@ -179,9 +234,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/text_color_666666"
+                    android:textColor="@color/normal_purple"
                     android:textSize="16sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dddddd" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -190,10 +250,11 @@
                 android:padding="5dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="套餐："
+                    android:gravity="center_vertical|right"
+                    android:text="套餐:"
                     android:textColor="@color/text_color_333333"
                     android:textSize="16sp" />
 
@@ -202,9 +263,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/text_color_666666"
+                    android:textColor="@color/normal_purple"
                     android:textSize="16sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dddddd" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -213,10 +279,11 @@
                 android:padding="5dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="号码："
+                    android:gravity="center_vertical|right"
+                    android:text="号码:"
                     android:textColor="@color/text_color_333333"
                     android:textSize="16sp" />
 
@@ -225,30 +292,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/text_color_666666"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="备注："
-                    android:textColor="@color/text_color_333333"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/activity_order_detail_tv_remark"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/text_color_666666"
+                    android:textColor="@color/normal_purple"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>

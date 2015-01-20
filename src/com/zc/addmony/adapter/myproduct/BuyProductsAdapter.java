@@ -105,7 +105,7 @@ public class BuyProductsAdapter extends BaseAdapter {
 								.getmBank()
 								.substring(bankNum.length() - 7,
 										bankNum.length()) + ")");
-
+				break;
 			}
 		}
 		

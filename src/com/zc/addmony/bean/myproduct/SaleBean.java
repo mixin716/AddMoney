@@ -11,6 +11,7 @@ public class SaleBean {
 	String bankname;
 	String bankacco;
 	String FundTypeCode;
+	String marketvalue;
 
 	public String getSharetype() {
 		return sharetype;
@@ -74,6 +75,14 @@ public class SaleBean {
 
 	public void setFundTypeCode(String fundTypeCode) {
 		FundTypeCode = fundTypeCode;
+	}
+
+	public String getMarketvalue() {
+		return marketvalue;
+	}
+
+	public void setMarketvalue(String marketvalue) {
+		this.marketvalue = marketvalue;
 	}
 
 }

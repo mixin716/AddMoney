@@ -61,17 +61,18 @@ public class RecordDetailsAdapter extends BaseAdapter {
 		}
 		if (!TextUtils.isEmpty(list.get(position).getBusinflagStr())) {
 			holder.tvName.setText(list.get(position).getBusinflagStr());
-		} else {
-			if ("024".equals(list.get(position).getCallingcode())) {
-				holder.tvName.setText("取现");
-				holder.tvMoney.setText(list.get(position).getApplyshare());
-			} else {
-				holder.tvName.setText("充值");
-				holder.tvMoney.setText(list.get(position).getApplysum());
-
-			}
 		}
-		holder.tvDate.setText(list.get(position).getApplydate());
+
+		if ("024".equals(list.get(position).getCallingcode())) {
+			holder.tvName.setText("取现");
+			holder.tvMoney.setText(list.get(position).getApplyshare());
+		} else {
+			holder.tvName.setText("充值");
+			holder.tvMoney.setText(list.get(position).getApplysum());
+
+		}
+		 holder.tvDate.setText(list.get(position).getApplydate());
+		// holder.tvMoney.setText(list.get(position).getApplysum());
 		return convertView;
 	}
 

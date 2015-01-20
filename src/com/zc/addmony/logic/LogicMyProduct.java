@@ -74,6 +74,7 @@ public class LogicMyProduct {
 				bean.setUsableremainshare(obj.optString("usableremainshare"));
 				bean.setSharetype(obj.optString("sharetype"));
 				bean.setFundcode(obj.optString("fundcode"));
+				bean.setMarketvalue(obj.optString("marketvalue"));
 				list.add(bean);
 			}
 		} catch (JSONException e) {

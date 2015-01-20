@@ -8,6 +8,7 @@ import com.zc.addmony.bean.productlist.ProductBean;
 
 import android.content.Context;
 import android.content.pm.LabeledIntent;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ public class TodayDealAdapter extends BaseAdapter {
 			holder.tvYewu = (TextView) convertView
 					.findViewById(R.id.adapter_today_deal_tv_yewu);
 			holder.llState = (LinearLayout) convertView.findViewById(R.id.adapter_today_ll_state);
+			holder.llMain = (LinearLayout) convertView.findViewById(R.id.adapter_today_ll_main);
 			convertView.setTag(holder);
 
 		} else {
@@ -117,6 +119,7 @@ public class TodayDealAdapter extends BaseAdapter {
 				holder.tvYewu.setText("定期定额申购");
 			}
 			holder.tvYewu.setTextColor(context.getResources().getColor(R.color.black));
+			holder.llMain.setBackgroundResource(R.drawable.ic_product_detail_top_view_background);
 		}else{
 			holder.tvMoney.setText(list.get(position).getApplyshare()+"");
 			holder.tvNumber.setText(list.get(position).getApplyserial());//申请编号
@@ -135,19 +138,16 @@ public class TodayDealAdapter extends BaseAdapter {
 			}
 			holder.tvYewu.setTextColor(context.getResources().getColor(R.color.normal_red));
 			holder.llState.setVisibility(View.GONE);
+			holder.llMain.setBackgroundResource(R.drawable.ic_product_detail_top_view_red);
 		}
-		
-		
-		
-		
-		
-		
+		int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, context.getResources().getDisplayMetrics());
+		holder.llMain.setPadding(padding, padding, padding, padding/2);
 		return convertView;
 	}
 
 	class ViewHolder {
 		TextView tvName, tvCode, tvMoney, tvState,tvNumber,tvYewu;
-		LinearLayout llState;
+		LinearLayout llState,llMain;
 	}
 
 }

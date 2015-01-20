@@ -24,10 +24,12 @@ public class ProductListBean {
 	private String declarestate;// 申购状态
 	private String withdrawstate;// 赎回状态
 	private String subscribestate;// 认购状态
-	private String FundTypeCode;//基金类型
+	private String FundTypeCode;// 基金类型
 	private String DailyProfit;// 万分收益
 	private String LatestWeeklyYield;// 近7日收益率
 	private String InvestAdvisorName;// 基金公司
+	private String incomeratio;
+	private String hfincomeratio;
 
 	public String getFundname() {
 		return fundname;
@@ -235,6 +237,22 @@ public class ProductListBean {
 
 	public void setInvestAdvisorName(String investAdvisorName) {
 		InvestAdvisorName = investAdvisorName;
+	}
+
+	public String getIncomeratio() {
+		return incomeratio;
+	}
+
+	public void setIncomeratio(String incomeratio) {
+		this.incomeratio = incomeratio;
+	}
+
+	public String getHfincomeratio() {
+		return hfincomeratio;
+	}
+
+	public void setHfincomeratio(String hfincomeratio) {
+		this.hfincomeratio = hfincomeratio;
 	}
 
 }
