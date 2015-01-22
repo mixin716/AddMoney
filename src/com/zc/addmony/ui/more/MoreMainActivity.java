@@ -16,6 +16,7 @@ import com.zc.addmony.R;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.utils.AnimUtil;
+import com.zc.addmony.view.lockview.LockPatternUtils;
 
 public class MoreMainActivity extends BaseActivity {
 
@@ -128,6 +129,7 @@ public class MoreMainActivity extends BaseActivity {
 
 	/** 退出登录 */
 	public void requestLogout() {
+		showLoading();
 		AjaxParams params = new AjaxParams();
 		httpRequest.get(Urls.LOGOUT, params, callBack, 0);
 	}
@@ -139,6 +141,8 @@ public class MoreMainActivity extends BaseActivity {
 		showToast(message);
 		btLogout.setVisibility(View.GONE);
 		userSharedData.clearUserInfomation();
+		LockPatternUtils.getInstance(
+				getApplicationContext()).saveLockPattern(null, "user_key");
 	}
 
 	@Override

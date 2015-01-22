@@ -99,18 +99,22 @@ public class SaleMoneyActivity extends BaseActivity {
 			sharetype = bpBean.getmSharetype();
 			fundName = bpBean.getmFundname();
 			tvFundName.setText(bpBean.getmFundname());
-			tvBankCode.setText(bpBean.getmBankName()+"("+bpBean.getmBank()+")");
+			String code = bpBean.getmBank().substring(0, 6)
+					+ "***"
+					+ bpBean.getmBank().substring(bpBean.getmBank().length() - 4,
+							bpBean.getmBank().length());
+			tvBankCode.setText(bpBean.getmBankName() + "(" + code + ")");
 			tvSaleMoney.setText("￥" + bpBean.getmHave());
-			if ("1109".equals(bpBean.getmFundTypeCode())) {
-				tvSaleTitle.setText("可赎回金额:");
-				tvHaveMoneyTitle.setText("未结算收益：");
-				tvHaveMoney.setText("￥" + bpBean.getmNot());
-			} else {
+//			if ("1109".equals(bpBean.getmFundTypeCode())) {
+//				tvSaleTitle.setText("可赎回金额:");
+//				tvHaveMoneyTitle.setText("未结算收益：");
+//				tvHaveMoney.setText("￥" + bpBean.getmNot());
+//			} else {
 				tvSaleTitle.setText("可赎回份额:");
 				//基金市值
 				tvHaveMoneyTitle.setText("基金市值：");
 				tvHaveMoney.setText("￥" + bpBean.getMarketvalue());
-			}
+//			}
 			
 		}
 
@@ -212,17 +216,17 @@ public class SaleMoneyActivity extends BaseActivity {
 
 					JSONObject fundObj = new JSONObject(
 							obj.optString("fundinfo"));
-					if (!TextUtils.isEmpty(fundObj.optString("FundTypeCode"))) {
-						if ("1109".equals(fundObj.optString("FundTypeCode"))) {
-							tvSaleTitle.setText("可赎回金额:");
-							tvHaveMoneyTitle.setText("未结算金额：");
-							tvHaveMoney.setText("￥" + haveMoney);
-						} else {
+//					if (!TextUtils.isEmpty(fundObj.optString("FundTypeCode"))) {
+//						if ("1109".equals(fundObj.optString("FundTypeCode"))) {
+//							tvSaleTitle.setText("可赎回金额:");
+//							tvHaveMoneyTitle.setText("未结算金额：");
+//							tvHaveMoney.setText("￥" + haveMoney);
+//						} else {
 							tvSaleTitle.setText("可赎回份额:");
 							tvHaveMoneyTitle.setText("基金市值：");
 							tvHaveMoney.setText("￥" + marketvalue);
-						}
-					}
+//						}
+//					}
 				}
 
 			} catch (JSONException e) {
@@ -275,13 +279,17 @@ public class SaleMoneyActivity extends BaseActivity {
 		tvSaleMoney.setText("￥" + bean.getUsableremainshare());
 
 		if (!TextUtils.isEmpty(bean.getFundTypeCode())) {
-			if ("1109".equals(bean.getFundTypeCode())) {
-				tvSaleTitle.setText("可赎回金额:");
-				tvHaveMoney.setText("￥" + bean.getUnpaidincome());
-			} else {
+			
+//			if ("1109".equals(bean.getFundTypeCode())) {
+//				tvSaleTitle.setText("可赎回金额:");
+//				tvHaveMoneyTitle.setText("未结算收益：");
+//				tvHaveMoney.setText("￥" + bean.getUnpaidincome());
+//			} else {
 				tvSaleTitle.setText("可赎回份额:");
+				//基金市值
+				tvHaveMoneyTitle.setText("基金市值：");
 				tvHaveMoney.setText("￥" + bean.getMarketvalue());
-			}
+//			}
 		}
 	}
 
@@ -300,7 +308,7 @@ public class SaleMoneyActivity extends BaseActivity {
 							bean.getBankacco().length() - 4,
 							bean.getBankacco().length());
 			tvBankCode.setText(bean.getBankname() + "(" + code + ")");
-//			setData(position);
+			setData(position);
 		}
 	}
 

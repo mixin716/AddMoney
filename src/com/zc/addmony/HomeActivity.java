@@ -120,7 +120,7 @@ public class HomeActivity extends BaseActivity {
 		ivTopActivity.setOnClickListener(this);
 		getInformationRequest();
 		if (User.GetFlag()) {
-			requestOrder();
+			// requestOrder();
 		}
 	}
 
@@ -137,7 +137,7 @@ public class HomeActivity extends BaseActivity {
 		httpRequest.addHeader("Cookie", "PHPSESSID=" + User.GetSession());
 		httpRequest.get(Urls.GET_ORDER, params, callBack, 1);
 	}
-	
+
 	/** 登录 */
 	public void requestLogin() {
 		showLoading();
@@ -146,7 +146,7 @@ public class HomeActivity extends BaseActivity {
 		params.put("password", User.GetPwd());
 		httpRequest.get(Urls.LOGIN, params, callBack, 2);
 	}
-	
+
 	private Handler cookieHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			DefaultHttpClient httpClient;
@@ -207,7 +207,7 @@ public class HomeActivity extends BaseActivity {
 		switch (reqeustCode) {
 		case 0:
 			try {
-				if(User.GetFlag()){
+				if (User.GetFlag()) {
 					requestLogin();
 				}
 				if (TextUtils.isEmpty(jsonString) || jsonString.equals("null")) {

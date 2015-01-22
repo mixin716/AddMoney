@@ -495,6 +495,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:gravity="right"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textSize="17sp" />

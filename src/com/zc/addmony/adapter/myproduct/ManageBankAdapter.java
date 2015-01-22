@@ -90,7 +90,7 @@ public class ManageBankAdapter extends BaseAdapter {
 													.length() - 4,
 											banks.get(position).getBank_num()
 													.length()) + "）");
-		}else{
+		} else {
 			holder.tvName.setText(banks.get(position).getBankName());
 		}
 
@@ -132,9 +132,19 @@ public class ManageBankAdapter extends BaseAdapter {
 			holder.imageBank.setImageResource(R.drawable.ic_bank_xingye);
 		} else if (bankName.indexOf("中信") != -1) {
 			holder.imageBank.setImageResource(R.drawable.ic_bank_zhongxin);
+		}else if (bankName.indexOf("招商") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_home_zhaoshang_icon);
+		}else if (bankName.indexOf("华夏") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_home_huaxia_icon);
+		}else if (bankName.indexOf("民生") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_minsheng);
+		}else if (bankName.indexOf("广发") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_guangfa);
+		}else if (bankName.indexOf("上海") != -1) {
+			holder.imageBank.setImageResource(R.drawable.ic_bank_shanghai);
 		} else if (bankName.indexOf("中国") != -1) {
 			holder.imageBank.setImageResource(R.drawable.ic_bank_zhongguo);
-		}
+		} 
 
 		holder.tvCheck.setOnClickListener(new OnClickListener() {
 

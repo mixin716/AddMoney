@@ -54,18 +54,20 @@
         android:padding="10dp"
         android:text="份额充足，立即参加活动"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/activity_share_judgment_bt_empty"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/ic_shopping_color_normal"
+        android:background="@drawable/bg_normal_red_selector"
         android:gravity="center"
         android:padding="10dp"
         android:text="份额不足，立即申购基金"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="gone" />
 
 </LinearLayout>

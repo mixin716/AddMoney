@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" >
+        android:paddingBottom="10dp" >
 
         <ImageView
             android:id="@+id/activity_home_iv_activity"
@@ -23,16 +22,16 @@
             android:id="@+id/activity_home_rl_increase_wealth"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_home_purple_background_selector"
             android:padding="10dp" >
 
             <ImageView
                 android:id="@+id/activity_home_iv_money_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_home_money_icon" />
@@ -85,11 +84,11 @@
             android:id="@+id/activity_home_rl_today_content"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_item_normal_bg"
             android:paddingBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:paddingRight="5dp" >
 
             <RelativeLayout
@@ -104,8 +103,8 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/ic_home_today_icon" />
 
                 <ImageView
@@ -353,6 +352,8 @@
             android:id="@+id/activity_home_tv_supervise_bank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:text="监管银行:民生银行"
             android:textColor="@color/text_color_666666"
@@ -362,6 +363,8 @@
             android:id="@+id/activity_home_tv_supervise_institution"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:text="监管机构:中国证券监督管理委员会"
             android:textColor="@color/text_color_666666"
@@ -370,12 +373,16 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="0.5dip"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:background="@color/text_color_666666" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:padding="10dp" >

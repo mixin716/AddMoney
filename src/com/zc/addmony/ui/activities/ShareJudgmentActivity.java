@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -26,7 +27,7 @@ import com.zc.addmony.logic.LogicBase;
 import com.zc.addmony.ui.buyproduct.BuyProductActivity;
 import com.zc.addmony.utils.AnimUtil;
 
-/** 判断套餐份额*/
+/** 判断套餐份额 */
 public class ShareJudgmentActivity extends BaseActivity {
 
 	private String TAG = "ShareJudgmentActivity";
@@ -107,7 +108,7 @@ public class ShareJudgmentActivity extends BaseActivity {
 			AnimUtil.pushRightInAndOut(ShareJudgmentActivity.this);
 			break;
 		case R.id.activity_share_judgment_bt_full:
-			if (Integer.valueOf(pBean.getPhoneTC().get(0).getShare()) <= Integer
+			if (Float.valueOf(pBean.getPhoneTC().get(0).getShare()) <= Float
 					.valueOf(total)) {
 				if (!requestFlag) {
 					showToast("网络请求失败，正在刷新");
@@ -165,6 +166,14 @@ public class ShareJudgmentActivity extends BaseActivity {
 				total = obj.optString("total");
 				tvName.setText(fundname + "基金");
 				tvNumber.setText(obj.optString("total"));
+				if (Float.valueOf(pBean.getPhoneTC().get(0).getShare()) <= Float
+						.valueOf(total)) {
+					btEmpty.setVisibility(View.GONE);
+					btFull.setVisibility(View.VISIBLE);
+				}else{//不足
+					btEmpty.setVisibility(View.VISIBLE);
+					btFull.setVisibility(View.GONE);
+				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
