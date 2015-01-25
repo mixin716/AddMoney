@@ -8,8 +8,6 @@
  */
 package com.zc.addmony.views;
 
-import com.zc.addmony.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -23,6 +21,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
+
+import com.zc.addmony.R;
 
 public class XListView extends ListView implements OnScrollListener {
 

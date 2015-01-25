@@ -53,6 +53,7 @@ public class OrderSuccessActivity extends BaseActivity {
 		Intent intent;
 		switch (viewId) {
 		case R.id.title_iv_left:
+			this.finish();
 			mAppliacton.outActivitys();
 			AnimUtil.pushRightInAndOut(OrderSuccessActivity.this);
 			break;

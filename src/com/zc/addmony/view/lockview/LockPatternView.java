@@ -20,8 +20,6 @@ package com.zc.addmony.view.lockview;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zc.addmony.R;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -43,6 +41,8 @@ import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+
+import com.zc.addmony.R;
 
 /**
  * Displays and detects the user's unlock attempt, which is a drag of a finger

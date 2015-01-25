@@ -15,8 +15,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.TextView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 

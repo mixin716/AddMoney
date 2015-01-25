@@ -19,12 +19,7 @@ import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.activities.EmailAddressAdapter;
-import com.zc.addmony.adapter.activities.PhoneAddressAdapter;
-import com.zc.addmony.bean.activities.AddressBean;
 import com.zc.addmony.common.Urls;
-import com.zc.addmony.logic.LogicActivities;
-import com.zc.addmony.ui.buyproduct.SelectActivity;
-import com.zc.addmony.utils.AnimUtil;
 
 public class EmailAddressActivity extends BaseActivity implements
 		OnItemClickListener {

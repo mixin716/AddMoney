@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.jky.struct2.http.core.AjaxParams;

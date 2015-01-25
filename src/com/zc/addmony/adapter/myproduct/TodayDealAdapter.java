@@ -3,11 +3,7 @@ package com.zc.addmony.adapter.myproduct;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zc.addmony.R;
-import com.zc.addmony.bean.productlist.ProductBean;
-
 import android.content.Context;
-import android.content.pm.LabeledIntent;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.zc.addmony.R;
+import com.zc.addmony.bean.productlist.ProductBean;
 
 public class TodayDealAdapter extends BaseAdapter {
 	private LayoutInflater inflater;

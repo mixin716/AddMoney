@@ -6,9 +6,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.ls.LSInput;
-
-import android.util.Log;
 
 import com.zc.addmony.bean.activities.AddressBean;
 import com.zc.addmony.bean.activities.ColorBean;

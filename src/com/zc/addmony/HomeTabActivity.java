@@ -2,13 +2,6 @@ package com.zc.addmony;
 
 import java.lang.reflect.Field;
 
-import com.zc.addmony.common.UserSharedData;
-import com.zc.addmony.ui.more.MoreMainActivity;
-import com.zc.addmony.ui.myproduct.LoginActivity;
-import com.zc.addmony.ui.myproduct.MyProductActivity;
-import com.zc.addmony.ui.productlist.ProductListActivity;
-import com.zc.addmony.ui.productlist.ProductTabActivity;
-
 import android.app.TabActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -20,9 +13,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TabHost;
 import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.Toast;
+import android.widget.TabHost;
+
+import com.zc.addmony.common.UserSharedData;
+import com.zc.addmony.ui.more.MoreMainActivity;
+import com.zc.addmony.ui.myproduct.MyProductActivity;
+import com.zc.addmony.ui.productlist.ProductTabActivity;
 
 public class HomeTabActivity extends TabActivity implements
 		OnCheckedChangeListener, OnClickListener {

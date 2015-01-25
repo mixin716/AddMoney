@@ -1,7 +1,6 @@
 package com.zc.addmony.logic;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -9,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.zc.addmony.bean.buyproduct.BanksBean;
 import com.zc.addmony.bean.buyproduct.BranchBean;

@@ -24,7 +24,6 @@ import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.productlist.FundListAdapter;
 import com.zc.addmony.adapter.productlist.ProductNameAdapter;
-import com.zc.addmony.adapter.productlist.ProductRateAdapter;
 import com.zc.addmony.bean.productlist.ProductListBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicProductList;

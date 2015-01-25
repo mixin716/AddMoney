@@ -1,13 +1,13 @@
 package com.zc.addmony.utils;
 
-import com.zc.addmony.R;
-
 import android.app.Activity;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.TranslateAnimation;
+
+import com.zc.addmony.R;
 
 /**
  * �����л���תЧ����� edit at 2012-8-30

@@ -15,7 +15,6 @@ import com.zc.addmony.bean.myproduct.OpenBankBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicPerson;
-import com.zc.addmony.ui.buyproduct.PerfectInformationActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
 

@@ -355,6 +355,7 @@
                     style="@style/wrap"
                     android:layout_marginRight="10dp"
                     android:text="*"
+                    android:visibility="invisible"
                     android:textColor="@color/normal_red" />
             </LinearLayout>
         </LinearLayout>

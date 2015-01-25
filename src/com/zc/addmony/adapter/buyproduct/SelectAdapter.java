@@ -2,14 +2,14 @@ package com.zc.addmony.adapter.buyproduct;
 
 import java.util.List;
 
-import com.zc.addmony.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.zc.addmony.R;
 
 public class SelectAdapter extends BaseAdapter {
 	private Context context;

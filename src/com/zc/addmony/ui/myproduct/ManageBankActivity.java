@@ -2,7 +2,6 @@ package com.zc.addmony.ui.myproduct;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.crypto.spec.OAEPParameterSpec;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,11 +14,12 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
 import com.jky.struct2.http.core.AjaxParams;
 import com.jky.struct2.http.entityhandle.HttpResult;
 import com.zc.addmony.BaseActivity;
@@ -32,7 +32,6 @@ import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicBase;
 import com.zc.addmony.logic.LogicBuyProduct;
-import com.zc.addmony.ui.buyproduct.CheckBankActivity;
 import com.zc.addmony.ui.buyproduct.PerfectInformationActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.DialogUtil;

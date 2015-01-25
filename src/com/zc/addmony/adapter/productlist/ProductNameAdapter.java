@@ -2,15 +2,15 @@ package com.zc.addmony.adapter.productlist;
 
 import java.util.List;
 
-import com.zc.addmony.R;
-import com.zc.addmony.bean.productlist.ProductListBean;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.zc.addmony.R;
+import com.zc.addmony.bean.productlist.ProductListBean;
 
 public class ProductNameAdapter extends BaseAdapter {
 	private LayoutInflater inflater;

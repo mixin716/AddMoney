@@ -25,7 +25,6 @@ import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicPerson;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
-import com.zc.addmony.utils.PatternUtil;
 
 public class LoginActivity extends BaseActivity {
 

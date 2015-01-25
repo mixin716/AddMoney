@@ -2,8 +2,6 @@ package com.zc.addmony.utils;
 
 
 
-import com.zc.addmony.R;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -14,6 +12,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.zc.addmony.R;
 
 
 /**

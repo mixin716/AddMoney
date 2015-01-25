@@ -1,6 +1,5 @@
 package com.zc.addmony.ui.myproduct;
 
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;

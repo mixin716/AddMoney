@@ -1,22 +1,21 @@
 package com.zc.addmony.adapter.myproduct;
 
 import java.util.List;
-import com.zc.addmony.R;
-import com.zc.addmony.bean.myproduct.ManageBankBean;
-import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.zc.addmony.R;
+import com.zc.addmony.bean.myproduct.ManageBankBean;
+import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
 
 public class ManageBankAdapter extends BaseAdapter {
 

@@ -27,8 +27,6 @@ import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
-import com.zc.addmony.HomeTabActivity;
-import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.myproduct.LoginBean;
 import com.zc.addmony.common.Urls;
@@ -36,7 +34,6 @@ import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicPerson;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
-import com.zc.addmony.utils.PatternUtil;
 
 public class MyProductActivity extends BaseActivity {
 

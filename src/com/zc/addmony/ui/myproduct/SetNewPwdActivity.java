@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;

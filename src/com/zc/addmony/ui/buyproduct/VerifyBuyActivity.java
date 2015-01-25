@@ -18,7 +18,6 @@ import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.BaseBean;
 import com.zc.addmony.bean.myproduct.FundBankListBean;
-import com.zc.addmony.bean.myproduct.ManageBankBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicBase;

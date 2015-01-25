@@ -2,7 +2,6 @@ package com.zc.addmony.ui.buyproduct;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +30,6 @@ import com.zc.addmony.ui.myproduct.RegisterSuccessActivity;
 import com.zc.addmony.ui.myproduct.RegisterThridActivity;
 import com.zc.addmony.utils.AnimUtil;
 import com.zc.addmony.utils.KeyBoard;
-import com.zc.addmony.utils.PatternUtil;
 
 /** 添加银行卡信息 */
 public class PerfectInformationActivity extends BaseActivity {

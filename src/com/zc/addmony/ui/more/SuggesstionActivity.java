@@ -1,6 +1,5 @@
 package com.zc.addmony.ui.more;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;

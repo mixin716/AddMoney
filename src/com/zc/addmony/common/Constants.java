@@ -1,42 +1,41 @@
 package com.zc.addmony.common;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 
 public class Constants {
 
-	public static final String INTENT_ACTION_FINISH_ALL = "com.bsk.yun.intent.ACTION_FINISH_ALL";// ¹Ø±ÕËùÓÐÒ³ÃæIntent
+	public static final String INTENT_ACTION_FINISH_ALL = "com.bsk.yun.intent.ACTION_FINISH_ALL";// ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Intent
 
 	public static Map<String, Object> passValueMap = new HashMap<String, Object>();
 	public static Drawable drawable;
 	public static boolean isChange = false;
 
-	/** µ±Ç° DEMO Ó¦ÓÃµÄ APP_KEY£¬µÚÈý·½Ó¦ÓÃÓ¦¸ÃÊ¹ÓÃ×Ô¼ºµÄ APP_KEY Ìæ»»¸Ã APP_KEY */
+	/** ï¿½ï¿½Ç° DEMO Ó¦ï¿½Ãµï¿½ APP_KEYï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ó¦ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ APP_KEY ï¿½æ»»ï¿½ï¿½ APP_KEY */
 	public static final String APP_KEY = "2025482806";
 
 	/**
-	 * µ±Ç° DEMO Ó¦ÓÃµÄ»Øµ÷Ò³£¬µÚÈý·½Ó¦ÓÃ¿ÉÒÔÊ¹ÓÃ×Ô¼ºµÄ»Øµ÷Ò³¡£
+	 * ï¿½ï¿½Ç° DEMO Ó¦ï¿½ÃµÄ»Øµï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã¿ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Ä»Øµï¿½Ò³ï¿½ï¿½
 	 * 
 	 * <p>
-	 * ×¢£º¹ØÓÚÊÚÈ¨»Øµ÷Ò³¶ÔÒÆ¶¯¿Í»§¶ËÓ¦ÓÃÀ´Ëµ¶ÔÓÃ»§ÊÇ²»¿É¼ûµÄ£¬ËùÒÔ¶¨ÒåÎªºÎÖÖÐÎÊ½¶¼½«²»Ó°Ïì£¬ µ«ÊÇÃ»ÓÐ¶¨Òå½«ÎÞ·¨Ê¹ÓÃ SDK ÈÏÖ¤µÇÂ¼¡£
-	 * ½¨ÒéÊ¹ÓÃÄ¬ÈÏ»Øµ÷Ò³£ºhttps://api.weibo.com/oauth2/default.html
+	 * ×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½Øµï¿½Ò³ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Í»ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ç²ï¿½ï¿½É¼ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ì£¬ ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð¶ï¿½ï¿½å½«ï¿½Þ·ï¿½Ê¹ï¿½ï¿½ SDK ï¿½ï¿½Ö¤ï¿½ï¿½Â¼ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ä¬ï¿½Ï»Øµï¿½Ò³ï¿½ï¿½https://api.weibo.com/oauth2/default.html
 	 * </p>
 	 */
 	public static final String REDIRECT_URL = "http://open.weibo.com/apps/2025482806/info/advanced";
 
 	/**
-	 * Scope ÊÇ OAuth2.0 ÊÚÈ¨»úÖÆÖÐ authorize ½Ó¿ÚµÄÒ»¸ö²ÎÊý¡£Í¨¹ý Scope£¬Æ½Ì¨½«¿ª·Å¸ü¶àµÄÎ¢²©
-	 * ºËÐÄ¹¦ÄÜ¸ø¿ª·¢Õß£¬Í¬Ê±Ò²¼ÓÇ¿ÓÃ»§ÒþË½±£»¤£¬ÌáÉýÁËÓÃ»§ÌåÑé£¬ÓÃ»§ÔÚÐÂ OAuth2.0 ÊÚÈ¨Ò³ÖÐÓÐÈ¨Àû Ñ¡Ôñ¸³ÓèÓ¦ÓÃµÄ¹¦ÄÜ¡£
+	 * Scope ï¿½ï¿½ OAuth2.0 ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ authorize ï¿½Ó¿Úµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ Scopeï¿½ï¿½Æ½Ì¨ï¿½ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ï¿½Î¢ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½Ü¸ï¿½ï¿½ß£ï¿½Í¬Ê±Ò²ï¿½ï¿½Ç¿ï¿½Ã»ï¿½ï¿½ï¿½Ë½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ OAuth2.0 ï¿½ï¿½È¨Ò³ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ Ñ¡ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ÃµÄ¹ï¿½ï¿½Ü¡ï¿½
 	 * 
-	 * ÎÒÃÇÍ¨¹ýÐÂÀËÎ¢²©¿ª·ÅÆ½Ì¨-->¹ÜÀíÖÐÐÄ-->ÎÒµÄÓ¦ÓÃ-->½Ó¿Ú¹ÜÀí´¦£¬ÄÜ¿´µ½ÎÒÃÇÄ¿Ç°ÒÑÓÐÄÄÐ©½Ó¿ÚµÄ Ê¹ÓÃÈ¨ÏÞ£¬¸ß¼¶È¨ÏÞÐèÒª½øÐÐÉêÇë¡£
+	 * ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½Ì¨-->ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->ï¿½Òµï¿½Ó¦ï¿½ï¿½-->ï¿½Ó¿Ú¹ï¿½ï¿½?ï¿½ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð©ï¿½Ó¿Úµï¿½ Ê¹ï¿½ï¿½È¨ï¿½Þ£ï¿½ï¿½ß¼ï¿½È¨ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡£
 	 * 
-	 * Ä¿Ç° Scope Ö§³Ö´«Èë¶à¸ö Scope È¨ÏÞ£¬ÓÃ¶ººÅ·Ö¸ô¡£
+	 * Ä¿Ç° Scope Ö§ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ Scope È¨ï¿½Þ£ï¿½ï¿½Ã¶ï¿½ï¿½Å·Ö¸ï¿½ï¿½ï¿½
 	 * 
-	 * ÓÐ¹ØÄÄÐ© OpenAPI ÐèÒªÈ¨ÏÞÉêÇë£¬Çë²é¿´£ºhttp://open.weibo.com/wiki/%E5%BE%AE%E5%8D%9AAPI
-	 * ¹ØÓÚ Scope ¸ÅÄî¼°×¢ÒâÊÂÏî£¬Çë²é¿´£ºhttp://open.weibo.com/wiki/Scope
+	 * ï¿½Ð¹ï¿½ï¿½ï¿½Ð© OpenAPI ï¿½ï¿½ÒªÈ¨ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½é¿´ï¿½ï¿½http://open.weibo.com/wiki/%E5%BE%AE%E5%8D%9AAPI
+	 * ï¿½ï¿½ï¿½ï¿½ Scope ï¿½ï¿½ï¿½î¼°×¢ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½é¿´ï¿½ï¿½http://open.weibo.com/wiki/Scope
 	 */
 	public static final String SCOPE = "email,direct_messages_read,direct_messages_write,"
 			+ "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
@@ -44,6 +43,6 @@ public class Constants {
 
 	public static int cid;
 	public static boolean refresh = false;
-	public static boolean pushInput = false;// Í¨¹ýÍÆËÍ´ò¿ªÈí¼þ
+	public static boolean pushInput = false;// Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ï¿½ï¿½ï¿½
 
 }

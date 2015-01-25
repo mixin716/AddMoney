@@ -3,8 +3,6 @@ package com.zc.addmony.ui.productlist;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-import org.json.JSONException;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,7 +18,6 @@ import com.jky.struct2.http.core.AjaxParams;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
-import com.zc.addmony.bean.TuijianBean;
 import com.zc.addmony.bean.productlist.ProductListBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicProductList;

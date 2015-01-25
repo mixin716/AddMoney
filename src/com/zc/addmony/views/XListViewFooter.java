@@ -6,14 +6,14 @@
  */
 package com.zc.addmony.views;
 
-import com.zc.addmony.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.zc.addmony.R;
 
 public class XListViewFooter extends LinearLayout {
 	public final static int STATE_NORMAL = 0;

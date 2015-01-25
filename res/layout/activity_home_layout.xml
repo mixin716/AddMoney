@@ -554,7 +554,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="广大银行"
+                            android:text="光大银行"
                             android:textColor="@color/text_color_666666"
                             android:textSize="10sp" />
                     </LinearLayout>

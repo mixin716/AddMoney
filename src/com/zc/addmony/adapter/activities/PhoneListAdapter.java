@@ -2,8 +2,6 @@ package com.zc.addmony.adapter.activities;
 
 import java.util.List;
 
-import org.w3c.dom.Text;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;

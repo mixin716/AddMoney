@@ -4,14 +4,12 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.zc.addmony.R;
 import com.zc.addmony.bean.activities.ShowPhoneBean;

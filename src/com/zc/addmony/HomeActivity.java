@@ -8,6 +8,17 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.jky.struct2.bitmap.FinalBitmap;
 import com.jky.struct2.bitmap.FinalBitmapManager;
 import com.jky.struct2.http.core.AjaxParams;
@@ -16,30 +27,10 @@ import com.zc.addmony.common.Urls;
 import com.zc.addmony.common.UserSharedData;
 import com.zc.addmony.logic.LogicHome;
 import com.zc.addmony.ui.activities.ActivitiesRuleActivity;
-import com.zc.addmony.ui.activities.ConfirmationOrderActivity;
-import com.zc.addmony.ui.activities.OrderInformationActivity;
-import com.zc.addmony.ui.activities.ShoppingActivity;
-import com.zc.addmony.ui.activities.ShowPhonesA;
-import com.zc.addmony.ui.lock.GestureActivity;
 import com.zc.addmony.ui.myproduct.IncreaseWealthActivity;
 import com.zc.addmony.ui.myproduct.LoginActivity;
 import com.zc.addmony.ui.productlist.ProductDetailActivity;
 import com.zc.addmony.utils.AnimUtil;
-import com.zc.addmony.view.lockview.LockPatternUtils;
-
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class HomeActivity extends BaseActivity {
 	private TextView tvTimes, tvRate, tvBank, tvInstitution, tvName,

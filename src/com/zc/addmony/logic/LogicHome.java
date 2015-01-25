@@ -1,14 +1,9 @@
 package com.zc.addmony.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.zc.addmony.bean.HomeBean;
-import com.zc.addmony.bean.PaimingBean;
 import com.zc.addmony.bean.TuijianBean;
 
 public class LogicHome {

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
-import com.zc.addmony.BaseActivity;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.activities.PhoneFragmenAdapter;
 

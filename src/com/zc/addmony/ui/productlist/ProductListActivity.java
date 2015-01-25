@@ -3,9 +3,6 @@ package com.zc.addmony.ui.productlist;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,7 +20,6 @@ import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.productlist.ProductListAdapter;
-import com.zc.addmony.bean.productlist.ProductBean;
 import com.zc.addmony.bean.productlist.ProductListBean;
 import com.zc.addmony.common.Urls;
 import com.zc.addmony.logic.LogicProductList;

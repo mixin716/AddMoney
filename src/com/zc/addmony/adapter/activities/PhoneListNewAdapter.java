@@ -2,16 +2,15 @@ package com.zc.addmony.adapter.activities;
 
 import java.util.List;
 
-import com.zc.addmony.R;
-import com.zc.addmony.adapter.activities.PhoneAddressAdapter.ViewHolder;
-import com.zc.addmony.bean.activities.ShowPhoneBean;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.zc.addmony.R;
+import com.zc.addmony.bean.activities.ShowPhoneBean;
 
 public class PhoneListNewAdapter extends BaseAdapter {
 	private LayoutInflater inflater;

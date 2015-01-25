@@ -1,13 +1,7 @@
 package com.zc.addmony.ui.activities;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,16 +13,12 @@ import android.widget.TextView;
 import com.jky.struct2.bitmap.FinalBitmap;
 import com.jky.struct2.bitmap.FinalBitmapManager;
 import com.jky.struct2.http.FinalHttp;
-import com.jky.struct2.http.core.AjaxCallBack;
-import com.jky.struct2.http.core.AjaxParams;
-import com.jky.struct2.http.entityhandle.HttpExceptionResult;
 import com.zc.addmony.BaseActivity;
 import com.zc.addmony.MApplication;
 import com.zc.addmony.R;
 import com.zc.addmony.bean.activities.ActivitiesPhoneBean;
 import com.zc.addmony.bean.activities.PhoneBean;
 import com.zc.addmony.common.Urls;
-import com.zc.addmony.logic.LogicActivities;
 import com.zc.addmony.utils.AnimUtil;
 
 /** 根据手机选择套餐*/

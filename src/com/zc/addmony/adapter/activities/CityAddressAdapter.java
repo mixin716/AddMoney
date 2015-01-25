@@ -2,10 +2,6 @@ package com.zc.addmony.adapter.activities;
 
 import java.util.List;
 
-import com.zc.addmony.R;
-import com.zc.addmony.bean.activities.AddressBean;
-import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+
+import com.zc.addmony.R;
+import com.zc.addmony.bean.activities.AddressBean;
+import com.zc.addmony.utils.ListViewPassValuetoActivityListener;
 
 public class CityAddressAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
