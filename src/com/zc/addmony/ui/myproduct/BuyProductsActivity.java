@@ -117,17 +117,20 @@ public class BuyProductsActivity extends BaseActivity implements
 			if (TextUtils.isEmpty(list.get(position).getmHave())) {
 				intent = new Intent(this, SaleMoneyActivity.class);
 				intent.putExtra("fundcode", list.get(position).getmFundcode());
+				startActivity(intent);
+				AnimUtil.pushLeftInAndOut(BuyProductsActivity.this);
 			} else {
 				if (Float.valueOf(list.get(position).getmHave()) > 0) {
 					intent = new Intent(this, SaleMoneyActivity.class);
 					intent.putExtra("fundcode", list.get(position).getmFundcode());
+					startActivity(intent);
+					AnimUtil.pushLeftInAndOut(BuyProductsActivity.this);
 				} else {
 					showToast("您当前持有金额为0，不能赎回");
 				}
 			}
 		}
-		startActivity(intent);
-		AnimUtil.pushLeftInAndOut(BuyProductsActivity.this);
+		
 	}
 
 	/** 请求购买的基金列表 */

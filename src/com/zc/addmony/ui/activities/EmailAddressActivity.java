@@ -20,6 +20,7 @@ import com.zc.addmony.BaseActivity;
 import com.zc.addmony.R;
 import com.zc.addmony.adapter.activities.EmailAddressAdapter;
 import com.zc.addmony.common.Urls;
+import com.zc.addmony.utils.AnimUtil;
 
 public class EmailAddressActivity extends BaseActivity implements
 		OnItemClickListener {
@@ -136,7 +137,21 @@ public class EmailAddressActivity extends BaseActivity implements
 		intent.putExtra("address", address);
 		setResult(RESULT_OK, intent);
 		finish();
+	}
+	
+	@Override
+	protected void doClickAction(int viewId) {
+		// TODO Auto-generated method stub
+		super.doClickAction(viewId);
+		switch (viewId) {
+		case R.id.title_iv_left:
+			this.finish();
+			AnimUtil.pushRightInAndOut(this);
+			break;
 
+		default:
+			break;
+		}
 	}
 
 }
